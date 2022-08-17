@@ -32,6 +32,12 @@
                                     <action selector="orderFrontAboutPanel:" target="-1" id="Dph-qy-WQn"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Check for Updates…" id="V0f-wW-VRs">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="checkForUpdates:" target="Lkr-J4-L1F" id="JRv-rR-wrY"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
                             <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW">
                                 <connections>
@@ -474,5 +480,6 @@ DQ
             </items>
             <point key="canvasLocation" x="62" y="293"/>
         </menu>
+        <customObject id="Lkr-J4-L1F" customClass="SPUStandardUpdaterController"/>
     </objects>
 </document>
