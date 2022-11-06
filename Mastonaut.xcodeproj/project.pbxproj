@@ -505,6 +505,7 @@
 		15F9F30C232EB9E900931594 /* SuggestionWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1530428122AEC64E00489F31 /* SuggestionWindowController.xib */; };
 		15FD4C33223870B000D699EF /* TransientWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FD4C32223870B000D699EF /* TransientWindow.swift */; };
 		15FD4C34223870B000D699EF /* TransientWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FD4C32223870B000D699EF /* TransientWindow.swift */; };
+		5512395A291847DB0026C1D5 /* AuthorizedAccount+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55123959291847DB0026C1D5 /* AuthorizedAccount+Image.swift */; };
 		8018496C90237DCCDED54D8E /* Pods_Mastonaut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 092B4EA6357A3987C4DB12B9 /* Pods_Mastonaut.framework */; };
 		9BF0CEF5AD6BE645406760FA /* Pods_Mastonaut__Mock_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D2DCB52811AC15559D8AE9 /* Pods_Mastonaut__Mock_.framework */; };
 		BB0D8382B9BA154D27AFBC63 /* Pods_CoreTootin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C7A9AB62B40D2AFDAA70E9 /* Pods_CoreTootin.framework */; };
@@ -933,6 +934,7 @@
 		39AA9CF1114711021688EDCD /* Pods-QuickToot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickToot.release.xcconfig"; path = "Target Support Files/Pods-QuickToot/Pods-QuickToot.release.xcconfig"; sourceTree = "<group>"; };
 		451D67EA024CBB6908731041 /* Pods-CoreTootin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoreTootin.debug.xcconfig"; path = "Target Support Files/Pods-CoreTootin/Pods-CoreTootin.debug.xcconfig"; sourceTree = "<group>"; };
 		4BCC49A8ECAB04865B510BFF /* Pods_QuickToot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickToot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		55123959291847DB0026C1D5 /* AuthorizedAccount+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthorizedAccount+Image.swift"; sourceTree = "<group>"; };
 		613EECFE95639DB968A362BE /* Pods-QuickToot.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickToot.adhoc.xcconfig"; path = "Target Support Files/Pods-QuickToot/Pods-QuickToot.adhoc.xcconfig"; sourceTree = "<group>"; };
 		7AEAB27D6CB6D651C5299936 /* Pods-MastonautTests.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MastonautTests.adhoc.xcconfig"; path = "Target Support Files/Pods-MastonautTests/Pods-MastonautTests.adhoc.xcconfig"; sourceTree = "<group>"; };
 		8BE1B4746437CF8AAE269D73 /* Pods-Mastonaut (Mock).adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mastonaut (Mock).adhoc.xcconfig"; path = "Target Support Files/Pods-Mastonaut (Mock)/Pods-Mastonaut (Mock).adhoc.xcconfig"; sourceTree = "<group>"; };
@@ -1546,6 +1548,7 @@
 				15B44D59225D0D9B00EDFDC1 /* AnnotatedURL.m */,
 				15BCDB12221B41CF007BFFAF /* AttachmentGroup.swift */,
 				15CD5BE521DEBDBE00E06C2F /* AuthorizedAccount.swift */,
+				55123959291847DB0026C1D5 /* AuthorizedAccount+Image.swift */,
 				15BC41632262AB1C00C2A150 /* ColumnMode.swift */,
 				15D648E82275F65A00E083F7 /* CyclicIterator.swift */,
 				15E973C0225A6953009CE4DF /* RelationshipSet.swift */,
@@ -2642,6 +2645,7 @@
 				1596DB44235F65A100B349B7 /* GetMACAddress.m in Sources */,
 				1584AA5C24D4CBF00073DC60 /* StatusInteractionPresenter.swift in Sources */,
 				1538FB3F2218B479006B5F78 /* ComposingPreferencesController.swift in Sources */,
+				5512395A291847DB0026C1D5 /* AuthorizedAccount+Image.swift in Sources */,
 				156C115122516B1900C54592 /* ProfileFieldsController.swift in Sources */,
 				15570C2722025C930030DAFB /* CardView.swift in Sources */,
 				15398EF722272EFA00D97406 /* NSDraggingInfo+Additions.swift in Sources */,

@@ -72,6 +72,7 @@ extension Array where Element == AuthorizedAccount
 			menuItem.target = target
 			menuItem.representedObject = account.uuid
 			menuItem.keyEquivalentModifierMask = itemHasKeyEquivalent ? .command : []
+			menuItem.image = account.avatarImage
 			menuItems.append(menuItem)
 
 			if currentUser == account.uuid
