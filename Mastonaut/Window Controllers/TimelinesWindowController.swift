@@ -1056,6 +1056,7 @@ private extension TimelinesWindowController {
 		let popUpButton = NonVibrantPopUpButton()
 		popUpButton.bezelStyle = .texturedRounded
 		popUpButton.translatesAutoresizingMaskIntoConstraints = false
+		popUpButton.imagePosition = .imageOnly;
 		return popUpButton
 	}
 
