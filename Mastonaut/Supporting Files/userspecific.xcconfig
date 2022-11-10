@@ -1,0 +1,18 @@
+//
+//  userspecific.xcconfig
+//  Mastonaut
+//
+//  Created by Sören Kuklau on 10.11.22.
+//  Copyright © 2022 Bruno Philipe. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+#include "Pods/Target Support Files/Pods-Mastonaut (Mock)/Pods-Mastonaut (Mock).debug.xcconfig"
+
+// Keys prefixed with `buildConfig_` get added
+// as static members to the Swift `BuildConfig`
+// struct on build
+
+buildConfig_APP_GROUP = CHANGEME123
