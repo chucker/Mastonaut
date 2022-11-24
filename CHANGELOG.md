@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Fixed deprecation warnings about using [strings as type identifiers](https://github.com/chucker/Mastonaut/issues/25)
+- Fixed deprecation warning about [NSKeyedUnarchiver in TimelinesWindowController](https://github.com/chucker/Mastonaut/issues/30)
 
 ## [1.3.10] - 2022-08-17
 
