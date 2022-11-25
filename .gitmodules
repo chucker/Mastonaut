@@ -1,3 +1,6 @@
 [submodule "Dependencies/MastodonKit"]
 	path = Dependencies/MastodonKit
 	url = git@github.com:chucker/MastodonKit.git
+[submodule "Dependencies/PullRefreshableScrollView"]
+	path = Dependencies/PullRefreshableScrollView
+	url = https://github.com/deicoon/PullRefreshableScrollView

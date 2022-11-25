@@ -20,6 +20,8 @@
 import Cocoa
 import MastodonKit
 import CoreTootin
+import PullRefreshableScrollView
+import SwiftUI
 
 let ListViewControllerMinimumWidth: CGFloat = 280
 
@@ -31,13 +33,58 @@ fileprivate struct ListCellViewIdentifier
 	
 }
 
+class ListViewPullToRefreshAccessoryView : NSView, AccessoryViewForPullRefreshable {
+	func viewDidEnterElasticity(_ sender: Any?) {
+		print("elasticity entered")
+	}
+	
+	func viewDidEnterValidationArea(_ sender: Any?) {
+		print("validation entered")
+	}
+	
+	func viewDidStick(_ sender: Any?) {
+		print("sticked")
+	}
+	
+	func viewDidRecede(_ sender: Any?) {
+		print("receded")
+	}
+	
+	func viewDidReachElasticityPercentage(_ sender: Any?, percentage: Double) {
+		subviews.removeAll()
+		let pullToRefreshView = PullToRefreshInnerView(percentage: percentage)
+		AppKitSwiftUIIntegration.hostSwiftUIView(pullToRefreshView, inView: self)
+
+		print("percentage : \(percentage)")
+	}
+}
+
 class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController,
 																MastonautTableViewDelegate,
+																PullRefreshableScrollViewDelegate,
 																NSTableViewDataSource,
 																RemoteEventsReceiver,
 																ClientObserver
 {
-	@IBOutlet internal private(set) unowned var scrollView: NSScrollView!
+	// MARK: - Pull to Refresh
+	func prScrollView(_ sender: PullRefreshableScrollView, triggeredOnEdge: PullRefreshableScrollView.ViewEdge) -> Bool {
+		reload()
+		
+		// the [readme](https://github.com/deicoon/PullRefreshableScrollView/blob/639e37e811c50cf39264f125e6df12eeec35f0e4/README.md)
+		// seems to say we're supposed to return `true`, but returning `false` seems to be easiest
+		// to un-stick the accessory view
+		return false
+	}
+	
+	@IBOutlet var topPullToRefreshAccessoryView : ListViewPullToRefreshAccessoryView!
+	
+	var topAccessoryView: (NSView & AccessoryViewForPullRefreshable)? {
+		get {
+			return topPullToRefreshAccessoryView
+		}
+	}
+	
+	@IBOutlet internal private(set) unowned var scrollView: PullRefreshableScrollView!
 	@IBOutlet internal private(set) unowned var tableView: NSTableView!
 	@IBOutlet internal private(set) unowned var topConstraint: NSLayoutConstraint!
 
@@ -93,6 +140,8 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
+		
+		needsLoadingIndicator = true
 
 		tableView.target = self
 		tableView.doubleAction = #selector(ListViewController.didDoubleClickTableView(_:))
@@ -210,6 +259,8 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 	}
 
 	func reload() {
+		needsLoadingIndicator = true
+		
 		lastPaginationResult = nil
 		revealedFilteredEntryKeys.removeAll()
 		reloadList()
@@ -218,7 +269,7 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 	internal func reloadList()
 	{
 		assert(Thread.isMainThread)
-
+		
 		let entryCount = entryList.count
 		var removedIndexSet = IndexSet(0..<entryCount)
 
@@ -321,10 +372,7 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 		return .default
 	}
 
-	internal var needsLoadingIndicator: Bool
-	{
-		return entryMap.isEmpty
-	}
+	internal var needsLoadingIndicator: Bool = false
 
 	internal func fetchEntries(for insertion: InsertionPoint)
 	{
@@ -432,6 +480,8 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 
 	internal func prepareNewEntries(_ entries: [Entry], for insertion: InsertionPoint, pagination: Pagination?)
 	{
+		needsLoadingIndicator = false
+		
 		let newEntries = entries.filter({ entryMap[$0.key] == nil })
 		handleNewEntries(newEntries, for: insertion, pagination: pagination)
 	}

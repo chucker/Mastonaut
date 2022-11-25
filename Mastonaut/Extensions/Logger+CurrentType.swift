@@ -28,4 +28,12 @@ extension Logger {
 		
 		self.init(label: label)
 	}
+	
+	/// Hack until https://github.com/chrisaljoudi/swift-log-oslog/issues/13 is resolved.
+	public func debug2(_ message: @autoclosure () -> Logger.Message,
+					   metadata: @autoclosure () -> Logger.Metadata? = nil,
+					   source: @autoclosure () -> String? = nil,
+					   file: String = #fileID, function: String = #function, line: UInt = #line) {
+		self.log(level: .info, message(), metadata: metadata(), source: source(), file: file, function: function, line: line)
+	}
 }

@@ -20,6 +20,7 @@
 import Foundation
 import Starscream
 import MastodonKit
+import CoreTootin
 
 class RemoteEventsListener: NSObject
 {
@@ -165,7 +166,7 @@ class RemoteEventsListener: NSObject
 		case publicLocal
 		case hashtag(String)
 		case hashtagLocal(String)
-		case list(String)
+		case list(FollowedList)
 		case direct
 
 		var name: String
@@ -195,7 +196,7 @@ class RemoteEventsListener: NSObject
 				items.append(URLQueryItem(name: "tag", value: tag))
 
 			case .list(let list):
-				items.append(URLQueryItem(name: "list", value: list))
+				items.append(URLQueryItem(name: "list", value: list.id))
 
 			case .user, .public, .publicLocal, .direct:
 				break

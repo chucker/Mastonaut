@@ -111,7 +111,7 @@ class AppDelegate: NSObject, NSApplicationDelegate
 		LoggingSystem.bootstrap(LoggingOSLog.init)
 		
 		let logger = Logger(subsystemType: self)
-		logger.info("applicationDidFinishLaunching")
+		logger.debug2("applicationDidFinishLaunching")
 
 		Preferences.addObserver(self, forKeyPath: "appearance")
 		updateAppearance()

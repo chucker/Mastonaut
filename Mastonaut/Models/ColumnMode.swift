@@ -29,6 +29,7 @@ enum ColumnMode: RawRepresentable, ColumnModel, Equatable, Comparable
 	case localTimeline
 	case publicTimeline
 	case notifications
+	case list(list: FollowedList)
 	case tag(name: String)
 
 	var rawValue: RawValue
@@ -39,6 +40,7 @@ enum ColumnMode: RawRepresentable, ColumnModel, Equatable, Comparable
 		case .localTimeline:	return "localTimeline"
 		case .publicTimeline:	return "publicTimeline"
 		case .notifications:	return "notifications"
+		case .list(let list):	return "list:\(list.title ?? "")"
 		case .tag(let name):	return "tag:\(name)"
 		}
 	}
@@ -51,6 +53,10 @@ enum ColumnMode: RawRepresentable, ColumnModel, Equatable, Comparable
 		case "localTimeline":	self = .localTimeline
 		case "publicTimeline":	self = .publicTimeline
 		case "notifications":	self = .notifications
+//		case let rawValue where rawValue.hasPrefix("list:"):
+//			let id = rawValue.suffix(from: rawValue.index(after: rawValue.range(of: "list:")!.upperBound))
+//			self = .list(list: List(from: <#T##Decoder#>) String(name))
+
 		case let rawValue where rawValue.hasPrefix("tag:"):
 			let name = rawValue.suffix(from: rawValue.index(after: rawValue.range(of: "tag:")!.upperBound))
 			self = .tag(name: String(name))
@@ -64,10 +70,11 @@ enum ColumnMode: RawRepresentable, ColumnModel, Equatable, Comparable
 	{
 		switch self
 		{
-		case .timeline:			return -4
-		case .localTimeline:	return -3
-		case .publicTimeline:	return -2
-		case .notifications:	return -1
+		case .timeline:			return -5
+		case .localTimeline:	return -4
+		case .publicTimeline:	return -3
+		case .notifications:	return -2
+		case .list:				return -1
 		case .tag:				return 0
 		}
 	}
@@ -80,6 +87,7 @@ enum ColumnMode: RawRepresentable, ColumnModel, Equatable, Comparable
 		case .localTimeline:	return TimelineViewController(source: .localTimeline)
 		case .publicTimeline:	return TimelineViewController(source: .publicTimeline)
 		case .notifications:	return NotificationListViewController()
+		case .list(let list):	return TimelineViewController(source: .list(list: list))
 		case .tag(let name):	return TimelineViewController(source: .tag(name: name))
 		}
 	}
@@ -106,10 +114,14 @@ enum ColumnMode: RawRepresentable, ColumnModel, Equatable, Comparable
 		case .notifications:
 			menuItem.title = 🔠("Notifications")
 			menuItem.image = #imageLiteral(resourceName: "bell")
+			
+		case .list(let list):
+			menuItem.title = 🔠(list.title!)
+			menuItem.image = NSImage(systemSymbolName: "list.bullet", accessibilityDescription: "List")
 
 		case .tag(let name):
 			menuItem.title = 🔠("Tag: %@", name)
-			menuItem.image = #imageLiteral(resourceName: "bell")
+			menuItem.image = #imageLiteral(resourceName: "bell") // FIXME I don't think that's the right image?
 		}
 
 		return menuItem
@@ -132,7 +144,8 @@ enum ColumnMode: RawRepresentable, ColumnModel, Equatable, Comparable
 		return menuItem
 	}
 
-	static var allItems: [ColumnMode]
+	/// Column modes that are always available (as opposed to lists, hashtags, etc.)
+	static var staticItems: [ColumnMode]
 	{
 		return [.timeline, .localTimeline, .publicTimeline, .notifications]
 	}
@@ -149,6 +162,8 @@ enum ColumnMode: RawRepresentable, ColumnModel, Equatable, Comparable
 			return true
 		case (.notifications, .notifications):
 			return true
+		case (.list(let leftList), .list(let rightList)):
+			return leftList.id == rightList.id
 		case (.tag(let leftTag), .tag(let righTag)):
 			return leftTag == righTag
 		default:

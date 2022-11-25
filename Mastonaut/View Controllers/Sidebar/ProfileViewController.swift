@@ -55,11 +55,6 @@ class ProfileViewController: TimelineViewController, SidebarPresentable, Account
 		return SidebarMode.profile(uri: accountURI)
 	}
 
-	override var needsLoadingIndicator: Bool
-	{
-		return entryMap.isEmpty
-	}
-
 	var titleMode: SidebarTitleMode
 	{
 		if let account = self.account
@@ -138,6 +133,9 @@ class ProfileViewController: TimelineViewController, SidebarPresentable, Account
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
+		
+		needsLoadingIndicator = true
+		
 		topConstraint.constant = -1
 		view.widthAnchor.constraint(greaterThanOrEqualToConstant: 320).isActive = true
 		updateAccessibilityAttributes()
@@ -161,6 +159,8 @@ class ProfileViewController: TimelineViewController, SidebarPresentable, Account
 
 	override func sourceDidChange(source: TimelineViewController.Source?)
 	{
+		needsLoadingIndicator = true
+		
 		reloadList()
 
 		if case .some(.userStatuses) = source
@@ -225,6 +225,8 @@ class ProfileViewController: TimelineViewController, SidebarPresentable, Account
 	{
 		let filteredStatuses = statuses.filter({ pinnedStatusMap[$0.id] == nil })
 		handleNewPinnedStatuses(filteredStatuses)
+		
+		needsLoadingIndicator = false
 	}
 
 	private func handleNewPinnedStatuses(_ statuses: [Status])

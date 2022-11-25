@@ -23,6 +23,15 @@ import CoreTootin
 
 extension AuthorizedAccount
 {
+	func setLists(_ lists: [List]) throws
+	{
+		for list in lists
+		{
+			let accountReference = try FollowedList.fetchOrInsert(for: list, authorizedAccount: self)
+			accountReference.authorizedAccount = self
+		}
+	}
+	
 	func setBlockedAccounts(_ accounts: [Account]) throws
 	{
 		try updateRelationship(keyPath: \AccountReference.isBlocked, using: accounts)

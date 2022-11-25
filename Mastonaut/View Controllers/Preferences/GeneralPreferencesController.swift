@@ -40,7 +40,7 @@ class GeneralPreferencesController: NSViewController
 		let appearance = Preferences.appearance
 		let view = AppearancePreferencesView(appearance: appearance)
 
-		hostSwiftUIView(view, inView: appearancePreferencesView)
+		AppKitSwiftUIIntegration.hostSwiftUIView(view, inView: appearancePreferencesView)
 
 		let timelinesResizeModeButtonMap: [MastonautPreferences.TimelinesResizeMode: NSButton] = [
 			.expandWindowFirst: timelinesResizeExpandFirstButton,
@@ -57,16 +57,5 @@ class GeneralPreferencesController: NSViewController
 
 		preferenceObservers.append(PreferenceEnumRadioObserver(preference: \MastonautPreferences.newWindowAccountMode,
 															   buttonMap: newWindowAccountModeButtonMap))
-	}
-	
-	private func hostSwiftUIView<TSwiftUIView: View>(_ swiftView: TSwiftUIView, inView nsView: NSView) {
-		let hostingView: NSHostingView<TSwiftUIView> = NSHostingView(rootView: swiftView)
-		nsView.addSubview(hostingView)
-		
-		hostingView.translatesAutoresizingMaskIntoConstraints = false
-		hostingView.leadingAnchor.constraint(equalTo: nsView.leadingAnchor).isActive = true
-		hostingView.trailingAnchor.constraint(equalTo: nsView.trailingAnchor).isActive = true
-		hostingView.topAnchor.constraint(equalTo: nsView.topAnchor).isActive = true
-		hostingView.bottomAnchor.constraint(equalTo: nsView.bottomAnchor).isActive = true
 	}
 }

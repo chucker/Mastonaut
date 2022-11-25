@@ -504,6 +504,11 @@
 		15F9F30C232EB9E900931594 /* SuggestionWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1530428122AEC64E00489F31 /* SuggestionWindowController.xib */; };
 		15FD4C33223870B000D699EF /* TransientWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FD4C32223870B000D699EF /* TransientWindow.swift */; };
 		15FD4C34223870B000D699EF /* TransientWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FD4C32223870B000D699EF /* TransientWindow.swift */; };
+		551239572917FA370026C1D5 /* userspecific.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 551239562917FA370026C1D5 /* userspecific.xcconfig */; };
+		5F176FAC290EF03900DF043C /* FollowedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F176FAB290EF03900DF043C /* FollowedList.swift */; };
+		5F176FAF290EF65200DF043C /* FollowedListsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F176FAE290EF65200DF043C /* FollowedListsService.swift */; };
+		5F38B52C29302F0C00FCB9FC /* AppKitSwiftUIIntegration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F38B52B29302F0C00FCB9FC /* AppKitSwiftUIIntegration.swift */; };
+		5F38B52F2930301600FCB9FC /* PullToRefreshInnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F38B52E2930301600FCB9FC /* PullToRefreshInnerView.swift */; };
 		5F3A17EF291DB26700EA6FEC /* CoreAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */; };
 		5F3A17F0291DB26700EA6FEC /* CoreAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */; };
 		5F3A17F1291DB26700EA6FEC /* CoreAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */; };
@@ -517,6 +522,8 @@
 		5FE72EB529298A37001C7A6C /* BuildConfig.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE72EB429298A37001C7A6C /* BuildConfig.generated.swift */; };
 		5FE72EB629298DB7001C7A6C /* BuildConfig.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE72EB429298A37001C7A6C /* BuildConfig.generated.swift */; };
 		5FE72EB729298DB7001C7A6C /* BuildConfig.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE72EB429298A37001C7A6C /* BuildConfig.generated.swift */; };
+		5FE7A535292E711100F7EB73 /* PullRefreshableScrollView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FE7A532292E704D00F7EB73 /* PullRefreshableScrollView.framework */; };
+		5FE7A536292E711100F7EB73 /* PullRefreshableScrollView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5FE7A532292E704D00F7EB73 /* PullRefreshableScrollView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8018496C90237DCCDED54D8E /* Pods_Mastonaut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 092B4EA6357A3987C4DB12B9 /* Pods_Mastonaut.framework */; };
 		9BF0CEF5AD6BE645406760FA /* Pods_Mastonaut__Mock_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D2DCB52811AC15559D8AE9 /* Pods_Mastonaut__Mock_.framework */; };
 		BB0D8382B9BA154D27AFBC63 /* Pods_CoreTootin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C7A9AB62B40D2AFDAA70E9 /* Pods_CoreTootin.framework */; };
@@ -575,6 +582,13 @@
 			remoteGlobalIDString = 15C4DD0B21D41EC0002AF6DA;
 			remoteInfo = Mastonaut;
 		};
+		5FE7A531292E704D00F7EB73 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5FE7A52D292E704D00F7EB73 /* PullRefreshableScrollView.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0BBA93E5206B8646001AE458;
+			remoteInfo = PullRefreshableScrollView;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -585,6 +599,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				154478A7232B0223009C71D4 /* CoreTootin.framework in Embed Frameworks */,
+				5FE7A536292E711100F7EB73 /* PullRefreshableScrollView.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -946,11 +961,18 @@
 		4BCC49A8ECAB04865B510BFF /* Pods_QuickToot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickToot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		551239562917FA370026C1D5 /* userspecific.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = userspecific.xcconfig; sourceTree = "<group>"; };
 		5512395829181BCA0026C1D5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		5F176FAB290EF03900DF043C /* FollowedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowedList.swift; sourceTree = "<group>"; };
+		5F176FAD290EF4AD00DF043C /* Mastonaut 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Mastonaut 8.xcdatamodel"; sourceTree = "<group>"; };
+		5F176FAE290EF65200DF043C /* FollowedListsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowedListsService.swift; sourceTree = "<group>"; };
+		5F176FB0290F00FB00DF043C /* Mastonaut 9.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Mastonaut 9.xcdatamodel"; sourceTree = "<group>"; };
+		5F38B52B29302F0C00FCB9FC /* AppKitSwiftUIIntegration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKitSwiftUIIntegration.swift; sourceTree = "<group>"; };
+		5F38B52E2930301600FCB9FC /* PullToRefreshInnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefreshInnerView.swift; sourceTree = "<group>"; };
 		5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = CoreAssets.xcassets; sourceTree = "<group>"; };
 		5FC3E18E2926F0E80086DCEE /* Logger+CurrentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Logger+CurrentType.swift"; sourceTree = "<group>"; };
 		5FC3E1912926FD640086DCEE /* AppearancePreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearancePreferencesView.swift; sourceTree = "<group>"; };
 		5FE72EAD292982F0001C7A6C /* BuildConfig.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = BuildConfig.sh; sourceTree = "<group>"; };
 		5FE72EB429298A37001C7A6C /* BuildConfig.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildConfig.generated.swift; sourceTree = "<group>"; };
+		5FE7A52D292E704D00F7EB73 /* PullRefreshableScrollView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PullRefreshableScrollView.xcodeproj; path = Dependencies/PullRefreshableScrollView/PullRefreshableScrollView.xcodeproj; sourceTree = "<group>"; };
 		613EECFE95639DB968A362BE /* Pods-QuickToot.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickToot.adhoc.xcconfig"; path = "Target Support Files/Pods-QuickToot/Pods-QuickToot.adhoc.xcconfig"; sourceTree = "<group>"; };
 		7AEAB27D6CB6D651C5299936 /* Pods-MastonautTests.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MastonautTests.adhoc.xcconfig"; path = "Target Support Files/Pods-MastonautTests/Pods-MastonautTests.adhoc.xcconfig"; sourceTree = "<group>"; };
 		7CE6D387292F0303005D2702 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
@@ -1000,6 +1022,7 @@
 				15765563229692C200783FFE /* AVKit.framework in Frameworks */,
 				154478A6232B0223009C71D4 /* CoreTootin.framework in Frameworks */,
 				8018496C90237DCCDED54D8E /* Pods_Mastonaut.framework in Frameworks */,
+				5FE7A535292E711100F7EB73 /* PullRefreshableScrollView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1044,6 +1067,7 @@
 		1507919521D5AB5B009EE4A3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				5F38B52D2930300400FCB9FC /* List View */,
 				5FC3E1902926FD520086DCEE /* Preferences */,
 				1547C99A220A356E00F64665 /* Collection View Items */,
 				150CEA3921FCBF7900F815A9 /* Table Cell Views */,
@@ -1139,6 +1163,7 @@
 				15E7452822372001009A1252 /* SVGKImage+Helpers.swift */,
 				15431283232EEB960010854A /* UserPopUpButtonController+Helper.swift */,
 				5FC3E18E2926F0E80086DCEE /* Logger+CurrentType.swift */,
+				5F38B52B29302F0C00FCB9FC /* AppKitSwiftUIIntegration.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1214,6 +1239,7 @@
 		1512DB82221B8D030090F2BD /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				5FE7A52D292E704D00F7EB73 /* PullRefreshableScrollView.xcodeproj */,
 			);
 			name = Dependencies;
 			sourceTree = "<group>";
@@ -1576,12 +1602,13 @@
 				15CD5BE521DEBDBE00E06C2F /* AuthorizedAccount.swift */,
 				15BC41632262AB1C00C2A150 /* ColumnMode.swift */,
 				15D648E82275F65A00E083F7 /* CyclicIterator.swift */,
+				5F176FAB290EF03900DF043C /* FollowedList.swift */,
+				15ECEECD22E8EEAB00A37CC0 /* LazyEvaluationAdapter.swift */,
 				15E973C0225A6953009CE4DF /* RelationshipSet.swift */,
 				15BC41602262A91300C2A150 /* SidebarMode.swift */,
-				15B7B2E12252A2AD00A3222C /* TrackingLayoutConstraint.swift */,
-				1572C55B22A2038100FAA77F /* StringCapableTextAttachment.swift */,
-				15ECEECD22E8EEAB00A37CC0 /* LazyEvaluationAdapter.swift */,
 				157D266723B25F8600B3A8BE /* StatusCellModel.swift */,
+				1572C55B22A2038100FAA77F /* StringCapableTextAttachment.swift */,
+				15B7B2E12252A2AD00A3222C /* TrackingLayoutConstraint.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1639,12 +1666,13 @@
 		15E973C3225A6B2F009CE4DF /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				15E973C4225A6B44009CE4DF /* RelationshipsService.swift */,
-				159439282299873C00E47DBB /* DirectoryService.swift */,
-				15769BB622B83C8300E93712 /* PollService.swift */,
-				15175EE022CEAC7600B27EBE /* HTMLParsingService.swift */,
-				154D4350237F459E005D99D9 /* FilterService.swift */,
 				15738893250195F000DE40F9 /* CellMenuItemHandler.swift */,
+				159439282299873C00E47DBB /* DirectoryService.swift */,
+				154D4350237F459E005D99D9 /* FilterService.swift */,
+				15175EE022CEAC7600B27EBE /* HTMLParsingService.swift */,
+				5F176FAE290EF65200DF043C /* FollowedListsService.swift */,
+				15769BB622B83C8300E93712 /* PollService.swift */,
+				15E973C4225A6B44009CE4DF /* RelationshipsService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1745,12 +1773,28 @@
 			path = "Window Controllers";
 			sourceTree = "<group>";
 		};
+		5F38B52D2930300400FCB9FC /* List View */ = {
+			isa = PBXGroup;
+			children = (
+				5F38B52E2930301600FCB9FC /* PullToRefreshInnerView.swift */,
+			);
+			path = "List View";
+			sourceTree = "<group>";
+		};
 		5FC3E1902926FD520086DCEE /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
 				5FC3E1912926FD640086DCEE /* AppearancePreferencesView.swift */,
 			);
 			path = Preferences;
+			sourceTree = "<group>";
+		};
+		5FE7A52E292E704D00F7EB73 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5FE7A532292E704D00F7EB73 /* PullRefreshableScrollView.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		98ECDB4860F1D57879765C05 /* Frameworks */ = {
@@ -1974,6 +2018,12 @@
 			);
 			productRefGroup = 15C4DD0D21D41EC0002AF6DA /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 5FE7A52E292E704D00F7EB73 /* Products */;
+					ProjectRef = 5FE7A52D292E704D00F7EB73 /* PullRefreshableScrollView.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				15C4DD0B21D41EC0002AF6DA /* Mastonaut */,
@@ -1984,6 +2034,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		5FE7A532292E704D00F7EB73 /* PullRefreshableScrollView.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PullRefreshableScrollView.framework;
+			remoteRef = 5FE7A531292E704D00F7EB73 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1523C6FE21E94C7F006DE234 /* Resources */ = {
@@ -2648,6 +2708,8 @@
 				15D648E92275F65A00E083F7 /* CyclicIterator.swift in Sources */,
 				150A9F0721FD202300DF42A1 /* AttributedStringCapable.swift in Sources */,
 				15B4AF12222A1AD2007AA447 /* NSAccessibility+Additions.swift in Sources */,
+				5F38B52F2930301600FCB9FC /* PullToRefreshInnerView.swift in Sources */,
+				5F38B52C29302F0C00FCB9FC /* AppKitSwiftUIIntegration.swift in Sources */,
 				15CB8A5B2288CDB100E465D8 /* GeneralPreferencesController.swift in Sources */,
 				1599F8EB22CABA0B00A53D93 /* StatusSearchResultViewController.swift in Sources */,
 				15C78372221CBD8600402C66 /* TimelinesViewController.swift in Sources */,
@@ -2665,6 +2727,7 @@
 				15249AF023401C7D0088B9EE /* NonVibrantPopUpButton.swift in Sources */,
 				15BB378E22A854880094B5A3 /* FileDropImageView.swift in Sources */,
 				15DB809921FFE4B700BEA2F9 /* NSMenu+Additions.swift in Sources */,
+				5F176FAF290EF65200DF043C /* FollowedListsService.swift in Sources */,
 				15F9B63D21DA6462008D95FE /* RelativeDateFormatter.swift in Sources */,
 				154D4351237F459E005D99D9 /* FilterService.swift in Sources */,
 				15BF72CB2342B3460020CE70 /* SidebarTitleViewController.swift in Sources */,
@@ -2705,6 +2768,7 @@
 				151199D022C04160007F2AEB /* InitialKeyViewProviding.swift in Sources */,
 				15979B1922CCEC8D006B6286 /* PollVotingCapable.swift in Sources */,
 				1552D6E92286576C009B4BBD /* MenuItemsControllers.swift in Sources */,
+				5F176FAC290EF03900DF043C /* FollowedList.swift in Sources */,
 				15CD5BE921DEEA9300E06C2F /* StatusComposerWindowController.swift in Sources */,
 				158A5CC924994C4300E95113 /* MastonautTableView.swift in Sources */,
 				15769616231A7206003C8B30 /* NotificationCenter+Helpers.swift in Sources */,
@@ -3595,6 +3659,8 @@
 		152DA63421E1B3140065CC1B /* Mastonaut.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				5F176FB0290F00FB00DF043C /* Mastonaut 9.xcdatamodel */,
+				5F176FAD290EF4AD00DF043C /* Mastonaut 8.xcdatamodel */,
 				1572BDBF265730B8009BF68F /* Mastonaut 7.xcdatamodel */,
 				15A947932495965900E413B2 /* Mastonaut 6.xcdatamodel */,
 				154E9FDD23456B0F00885966 /* Mastonaut 5.xcdatamodel */,
@@ -3603,7 +3669,7 @@
 				1531084922B0EDA7002FA1E7 /* Mastonaut 2.xcdatamodel */,
 				152DA63521E1B3140065CC1B /* Mastonaut.xcdatamodel */,
 			);
-			currentVersion = 1572BDBF265730B8009BF68F /* Mastonaut 7.xcdatamodel */;
+			currentVersion = 5F176FB0290F00FB00DF043C /* Mastonaut 9.xcdatamodel */;
 			path = Mastonaut.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

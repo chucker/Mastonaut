@@ -43,4 +43,21 @@ extension NSMenuItem
 		keyEquivalentModifierMask = modifierMask
 		return self
 	}
+	
+	/// Mimics the style in menus such as Services. Those are actually implemented
+	/// as a view, which enables making them left-aligned. Alas, that view is a private
+	/// API.
+	///
+	/// Make sure to set `autoenablesItems = false` on the parent menu.
+	static func sectionHeader(_ title: String) -> NSMenuItem
+	{
+		let smallBoldSystemFont = NSFont.systemFont(ofSize: 11, weight: NSFont.Weight.semibold)
+		
+		let item = NSMenuItem()
+		let attributedTitle = NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: smallBoldSystemFont])
+		item.attributedTitle = attributedTitle
+		item.isEnabled = false
+		
+		return item
+	}
 }

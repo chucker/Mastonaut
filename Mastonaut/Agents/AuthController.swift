@@ -200,6 +200,7 @@ class AuthController
 
 			authorizedAccount.updateLocalInfo(using: details.account, instance: details.instance)
 			self.delegate?.authController(self, didUpdate: details.account, uuid: authorizedAccount.uuid)
+			self.updateLists(for: authorizedAccount, using: client)
 			self.updateBlocksAndMutes(for: details.account,
 									 authorizedAccount: authorizedAccount,
 									 using: client,
@@ -226,6 +227,25 @@ class AuthController
 		}
 	}
 
+	private func updateLists(for authorizedAccount: AuthorizedAccount,
+							 using client: ClientType)
+	{
+		let service = FollowedListsService(client: client, authorizedAccount: authorizedAccount)
+		
+		service.loadFollowedLists(completion: {
+			result in
+			
+			DispatchQueue.main.async
+			{
+				if case .success(let allLists) = result
+				{
+					do { try authorizedAccount.setLists(allLists) }
+					catch { print("Could not update lists: \(error)") }
+				}
+			}
+		})
+	}
+	
 	private func updateBlocksAndMutes(for account: Account,
 									  authorizedAccount: AuthorizedAccount,
 									  using client: ClientType,
