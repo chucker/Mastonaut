@@ -51,7 +51,5 @@
 	</dict>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2019 Bruno Philipe. All rights reserved.</string>
-	<key>SUFeedURL</key>
-	<string>https://chucker.github.io/Mastonaut/appcast.xml</string>
 </dict>
 </plist>
