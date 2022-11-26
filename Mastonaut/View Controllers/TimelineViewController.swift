@@ -19,31 +19,68 @@
 
 import Cocoa
 import CoreTootin
-import MastodonKit
+import Logging
 
 class TimelineViewController: StatusListViewController
 {
+	private var logger: Logger
+
+	private var markerTimer: Timer?
+	
 	internal var source: Source?
 	{
 		didSet { if source != oldValue { sourceDidChange(source: source) }}
 	}
-
+	
 	init(source: Source?)
 	{
 		self.source = source
+		
+		logger = Logger(subsystemType: Self)
+		
 		super.init()
+		
+		if (source != nil) && source == .timeline {
+			startMarkerTimer(forSource: source!);
+		}
+		
 		updateAccessibilityAttributes()
 	}
+	
 
 	@available(*, unavailable)
 	required init?(coder: NSCoder)
 	{
 		fatalError("init(coder:) has not been implemented")
 	}
-
+	
 	internal func sourceDidChange(source: Source?)
 	{
+		switch source {
+		case .timeline:
+			if let source {
+				startMarkerTimer(forSource: source);
+			}
+		default:
+			stopMarkerTimerIfRunning();
+		}
+		
 		updateAccessibilityAttributes()
+	}
+	
+	func startMarkerTimer(forSource source: Source) {
+		stopMarkerTimerIfRunning()
+		
+		markerTimer = Timer.scheduledTimer(timeInterval: 30.0, target: self,
+										   selector: #selector(setMarker), userInfo: nil, repeats: true)
+	}
+	
+	func stopMarkerTimerIfRunning() {
+		markerTimer?.invalidate()
+	}
+	
+	@objc func setMarker() {
+		logger.debug2("Updating timeline marker")
 	}
 
 	override func clientDidChange(_ client: ClientType?, oldClient: ClientType?)
@@ -165,6 +202,7 @@ class TimelineViewController: StatusListViewController
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
+
 		updateAccessibilityAttributes()
 	}
 

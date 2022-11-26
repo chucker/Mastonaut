@@ -29,6 +29,23 @@ extension Logger {
 		self.init(label: label)
 	}
 	
+	/// Construct a `Logger` given an object from a type that will serve
+	/// as the **subsystem** (an Apple Unified Logging concept).
+	///
+	/// For example, if `subsystemObject` is of  type `MyClass` and
+	/// lives in a bundle with identifier `com.example.MyApp`, the
+	/// subsystem of logging messages gets set to
+	/// `com.example.MyApp.MyClass`, so you can easily use
+	/// **Console** to filter for log mesages occuring in that particular
+	/// type.
+	init(subsystemType: AnyObject.Type) {
+		let bundleIdentifier = Bundle(for: subsystemType).bundleIdentifier!
+				
+		let label = "\(bundleIdentifier).\(String(describing: subsystemType))"
+		
+		self.init(label: label)
+	}
+	
 	/// Hack until https://github.com/chrisaljoudi/swift-log-oslog/issues/13 is resolved.
 	public func debug2(_ message: @autoclosure () -> Logger.Message,
 					   metadata: @autoclosure () -> Logger.Metadata? = nil,
