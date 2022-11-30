@@ -18,10 +18,10 @@
 //
 
 import Cocoa
-import MastodonKit
 import CoreTootin
-import PullRefreshableScrollView
 import Logging
+import MastodonKit
+import PullRefreshableScrollView
 
 class TimelinesWindowController: NSWindowController, UserPopUpButtonDisplaying, ToolbarWindowController
 {
@@ -71,6 +71,8 @@ class TimelinesWindowController: NSWindowController, UserPopUpButtonDisplaying, 
 
 	// MARK: Lifecycle Support
 	private var preservedWindowFrameStack: Stack<CGRect> = []
+
+	private var logger: Logger = Logger(label: "TimelinesWindowController")
 
 	var currentInstance: Instance? {
 		didSet {
@@ -259,12 +261,16 @@ class TimelinesWindowController: NSWindowController, UserPopUpButtonDisplaying, 
 		// the class name level and encodes only the internals.
 //		if let stack: NavigationStack<SidebarMode> = coder.decodeObject(forKey: CodingKeys.sidebarNavigationStack)
 		if let stackEncodedData: Data = coder.decodeObject(forKey: CodingKeys.sidebarNavigationStack) {
-			let decoder = NSKeyedUnarchiver(forReadingWith: stackEncodedData)
-			if let stack = NavigationStack<SidebarMode>(coder: decoder) {
-				timelinesSplitViewController.preserveSplitViewSizeForNextSidebarInstall = true
-				sidebarSubcontroller = SidebarSubcontroller(sidebarContainer: self,
-															navigationControl: sidebarNavigationSegmentedControl,
-															navigationStack: stack)
+			do {
+				let decoder = try NSKeyedUnarchiver(forReadingFrom: stackEncodedData)
+				if let stack = NavigationStack<SidebarMode>(coder: decoder) {
+					timelinesSplitViewController.preserveSplitViewSizeForNextSidebarInstall = true
+					sidebarSubcontroller = SidebarSubcontroller(sidebarContainer: self,
+																navigationControl: sidebarNavigationSegmentedControl,
+																navigationStack: stack)
+				}
+			} catch {
+				logger.error("Error creating NSKeyedUnarchiver for navigation stack. \(error.localizedDescription)")
 			}
 		}
 
