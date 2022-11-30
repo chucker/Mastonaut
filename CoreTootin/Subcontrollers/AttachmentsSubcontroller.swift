@@ -441,9 +441,9 @@ public extension AttachmentsSubcontroller
 	func addAttachments(pasteboard: NSPasteboard) -> Bool
 	{
 		let types = AttachmentUploader.supportedAttachmentTypes
-
+		
 		if let fileUrls = pasteboard.readObjects(forClasses: [NSURL.self],
-												 options: [.urlReadingContentsConformToTypes: types,
+												 options: [.urlReadingContentsConformToTypes: types.map { $0.identifier },
 														   .urlReadingFileURLsOnly: true]) as? [URL],
 			!fileUrls.isEmpty
 		{
