@@ -19,21 +19,23 @@
 
 import Cocoa
 import CoreTootin
+import Logging
+import LoggingOSLog
 import MastodonKit
 
 class ShareViewController: NSViewController, UserPopUpButtonDisplaying
 {
+	private var logger: Logger!
+
 	private let persistence = Persistence()
 	private let keychain = Keychain()
 	private let urlSession = URLSession(configuration: .forClients)
 	private lazy var instanceService = InstanceService(urlSessionConfiguration: .forClients,
-													   keychainController: keychain.keychainController,
-													   accountsService: accountsService)
+	                                                   keychainController: keychain.keychainController,
+	                                                   accountsService: accountsService)
 
-	private lazy var accountsService: AccountsService = {
-		return AccountsService(context: persistence.persistentContainer.viewContext,
-							   keychainController: keychain.keychainController)
-	}()
+	private lazy var accountsService: AccountsService = .init(context: persistence.persistentContainer.viewContext,
+	                                                          keychainController: keychain.keychainController)
 
 	@IBOutlet private unowned var sendButton: NSButton!
 	@IBOutlet private unowned var contentStackView: NSStackView!
@@ -47,7 +49,7 @@ class ShareViewController: NSViewController, UserPopUpButtonDisplaying
 	@IBOutlet private unowned var attachmentsSubcontroller: AttachmentsSubcontroller!
 
 	private lazy var userPopUpButtonController = UserPopUpButtonSubcontroller(display: self,
-																			  accountsService: accountsService)
+	                                                                          accountsService: accountsService)
 
 	private var audienceSelection: Visibility = Visibility.make(from: Preferences.defaultStatusAudience)
 	private var observations: [NSKeyValueObservation] = []
@@ -67,11 +69,13 @@ class ShareViewController: NSViewController, UserPopUpButtonDisplaying
 
 			service.set(status: statusTextContent)
 
-			postingServiceObservations.observe(service, \.characterCount, sendInitial: true) { [weak self] (_, _) in
+			postingServiceObservations.observe(service, \.characterCount, sendInitial: true)
+			{ [weak self] _, _ in
 				self?.updateRemainingCountLabel()
 			}
 
-			postingServiceObservations.observe(service, \.submitTaskFuture) { [weak self] (service, _) in
+			postingServiceObservations.observe(service, \.submitTaskFuture)
+			{ [weak self] _, _ in
 				self?.updateSubmitEnabled()
 				self?.submitStatusIndicator.setAnimating(self?.hasActiveTasks ?? false)
 			}
@@ -91,7 +95,7 @@ class ShareViewController: NSViewController, UserPopUpButtonDisplaying
 	// MARK: State Management
 
 	private let statusCharacterLimit = 500
-	private var hasValidTextContents: Bool { return (1..<statusCharacterLimit).contains(totalCharacterCount) }
+	private var hasValidTextContents: Bool { return (1 ..< statusCharacterLimit).contains(totalCharacterCount) }
 	private var hasAttachments: Bool { return !attachmentsSubcontroller.attachments.isEmpty }
 	private var hasActiveUploadTasks: Bool { return attachmentsSubcontroller.attachmentUploader.hasActiveTasks }
 	private var hasActiveSubmitTask: Bool { return postingService?.isSubmiting == true }
@@ -131,7 +135,7 @@ class ShareViewController: NSViewController, UserPopUpButtonDisplaying
 	var currentUser: UUID?
 	{
 		get { return currentAccount?.uuid }
-		set { currentAccount = newValue.flatMap({ accountsService.account(with: $0) }) }
+		set { currentAccount = newValue.flatMap { accountsService.account(with: $0) } }
 	}
 
 	private var client: ClientType?
@@ -141,16 +145,17 @@ class ShareViewController: NSViewController, UserPopUpButtonDisplaying
 			attachmentsSubcontroller.client = client
 			postingService = client.map { PostingService(client: $0) }
 
-			if let account = self.currentAccount
+			if let account = currentAccount
 			{
-				instanceService.instance(for: account) { [weak self] (instance) in
+				instanceService.instance(for: account)
+				{ [weak self] instance in
 					self?.currentInstance = instance
 				}
 			}
 		}
 	}
 
-	var currentAccount: AuthorizedAccount? = nil
+	var currentAccount: AuthorizedAccount?
 	{
 		didSet
 		{
@@ -161,9 +166,9 @@ class ShareViewController: NSViewController, UserPopUpButtonDisplaying
 			{
 				let reauthAgent = accountsService.reauthorizationAgent(for: account)
 				client = Client.create(for: account,
-									   keychainController: keychain.keychainController,
-									   reauthAgent: reauthAgent,
-									   urlSession: urlSession)
+				                       keychainController: keychain.keychainController,
+				                       reauthAgent: reauthAgent,
+				                       urlSession: urlSession)
 			}
 			else
 			{
@@ -174,14 +179,15 @@ class ShareViewController: NSViewController, UserPopUpButtonDisplaying
 
 	func shouldChangeCurrentUser(to userUUID: UUID) -> Bool
 	{
-		guard !hasAttachments else
+		guard !hasAttachments
+		else
 		{
 			let response = NSAlert.confirmReuploadAttachmentsDialog().runModal()
 
 			if response == .alertFirstButtonReturn
 			{
-				self.currentUser = userUUID
-				self.attachmentsSubcontroller.discardAllAttachmentsAndUploadAgain()
+				currentUser = userUUID
+				attachmentsSubcontroller.discardAllAttachmentsAndUploadAgain()
 				return true
 			}
 			else
@@ -220,6 +226,14 @@ class ShareViewController: NSViewController, UserPopUpButtonDisplaying
 
 	private func setUp()
 	{
+		// we'll get here each time the share sheet is opened
+		if logger == nil
+		{
+			LoggingSystem.bootstrap(LoggingOSLog.init)
+
+			logger = Logger(subsystemType: self)
+		}
+
 		if Preferences.newWindowAccountMode == .pickFirstOne
 		{
 			currentAccount = accountsService.authorizedAccounts.first
@@ -237,18 +251,18 @@ class ShareViewController: NSViewController, UserPopUpButtonDisplaying
 		textView.insertDoubleNewLines = Preferences.insertDoubleNewLines
 
 		observations.observePreference(\MastonautPreferences.insertDoubleNewLines)
-			{
-				[weak textView] (preferences, change) in
-				textView?.insertDoubleNewLines = preferences.insertDoubleNewLines
-			}
+		{
+			[weak textView] preferences, _ in
+			textView?.insertDoubleNewLines = preferences.insertDoubleNewLines
+		}
 
 		observations.observe(attachmentsSubcontroller, \AttachmentsSubcontroller.attachmentCount)
-			{
-				[unowned self] (_, change) in
+		{
+			[unowned self] _, change in
 
-				guard let oldCount = change.oldValue else { return }
-				self.handleAttachmentCountsChanged(oldCount: oldCount)
-			}
+			guard let oldCount = change.oldValue else { return }
+			self.handleAttachmentCountsChanged(oldCount: oldCount)
+		}
 
 		userPopUpButtonController.updateUserPopUpButton()
 	}
@@ -269,47 +283,65 @@ class ShareViewController: NSViewController, UserPopUpButtonDisplaying
 		{
 			if attachment.hasItemConformingToTypeIdentifier(kUTTypeURL as String)
 			{
+				logger.debug2("attachment has URL")
+
 				dispatchGroup.enter()
 				loadURL(from: attachment) { dispatchGroup.leave() }
 			}
 			else if attachment.hasItemConformingToTypeIdentifier(kUTTypeImage as String)
 			{
+				logger.debug2("attachment has image")
+
 				dispatchGroup.enter()
 				loadImage(from: attachment) { dispatchGroup.leave() }
 			}
 			else if attachment.hasItemConformingToTypeIdentifier(kUTTypePlainText as String)
 			{
+				logger.debug2("attachment has plain text")
+
 				dispatchGroup.enter()
 				loadString(from: attachment) { dispatchGroup.leave() }
 			}
 		}
 
 		dispatchGroup.notify(queue: .main)
-			{
-				[weak self] in
+		{
+			[weak self] in
 
-				guard let self = self else { return }
+			guard let self = self else { return }
 
-				let joinedTextElements = self.textElementsToInsert.uniqueElements().joined(separator: " ")
-				self.textView.insertAttributedString(NSAttributedString(string: joinedTextElements))
-				self.postingService?.set(status: self.statusTextContent)
-			}
+			let joinedTextElements = self.textElementsToInsert.uniqueElements().joined(separator: " ")
+			self.textView.insertAttributedString(NSAttributedString(string: joinedTextElements))
+			self.postingService?.set(status: self.statusTextContent)
+		}
 	}
 
 	private func loadURL(from attachment: NSItemProvider, completion: @escaping () -> Void)
 	{
 		let supportedUTIs = AttachmentUploader.supportedAttachmentTypes
 
-		attachment.loadItem(forTypeIdentifier: kUTTypeURL as String, options: nil) { [weak self] (object, _) in
-			if let url = object as? URL, let self = self
+		attachment.loadItem(forTypeIdentifier: kUTTypeURL as String, options: nil)
+		{ [weak self] object, _ in
+			var url: URL?
+
+			// as of macOS 13.0.1, both Safari and Maps encode the URL as data
+			// https://github.com/chucker/Mastonaut/issues/57
+			if let data = object as? Data, let urlString = String(data: data, encoding: .utf8)
 			{
-				if url.isFileURL, let uti = url.fileUTI, supportedUTIs.contains(uti as CFString)
+				url = URL(string: urlString)!
+			}
+			else if object is URL
+			{}
+
+			if url != nil, let self = self
+			{
+				if url!.isFileURL, let uti = url!.fileUTI, supportedUTIs.contains(uti as CFString)
 				{
-					self.attachmentsSubcontroller.addAttachments([url])
+					self.attachmentsSubcontroller.addAttachments([url!])
 				}
 				else
 				{
-					self.textElementsToInsert.append(url.absoluteString)
+					self.textElementsToInsert.append(url!.absoluteString)
 				}
 			}
 
@@ -319,7 +351,8 @@ class ShareViewController: NSViewController, UserPopUpButtonDisplaying
 
 	private func loadImage(from attachment: NSItemProvider, completion: @escaping () -> Void)
 	{
-		attachment.loadItem(forTypeIdentifier: kUTTypeImage as String, options: nil) { [weak self] (object, _) in
+		attachment.loadItem(forTypeIdentifier: kUTTypeImage as String, options: nil)
+		{ [weak self] object, _ in
 			if let image = object as? NSImage
 			{
 				self?.attachmentsSubcontroller.addAttachments([image])
@@ -330,7 +363,8 @@ class ShareViewController: NSViewController, UserPopUpButtonDisplaying
 
 	private func loadString(from attachment: NSItemProvider, completion: @escaping () -> Void)
 	{
-		attachment.loadItem(forTypeIdentifier: kUTTypePlainText as String, options: nil) { [weak self] (object, _) in
+		attachment.loadItem(forTypeIdentifier: kUTTypePlainText as String, options: nil)
+		{ [weak self] object, _ in
 			if let string = object as? String
 			{
 				self?.textElementsToInsert.insert(string, at: 0)
@@ -343,32 +377,34 @@ class ShareViewController: NSViewController, UserPopUpButtonDisplaying
 	{
 		let attachments = attachmentsSubcontroller.attachments
 
-		guard !attachmentsSubcontroller.hasAttachmentsPendingUpload else
+		guard !attachmentsSubcontroller.hasAttachmentsPendingUpload
+		else
 		{
 			showAlert(title: 🔠("Attention"),
-					  message: 🔠("One or more attachments are still being uploaded. Please wait for them to complete uploading – or remove them – before submitting."))
+			          message: 🔠("One or more attachments are still being uploaded. Please wait for them to complete uploading – or remove them – before submitting."))
 			return
 		}
 
 		postingService?.post(visibility: audienceSelection,
-							 isSensitive: false,
-							 attachmentIds: attachments.compactMap({ $0.attachment?.id }),
-							 replyStatusId: nil,
-							 poll: nil)
+		                     isSensitive: false,
+		                     attachmentIds: attachments.compactMap { $0.attachment?.id },
+		                     replyStatusId: nil,
+		                     poll: nil)
+		{
+			[weak self] result in
+
+			guard case .success = result
+			else
 			{
-				[weak self] result in
-
-				guard case .success = result else
-				{
-					// Show error
-					return
-				}
-
-				DispatchQueue.main.async
-					{
-						self?.completeExtension()
-					}
+				// Show error
+				return
 			}
+
+			DispatchQueue.main.async
+			{
+				self?.completeExtension()
+			}
+		}
 	}
 
 	@IBAction func cancel(_ sender: AnyObject?)
@@ -424,9 +460,9 @@ extension ShareViewController: StatusComposerController
 	func showAttachmentError(message: String)
 	{
 		let alert = NSAlert.makeAlert(style: .warning,
-									  title: 🔠("Error"),
-									  message: 🔠("compose.attachment.server", message),
-									  dialogMode: nil)
+		                              title: 🔠("Error"),
+		                              message: 🔠("compose.attachment.server", message),
+		                              dialogMode: nil)
 
 		alert.runModal()
 	}
