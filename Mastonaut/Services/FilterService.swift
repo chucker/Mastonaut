@@ -17,8 +17,8 @@
 //  GNU General Public License for more details.
 //
 
-import Foundation
 import CoreTootin
+import Foundation
 import MastodonKit
 
 class FilterService: NSObject, RemoteEventsReceiver {
@@ -63,7 +63,7 @@ class FilterService: NSObject, RemoteEventsReceiver {
 	init(client: ClientType, account: AuthorizedAccount) {
 		self.client = client
 		self.account = account
-		self.filters = (account.filters as? Set<CachedFilter>)?.compactMap({ UserFilter(filter: $0) })
+		filters = (account.filters as? Set<CachedFilter>)?.compactMap { UserFilter(filter: $0) }
 
 		super.init()
 
@@ -94,14 +94,14 @@ class FilterService: NSObject, RemoteEventsReceiver {
 
 	func create(filter: UserFilter, completion: @escaping (Result<Filter>) -> Void) {
 		client.run(FilterRequests.create(phrase: filter.phrase, context: filter.context,
-										 irreversible: filter.irreversible, wholeWord: filter.wholeWord,
-										 expiresIn: filter.expiresAt), completion: completion)
+		                                 irreversible: filter.irreversible, wholeWord: filter.wholeWord,
+		                                 expiresIn: filter.expiresAt), completion: completion)
 	}
 
 	func updateFilter(id: String, updatedFilter filter: UserFilter, completion: @escaping (Result<Filter>) -> Void) {
 		client.run(FilterRequests.update(id: id, phrase: filter.phrase, context: filter.context,
-										 irreversible: filter.irreversible, wholeWord: filter.wholeWord,
-										 expiresIn: filter.expiresAt), completion: completion)
+		                                 irreversible: filter.irreversible, wholeWord: filter.wholeWord,
+		                                 expiresIn: filter.expiresAt), completion: completion)
 	}
 
 	private func setNeedsUpdate(hadFailure: Bool) {
@@ -132,7 +132,7 @@ class FilterService: NSObject, RemoteEventsReceiver {
 			case .success(let filters, _):
 				DispatchQueue.main.async {
 					self.account.setCachedFilters(from: filters)
-					self.filters = filters.map({ UserFilter(filter: $0) })
+					self.filters = filters.map { UserFilter(filter: $0) }
 					self.needsUpdate = false
 					self.isUpdating = false
 				}
@@ -157,13 +157,9 @@ class FilterService: NSObject, RemoteEventsReceiver {
 
 	// MARK: - RemoteEventsReceiver
 
-	func remoteEventsCoordinator(streamIdentifierDidConnect: StreamIdentifier) {
+	func remoteEventsCoordinator(streamIdentifierDidConnect: StreamIdentifier) {}
 
-	}
-
-	func remoteEventsCoordinator(streamIdentifierDidDisconnect: StreamIdentifier) {
-
-	}
+	func remoteEventsCoordinator(streamIdentifierDidDisconnect: StreamIdentifier) {}
 
 	func remoteEventsCoordinator(streamIdentifier: StreamIdentifier, didHandleEvent event: ClientEvent) {
 		if case .keywordFiltersChanged = event {
@@ -171,9 +167,7 @@ class FilterService: NSObject, RemoteEventsReceiver {
 		}
 	}
 
-	func remoteEventsCoordinator(streamIdentifier: StreamIdentifier, parserProducedError: Error) {
-
-	}
+	func remoteEventsCoordinator(streamIdentifier: StreamIdentifier, parserProducedError: Error) {}
 }
 
 struct UserFilter {
@@ -227,7 +221,7 @@ struct UserFilter {
 			return true
 		}
 
-		let content = status.attributedContent.string
+		let content = status.reblog?.attributedContent.string ?? status.attributedContent.string
 
 		if content.isEmpty == false, checkMatch(string: content) {
 			return true
@@ -274,12 +268,10 @@ struct UserFilter {
 }
 
 protocol FilterServiceObserver: NSObject {
-
 	func filterServiceDidUpdateFilters(_ service: FilterService)
 }
 
 private extension AuthorizedAccount {
-
 	func setCachedFilters(from fetchedFilters: [Filter]) {
 		guard let context = managedObjectContext else {
 			assertionFailure("No context set for authorized account!!")
