@@ -504,8 +504,6 @@
 		15F9F30C232EB9E900931594 /* SuggestionWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1530428122AEC64E00489F31 /* SuggestionWindowController.xib */; };
 		15FD4C33223870B000D699EF /* TransientWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FD4C32223870B000D699EF /* TransientWindow.swift */; };
 		15FD4C34223870B000D699EF /* TransientWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FD4C32223870B000D699EF /* TransientWindow.swift */; };
-		5F62B01728AD75CD0051C905 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 5F62B01628AD75CD0051C905 /* Sparkle */; };
-		551239572917FA370026C1D5 /* userspecific.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 551239562917FA370026C1D5 /* userspecific.xcconfig */; };
 		5F043C53293286110095C702 /* NotificationTypeFilterPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F043C52293286110095C702 /* NotificationTypeFilterPreferencesView.swift */; };
 		5F043C54293286110095C702 /* NotificationTypeFilterPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F043C52293286110095C702 /* NotificationTypeFilterPreferencesView.swift */; };
 		5F043C562932872D0095C702 /* NotificationPerAccountPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F043C552932872D0095C702 /* NotificationPerAccountPreferencesView.swift */; };
@@ -517,6 +515,9 @@
 		5F3A17EF291DB26700EA6FEC /* CoreAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */; };
 		5F3A17F0291DB26700EA6FEC /* CoreAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */; };
 		5F3A17F1291DB26700EA6FEC /* CoreAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */; };
+		5F3E2F0F293B7C9F00113764 /* Logger+CurrentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC3E18E2926F0E80086DCEE /* Logger+CurrentType.swift */; };
+		5F3E2F11293B7CED00113764 /* LoggingOSLog in Frameworks */ = {isa = PBXBuildFile; productRef = 5F3E2F10293B7CED00113764 /* LoggingOSLog */; };
+		5F62B01728AD75CD0051C905 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 5F62B01628AD75CD0051C905 /* Sparkle */; };
 		5FC3E18D2926EF3F0086DCEE /* LoggingOSLog in Frameworks */ = {isa = PBXBuildFile; productRef = 5FC3E18C2926EF3F0086DCEE /* LoggingOSLog */; };
 		5FC3E18F2926F0E80086DCEE /* Logger+CurrentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC3E18E2926F0E80086DCEE /* Logger+CurrentType.swift */; };
 		5FC3E1922926FD640086DCEE /* AppearancePreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC3E1912926FD640086DCEE /* AppearancePreferencesView.swift */; };
@@ -1017,6 +1018,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7D99EDB7E2A091BF870FD6E /* Pods_QuickToot.framework in Frameworks */,
+				5F3E2F11293B7CED00113764 /* LoggingOSLog in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1919,6 +1921,9 @@
 				15A22B83232C5289009D5637 /* PBXTargetDependency */,
 			);
 			name = QuickToot;
+			packageProductDependencies = (
+				5F3E2F10293B7CED00113764 /* LoggingOSLog */,
+			);
 			productName = QuickToot;
 			productReference = 15608F40232C4DED00923CB7 /* QuickToot.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -2695,6 +2700,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F3E2F0F293B7C9F00113764 /* Logger+CurrentType.swift in Sources */,
 				15608F45232C4DED00923CB7 /* ShareViewController.swift in Sources */,
 				15431287232EEDFF0010854A /* UserPopUpButtonController+Helper.swift in Sources */,
 			);
@@ -3666,6 +3672,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5F3E2F10293B7CED00113764 /* LoggingOSLog */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5FC3E18B2926EF3F0086DCEE /* XCRemoteSwiftPackageReference "swift-log-oslog" */;
+			productName = LoggingOSLog;
+		};
 		5F62B01628AD75CD0051C905 /* Sparkle */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5F62B01528AD75CD0051C905 /* XCRemoteSwiftPackageReference "Sparkle" */;
