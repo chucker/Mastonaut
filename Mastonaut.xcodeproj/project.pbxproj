@@ -514,6 +514,8 @@
 		5F1F20D72938E9130057E585 /* Logger+CurrentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC3E18E2926F0E80086DCEE /* Logger+CurrentType.swift */; };
 		5F1F20D82938E9140057E585 /* Logger+CurrentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC3E18E2926F0E80086DCEE /* Logger+CurrentType.swift */; };
 		5F1F20D92938E9140057E585 /* Logger+CurrentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC3E18E2926F0E80086DCEE /* Logger+CurrentType.swift */; };
+		5F373E54293C0B3500051F94 /* StatusComposerAttachmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F373E53293C0B3500051F94 /* StatusComposerAttachmentsView.swift */; };
+		5F373E55293C0B3500051F94 /* StatusComposerAttachmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F373E53293C0B3500051F94 /* StatusComposerAttachmentsView.swift */; };
 		5F38B52C29302F0C00FCB9FC /* AppKitSwiftUIIntegration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F38B52B29302F0C00FCB9FC /* AppKitSwiftUIIntegration.swift */; };
 		5F38B52F2930301600FCB9FC /* PullToRefreshInnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F38B52E2930301600FCB9FC /* PullToRefreshInnerView.swift */; };
 		5F3A17EF291DB26700EA6FEC /* CoreAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */; };
@@ -972,6 +974,7 @@
 		5F176FAD290EF4AD00DF043C /* Mastonaut 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Mastonaut 8.xcdatamodel"; sourceTree = "<group>"; };
 		5F176FAE290EF65200DF043C /* FollowedListsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowedListsService.swift; sourceTree = "<group>"; };
 		5F176FB0290F00FB00DF043C /* Mastonaut 9.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Mastonaut 9.xcdatamodel"; sourceTree = "<group>"; };
+		5F373E53293C0B3500051F94 /* StatusComposerAttachmentsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusComposerAttachmentsView.swift; sourceTree = "<group>"; };
 		5F38B52B29302F0C00FCB9FC /* AppKitSwiftUIIntegration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKitSwiftUIIntegration.swift; sourceTree = "<group>"; };
 		5F38B52E2930301600FCB9FC /* PullToRefreshInnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefreshInnerView.swift; sourceTree = "<group>"; };
 		5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = CoreAssets.xcassets; sourceTree = "<group>"; };
@@ -1073,19 +1076,20 @@
 		1507919521D5AB5B009EE4A3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				5F38B52D2930300400FCB9FC /* List View */,
-				5FC3E1902926FD520086DCEE /* Preferences */,
-				1547C99A220A356E00F64665 /* Collection View Items */,
-				150CEA3921FCBF7900F815A9 /* Table Cell Views */,
-				15BF72C92342B3200020CE70 /* Sidebar Title Views */,
-				1507919621D5AB77009EE4A3 /* FlippedView.swift */,
-				1598919D21FFC0A000FA92F7 /* RefreshingFormattedTextField.swift */,
+				15D648E52275CC6400E083F7 /* AnimatedImageView.swift */,
 				15570C2622025C920030DAFB /* CardView.swift */,
 				15722EA722123D2A00A672C6 /* ClickThroughTextField.swift */,
+				1547C99A220A356E00F64665 /* Collection View Items */,
 				1538FB21221777EE006B5F78 /* CoverView.swift */,
-				15D648E52275CC6400E083F7 /* AnimatedImageView.swift */,
+				1507919621D5AB77009EE4A3 /* FlippedView.swift */,
+				5F38B52D2930300400FCB9FC /* List View */,
 				158A5CC824994C4300E95113 /* MastonautTableView.swift */,
 				15DDC05924B0E3D900F6F1EE /* NoInsetsTableView.swift */,
+				5FC3E1902926FD520086DCEE /* Preferences */,
+				1598919D21FFC0A000FA92F7 /* RefreshingFormattedTextField.swift */,
+				15BF72C92342B3200020CE70 /* Sidebar Title Views */,
+				5F373E52293C0B3500051F94 /* Status Composer */,
+				150CEA3921FCBF7900F815A9 /* Table Cell Views */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1776,6 +1780,14 @@
 				1530428122AEC64E00489F31 /* SuggestionWindowController.xib */,
 			);
 			path = "Window Controllers";
+			sourceTree = "<group>";
+		};
+		5F373E52293C0B3500051F94 /* Status Composer */ = {
+			isa = PBXGroup;
+			children = (
+				5F373E53293C0B3500051F94 /* StatusComposerAttachmentsView.swift */,
+			);
+			path = "Status Composer";
 			sourceTree = "<group>";
 		};
 		5F38B52D2930300400FCB9FC /* List View */ = {
@@ -2536,6 +2548,7 @@
 				15E7452722371DCB009A1252 /* AccountsPlaceholderController.swift in Sources */,
 				1523C6EA21E94C7F006DE234 /* AttachmentViewController.swift in Sources */,
 				15B981B7234FE549008391F8 /* FavoritesViewController.swift in Sources */,
+				5F373E55293C0B3500051F94 /* StatusComposerAttachmentsView.swift in Sources */,
 				1538FB3722188978006B5F78 /* ViewingPreferencesController.swift in Sources */,
 				15EE539E22C95854001BEA58 /* SearchResultsPresenter.swift in Sources */,
 				1538FB23221777EE006B5F78 /* CoverView.swift in Sources */,
@@ -2779,6 +2792,7 @@
 				1561EBAF225C02070034EAA6 /* MastodonURLResolver.swift in Sources */,
 				15E973CB225A9E24009CE4DF /* AuthorizedAccountProviding.swift in Sources */,
 				151199D022C04160007F2AEB /* InitialKeyViewProviding.swift in Sources */,
+				5F373E54293C0B3500051F94 /* StatusComposerAttachmentsView.swift in Sources */,
 				15979B1922CCEC8D006B6286 /* PollVotingCapable.swift in Sources */,
 				1552D6E92286576C009B4BBD /* MenuItemsControllers.swift in Sources */,
 				5F176FAC290EF03900DF043C /* FollowedList.swift in Sources */,
