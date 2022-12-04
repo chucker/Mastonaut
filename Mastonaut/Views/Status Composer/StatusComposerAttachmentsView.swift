@@ -6,12 +6,16 @@
 //  Copyright © 2022 Bruno Philipe. All rights reserved.
 //
 
+import MastodonKit
 import SwiftUI
 
 struct ComposerAttachment: Identifiable {
 	let id: String
 
 	var description: String = ""
+
+	let type: AttachmentType
+	var metadata: String = ""
 }
 
 struct StatusComposerAttachmentsView: View {
@@ -19,12 +23,40 @@ struct StatusComposerAttachmentsView: View {
 
 	var body: some View {
 		ForEach(attachments) { attachment in
-			HStack {
-				Text(attachment.id)
-					.padding()
-					.border(.green, width: 10)
+			HStack(alignment: .top) {
+				VStack {
+					ZStack {
+						Text(attachment.id)
+							.padding()
+							.border(.green, width: 10)
+
+						Button(action: {}) {
+							Image(systemName: "xmark.circle.fill")
+								.padding(.leading, 25)
+								.padding(.bottom, 25)
+								.accessibilityLabel("Delete attachment")
+						}
+						.buttonStyle(.borderless)
+					}
+
+					HStack {
+						switch attachment.type {
+						case .image:
+							Image(systemName: "camera")
+						case .video, .gifv:
+							Image(systemName: "video")
+						default:
+							EmptyView()
+						}
+
+						Text(attachment.metadata)
+							.font(.system(size: 11))
+					}
+				}
 
 				Text(attachment.description)
+
+				Spacer()
 			}
 		}
 	}
@@ -32,12 +64,15 @@ struct StatusComposerAttachmentsView: View {
 
 struct SwiftUIView_Previews: PreviewProvider {
 	static var previews: some View {
-		var attachmentWithDescription = ComposerAttachment(id: "2")
+		var attachmentWithMovieMetadata = ComposerAttachment(id: "3", type: .video)
+		attachmentWithMovieMetadata.metadata = "7s"
+
+		var attachmentWithDescription = ComposerAttachment(id: "2", type: .image)
 		attachmentWithDescription.description = "Hello, this is some text"
 
 		let noAttachments = [ComposerAttachment]()
-		let oneAttachment: [ComposerAttachment] = [ComposerAttachment(id: "1")]
-		let threeAttachments: [ComposerAttachment] = [ComposerAttachment(id: "1"), attachmentWithDescription, ComposerAttachment(id: "3")]
+		let oneAttachment: [ComposerAttachment] = [ComposerAttachment(id: "1", type: .image)]
+		let threeAttachments: [ComposerAttachment] = [ComposerAttachment(id: "1", type: .image), attachmentWithDescription, attachmentWithMovieMetadata]
 
 		return VStack {
 			StatusComposerAttachmentsView(attachments: noAttachments)
