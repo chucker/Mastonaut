@@ -22,6 +22,9 @@ struct StatusComposerAttachmentsView: View {
 	@State var attachments: [ComposerAttachment]
 
 	var body: some View {
+		let count = attachments.count
+		var i = 0
+		
 		ForEach(attachments) { attachment in
 			HStack(alignment: .top) {
 				VStack {
@@ -57,6 +60,10 @@ struct StatusComposerAttachmentsView: View {
 				Text(attachment.description)
 
 				Spacer()
+			}
+			
+			if i != count {
+				Divider()
 			}
 		}
 	}
