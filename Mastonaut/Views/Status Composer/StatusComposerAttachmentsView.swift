@@ -75,7 +75,7 @@ struct SwiftUIView_Previews: PreviewProvider {
 		attachmentWithMovieMetadata.metadata = "7s"
 
 		var attachmentWithDescription = ComposerAttachment(id: "2", type: .image)
-		attachmentWithDescription.description = "Hello, this is some text"
+		attachmentWithDescription.description = "Hello, this is some text with a lot of words. We "
 
 		let noAttachments = [ComposerAttachment]()
 		let oneAttachment: [ComposerAttachment] = [ComposerAttachment(id: "1", type: .image)]
@@ -83,13 +83,13 @@ struct SwiftUIView_Previews: PreviewProvider {
 
 		return VStack {
 			StatusComposerAttachmentsView(attachments: noAttachments)
-				.padding(.all, 10)
+			//.padding(.all, 10)
 
 			StatusComposerAttachmentsView(attachments: oneAttachment)
-				.padding(.all, 10)
+				//.padding(.all, 10)
 
 			StatusComposerAttachmentsView(attachments: threeAttachments)
-				.padding(.all, 10)
+				//.padding(.all, 10)
 		}
 	}
 }

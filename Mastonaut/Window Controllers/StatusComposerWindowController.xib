@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="19455" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19455"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -49,7 +49,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowCollectionBehavior key="collectionBehavior" fullScreenAuxiliary="YES"/>
             <rect key="contentRect" x="484" y="366" width="534" height="469"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1512" height="944"/>
             <value key="minSize" type="size" width="530" height="100"/>
             <view key="contentView" wantsLayer="YES" id="zyG-Dy-UO4">
                 <rect key="frame" x="0.0" y="0.0" width="534" height="469"/>
@@ -250,37 +250,6 @@
                                     <outlet property="clickTarget" destination="xJy-2A-0H6" id="iJz-sY-AGr"/>
                                 </connections>
                             </textField>
-                            <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ojG-iv-V3P">
-                                <rect key="frame" x="0.0" y="108" width="534" height="80"/>
-                                <clipView key="contentView" id="ZX0-GE-Bxi">
-                                    <rect key="frame" x="0.0" y="0.0" width="534" height="80"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <collectionView id="yuF-it-2oS">
-                                            <rect key="frame" x="0.0" y="0.0" width="534" height="80"/>
-                                            <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
-                                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" id="vnr-A4-Poh">
-                                                <size key="itemSize" width="80" height="80"/>
-                                            </collectionViewFlowLayout>
-                                            <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            <connections>
-                                                <outlet property="dataSource" destination="Xm5-a8-zna" id="06f-pE-fjU"/>
-                                            </connections>
-                                        </collectionView>
-                                    </subviews>
-                                </clipView>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="EGh-a1-faR"/>
-                                </constraints>
-                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="anl-4C-bsX">
-                                    <rect key="frame" x="1" y="36" width="478" height="16"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </scroller>
-                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="iXF-H7-vCL">
-                                    <rect key="frame" x="-100" y="-100" width="16" height="60"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </scroller>
-                            </scrollView>
                             <customView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZS3-6P-GAx" customClass="BorderView" customModule="CoreTootin">
                                 <rect key="frame" x="12" y="241" width="54" height="54"/>
                                 <subviews>
@@ -315,6 +284,10 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="drawsBackground" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </customView>
+                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="82F-UU-3Yo">
+                                <rect key="frame" x="0.0" y="106" width="534" height="84"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </customView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="ZS3-6P-GAx" firstAttribute="leading" secondItem="Zf9-dM-Kea" secondAttribute="leading" constant="12" id="3BI-H2-Od1"/>
@@ -324,16 +297,13 @@
                             <constraint firstAttribute="trailing" secondItem="BvM-mg-KXN" secondAttribute="trailing" id="JwU-6t-evs"/>
                             <constraint firstItem="uhG-N6-r6Y" firstAttribute="leading" secondItem="ZS3-6P-GAx" secondAttribute="trailing" constant="12" id="N5O-4s-t05"/>
                             <constraint firstItem="uhG-N6-r6Y" firstAttribute="top" secondItem="mrg-2W-A5b" secondAttribute="top" constant="7" id="QTx-Vl-bt9"/>
-                            <constraint firstItem="ojG-iv-V3P" firstAttribute="leading" secondItem="Zf9-dM-Kea" secondAttribute="leading" id="TWC-Ku-JLD"/>
                             <constraint firstItem="ZS3-6P-GAx" firstAttribute="top" secondItem="fXh-F1-mBy" secondAttribute="bottom" constant="9" id="a2s-n6-crQ"/>
                             <constraint firstAttribute="trailing" secondItem="fXh-F1-mBy" secondAttribute="trailing" id="d1F-Cq-VEy"/>
                             <constraint firstAttribute="trailing" secondItem="mrg-2W-A5b" secondAttribute="trailing" id="gwl-tG-Naw"/>
-                            <constraint firstItem="ojG-iv-V3P" firstAttribute="top" secondItem="mrg-2W-A5b" secondAttribute="bottom" constant="2" id="hij-C8-swn"/>
                             <constraint firstItem="mrg-2W-A5b" firstAttribute="top" secondItem="fXh-F1-mBy" secondAttribute="bottom" constant="2" id="ish-q5-XjQ"/>
                             <constraint firstItem="BvM-mg-KXN" firstAttribute="leading" secondItem="Zf9-dM-Kea" secondAttribute="leading" id="lZX-H8-t3J"/>
                             <constraint firstItem="BvM-mg-KXN" firstAttribute="top" secondItem="mrg-2W-A5b" secondAttribute="bottom" constant="84" id="mnv-NC-zek"/>
                             <constraint firstAttribute="trailing" secondItem="uhG-N6-r6Y" secondAttribute="trailing" constant="10" id="rJG-h3-7Xg"/>
-                            <constraint firstAttribute="trailing" secondItem="ojG-iv-V3P" secondAttribute="trailing" id="sbA-tf-uPh"/>
                             <constraint firstItem="mrg-2W-A5b" firstAttribute="top" secondItem="Zf9-dM-Kea" secondAttribute="top" constant="40" id="zew-8v-la2"/>
                         </constraints>
                     </customView>
@@ -565,7 +535,7 @@
         </customObject>
         <customObject id="Xm5-a8-zna" customClass="AttachmentsSubcontroller" customModule="CoreTootin">
             <connections>
-                <outlet property="attachmentCollectionView" destination="yuF-it-2oS" id="2uJ-Ag-Q2j"/>
+                <outlet property="attachmentView" destination="82F-UU-3Yo" id="MAk-yu-Ouy"/>
                 <outlet property="statusComposerController" destination="-2" id="0Hy-qS-Td5"/>
             </connections>
         </customObject>
@@ -708,7 +678,7 @@
         </popover>
     </objects>
     <resources>
-        <image name="NSStopProgressTemplate" width="14" height="13"/>
+        <image name="NSStopProgressTemplate" width="17" height="16"/>
         <image name="camera" width="16" height="14"/>
         <image name="content_warning" width="22" height="14"/>
         <image name="emoji_panel" width="14" height="14"/>

@@ -514,9 +514,6 @@
 		5F1F20D72938E9130057E585 /* Logger+CurrentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC3E18E2926F0E80086DCEE /* Logger+CurrentType.swift */; };
 		5F1F20D82938E9140057E585 /* Logger+CurrentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC3E18E2926F0E80086DCEE /* Logger+CurrentType.swift */; };
 		5F1F20D92938E9140057E585 /* Logger+CurrentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC3E18E2926F0E80086DCEE /* Logger+CurrentType.swift */; };
-		5F373E54293C0B3500051F94 /* StatusComposerAttachmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F373E53293C0B3500051F94 /* StatusComposerAttachmentsView.swift */; };
-		5F373E55293C0B3500051F94 /* StatusComposerAttachmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F373E53293C0B3500051F94 /* StatusComposerAttachmentsView.swift */; };
-		5F38B52C29302F0C00FCB9FC /* AppKitSwiftUIIntegration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F38B52B29302F0C00FCB9FC /* AppKitSwiftUIIntegration.swift */; };
 		5F38B52F2930301600FCB9FC /* PullToRefreshInnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F38B52E2930301600FCB9FC /* PullToRefreshInnerView.swift */; };
 		5F3A17EF291DB26700EA6FEC /* CoreAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */; };
 		5F3A17F0291DB26700EA6FEC /* CoreAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */; };
@@ -530,6 +527,9 @@
 		5FE72EB729298DB7001C7A6C /* BuildConfig.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE72EB429298A37001C7A6C /* BuildConfig.generated.swift */; };
 		5FE7A535292E711100F7EB73 /* PullRefreshableScrollView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FE7A532292E704D00F7EB73 /* PullRefreshableScrollView.framework */; };
 		5FE7A536292E711100F7EB73 /* PullRefreshableScrollView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5FE7A532292E704D00F7EB73 /* PullRefreshableScrollView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5FF6B94D294364A100DB558A /* StatusComposerAttachmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F373E53293C0B3500051F94 /* StatusComposerAttachmentsView.swift */; };
+		5FF6B94E294364E500DB558A /* AppKitSwiftUIIntegration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F38B52B29302F0C00FCB9FC /* AppKitSwiftUIIntegration.swift */; };
+		5FF6B94F2943652000DB558A /* AppKitSwiftUIIntegration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F38B52B29302F0C00FCB9FC /* AppKitSwiftUIIntegration.swift */; };
 		8018496C90237DCCDED54D8E /* Pods_Mastonaut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 092B4EA6357A3987C4DB12B9 /* Pods_Mastonaut.framework */; };
 		9BF0CEF5AD6BE645406760FA /* Pods_Mastonaut__Mock_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D2DCB52811AC15559D8AE9 /* Pods_Mastonaut__Mock_.framework */; };
 		BB0D8382B9BA154D27AFBC63 /* Pods_CoreTootin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C7A9AB62B40D2AFDAA70E9 /* Pods_CoreTootin.framework */; };
@@ -2548,7 +2548,6 @@
 				15E7452722371DCB009A1252 /* AccountsPlaceholderController.swift in Sources */,
 				1523C6EA21E94C7F006DE234 /* AttachmentViewController.swift in Sources */,
 				15B981B7234FE549008391F8 /* FavoritesViewController.swift in Sources */,
-				5F373E55293C0B3500051F94 /* StatusComposerAttachmentsView.swift in Sources */,
 				1538FB3722188978006B5F78 /* ViewingPreferencesController.swift in Sources */,
 				15EE539E22C95854001BEA58 /* SearchResultsPresenter.swift in Sources */,
 				1538FB23221777EE006B5F78 /* CoverView.swift in Sources */,
@@ -2645,6 +2644,7 @@
 				159C2186232D478C00139BD5 /* Visibility+MenuItemCapable.swift in Sources */,
 				154478B0232B0B38009C71D4 /* Mastonaut.xcdatamodeld in Sources */,
 				159C216F232C570600139BD5 /* NSRegularExpression+Patterns.swift in Sources */,
+				5FF6B94D294364A100DB558A /* StatusComposerAttachmentsView.swift in Sources */,
 				15EE2AFE232EA03600155E16 /* AttachmentsSubcontroller.swift in Sources */,
 				15431280232EE47B0010854A /* NSKeyValueObservation+Helpers.swift in Sources */,
 				154478B5232B105C009C71D4 /* KeychainController.swift in Sources */,
@@ -2669,6 +2669,7 @@
 				1546CB82232E7BC700A0F3AC /* NSStackView+Additions.swift in Sources */,
 				156976362348D28E001D8A08 /* AppRegistrationAgent.swift in Sources */,
 				15EE2B05232EA21900155E16 /* String+Additions.swift in Sources */,
+				5FF6B94E294364E500DB558A /* AppKitSwiftUIIntegration.swift in Sources */,
 				1574DE22233C038E00AB1036 /* NSAlert+Dialog.swift in Sources */,
 				1574DE23233C03EE00AB1036 /* NSAlert+Additions.swift in Sources */,
 				159C2181232D37A200139BD5 /* LocalizationTool.swift in Sources */,
@@ -2734,7 +2735,6 @@
 				150A9F0721FD202300DF42A1 /* AttributedStringCapable.swift in Sources */,
 				15B4AF12222A1AD2007AA447 /* NSAccessibility+Additions.swift in Sources */,
 				5F38B52F2930301600FCB9FC /* PullToRefreshInnerView.swift in Sources */,
-				5F38B52C29302F0C00FCB9FC /* AppKitSwiftUIIntegration.swift in Sources */,
 				15CB8A5B2288CDB100E465D8 /* GeneralPreferencesController.swift in Sources */,
 				1599F8EB22CABA0B00A53D93 /* StatusSearchResultViewController.swift in Sources */,
 				15C78372221CBD8600402C66 /* TimelinesViewController.swift in Sources */,
@@ -2792,7 +2792,6 @@
 				1561EBAF225C02070034EAA6 /* MastodonURLResolver.swift in Sources */,
 				15E973CB225A9E24009CE4DF /* AuthorizedAccountProviding.swift in Sources */,
 				151199D022C04160007F2AEB /* InitialKeyViewProviding.swift in Sources */,
-				5F373E54293C0B3500051F94 /* StatusComposerAttachmentsView.swift in Sources */,
 				15979B1922CCEC8D006B6286 /* PollVotingCapable.swift in Sources */,
 				1552D6E92286576C009B4BBD /* MenuItemsControllers.swift in Sources */,
 				5F176FAC290EF03900DF043C /* FollowedList.swift in Sources */,
@@ -2818,6 +2817,7 @@
 				15082D552312CA3A0075BB1D /* ReconnectModerator.swift in Sources */,
 				1599F8EE22CABD1B00A53D93 /* TagSearchResultsViewController.swift in Sources */,
 				15431295232EF5380010854A /* AuthController.swift in Sources */,
+				5FF6B94F2943652000DB558A /* AppKitSwiftUIIntegration.swift in Sources */,
 				15BC41552262218C00C2A150 /* TagViewController.swift in Sources */,
 				15BC415B2262A65F00C2A150 /* TimelinesWindowRestoration.swift in Sources */,
 				1507924421D6E707009EE4A3 /* InstancePickerWindowController.swift in Sources */,
