@@ -11,25 +11,43 @@ import SwiftUI
 
 struct ComposerAttachment: Identifiable {
 	let id: String
-	
+
 	var description: String = ""
-	
+
 	let type: AttachmentType
 	var metadata: String = ""
-	
+
 	static func fromUploads(_ uploads: [Upload]) -> [ComposerAttachment] {
 		return uploads.map { ComposerAttachment(id: $0.fileName ?? "test", description: $0.fileName ?? "desc", type: .image) }
 	}
 }
 
+class ComposerAttachmentCollection: ObservableObject {
+	@Published var items: [ComposerAttachment]
+
+	init() {
+		self.items = []
+	}
+	
+	func replaceItems(_ newItems: [Upload]) {
+		items.removeAll()
+		
+		for item in newItems {
+			let composerAttachment = ComposerAttachment(id: item.fileName ?? "test", description: item.fileName ?? "desc", type: .image)
+			
+			items.append(composerAttachment)
+		}
+	}
+}
+
 struct StatusComposerAttachmentsView: View {
-	@State var attachments: [ComposerAttachment]
+	@StateObject var attachments = ComposerAttachmentCollection()
 
 	var body: some View {
-		let count = attachments.count
+		let count = attachments.items.count
 		var i = 0
-		
-		ForEach(attachments) { attachment in
+
+		ForEach($attachments.items) { $attachment in
 			HStack(alignment: .top) {
 				VStack {
 					ZStack {
@@ -61,15 +79,17 @@ struct StatusComposerAttachmentsView: View {
 					}
 				}
 
-				Text(attachment.description)
+				TextField("Description:", text: $attachment.description)
 
 				Spacer()
 			}
-			
+
 			if i != count {
 				Divider()
 			}
-		}.background(.blue)
+		}
+		.background(.blue)
+//		.frame(minWidth: 534, minHeight: 100)
 	}
 }
 
@@ -81,19 +101,25 @@ struct SwiftUIView_Previews: PreviewProvider {
 		var attachmentWithDescription = ComposerAttachment(id: "2", type: .image)
 		attachmentWithDescription.description = "Hello, this is some text with a lot of words. We "
 
-		let noAttachments = [ComposerAttachment]()
-		let oneAttachment: [ComposerAttachment] = [ComposerAttachment(id: "1", type: .image)]
-		let threeAttachments: [ComposerAttachment] = [ComposerAttachment(id: "1", type: .image), attachmentWithDescription, attachmentWithMovieMetadata]
+		let noAttachments = ComposerAttachmentCollection()
+
+		let oneAttachment = ComposerAttachmentCollection()
+		oneAttachment.items.append(ComposerAttachment(id: "1", type: .image))
+
+		let threeAttachments = ComposerAttachmentCollection()
+		threeAttachments.items.append(ComposerAttachment(id: "1", type: .image))
+		threeAttachments.items.append(attachmentWithDescription)
+		threeAttachments.items.append(attachmentWithMovieMetadata)
 
 		return VStack {
 			StatusComposerAttachmentsView(attachments: noAttachments)
-			//.padding(.all, 10)
+			// .padding(.all, 10)
 
 			StatusComposerAttachmentsView(attachments: oneAttachment)
-				//.padding(.all, 10)
+			// .padding(.all, 10)
 
 			StatusComposerAttachmentsView(attachments: threeAttachments)
-				//.padding(.all, 10)
+			// .padding(.all, 10)
 		}
 	}
 }

@@ -67,6 +67,13 @@ public class AttachmentsSubcontroller: NSObject
 	{
 		super.awakeFromNib()
 		
+		let oneAttachment = ComposerAttachmentCollection()
+		oneAttachment.items.append(ComposerAttachment(id: "1", type: .image))
+
+		statusComposerAttachmentView = StatusComposerAttachmentsView(attachments: oneAttachment)
+
+		AppKitSwiftUIIntegration.hostSwiftUIView(statusComposerAttachmentView, inView: attachmentView)
+		
 //		attachmentCollectionView.register(AttachmentItem.self,
 //		                                  forItemWithIdentifier: ReuseIdentifiers.attachment)
 //
@@ -211,10 +218,9 @@ public class AttachmentsSubcontroller: NSObject
 //		let noAttachments = [ComposerAttachment]()
 //		let oneAttachment: [ComposerAttachment] = [ComposerAttachment(id: "1", type: .image)]
 //		let threeAttachments: [ComposerAttachment] = [ComposerAttachment(id: "1", type: .image), attachmentWithDescription, attachmentWithMovieMetadata]
-		
-		statusComposerAttachmentView = StatusComposerAttachmentsView(attachments: ComposerAttachment.fromUploads(attachments))
 
-		AppKitSwiftUIIntegration.hostSwiftUIView(statusComposerAttachmentView, inView: attachmentView)
+//		statusComposerAttachmentView!.attachments.items.remove(at: 0)
+		statusComposerAttachmentView?.attachments.replaceItems(attachments)
 	}
 
 	public func removeAttachment(_ attachment: Upload)
