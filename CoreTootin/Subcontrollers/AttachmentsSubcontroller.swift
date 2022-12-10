@@ -67,20 +67,6 @@ public class AttachmentsSubcontroller: NSObject
 	{
 		super.awakeFromNib()
 		
-		var attachmentWithMovieMetadata = ComposerAttachment(id: "3", type: .video)
-		attachmentWithMovieMetadata.metadata = "7s"
-
-		var attachmentWithDescription = ComposerAttachment(id: "2", type: .image)
-		attachmentWithDescription.description = "Hello, this is some text with a lot of words. We "
-
-		let noAttachments = [ComposerAttachment]()
-		let oneAttachment: [ComposerAttachment] = [ComposerAttachment(id: "1", type: .image)]
-		let threeAttachments: [ComposerAttachment] = [ComposerAttachment(id: "1", type: .image), attachmentWithDescription, attachmentWithMovieMetadata]
-		
-		statusComposerAttachmentView = StatusComposerAttachmentsView(attachments: threeAttachments)
-
-		AppKitSwiftUIIntegration.hostSwiftUIView(statusComposerAttachmentView, inView: attachmentView)
-
 //		attachmentCollectionView.register(AttachmentItem.self,
 //		                                  forItemWithIdentifier: ReuseIdentifiers.attachment)
 //
@@ -215,6 +201,20 @@ public class AttachmentsSubcontroller: NSObject
 		let insertedSet = Set(insertedItems.map { IndexPath(item: $0, section: 0) })
 
 //		attachmentCollectionView.animator().insertItems(at: insertedSet)
+		
+//		var attachmentWithMovieMetadata = ComposerAttachment(id: "3", type: .video)
+//		attachmentWithMovieMetadata.metadata = "7s"
+//
+//		var attachmentWithDescription = ComposerAttachment(id: "2", type: .image)
+//		attachmentWithDescription.description = "Hello, this is some text with a lot of words. We "
+//
+//		let noAttachments = [ComposerAttachment]()
+//		let oneAttachment: [ComposerAttachment] = [ComposerAttachment(id: "1", type: .image)]
+//		let threeAttachments: [ComposerAttachment] = [ComposerAttachment(id: "1", type: .image), attachmentWithDescription, attachmentWithMovieMetadata]
+		
+		statusComposerAttachmentView = StatusComposerAttachmentsView(attachments: ComposerAttachment.fromUploads(attachments))
+
+		AppKitSwiftUIIntegration.hostSwiftUIView(statusComposerAttachmentView, inView: attachmentView)
 	}
 
 	public func removeAttachment(_ attachment: Upload)

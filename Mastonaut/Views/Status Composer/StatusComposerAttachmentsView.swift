@@ -11,11 +11,15 @@ import SwiftUI
 
 struct ComposerAttachment: Identifiable {
 	let id: String
-
+	
 	var description: String = ""
-
+	
 	let type: AttachmentType
 	var metadata: String = ""
+	
+	static func fromUploads(_ uploads: [Upload]) -> [ComposerAttachment] {
+		return uploads.map { ComposerAttachment(id: $0.fileName ?? "test", description: $0.fileName ?? "desc", type: .image) }
+	}
 }
 
 struct StatusComposerAttachmentsView: View {
@@ -65,7 +69,7 @@ struct StatusComposerAttachmentsView: View {
 			if i != count {
 				Divider()
 			}
-		}
+		}.background(.blue)
 	}
 }
 
