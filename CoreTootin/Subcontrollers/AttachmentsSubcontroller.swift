@@ -67,8 +67,9 @@ public class AttachmentsSubcontroller: NSObject
 	{
 		super.awakeFromNib()
 		
+		// FIXME we still need this because the layout is otherwise broken
 		let oneAttachment = ComposerAttachmentCollection()
-		oneAttachment.items.append(ComposerAttachment(id: "1", type: .image))
+		oneAttachment.items.append(ComposerAttachment(id: "1", type: .image, upload: nil))
 
 		statusComposerAttachmentView = StatusComposerAttachmentsView(attachments: oneAttachment)
 
@@ -232,6 +233,8 @@ public class AttachmentsSubcontroller: NSObject
 
 	public func update(thumbnail: NSImage, for upload: Upload)
 	{
+		guard var composerAttachment = statusComposerAttachmentView?.attachments.getItemForUpload(upload) else { return }
+		composerAttachment.thumbnailImage = thumbnail
 //		guard let index = attachments.firstIndex(of: upload) else { return }
 //		(attachmentCollectionView.item(at: index) as? AttachmentItem)?.image = thumbnail
 	}

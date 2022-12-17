@@ -17,8 +17,12 @@ struct ComposerAttachment: Identifiable {
 	let type: AttachmentType
 	var metadata: String = ""
 
-	static func fromUploads(_ uploads: [Upload]) -> [ComposerAttachment] {
-		return uploads.map { ComposerAttachment(id: $0.fileName ?? "test", description: $0.fileName ?? "desc", type: .image) }
+	var thumbnailImage: NSImage?
+
+	let upload: Upload?
+
+	static func fromUpload(_ upload: Upload) -> ComposerAttachment {
+		return ComposerAttachment(id: upload.fileName ?? "test", description: upload.fileName ?? "desc", type: .image, upload: upload)
 	}
 }
 
@@ -28,15 +32,19 @@ class ComposerAttachmentCollection: ObservableObject {
 	init() {
 		self.items = []
 	}
-	
+
 	func replaceItems(_ newItems: [Upload]) {
 		items.removeAll()
-		
+
 		for item in newItems {
-			let composerAttachment = ComposerAttachment(id: item.fileName ?? "test", description: item.fileName ?? "desc", type: .image)
-			
+			let composerAttachment = ComposerAttachment.fromUpload(item)
+
 			items.append(composerAttachment)
 		}
+	}
+
+	func getItemForUpload(_ upload: Upload) -> ComposerAttachment? {
+		return items.first { $0.upload == upload }
 	}
 }
 
@@ -45,16 +53,21 @@ struct StatusComposerAttachmentsView: View {
 
 	var body: some View {
 		let count = attachments.items.count
-		var i = 0
 
 		ForEach($attachments.items) { $attachment in
+			Divider()
+
 			HStack(alignment: .top) {
 				VStack {
 					ZStack {
-						Text(attachment.id)
-							.padding()
-							.border(.green, width: 10)
-
+						if (attachment.thumbnailImage != nil) {
+							Image(nsImage: attachment.thumbnailImage!)
+							//						Text(attachment.id)
+								.padding()
+								.background(.secondary)
+							//											.frame(width: 32, height: 32)
+						}
+						
 						Button(action: {}) {
 							Image(systemName: "xmark.circle.fill")
 								.padding(.leading, 25)
@@ -79,35 +92,31 @@ struct StatusComposerAttachmentsView: View {
 					}
 				}
 
-				TextField("Description:", text: $attachment.description)
+				TextField("Describe this attachment", text: $attachment.description)
 
 				Spacer()
 			}
-
-			if i != count {
-				Divider()
-			}
 		}
-		.background(.blue)
+//		.background(.blue)
 //		.frame(minWidth: 534, minHeight: 100)
 	}
 }
 
 struct SwiftUIView_Previews: PreviewProvider {
 	static var previews: some View {
-		var attachmentWithMovieMetadata = ComposerAttachment(id: "3", type: .video)
+		var attachmentWithMovieMetadata = ComposerAttachment(id: "3", type: .video, upload: nil)
 		attachmentWithMovieMetadata.metadata = "7s"
 
-		var attachmentWithDescription = ComposerAttachment(id: "2", type: .image)
+		var attachmentWithDescription = ComposerAttachment(id: "2", type: .image, upload: nil)
 		attachmentWithDescription.description = "Hello, this is some text with a lot of words. We "
 
 		let noAttachments = ComposerAttachmentCollection()
 
 		let oneAttachment = ComposerAttachmentCollection()
-		oneAttachment.items.append(ComposerAttachment(id: "1", type: .image))
+		oneAttachment.items.append(ComposerAttachment(id: "1", type: .image, upload: nil))
 
 		let threeAttachments = ComposerAttachmentCollection()
-		threeAttachments.items.append(ComposerAttachment(id: "1", type: .image))
+		threeAttachments.items.append(ComposerAttachment(id: "1", type: .image, upload: nil))
 		threeAttachments.items.append(attachmentWithDescription)
 		threeAttachments.items.append(attachmentWithMovieMetadata)
 
