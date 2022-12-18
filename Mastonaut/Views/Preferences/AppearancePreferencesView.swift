@@ -28,6 +28,7 @@ struct AppearancePreferencesView: View {
 			}
 			.pickerStyle(.radioGroup)
 			.horizontalRadioGroupLayout()
+			.padding(.horizontal, -8)
 		}
 		.onChange(of: appearance) { newValue in
 			Preferences.appearance = newValue
