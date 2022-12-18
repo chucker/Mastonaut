@@ -519,6 +519,8 @@
 		5F3A17EF291DB26700EA6FEC /* CoreAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */; };
 		5F3A17F0291DB26700EA6FEC /* CoreAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */; };
 		5F3A17F1291DB26700EA6FEC /* CoreAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */; };
+		5F74B959294F5DD900DE1909 /* StatusPrivacyPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F74B958294F5DD900DE1909 /* StatusPrivacyPreferencesView.swift */; };
+		5F74B95A294F5DD900DE1909 /* StatusPrivacyPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F74B958294F5DD900DE1909 /* StatusPrivacyPreferencesView.swift */; };
 		5FC3E1922926FD640086DCEE /* AppearancePreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC3E1912926FD640086DCEE /* AppearancePreferencesView.swift */; };
 		5FC3E1952927018A0086DCEE /* LoggingOSLog in Frameworks */ = {isa = PBXBuildFile; productRef = 5FC3E1942927018A0086DCEE /* LoggingOSLog */; };
 		5FE72EAE292982F0001C7A6C /* BuildConfig.sh in Resources */ = {isa = PBXBuildFile; fileRef = 5FE72EAD292982F0001C7A6C /* BuildConfig.sh */; };
@@ -975,6 +977,7 @@
 		5F38B52B29302F0C00FCB9FC /* AppKitSwiftUIIntegration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKitSwiftUIIntegration.swift; sourceTree = "<group>"; };
 		5F38B52E2930301600FCB9FC /* PullToRefreshInnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefreshInnerView.swift; sourceTree = "<group>"; };
 		5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = CoreAssets.xcassets; sourceTree = "<group>"; };
+		5F74B958294F5DD900DE1909 /* StatusPrivacyPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusPrivacyPreferencesView.swift; sourceTree = "<group>"; };
 		5FC3E18E2926F0E80086DCEE /* Logger+CurrentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Logger+CurrentType.swift"; sourceTree = "<group>"; };
 		5FC3E1912926FD640086DCEE /* AppearancePreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearancePreferencesView.swift; sourceTree = "<group>"; };
 		5FE72EAD292982F0001C7A6C /* BuildConfig.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = BuildConfig.sh; sourceTree = "<group>"; };
@@ -1792,6 +1795,7 @@
 				5FC3E1912926FD640086DCEE /* AppearancePreferencesView.swift */,
 				5F043C52293286110095C702 /* NotificationTypeFilterPreferencesView.swift */,
 				5F043C552932872D0095C702 /* NotificationPerAccountPreferencesView.swift */,
+				5F74B958294F5DD900DE1909 /* StatusPrivacyPreferencesView.swift */,
 			);
 			path = Preferences;
 			sourceTree = "<group>";
@@ -2456,6 +2460,7 @@
 				1573888F25018C5E00DE40F9 /* Selectable.swift in Sources */,
 				157D78C22284D27300DAE4A4 /* StatusListViewController.swift in Sources */,
 				150B1EE1227E33C30048EA22 /* NSView+EmojiSubviews.m in Sources */,
+				5F74B95A294F5DD900DE1909 /* StatusPrivacyPreferencesView.swift in Sources */,
 				151199CC22BFCF05007F2AEB /* ComposerPollViewController.swift in Sources */,
 				1572C55D22A2038100FAA77F /* StringCapableTextAttachment.swift in Sources */,
 				15B44D5B225D0D9B00EDFDC1 /* AnnotatedURL.m in Sources */,
@@ -2807,6 +2812,7 @@
 				15BC41552262218C00C2A150 /* TagViewController.swift in Sources */,
 				15BC415B2262A65F00C2A150 /* TimelinesWindowRestoration.swift in Sources */,
 				1507924421D6E707009EE4A3 /* InstancePickerWindowController.swift in Sources */,
+				5F74B959294F5DD900DE1909 /* StatusPrivacyPreferencesView.swift in Sources */,
 				15BC41642262AB1C00C2A150 /* ColumnMode.swift in Sources */,
 				1596DB44235F65A100B349B7 /* GetMACAddress.m in Sources */,
 				1584AA5C24D4CBF00073DC60 /* StatusInteractionPresenter.swift in Sources */,
