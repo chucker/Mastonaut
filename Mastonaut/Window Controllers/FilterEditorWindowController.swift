@@ -173,8 +173,8 @@ class FilterEditorWindowController: NSWindowController {
 		else if expirationIdentifier == "custom" {
 			expiration = expirationDatePicker.dateValue
 		}
-		else if let minutes = Double(expirationIdentifier), "\(minutes)" == expirationIdentifier {
-			expiration = Date(timeIntervalSinceNow: minutes * 60)
+		else if let minutes = Int(expirationIdentifier), "\(minutes)" == expirationIdentifier {
+			expiration = Date(timeIntervalSinceNow: Double(minutes) * 60)
 		}
 		else {
 			// Fallback
