@@ -133,8 +133,8 @@ class FilterEditorWindowController: NSWindowController {
 	}
 
 	private func selectActionPopUpButtonItem(identifier: String) {
-		if let item = expirationDatePopUpButton.itemArray.first(where: { $0.identifier?.rawValue == identifier }) {
-			expirationDatePopUpButton.select(item)
+		if let item = actionPopUpButton.itemArray.first(where: { $0.identifier?.rawValue == identifier }) {
+			actionPopUpButton.select(item)
 		}
 	}
 
