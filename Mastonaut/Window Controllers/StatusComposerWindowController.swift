@@ -662,7 +662,16 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 			window?.makeFirstResponder(textView)
 		}
 
-		setAudienceSelection(visibility: status.visibility)
+		// if the status we're replying to is already private, use that. Otherwise, use the reply default.
+		if status.visibility == .direct || status.visibility == .private
+		{
+			setAudienceSelection(visibility: status.visibility)
+		}
+		else
+		{
+			setAudienceSelection(visibility: Visibility.make(from: Preferences.defaultReplyAudience))
+		}
+
 		updateRemainingCountLabel()
 
 		// Do this last so that the setter gets to calculate the needed height for the constraint.

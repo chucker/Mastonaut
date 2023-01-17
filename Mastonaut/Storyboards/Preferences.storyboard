@@ -520,48 +520,15 @@
             <objects>
                 <viewController title="Composing" showSeguePresentationStyle="single" id="sar-Nn-LHe" customClass="ComposingPreferencesController" customModule="Mastonaut" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" misplaced="YES" id="wIY-Oo-Tb0">
-                        <rect key="frame" x="0.0" y="0.0" width="670" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="670" height="350"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="20" horizontalStackHuggingPriority="250.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalCompressionResistancePriority="250" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fRF-wq-Gmh">
-                                <rect key="frame" x="20" y="20" width="630" height="232"/>
+                                <rect key="frame" x="20" y="20" width="630" height="350"/>
                                 <subviews>
-                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="V1f-eA-FlS">
-                                        <rect key="frame" x="0.0" y="204" width="630" height="28"/>
-                                        <subviews>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hRH-MX-k5T">
-                                                <rect key="frame" x="-2" y="7" width="244" height="16"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="240" id="M32-KN-sRR"/>
-                                                </constraints>
-                                                <textFieldCell key="cell" alignment="right" title="Default status privacy:" id="3SC-la-k5a">
-                                                    <font key="font" usesAppearanceFont="YES"/>
-                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                </textFieldCell>
-                                            </textField>
-                                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MCh-KT-Z0x">
-                                                <rect key="frame" x="249" y="0.0" width="78" height="25"/>
-                                                <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="H33-Fg-GYd" id="63Y-s4-2M3">
-                                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                    <font key="font" metaFont="menu"/>
-                                                    <menu key="menu" id="1Ga-Tz-wcl">
-                                                        <items>
-                                                            <menuItem title="Item 1" state="on" id="H33-Fg-GYd"/>
-                                                            <menuItem title="Item 2" id="q1T-5v-XOl"/>
-                                                            <menuItem title="Item 3" id="tno-qT-z7v"/>
-                                                        </items>
-                                                    </menu>
-                                                </popUpButtonCell>
-                                            </popUpButton>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="hRH-MX-k5T" firstAttribute="leading" secondItem="V1f-eA-FlS" secondAttribute="leading" id="85z-d2-D1d"/>
-                                            <constraint firstItem="hRH-MX-k5T" firstAttribute="firstBaseline" secondItem="MCh-KT-Z0x" secondAttribute="firstBaseline" id="i2u-Rp-rOY"/>
-                                            <constraint firstItem="MCh-KT-Z0x" firstAttribute="leading" secondItem="hRH-MX-k5T" secondAttribute="trailing" constant="12" id="kdI-xi-ExQ"/>
-                                            <constraint firstItem="MCh-KT-Z0x" firstAttribute="top" secondItem="V1f-eA-FlS" secondAttribute="top" constant="4" id="rvg-pl-iYe"/>
-                                            <constraint firstAttribute="bottom" secondItem="MCh-KT-Z0x" secondAttribute="bottom" constant="4" id="xu5-fK-wLA"/>
-                                        </constraints>
+                                    <customView id="LQE-TB-013" customClass="NSHostingView">
+                                        <rect key="frame" x="0.0" y="204" width="630" height="70"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                     </customView>
                                     <customView horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="JOb-HG-dyh">
                                         <rect key="frame" x="0.0" y="112" width="630" height="72"/>
@@ -679,10 +646,10 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="defaultAudiencePopUpButton" destination="MCh-KT-Z0x" id="zWQ-FK-brs"/>
                         <outlet property="defaultMarkAsSensitiveButton" destination="eJs-VJ-b7W" id="qJU-Mh-h7D"/>
                         <outlet property="insertDoubleNewLinesButton" destination="iCz-M8-d6U" id="YtT-SC-gUQ"/>
                         <outlet property="insertZWJCharactersButton" destination="DN3-Rd-V0U" id="cZl-Ci-1j1"/>
+                        <outlet property="statusPrivacyPreferences" destination="LQE-TB-013" id="92N-3a-bwt"/>
                     </connections>
                 </viewController>
                 <customObject id="HT0-2f-WZD" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

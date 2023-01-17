@@ -109,6 +109,12 @@ public class MastonautPreferences: PreferencesController
 		set { defaults.setValue(newValue.rawValue, forKey: #keyPath(defaultStatusAudience)) }
 	}
 
+	@objc public dynamic var defaultReplyAudience: StatusAudience
+	{
+		get { return integerRepresentable(for: #keyPath(defaultReplyAudience), default: .unlisted) }
+		set { defaults.setValue(newValue.rawValue, forKey: #keyPath(defaultReplyAudience)) }
+	}
+
 	@objc public dynamic var markMediaAsSensitive: Bool
 	{
 		get { return bool(forKey: #keyPath(markMediaAsSensitive)) ?? false }

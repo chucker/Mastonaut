@@ -19,10 +19,11 @@
 
 import Cocoa
 import CoreTootin
+import SwiftUI
 
 class ComposingPreferencesController: NSViewController
 {
-	@IBOutlet private weak var defaultAudiencePopUpButton: NSPopUpButton!
+	@IBOutlet var statusPrivacyPreferences: NSView!
 	@IBOutlet private var defaultMarkAsSensitiveButton: NSButton!
 	@IBOutlet private var insertDoubleNewLinesButton: NSButton!
 	@IBOutlet private var insertZWJCharactersButton: NSButton!
@@ -33,8 +34,9 @@ class ComposingPreferencesController: NSViewController
 	{
 		super.awakeFromNib()
 
-		preferenceObservers.append(PreferenceEnumPopUpObserver(preference: \MastonautPreferences.defaultStatusAudience,
-															   popUpButton: defaultAudiencePopUpButton))
+		let preferences = MastonautPreferences.instance
+		let view = StatusPrivacyPreferencesView(preferences: preferences)
+		AppKitSwiftUIIntegration.hostSwiftUIView(view, inView: statusPrivacyPreferences)
 
 		preferenceObservers.append(PreferenceCheckboxObserver(preference: \MastonautPreferences.markMediaAsSensitive,
 		                                                      checkbox: defaultMarkAsSensitiveButton))
