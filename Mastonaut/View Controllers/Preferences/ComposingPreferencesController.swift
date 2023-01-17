@@ -23,9 +23,9 @@ import CoreTootin
 class ComposingPreferencesController: NSViewController
 {
 	@IBOutlet private weak var defaultAudiencePopUpButton: NSPopUpButton!
-	@IBOutlet private weak var defaultMarkAsSensitiveButton: NSButton!
-	@IBOutlet private weak var insertDoubleNewLinesButton: NSButton!
-	@IBOutlet private weak var insertZWJCharactersButton: NSButton!
+	@IBOutlet private var defaultMarkAsSensitiveButton: NSButton!
+	@IBOutlet private var insertDoubleNewLinesButton: NSButton!
+	@IBOutlet private var insertZWJCharactersButton: NSButton!
 
 	private var preferenceObservers: [AnyObject] = []
 
@@ -37,12 +37,12 @@ class ComposingPreferencesController: NSViewController
 															   popUpButton: defaultAudiencePopUpButton))
 
 		preferenceObservers.append(PreferenceCheckboxObserver(preference: \MastonautPreferences.markMediaAsSensitive,
-															  checkbox: defaultMarkAsSensitiveButton))
+		                                                      checkbox: defaultMarkAsSensitiveButton))
 
 		preferenceObservers.append(PreferenceCheckboxObserver(preference: \MastonautPreferences.insertDoubleNewLines,
-															  checkbox: insertDoubleNewLinesButton))
+		                                                      checkbox: insertDoubleNewLinesButton))
 
 		preferenceObservers.append(PreferenceCheckboxObserver(preference: \MastonautPreferences.insertJoinersBetweenEmojis,
-															  checkbox: insertZWJCharactersButton))
+		                                                      checkbox: insertZWJCharactersButton))
 	}
 }

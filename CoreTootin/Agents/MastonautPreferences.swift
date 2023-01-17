@@ -45,7 +45,7 @@ public class MastonautPreferences: PreferencesController
 		{
 			sharedInstance = MastonautPreferences()
 		}
-
+		
 		return sharedInstance
 	}
 

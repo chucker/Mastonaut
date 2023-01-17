@@ -18,8 +18,8 @@
 //
 
 import Cocoa
-import MastodonKit
 import CoreTootin
+import MastodonKit
 
 class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplaying
 {
@@ -91,11 +91,11 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 	]
 
 	private lazy var fileDropFilteringOptions: [NSPasteboard.ReadingOptionKey: Any]? =
-		{
-			return [.urlReadingContentsConformToTypes: AttachmentUploader.supportedAttachmentTypes]
-		}()
+	{
+		[.urlReadingContentsConformToTypes: AttachmentUploader.supportedAttachmentTypes]
+	}()
 
-	private var hasValidTextContents: Bool { return (1...statusCharacterLimit).contains(totalCharacterCount) }
+	private var hasValidTextContents: Bool { return (1 ... statusCharacterLimit).contains(totalCharacterCount) }
 	private var hasAttachments: Bool { return !attachmentsSubcontroller.attachments.isEmpty }
 	private var hasActiveUploadTasks: Bool { return attachmentsSubcontroller.attachmentUploader.hasActiveTasks }
 	private var hasActiveSubmitTask: Bool { return postingService?.isSubmiting == true }
@@ -106,10 +106,10 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 	private var isDirty: Bool
 	{
 		return totalCharacterCount > 0
-				|| hasAttachments
-				|| hasActiveTasks
-				|| pollViewController.isDirty
-				|| replyStatus != nil
+			|| hasAttachments
+			|| hasActiveTasks
+			|| pollViewController.isDirty
+			|| replyStatus != nil
 	}
 
 	private var hasValidPollConfiguration: Bool
@@ -156,13 +156,13 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 		didSet
 		{
 			didChangeValue(for: \.hasLoadedClientEmoji)
-			currentClientEmoji.map({ emojiPickerPanelController.setEmoji($0) })
+			currentClientEmoji.map { emojiPickerPanelController.setEmoji($0) }
 		}
 	}
 
 	@objc var hasLoadedClientEmoji: ObjCBool { return ObjCBool(booleanLiteral: currentClientEmoji != nil) }
 
-	private var resolverService: ResolverService? = nil
+	private var resolverService: ResolverService?
 	{
 		didSet
 		{
@@ -170,8 +170,10 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 
 			guard let service = resolverService else { return }
 
-			resolverServiceObservations.observe(service, \.resolverFuture) { [weak self] (service, _) in
-				DispatchQueue.main.async {
+			resolverServiceObservations.observe(service, \.resolverFuture)
+			{ [weak self] _, _ in
+				DispatchQueue.main.async
+				{
 					self?.updateSubmitEnabled()
 					self?.submitStatusIndicator.setAnimating(self?.hasActiveTasks ?? false)
 				}
@@ -179,7 +181,7 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 		}
 	}
 
-	private var accountSearchService: AccountSearchService? = nil
+	private var accountSearchService: AccountSearchService?
 	{
 		didSet
 		{
@@ -187,7 +189,7 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 		}
 	}
 
-	private var postingService: PostingService? = nil
+	private var postingService: PostingService?
 	{
 		didSet
 		{
@@ -198,11 +200,13 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 			service.set(status: statusTextContent)
 			service.set(contentWarning: contentWarningTextContent)
 
-			postingServiceObservations.observe(service, \.characterCount, sendInitial: true) { [weak self] (_, _) in
+			postingServiceObservations.observe(service, \.characterCount, sendInitial: true)
+			{ [weak self] _, _ in
 				self?.updateRemainingCountLabel()
 			}
 
-			postingServiceObservations.observe(service, \.submitTaskFuture) { [weak self] (service, _) in
+			postingServiceObservations.observe(service, \.submitTaskFuture)
+			{ [weak self] _, _ in
 				self?.updateSubmitEnabled()
 				self?.submitStatusIndicator.setAnimating(self?.hasActiveTasks ?? false)
 			}
@@ -219,7 +223,7 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 		}
 	}
 
-	private var client: ClientType? = nil
+	private var client: ClientType?
 	{
 		didSet
 		{
@@ -230,11 +234,11 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 			accountSearchService = nil
 			currentInstance = nil
 
-			if let account = self.currentAccount
+			if let account = currentAccount
 			{
 				instanceService.instance(for: account)
 				{
-					[weak self] (instance) in
+					[weak self] instance in
 
 					self?.currentInstance = instance
 				}
@@ -243,29 +247,29 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 			if let client = client, oldValue != nil, client.baseURL != oldValue!.baseURL, let replyStatus = replyStatus
 			{
 				resolverService?.resolveStatus(uri: replyStatus.resolvableURI)
+				{
+					[weak self] result in
+
+					DispatchQueue.main.async
 					{
-						[weak self] (result) in
+						guard let self = self else { return }
 
-						DispatchQueue.main.async
-							{
-								guard let self = self else { return }
+						switch (result, self.replyStatusSenderWindowController)
+						{
+						case (.success(let status), .some(let windowController)):
+							self.setupAsReply(to: status,
+							                  using: self.currentAccount,
+							                  senderWindowController: windowController)
 
-								switch (result, self.replyStatusSenderWindowController)
-								{
-								case (.success(let status), .some(let windowController)):
-									self.setupAsReply(to: status,
-													  using: self.currentAccount,
-													  senderWindowController: windowController)
+						case (.failure(let error), _):
+							NSLog("Failed resolving status: \(error)")
+							fallthrough
 
-								case (.failure(let error), _):
-									NSLog("Failed resolving status: \(error)")
-									fallthrough
-
-								default:
-									self.dismissReplyStatus()
-								}
-							}
+						default:
+							self.dismissReplyStatus()
+						}
 					}
+				}
 			}
 
 			if let client = client, oldValue?.baseURL != client.baseURL
@@ -276,8 +280,8 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 		}
 	}
 
-	private weak var replyStatusSenderWindowController: TimelinesWindowController? = nil
-	private var replyStatus: Status? = nil
+	private weak var replyStatusSenderWindowController: TimelinesWindowController?
+	private var replyStatus: Status?
 	{
 		didSet
 		{
@@ -335,38 +339,42 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 	internal var currentUser: UUID?
 	{
 		get { return currentAccount?.uuid }
-		set { currentAccount = newValue.flatMap({ accountsService.account(with: $0) }) }
+		set { currentAccount = newValue.flatMap { accountsService.account(with: $0) } }
 	}
 
-	var currentAccount: AuthorizedAccount? = nil
+	var currentAccount: AuthorizedAccount?
 	{
 		didSet
 		{
 			currentAccountObservations.removeAll()
 
-			if let currentAccount = self.currentAccount
+			if let currentAccount = currentAccount
 			{
 				let accountUUID = currentAccount.uuid
 				client = Client.create(for: currentAccount)
 				authorAvatarView.image = #imageLiteral(resourceName: "missing.png")
 
-				if let accountPreferences = currentAccount.accountPreferences {
-					currentAccountObservations.observe(accountPreferences, \.customTootLengthLimit, sendInitial: true) {
-						[weak self] accountPreferences, change in
+				if let accountPreferences = currentAccount.accountPreferences
+				{
+					currentAccountObservations.observe(accountPreferences, \.customTootLengthLimit, sendInitial: true)
+					{
+						[weak self] accountPreferences, _ in
 
 						self?.statusCharacterLimit = accountPreferences.customTootLengthLimit?.intValue ?? 500
 						self?.updateRemainingCountLabel()
 					}
 				}
 
-				AppDelegate.shared.avatarImageCache.fetchImage(account: currentAccount) { [weak self] (result) in
-					switch result {
+				AppDelegate.shared.avatarImageCache.fetchImage(account: currentAccount)
+				{ [weak self] result in
+					switch result
+					{
 					case .inCache(let image):
 						assert(Thread.isMainThread)
 						self?.authorAvatarView.image = image
 					case .loaded(let image):
 						self?.applyAuthorImageIfNotReused(image, originalAccountUUID: accountUUID)
-					case .noImage(_):
+					case .noImage:
 						self?.applyAuthorImageIfNotReused(nil, originalAccountUUID: accountUUID)
 					}
 				}
@@ -432,7 +440,7 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 	private lazy var openPanel: NSOpenPanel = {
 		let panel = NSOpenPanel()
 		panel.allowsMultipleSelection = true
-		panel.allowedFileTypes = AttachmentUploader.supportedAttachmentTypes.map({ $0 as String })
+		panel.allowedFileTypes = AttachmentUploader.supportedAttachmentTypes.map { $0 as String }
 		panel.message = 🔠("Select one or more files to upload and attach to your status.")
 		panel.prompt = 🔠("Attach")
 		return panel
@@ -458,13 +466,13 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 
 		audiencePopupButton.select(audienceItems.first(where: { $0.representedObject ?== defaultAudience }))
 		observations.observePreference(\MastonautPreferences.defaultStatusAudience)
-			{
-				[weak self, weak audiencePopupButton] (preferences, change) in
+		{
+			[weak self, weak audiencePopupButton] preferences, _ in
 
-				let defaultAudience = Visibility.make(from: preferences.defaultStatusAudience)
-				self?.audienceSelection = defaultAudience
-				audiencePopupButton?.select(audienceItems.first(where: { $0.representedObject ?== defaultAudience }))
-			}
+			let defaultAudience = Visibility.make(from: preferences.defaultStatusAudience)
+			self?.audienceSelection = defaultAudience
+			audiencePopupButton?.select(audienceItems.first(where: { $0.representedObject ?== defaultAudience }))
+		}
 
 		textView.font = placeholderTextField.font
 		textView.insertDoubleNewLines = Preferences.insertDoubleNewLines
@@ -477,18 +485,18 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 		}
 
 		observations.observePreference(\MastonautPreferences.insertDoubleNewLines)
-			{
-				[weak textView] (preferences, change) in
-				textView?.insertDoubleNewLines = preferences.insertDoubleNewLines
-			}
+		{
+			[weak textView] preferences, _ in
+			textView?.insertDoubleNewLines = preferences.insertDoubleNewLines
+		}
 
 		observations.observe(attachmentsSubcontroller, \AttachmentsSubcontroller.attachmentCount)
-			{
-				[unowned self] (_, change) in
+		{
+			[unowned self] _, change in
 
-				guard let oldCount = change.oldValue else { return }
-				self.handleAttachmentCountsChanged(oldCount: oldCount)
-			}
+			guard let oldCount = change.oldValue else { return }
+			self.handleAttachmentCountsChanged(oldCount: oldCount)
+		}
 
 		if #available(OSX 10.14, *)
 		{
@@ -500,23 +508,23 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 
 		pollContainerView.addSubview(pollViewController.view)
 		NSLayoutConstraint.activate(NSLayoutConstraint.constraintsEmbedding(view: pollViewController.view,
-																			in: pollContainerView,
-																			inset: NSSize(width: 12, height: 12)))
+		                                                                    in: pollContainerView,
+		                                                                    inset: NSSize(width: 12, height: 12)))
 
 		observations.observe(pollViewController.view, \.frame)
-			{
-				[weak self] (_, _) in self?.updateBottomDrawerConstraint()
-			}
+		{
+			[weak self] _, _ in self?.updateBottomDrawerConstraint()
+		}
 
 		observations.observe(pollViewController, \.allOptionsAreValid)
-			{
-				[weak self] (_, _) in self?.updateSubmitEnabled()
-			}
+		{
+			[weak self] _, _ in self?.updateSubmitEnabled()
+		}
 
 		observations.observe(pollViewController, \.isDirty)
-			{
-				[weak self] (_, _) in self?.updateSubmitEnabled()
-			}
+		{
+			[weak self] _, _ in self?.updateSubmitEnabled()
+		}
 
 		textView.nextKeyView = pollViewController.initialKeyView
 		pollViewController.nextKeyView = contentWarningTextField
@@ -524,7 +532,8 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 
 	func shouldChangeCurrentUser(to userUUID: UUID) -> Bool
 	{
-		guard !hasAttachments else
+		guard !hasAttachments
+		else
 		{
 			NSAlert.confirmReuploadAttachmentsDialog().beginSheetModal(for: window!)
 			{
@@ -570,7 +579,7 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 
 	private func collapseAllDrawers()
 	{
-		guard let window = self.window else { return }
+		guard let window = window else { return }
 
 		let constraintsToCollapse = [
 			contentWarningConstraint,
@@ -578,9 +587,9 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 			replyStatusConstraint
 		]
 
-		let totalCollapsedHeight = constraintsToCollapse.reduce(0, { $0 + $1!.constant })
+		let totalCollapsedHeight = constraintsToCollapse.reduce(0) { $0 + $1!.constant }
 
-		constraintsToCollapse.forEach({ $0!.constant = 0 })
+		constraintsToCollapse.forEach { $0!.constant = 0 }
 		// This is done separatelly because collapsing this constraint doesn't affect the window height
 		attachmentsConstraint.constant = 0
 
@@ -588,10 +597,10 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 	}
 
 	func setupAsReply(to status: Status,
-					  using account: AuthorizedAccount?,
-					  senderWindowController: TimelinesWindowController)
+	                  using account: AuthorizedAccount?,
+	                  senderWindowController: TimelinesWindowController)
 	{
-		guard confirmDiscardChangesIfNeeded(completion: { (shouldDiscard) in
+		guard confirmDiscardChangesIfNeeded(completion: { shouldDiscard in
 			if shouldDiscard
 			{
 				self.textView.string = ""
@@ -602,7 +611,7 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 		currentAccount = account
 
 		let replyStatus = status.reblog ?? status
-		let mentionSet = NSMutableOrderedSet(array: replyStatus.mentions.map({ $0.acct }))
+		let mentionSet = NSMutableOrderedSet(array: replyStatus.mentions.map { $0.acct })
 
 		if mentionSet.contains(replyStatus.account.acct) == false
 		{
@@ -614,7 +623,7 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 			mentionSet.remove(currentUsername)
 		}
 
-		let newText = mentionSet.map({ "@\($0) " }).joined()
+		let newText = mentionSet.map { "@\($0) " }.joined()
 
 		attachmentsSubcontroller.reset()
 		textView.string = newText
@@ -623,7 +632,7 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 		{
 			let newTextLength = (newText as NSString).length
 			let replyURILength = ("@\(mentionSet.firstObject as! String) " as NSString).length
-			textView.setSelectedRange(NSRange(location: replyURILength, length:  newTextLength - replyURILength))
+			textView.setSelectedRange(NSRange(location: replyURILength, length: newTextLength - replyURILength))
 		}
 
 		if let instance = currentInstance
@@ -636,13 +645,13 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 		}
 
 		replyStatusAuthorNameLabel.set(stringValue: replyStatus.authorName,
-									   applyingAttributes: StatusComposerWindowController.authorLabelAttributes,
-									   applyingEmojis: replyStatus.account.cacheableEmojis)
+		                               applyingAttributes: StatusComposerWindowController.authorLabelAttributes,
+		                               applyingEmojis: replyStatus.account.cacheableEmojis)
 
 		replyStatusContentsLabel.linkHandler = self
 		replyStatusContentsLabel.set(attributedStringValue: replyStatus.attributedContent,
-									 applyingAttributes: StatusComposerWindowController.statusLabelAttributes,
-									 applyingEmojis: replyStatus.cacheableEmojis)
+		                             applyingAttributes: StatusComposerWindowController.statusLabelAttributes,
+		                             applyingEmojis: replyStatus.cacheableEmojis)
 
 		replyStatusAvatarView.image = #imageLiteral(resourceName: "missing")
 
@@ -661,8 +670,10 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 		replyStatusSenderWindowController = senderWindowController
 
 		let localStatusID = replyStatus.id
-		AppDelegate.shared.avatarImageCache.fetchImage(account: replyStatus.account) { [weak self] result in
-			switch result {
+		AppDelegate.shared.avatarImageCache.fetchImage(account: replyStatus.account)
+		{ [weak self] result in
+			switch result
+			{
 			case .inCache(let image):
 				assert(Thread.isMainThread)
 				self?.replyStatusAvatarView.image = image
@@ -676,7 +687,7 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 
 	func setupAsMention(handle: String, using account: AuthorizedAccount?, directMessage: Bool)
 	{
-		guard confirmDiscardChangesIfNeeded(completion: { (shouldDiscard) in
+		guard confirmDiscardChangesIfNeeded(completion: { shouldDiscard in
 			if shouldDiscard
 			{
 				self.textView.string = ""
@@ -690,7 +701,7 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 		attachmentsSubcontroller.reset()
 		setContentWarning("")
 		setAudienceSelection(visibility: directMessage ? .direct
-													   : Visibility.make(from: Preferences.defaultStatusAudience))
+			: Visibility.make(from: Preferences.defaultStatusAudience))
 
 		let newStatus = "\(handle) "
 		postingService?.set(status: newStatus)
@@ -704,7 +715,7 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 	{
 		guard status.reblog == nil else { return }
 
-		guard confirmDiscardChangesIfNeeded(completion: { (shouldDiscard) in
+		guard confirmDiscardChangesIfNeeded(completion: { shouldDiscard in
 			if shouldDiscard
 			{
 				self.textView.string = ""
@@ -719,9 +730,9 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 		postingService?.set(status: status.fullAttributedContent.string)
 
 		DispatchQueue.main.async
-			{
-				self.textView.replaceShortcodesWithEmojiIfPossible()
-			}
+		{
+			self.textView.replaceShortcodesWithEmojiIfPossible()
+		}
 
 		setContentWarning(status.spoilerText)
 		setAudienceSelection(visibility: status.visibility)
@@ -732,13 +743,13 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 		if let poll = status.poll
 		{
 			pollEnabled = true
-			pollViewController.optionTitles = poll.options.map({ $0.title })
+			pollViewController.optionTitles = poll.options.map { $0.title }
 		}
 
 		guard !status.mediaAttachments.isEmpty else { return }
 
 		let uploads = attachmentsSubcontroller.addAttachments(status.mediaAttachments)
-		let resourceFetcher = self.resourcesFetcher
+		let resourceFetcher = resourcesFetcher
 
 		for upload in uploads
 		{
@@ -750,21 +761,22 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 				guard case .success(let image) = result else { return }
 
 				DispatchQueue.main.async
-					{
-						self?.attachmentsSubcontroller.update(thumbnail: image, for: upload)
-					}
+				{
+					self?.attachmentsSubcontroller.update(thumbnail: image, for: upload)
+				}
 			}
 		}
 	}
 
 	private func confirmDiscardChangesIfNeeded(completion: @escaping (Bool) -> Void) -> Bool
 	{
-		guard statusTextContent.isEmpty else
+		guard statusTextContent.isEmpty
+		else
 		{
 			showAlert(style: .warning,
-					  title: 🔠("Discard current draft?"),
-					  message: 🔠("Composing a reply now will discard your currently drafted toot, including attachments. Do you wish to proceed?"),
-					  dialogMode: .discardKeepEditing)
+			          title: 🔠("Discard current draft?"),
+			          message: 🔠("Composing a reply now will discard your currently drafted toot, including attachments. Do you wish to proceed?"),
+			          dialogMode: .discardKeepEditing)
 			{
 				response in completion(response == .alertFirstButtonReturn)
 			}
@@ -794,33 +806,35 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 	private func applyAvatarImageIfNotReused(_ image: NSImage?, originatingStatusID: String)
 	{
 		DispatchQueue.main.async
+		{
+			[weak self] in
+
+			// Make sure that the status view hasn't been reused since this fetch was dispatched.
+			guard self?.replyStatus?.id == originatingStatusID
+			else
 			{
-				[weak self] in
-
-				// Make sure that the status view hasn't been reused since this fetch was dispatched.
-				guard self?.replyStatus?.id == originatingStatusID else
-				{
-					return
-				}
-
-				self?.replyStatusAvatarView.image = image ?? #imageLiteral(resourceName: "missing")
+				return
 			}
+
+			self?.replyStatusAvatarView.image = image ?? #imageLiteral(resourceName: "missing")
+		}
 	}
 
 	private func applyAuthorImageIfNotReused(_ image: NSImage?, originalAccountUUID: UUID)
 	{
 		DispatchQueue.main.async
+		{
+			[weak self] in
+
+			// Make sure that the composer view hasn't been reused since this fetch was dispatched.
+			guard self?.currentUser == originalAccountUUID
+			else
 			{
-				[weak self] in
-
-				// Make sure that the composer view hasn't been reused since this fetch was dispatched.
-				guard self?.currentUser == originalAccountUUID else
-				{
-					return
-				}
-
-				self?.authorAvatarView.image = image ?? #imageLiteral(resourceName: "missing")
+				return
 			}
+
+			self?.authorAvatarView.image = image ?? #imageLiteral(resourceName: "missing")
+		}
 	}
 
 	private func updateRemainingCountLabel()
@@ -842,58 +856,61 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 
 	private func validateAndSendStatus()
 	{
-		guard canSubmitStatus else
+		guard canSubmitStatus
+		else
 		{
 			return
 		}
 
 		let attachments = attachmentsSubcontroller.attachments
 
-		guard !attachmentsSubcontroller.hasAttachmentsPendingUpload else
+		guard !attachmentsSubcontroller.hasAttachmentsPendingUpload
+		else
 		{
 			showAlert(title: 🔠("Attention"),
-					  message: 🔠("One or more attachments are still being uploaded. Please wait for them to complete uploading – or remove them – before submitting."))
+			          message: 🔠("One or more attachments are still being uploaded. Please wait for them to complete uploading – or remove them – before submitting."))
 			return
 		}
 
-		var poll: PollPayload? = nil
+		var poll: PollPayload?
 
 		if hasPoll, pollViewController.allOptionsAreValid
 		{
 			poll = PollPayload(options: pollViewController.optionTitles,
-							   expiration: pollViewController.pollDuration,
-							   multipleChoice: pollViewController.multipleChoice)
+			                   expiration: pollViewController.pollDuration,
+			                   multipleChoice: pollViewController.multipleChoice)
 		}
 
 		postingService?.post(visibility: audienceSelection,
-							 isSensitive: visibilitySegmentedControl.isSelected(forSegment: 0),
-							 attachmentIds: attachments.compactMap({ $0.attachment?.id }),
-							 replyStatusId: replyStatus?.id,
-							 poll: poll)
+		                     isSensitive: visibilitySegmentedControl.isSelected(forSegment: 0),
+		                     attachmentIds: attachments.compactMap { $0.attachment?.id },
+		                     replyStatusId: replyStatus?.id,
+		                     poll: poll)
+		{
+			[weak self] result in
+
+			guard let self = self else { return }
+
+			switch result
 			{
-				[weak self] result in
+			case .success:
+				self.reset()
 
-				guard let self = self else { return }
-
-				switch result
-				{
-				case .success:
-					self.reset()
-
-				case .failure(let error):
-					self.updateSubmitEnabled()
-					self.window?.windowController?.displayError(NetworkError(error))
-				}
+			case .failure(let error):
+				self.updateSubmitEnabled()
+				self.window?.windowController?.displayError(NetworkError(error))
 			}
+		}
 
 		updateSubmitEnabled()
 	}
 
 	private func fetchInstanceEmoji(using client: ClientType)
 	{
-		guard let instance = client.parsedBaseUrl?.host else
+		guard let instance = client.parsedBaseUrl?.host
+		else
 		{
-			self.currentClientEmoji = nil
+			currentClientEmoji = nil
 			return
 		}
 
@@ -902,12 +919,12 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 			[weak self] result in
 
 			DispatchQueue.main.async
-				{
-					guard let self = self, case .success(let emoji, _) = result else { return }
+			{
+				guard let self = self, case .success(let emoji, _) = result else { return }
 
-					self.currentClientEmoji = emoji.cacheable(instance: instance)
-												   .sorted()
-												   .filter({ $0.visibleInPicker })
+				self.currentClientEmoji = emoji.cacheable(instance: instance)
+					.sorted()
+					.filter { $0.visibleInPicker }
 			}
 		}
 	}
@@ -966,25 +983,25 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 
 		let oldBottomDrawerConstant = bottomDrawerConstraint.constant
 
-		NSAnimationContext.runAnimationGroup()
+		NSAnimationContext.runAnimationGroup
+		{
+			context in
+
+			context.duration = 0.15
+			context.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
+
+			self.bottomDrawerConstraint.animator().constant = bottomDrawerConstant
+			self.attachmentsConstraint.animator().constant = attachmentsConstant
+
+			if oldBottomDrawerConstant > bottomDrawerConstant, let window = self.window
 			{
-				context in
-
-				context.duration = 0.15
-				context.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
-
-				self.bottomDrawerConstraint.animator().constant = bottomDrawerConstant
-				self.attachmentsConstraint.animator().constant = attachmentsConstant
-
-				if oldBottomDrawerConstant > bottomDrawerConstant, let window = self.window
-				{
-					var frame = window.frame
-					let height = max(window.minSize.height, frame.height - (oldBottomDrawerConstant - bottomDrawerConstant))
-					frame.origin.y += oldBottomDrawerConstant - bottomDrawerConstant
-					frame.size.height = height
-					window.animator().setFrame(frame, display: true)
-				}
+				var frame = window.frame
+				let height = max(window.minSize.height, frame.height - (oldBottomDrawerConstant - bottomDrawerConstant))
+				frame.origin.y += oldBottomDrawerConstant - bottomDrawerConstant
+				frame.size.height = height
+				window.animator().setFrame(frame, display: true)
 			}
+		}
 	}
 
 	private struct BottomDrawerMode: OptionSet
@@ -1000,18 +1017,20 @@ extension StatusComposerWindowController: NSWindowDelegate
 {
 	func windowShouldClose(_ sender: NSWindow) -> Bool
 	{
-		guard !isDirty else {
+		guard !isDirty
+		else
+		{
 			showAlert(title: 🔠("Discard current draft?"),
-					  message: 🔠("Closing the composer now will discard your currently drafted toot, including attachments. Do you wish to proceed?"),
-					  dialogMode: .discardKeepEditing)
-				{
-					response in
+			          message: 🔠("Closing the composer now will discard your currently drafted toot, including attachments. Do you wish to proceed?"),
+			          dialogMode: .discardKeepEditing)
+			{
+				response in
 
-					if response == .alertFirstButtonReturn
-					{
-						self.reset()
-					}
+				if response == .alertFirstButtonReturn
+				{
+					self.reset()
 				}
+			}
 			return false
 		}
 
@@ -1033,7 +1052,7 @@ extension StatusComposerWindowController: NSDraggingDestination
 	{
 		guard
 			sender.draggingPasteboard.canReadObject(forClasses: [NSURL.self, NSImage.self],
-													options: fileDropFilteringOptions)
+			                                        options: fileDropFilteringOptions)
 		else
 		{
 			return NSDragOperation()
@@ -1057,7 +1076,7 @@ extension StatusComposerWindowController: NSDraggingDestination
 	func prepareForDragOperation(_ sender: NSDraggingInfo) -> Bool
 	{
 		return sender.draggingPasteboard.canReadObject(forClasses: [NSURL.self, NSImage.self],
-													   options: fileDropFilteringOptions)
+		                                               options: fileDropFilteringOptions)
 	}
 
 	func performDragOperation(_ sender: NSDraggingInfo) -> Bool
@@ -1104,7 +1123,7 @@ extension StatusComposerWindowController: NSTextViewDelegate
 extension StatusComposerWindowController: BaseComposerTextViewPasteDelegate
 {
 	func readablePasteboardTypes(for controlTextView: BaseComposerTextView,
-								 proposedTypes: [NSPasteboard.PasteboardType]) -> [NSPasteboard.PasteboardType]
+	                             proposedTypes: [NSPasteboard.PasteboardType]) -> [NSPasteboard.PasteboardType]
 	{
 		return proposedTypes + [.fileURL, .png, .tiff]
 	}
@@ -1125,10 +1144,10 @@ extension StatusComposerWindowController: AccountsMenuProvider
 	var accountsMenuItems: [NSMenuItem]
 	{
 		return accounts.makeMenuItems(currentUser: currentAccount?.uuid,
-									  action: #selector(UserPopUpButtonSubcontroller.selectAccount(_:)),
-									  target: userPopUpButtonController,
-									  emojiContainer: nil,
-									  setKeyEquivalents: true).menuItems
+		                              action: #selector(UserPopUpButtonSubcontroller.selectAccount(_:)),
+		                              target: userPopUpButtonController,
+		                              emojiContainer: nil,
+		                              setKeyEquivalents: true).menuItems
 	}
 }
 
@@ -1179,22 +1198,24 @@ extension StatusComposerWindowController
 
 	@IBAction func showAttachmentPickerSheet(_ sender: Any?)
 	{
-		guard let window = self.window else
+		guard let window = window
+		else
 		{
 			return
 		}
 
 		openPanel.beginSheetModal(for: window)
+		{
+			[weak self] response in
+
+			guard response == .OK, let urls = self?.openPanel.urls
+			else
 			{
-				[weak self] response in
-
-				guard response == .OK, let urls = self?.openPanel.urls else
-				{
-					return
-				}
-
-				DispatchQueue.main.async { self?.attachmentsSubcontroller.addAttachments(urls) }
+				return
 			}
+
+			DispatchQueue.main.async { self?.attachmentsSubcontroller.addAttachments(urls) }
+		}
 	}
 
 	@IBAction func showAudienceInfo(_ sender: Any?)
@@ -1233,8 +1254,8 @@ extension StatusComposerWindowController: CustomEmojiSelectionHandler
 		emojiPickerPopover.close()
 		let emoji = emojiAdapter.emoji
 		let emojiString = ":\(emoji.shortcode):".applyingEmojiAttachments([emoji],
-																		  font: textView.font,
-																		  containerView: textView)
+		                                                                  font: textView.font,
+		                                                                  containerView: textView)
 		textView.insertAttributedString(emojiString)
 	}
 }
@@ -1245,8 +1266,8 @@ extension StatusComposerWindowController: ComposerTextViewEmojiProvider
 	{
 		guard let emoji = currentClientEmoji?.first(where: { $0.shortcode == shortcode }) else { return nil }
 		return (":\(shortcode):" as NSString).applyingEmojiAttachments([emoji],
-																	   font: placeholderTextField.font,
-																	   containerView: textView)
+		                                                               font: placeholderTextField.font,
+		                                                               containerView: textView)
 	}
 }
 
@@ -1256,5 +1277,4 @@ extension StatusComposerWindowController: StatusComposerController
 	{
 		showAlert(style: .warning, title: 🔠("Error"), message: message)
 	}
-
 }
