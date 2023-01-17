@@ -57,6 +57,11 @@ struct StatusPrivacyPreferencesView: View {
 			}
 			.scaledToFit()
 			.padding(.horizontal, -8)
+
+			Spacer()
+			Text("Replies to private statuses will always default to private.")
+				.font(.subheadline)
+				.foregroundColor(.secondary)
 		}
 		// these seem to be needed to sync the changes back to MastonautPreferences https://stackoverflow.com/questions/71762758
 		.onChange(of: defaultStatusAudience) { newValue in
@@ -65,8 +70,9 @@ struct StatusPrivacyPreferencesView: View {
 		.onChange(of: defaultReplyAudience) { newValue in
 			preferences?.defaultReplyAudience = newValue
 		}
+		// AppKit layout hacks
 		.padding(.trailing, 15)
-		.frame(minHeight: 50)
+		.frame(minHeight: 70)
 	}
 }
 
