@@ -132,7 +132,15 @@ public class MastonautPreferences: PreferencesController
 		get { return bool(forKey: #keyPath(insertJoinersBetweenEmojis)) ?? true }
 		set { defaults.setValue(newValue, forKey: #keyPath(insertJoinersBetweenEmojis)) }
 	}
+	
+	// Notifications preferences (most of these are per-account and therefore not here)
 
+	@objc public dynamic var coalesceNotifications: Bool
+	{
+		get { return bool(forKey: #keyPath(coalesceNotifications)) ?? true }
+		set { defaults.setValue(newValue, forKey: #keyPath(coalesceNotifications)) }
+	}
+	
 	// Storages
 
 	public func storedFrame(forTimelineWindowIndex index: Int) -> NSRect?

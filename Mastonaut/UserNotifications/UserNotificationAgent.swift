@@ -145,6 +145,29 @@ class UserNotificationAgent
 			(notification.type == .admin_report && accountNotificationPreferences?.showAdminReports ?? true)
 	}
 
+	public static func coalesceNotifications(_ notifications: [MastodonNotification]) -> [MastodonNotification]
+	{
+		let preferences = MastonautPreferences.instance
+
+		if !preferences.coalesceNotifications
+		{
+			return notifications
+		}
+
+		for i in 1 ... notifications.count - 1
+		{
+			let previous = notifications[i - 1]
+			let current = notifications[i]
+
+			if previous.type == .follow && current.type == .follow
+			{
+				
+			}
+		}
+
+		return notifications
+	}
+
 	private func postNotification(for accountUUID: UUID,
 	                              account: AuthorizedAccount,
 	                              receiverName: String?,
