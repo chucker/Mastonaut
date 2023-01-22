@@ -137,7 +137,7 @@ public class MastonautPreferences: PreferencesController
 
 	@objc public dynamic var coalesceNotifications: Bool
 	{
-		get { return bool(forKey: #keyPath(coalesceNotifications)) ?? true }
+		get { return bool(forKey: #keyPath(coalesceNotifications)) ?? false }
 		set { defaults.setValue(newValue, forKey: #keyPath(coalesceNotifications)) }
 	}
 	

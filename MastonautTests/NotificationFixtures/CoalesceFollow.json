@@ -1,0 +1,38 @@
+[
+  {
+	"id": "1",
+	"type": "follow",
+	"created_at": 12345,
+	"account": {
+	  "id": "1",
+	  "username": "a",
+	  "acct": "a@mastodon.example",
+	  "display_name": "a",
+	  "note": "hello",
+	  "url": "http://mastodon.example/@a",
+	  "locked": false,
+	  "created_at": 12345,
+	  "followers_count": 0,
+	  "following_count": 0,
+	  "statuses_count": 0
+	}
+  },
+  {
+	"id": "1",
+	"type": "follow",
+	"created_at": 12345,
+	"account": {
+	  "id": "2",
+	  "username": "b",
+	  "acct": "b@mastodon.example",
+	  "display_name": "b",
+	  "note": "hello",
+	  "url": "http://mastodon.example/@b",
+	  "locked": false,
+	  "created_at": 12345,
+	  "followers_count": 0,
+	  "following_count": 0,
+	  "statuses_count": 0
+	}
+  }
+]

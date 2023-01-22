@@ -145,27 +145,82 @@ class UserNotificationAgent
 			(notification.type == .admin_report && accountNotificationPreferences?.showAdminReports ?? true)
 	}
 
-	public static func coalesceNotifications(_ notifications: [MastodonNotification]) -> [MastodonNotification]
+	public static func coalesceNotifications(_ notifications: [MastodonNotification]) -> [CoalescedNotification]
 	{
 		let preferences = MastonautPreferences.instance
 
-		if !preferences.coalesceNotifications
+		if !preferences.coalesceNotifications ||
+			notifications.count == 1
 		{
-			return notifications
+			return notifications.map { CoalescedNotification.uncoalesced(originalNotification: $0) }
 		}
 
-		for i in 1 ... notifications.count - 1
+		var coalescedNotifications = [CoalescedNotification]()
+		
+		var skipAhead = 0
+
+		for i in 0...notifications.count - 1
 		{
-			let previous = notifications[i - 1]
+			if skipAhead > i
+			{
+				continue
+			}
+
 			let current = notifications[i]
 
-			if previous.type == .follow && current.type == .follow
+			switch current.type
 			{
+			case .follow:
+				var j = i+1
+				while j <= notifications.count - 1
+				{
+					let next = notifications[j]
+
+					if next.type != .follow
+					{
+						break
+					}
+
+					j+=1
+				}
+
+				j-=1
+
+				coalescedNotifications.append(CoalescedNotification.following(accounts: notifications[i...j].map { $0.account }))
+
+				skipAhead = j+1
+
+			case .reblog, .favourite:
+				var j = i+1
+				while j <= notifications.count - 1
+				{
+					let next = notifications[j]
+
+					if next.type != .reblog, next.type != .favourite
+					{
+						break
+					}
+
+					if next.status?.id != current.status?.id
+					{
+						break
+					}
+
+					j+=1
+				}
 				
+				j-=1
+
+				coalescedNotifications.append(CoalescedNotification.rebloggedOrFavorited(accounts: notifications[i...j].map { $0.account }, types: notifications[i...j].map { $0.type }, status: current.status!))
+
+				skipAhead = j+1
+
+			default:
+				coalescedNotifications.append(CoalescedNotification.uncoalesced(originalNotification: current))
 			}
 		}
 
-		return notifications
+		return coalescedNotifications
 	}
 
 	private func postNotification(for accountUUID: UUID,

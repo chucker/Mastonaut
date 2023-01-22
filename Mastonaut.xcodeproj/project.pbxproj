@@ -520,6 +520,10 @@
 		5F3A17F0291DB26700EA6FEC /* CoreAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */; };
 		5F3A17F1291DB26700EA6FEC /* CoreAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */; };
 		5F5338B32960B23200C1D9AE /* ReplaceCharactersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5338B22960B23200C1D9AE /* ReplaceCharactersTests.swift */; };
+		5F65400B297C7A9B0089BECC /* NotificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F65400A297C7A9B0089BECC /* NotificationTests.swift */; };
+		5F65400E297C7CD00089BECC /* CoalesceJustOne.json in Sources */ = {isa = PBXBuildFile; fileRef = 5F65400D297C7CD00089BECC /* CoalesceJustOne.json */; };
+		5F654012297CA3970089BECC /* CoalescedNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F654011297CA3970089BECC /* CoalescedNotification.swift */; };
+		5F654013297CA3A30089BECC /* CoalescedNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F654011297CA3970089BECC /* CoalescedNotification.swift */; };
 		5F74B959294F5DD900DE1909 /* StatusPrivacyPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F74B958294F5DD900DE1909 /* StatusPrivacyPreferencesView.swift */; };
 		5F74B95A294F5DD900DE1909 /* StatusPrivacyPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F74B958294F5DD900DE1909 /* StatusPrivacyPreferencesView.swift */; };
 		5F8C133C2969F1D9007BE2D5 /* Sdifft in Frameworks */ = {isa = PBXBuildFile; productRef = 5F8C133B2969F1D9007BE2D5 /* Sdifft */; };
@@ -985,6 +989,12 @@
 		5F38B52E2930301600FCB9FC /* PullToRefreshInnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefreshInnerView.swift; sourceTree = "<group>"; };
 		5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = CoreAssets.xcassets; sourceTree = "<group>"; };
 		5F5338B22960B23200C1D9AE /* ReplaceCharactersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceCharactersTests.swift; sourceTree = "<group>"; };
+		5F65400A297C7A9B0089BECC /* NotificationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTests.swift; sourceTree = "<group>"; };
+		5F65400D297C7CD00089BECC /* CoalesceJustOne.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CoalesceJustOne.json; sourceTree = "<group>"; };
+		5F65400F297C8E4B0089BECC /* CoalesceSameConsecutiveStatus.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CoalesceSameConsecutiveStatus.json; sourceTree = "<group>"; };
+		5F654010297C8FCA0089BECC /* CoalesceDifferentStatuses.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CoalesceDifferentStatuses.json; sourceTree = "<group>"; };
+		5F654011297CA3970089BECC /* CoalescedNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoalescedNotification.swift; sourceTree = "<group>"; };
+		5F654014297D6D600089BECC /* CoalesceFollow.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CoalesceFollow.json; sourceTree = "<group>"; };
 		5F74B958294F5DD900DE1909 /* StatusPrivacyPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusPrivacyPreferencesView.swift; sourceTree = "<group>"; };
 		5F8C1346296A0661007BE2D5 /* EditedStatusTableCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditedStatusTableCellView.xib; sourceTree = "<group>"; };
 		5F8C1348296A06E3007BE2D5 /* EditedStatusTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditedStatusTableCellView.swift; sourceTree = "<group>"; };
@@ -1636,6 +1646,7 @@
 				1572C55B22A2038100FAA77F /* StringCapableTextAttachment.swift */,
 				15B7B2E12252A2AD00A3222C /* TrackingLayoutConstraint.swift */,
 				5F8C134E296A8C89007BE2D5 /* StatusEditCellModel.swift */,
+				5F654011297CA3970089BECC /* CoalescedNotification.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1661,12 +1672,14 @@
 		15DE367522443FFA00480949 /* MastonautTests */ = {
 			isa = PBXGroup;
 			children = (
+				5F65400C297C7CB80089BECC /* NotificationFixtures */,
 				153709182295A2B3002B99DF /* Resources */,
 				15DE367622443FFA00480949 /* MastonautTests.swift */,
 				153709162295A297002B99DF /* ImageResizeTests.swift */,
 				15DE367822443FFA00480949 /* Info.plist */,
 				154B6BC6234A16C50025A9DB /* NavigationStackTests.swift */,
 				5F5338B22960B23200C1D9AE /* ReplaceCharactersTests.swift */,
+				5F65400A297C7A9B0089BECC /* NotificationTests.swift */,
 			);
 			path = MastonautTests;
 			sourceTree = "<group>";
@@ -1807,6 +1820,17 @@
 				5F38B52E2930301600FCB9FC /* PullToRefreshInnerView.swift */,
 			);
 			path = "List View";
+			sourceTree = "<group>";
+		};
+		5F65400C297C7CB80089BECC /* NotificationFixtures */ = {
+			isa = PBXGroup;
+			children = (
+				5F65400F297C8E4B0089BECC /* CoalesceSameConsecutiveStatus.json */,
+				5F654014297D6D600089BECC /* CoalesceFollow.json */,
+				5F654010297C8FCA0089BECC /* CoalesceDifferentStatuses.json */,
+				5F65400D297C7CD00089BECC /* CoalesceJustOne.json */,
+			);
+			path = NotificationFixtures;
 			sourceTree = "<group>";
 		};
 		5FC3E1902926FD520086DCEE /* Preferences */ = {
@@ -2602,6 +2626,7 @@
 				158B997B21FBB9E30046C8D6 /* ToolbarWindow.swift in Sources */,
 				1523C6F421E94C7F006DE234 /* AuthWindowController.swift in Sources */,
 				15E973C2225A6953009CE4DF /* RelationshipSet.swift in Sources */,
+				5F654013297CA3A30089BECC /* CoalescedNotification.swift in Sources */,
 				15E973C6225A6B44009CE4DF /* RelationshipsService.swift in Sources */,
 				15D0F59B230B36FE00B0AE5B /* RemoteEventsCoordinator.swift in Sources */,
 				15B4AF19222B682A007AA447 /* PreferencesWindowController.swift in Sources */,
@@ -2790,6 +2815,7 @@
 				1531B8BE230216FA006D9DDB /* UserNotificationTool.swift in Sources */,
 				1574CF63224435B4000FE3ED /* NSURL+Sanitization.m in Sources */,
 				C98AE162223D7FB700A8DD22 /* AvatarImageCache.swift in Sources */,
+				5F654012297CA3970089BECC /* CoalescedNotification.swift in Sources */,
 				15B25D05265166F100C90963 /* AccountFiltersController.swift in Sources */,
 				15431284232EEB960010854A /* UserPopUpButtonController+Helper.swift in Sources */,
 				15F1D25221F7D5AC00B01F35 /* AttachmentWindowController.swift in Sources */,
@@ -2908,7 +2934,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F65400B297C7A9B0089BECC /* NotificationTests.swift in Sources */,
 				15DE367722443FFA00480949 /* MastonautTests.swift in Sources */,
+				5F65400E297C7CD00089BECC /* CoalesceJustOne.json in Sources */,
 				154B6BC7234A16C50025A9DB /* NavigationStackTests.swift in Sources */,
 				5F5338B32960B23200C1D9AE /* ReplaceCharactersTests.swift in Sources */,
 				153709172295A297002B99DF /* ImageResizeTests.swift in Sources */,
