@@ -284,9 +284,9 @@ class NotificationListViewController: ListViewController<MastodonNotification>, 
 
 		filteredNotifications = filteredNotifications.filter { UserNotificationAgent.shouldShowNotification($0, accountNotificationPreferences: accountNotificationPreferences) }
 		
-		let coalescedNotifications = UserNotificationAgent.coalesceNotifications(filteredNotifications)
+//		let coalescedNotifications = UserNotificationAgent.coalesceNotifications(filteredNotifications)
 
-		super.prepareNewEntries(coalescedNotifications, for: insertion, pagination: pagination)
+		super.prepareNewEntries(filteredNotifications, for: insertion, pagination: pagination)
 	}
 
 	override func cellViewIdentifier(for notification: MastodonNotification) -> NSUserInterfaceItemIdentifier
