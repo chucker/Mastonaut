@@ -80,6 +80,11 @@ class StatusListViewController: ListViewController<Status, Status>, StatusIntera
 		filterService?.register(observer: self)
 	}
 
+	override func mapNewEntries(_ entries: [Status]) -> [Status]
+	{
+		return entries
+	}
+
 	func handle(updatedStatus: Status)
 	{
 		handle(updatedEntry: updatedStatus)
