@@ -212,7 +212,7 @@ class ProfileViewController: TimelineViewController, SidebarPresentable, Account
 	}
 
 	override func prepareNewEntries(_ entries: [Status],
-									for insertion: ListViewController<Status>.InsertionPoint,
+									for insertion: ListViewController<Status, Status>.InsertionPoint,
 									pagination: Pagination?)
 	{
 		let (pinnedEntries, filteredEntries) = entries.segregated(using: { $0.pinned == true })

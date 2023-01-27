@@ -21,7 +21,7 @@ import Cocoa
 import CoreTootin
 import MastodonKit
 
-class NotificationListViewController: ListViewController<MastodonNotification>, NotificationInteractionHandling, StatusInteractionHandling, PollVotingCapable, FilterServiceObserver
+class NotificationListViewController: ListViewController<CoalescedNotification, MastodonNotification>, NotificationInteractionHandling, StatusInteractionHandling, PollVotingCapable, FilterServiceObserver
 {
 	private var statusIdNotificationIdMap: [String: String] = [:]
 	private var observations: [NSKeyValueObservation] = []
@@ -237,7 +237,7 @@ class NotificationListViewController: ListViewController<MastodonNotification>, 
 		return menuItems(for: notification)
 	}
 
-	func menuItems(for notification: MastodonNotification) -> [NSMenuItem]
+	func menuItems(for notification: CoalescedNotification) -> [NSMenuItem]
 	{
 		if let status = notification.status
 		{
@@ -262,18 +262,16 @@ class NotificationListViewController: ListViewController<MastodonNotification>, 
 		}
 	}
 
-	override func fetchEntries(for insertion: ListViewController<MastodonNotification>.InsertionPoint)
+	override func fetchEntries(for insertion: ListViewController<CoalescedNotification, MastodonNotification>.InsertionPoint)
 	{
 		super.fetchEntries(for: insertion)
 
 		run(request: Notifications.all(range: rangeForEntryFetch(for: insertion)), for: insertion)
 	}
 
-	override func prepareNewEntries(_ notifications: [MastodonNotification],
-	                                for insertion: ListViewController<MastodonNotification>.InsertionPoint,
-	                                pagination: Pagination?)
+	override func mapNewEntries(_ entries: [MastodonNotification]) -> [CoalescedNotification]
 	{
-		var filteredNotifications = notifications.filter { $0.isOfKnownType }
+		var filteredNotifications = entries.filter { $0.isOfKnownType }
 
 		for notification in filteredNotifications
 		{
@@ -284,13 +282,11 @@ class NotificationListViewController: ListViewController<MastodonNotification>, 
 		}
 
 		filteredNotifications = filteredNotifications.filter { UserNotificationAgent.shouldShowNotification($0, accountNotificationPreferences: accountNotificationPreferences) }
-		
-//		let coalescedNotifications = UserNotificationAgent.coalesceNotifications(filteredNotifications)
 
-		super.prepareNewEntries(filteredNotifications, for: insertion, pagination: pagination)
+		return UserNotificationAgent.coalesceNotifications(filteredNotifications)
 	}
 
-	override func cellViewIdentifier(for notification: MastodonNotification) -> NSUserInterfaceItemIdentifier
+	override func cellViewIdentifier(for notification: CoalescedNotification) -> NSUserInterfaceItemIdentifier
 	{
 		switch notification.type
 		{
@@ -309,7 +305,7 @@ class NotificationListViewController: ListViewController<MastodonNotification>, 
 		}
 	}
 
-	override func populate(cell: NSTableCellView, for notification: MastodonNotification)
+	override func populate(cell: NSTableCellView, for notification: CoalescedNotification)
 	{
 		guard
 			let attachmentPresenter = authorizedAccountProvider?.attachmentPresenter,
@@ -410,7 +406,7 @@ class NotificationListViewController: ListViewController<MastodonNotification>, 
 		}
 	}
 
-	override func didDoubleClickRow(for notification: MastodonNotification)
+	override func didDoubleClickRow(for notification: CoalescedNotification)
 	{
 		if let status = notification.status
 		{
@@ -454,7 +450,7 @@ class NotificationListViewController: ListViewController<MastodonNotification>, 
 		return (filterService?.filters ?? []).filter { $0.context.contains(.notifications) }
 	}
 
-	override func checkEntry(_ notification: MastodonNotification, matchesFilter filter: UserFilter) -> Bool
+	override func checkEntry(_ notification: CoalescedNotification, matchesFilter filter: UserFilter) -> Bool
 	{
 		return filter.checkMatch(notification: notification)
 	}
@@ -466,7 +462,7 @@ class NotificationListViewController: ListViewController<MastodonNotification>, 
 
 	// MARK: - Keyboard Navigation
 
-	override func showPreview(for notification: MastodonKit.Notification, atRow row: Int)
+	override func showPreview(for notification: CoalescedNotification, atRow row: Int)
 	{
 		guard let cellView = tableView.rowView(atRow: row, makeIfNecessary: false)?.view(atColumn: 0),
 		      let mediaPresenterCell = cellView as? MediaPresenting

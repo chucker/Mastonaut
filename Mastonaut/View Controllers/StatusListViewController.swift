@@ -21,7 +21,7 @@ import CoreTootin
 import Foundation
 import MastodonKit
 
-class StatusListViewController: ListViewController<Status>, StatusInteractionHandling, PollVotingCapable, FilterServiceObserver
+class StatusListViewController: ListViewController<Status, Status>, StatusInteractionHandling, PollVotingCapable, FilterServiceObserver
 {
 	private var observations: [NSKeyValueObservation] = []
 	private var filterService: FilterService?

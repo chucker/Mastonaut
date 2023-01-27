@@ -64,7 +64,7 @@ class ListViewPullToRefreshAccessoryView: NSView, AccessoryViewForPullRefreshabl
 	}
 }
 
-class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController,
+class ListViewController<DisplayedEntry: ListViewPresentable & Codable, FetchedEntry: ListViewPresentable & Codable>: NSViewController,
 	MastonautTableViewDelegate,
 	PullRefreshableScrollViewDelegate,
 	NSTableViewDataSource,
@@ -119,7 +119,7 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 
 	private var pendingFetchTasks: Set<FutureTask> = []
 
-	internal private(set) var entryMap: [String: Entry] = [:]
+	internal private(set) var entryMap: [String: DisplayedEntry] = [:]
 	internal private(set) var entryList: [EntryReference] = []
 	{
 		didSet
@@ -405,12 +405,12 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 		])
 	}
 
-	internal func entry(for id: String) -> Entry?
+	internal func entry(for id: String) -> DisplayedEntry?
 	{
 		return entryMap[id]
 	}
 
-	internal func run(request: Request<[Entry]>, for insertion: InsertionPoint)
+	internal func run(request: Request<[FetchedEntry]>, for insertion: InsertionPoint)
 	{
 		let futurePromise = Promise<FutureTask>()
 
@@ -441,7 +441,9 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 					switch result
 					{
 					case .success(let entries, let pagination):
-						self.prepareNewEntries(entries, for: insertion, pagination: pagination)
+						let mappedEntries = self.mapNewEntries(entries)
+
+						self.prepareNewEntries(mappedEntries, for: insertion, pagination: pagination)
 
 					case .failure(let error):
 						self.failedLoadingEntries(for: request, error: error, insertion: insertion)
@@ -463,7 +465,7 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 		future.resolutionHandler = { task in task.resume() }
 	}
 
-	internal func failedLoadingEntries(for request: Request<[Entry]>, error: Error?, insertion: InsertionPoint)
+	internal func failedLoadingEntries(for request: Request<[FetchedEntry]>, error: Error?, insertion: InsertionPoint)
 	{
 		NSLog("Failed fetching timeline: \(error?.localizedDescription ?? "nil error")")
 
@@ -485,7 +487,12 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 		}
 	}
 
-	internal func prepareNewEntries(_ entries: [Entry], for insertion: InsertionPoint, pagination: Pagination?)
+	internal func mapNewEntries(_ entries: [FetchedEntry]) -> [DisplayedEntry]
+	{
+		preconditionFailure("This method must be overridden")
+	}
+
+	internal func prepareNewEntries(_ entries: [DisplayedEntry], for insertion: InsertionPoint, pagination: Pagination?)
 	{
 		needsLoadingIndicator = false
 
@@ -493,7 +500,7 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 		handleNewEntries(newEntries, for: insertion, pagination: pagination)
 	}
 
-	internal func handle(updatedEntry entry: Entry)
+	internal func handle(updatedEntry entry: DisplayedEntry)
 	{
 		let entryKey = entry.key
 
@@ -533,7 +540,7 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 		tableView.removeRowsAnimatingIfVisible(at: IndexSet(integer: entryIndex))
 	}
 
-	private func handleNewEntries(_ entries: [Entry], for insertion: InsertionPoint, pagination: Pagination?)
+	private func handleNewEntries(_ entries: [DisplayedEntry], for insertion: InsertionPoint, pagination: Pagination?)
 	{
 		assert(Thread.isMainThread)
 
@@ -652,7 +659,7 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 	{
 		guard entryList.count > maxCount, tableView.visibleRect.maxY / tableView.bounds.height < 0.5 else { return }
 
-		let entriesToRemove: [(offset: Int, element: ListViewController<Entry>.EntryReference)] =
+		let entriesToRemove: [(offset: Int, element: ListViewController<DisplayedEntry, FetchedEntry>.EntryReference)] =
 			entryList.enumerated().suffix(entryList.count - maxCount).filter { $0.element.entryKey != nil }
 
 		guard entriesToRemove.isEmpty == false else { return }
@@ -691,7 +698,7 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 		return []
 	}
 
-	func entryMatchesAnyFilter(_ entry: Entry) -> Bool
+	func entryMatchesAnyFilter(_ entry: DisplayedEntry) -> Bool
 	{
 		guard revealedFilteredEntryKeys.contains(entry.key) == false
 		else
@@ -714,7 +721,7 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 		return isMatch
 	}
 
-	func checkEntry(_ entry: Entry, matchesFilter: UserFilter) -> Bool
+	func checkEntry(_ entry: DisplayedEntry, matchesFilter: UserFilter) -> Bool
 	{
 		return false
 	}
@@ -882,7 +889,7 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 		}
 	}
 
-	internal func entry(for reference: EntryReference) -> Entry?
+	internal func entry(for reference: EntryReference) -> DisplayedEntry?
 	{
 		return reference.entryKey.flatMap { entryMap[$0] }
 	}
@@ -934,22 +941,22 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 		fatalError("receivedClientEvent(_:) must be overwritten by subclasses!")
 	}
 
-	internal func cellViewIdentifier(for entry: Entry) -> NSUserInterfaceItemIdentifier
+	internal func cellViewIdentifier(for entry: DisplayedEntry) -> NSUserInterfaceItemIdentifier
 	{
 		fatalError("cellViewIdentifier(for:) must be overwritten by subclasses!")
 	}
 
-	internal func didDoubleClickRow(for entry: Entry)
+	internal func didDoubleClickRow(for entry: DisplayedEntry)
 	{
 		fatalError("didDoubleClickRow(for:) must be overwritten by subclasses!")
 	}
 
-	internal func showPreview(for entry: Entry, atRow row: Int)
+	internal func showPreview(for entry: DisplayedEntry, atRow row: Int)
 	{
 		fatalError("showPreview(for:atRow:) must be overwritten by subclasses!")
 	}
 
-	internal func populate(cell: NSTableCellView, for entry: Entry)
+	internal func populate(cell: NSTableCellView, for entry: DisplayedEntry)
 	{
 		fatalError("populate(cell:for:) must be overwritten by subclasses!")
 	}
@@ -1096,7 +1103,7 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 
 	internal enum EntryReference: Equatable
 	{
-		case entry(key: Dictionary<String, Entry>.Key)
+		case entry(key: Dictionary<String, DisplayedEntry>.Key)
 		case special(key: String)
 		case expander
 
