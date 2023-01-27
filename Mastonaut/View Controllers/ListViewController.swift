@@ -18,39 +18,44 @@
 //
 
 import Cocoa
-import MastodonKit
 import CoreTootin
+import MastodonKit
 import PullRefreshableScrollView
 import SwiftUI
 
 let ListViewControllerMinimumWidth: CGFloat = 280
 
-fileprivate struct ListCellViewIdentifier
+private enum ListCellViewIdentifier
 {
 	static let expander = NSUserInterfaceItemIdentifier("expander")
 	static let row = NSUserInterfaceItemIdentifier("row")
 	static let filtered = NSUserInterfaceItemIdentifier("filtered")
-	
 }
 
-class ListViewPullToRefreshAccessoryView : NSView, AccessoryViewForPullRefreshable {
-	func viewDidEnterElasticity(_ sender: Any?) {
+class ListViewPullToRefreshAccessoryView: NSView, AccessoryViewForPullRefreshable
+{
+	func viewDidEnterElasticity(_ sender: Any?)
+	{
 		print("elasticity entered")
 	}
-	
-	func viewDidEnterValidationArea(_ sender: Any?) {
+
+	func viewDidEnterValidationArea(_ sender: Any?)
+	{
 		print("validation entered")
 	}
-	
-	func viewDidStick(_ sender: Any?) {
+
+	func viewDidStick(_ sender: Any?)
+	{
 		print("sticked")
 	}
-	
-	func viewDidRecede(_ sender: Any?) {
+
+	func viewDidRecede(_ sender: Any?)
+	{
 		print("receded")
 	}
-	
-	func viewDidReachElasticityPercentage(_ sender: Any?, percentage: Double) {
+
+	func viewDidReachElasticityPercentage(_ sender: Any?, percentage: Double)
+	{
 		subviews.removeAll()
 		let pullToRefreshView = PullToRefreshInnerView(percentage: percentage)
 		AppKitSwiftUIIntegration.hostSwiftUIView(pullToRefreshView, inView: self)
@@ -60,43 +65,44 @@ class ListViewPullToRefreshAccessoryView : NSView, AccessoryViewForPullRefreshab
 }
 
 class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController,
-																MastonautTableViewDelegate,
-																PullRefreshableScrollViewDelegate,
-																NSTableViewDataSource,
-																RemoteEventsReceiver,
-																ClientObserver
+	MastonautTableViewDelegate,
+	PullRefreshableScrollViewDelegate,
+	NSTableViewDataSource,
+	RemoteEventsReceiver,
+	ClientObserver
 {
 	// MARK: - Pull to Refresh
-	func prScrollView(_ sender: PullRefreshableScrollView, triggeredOnEdge: PullRefreshableScrollView.ViewEdge) -> Bool {
+
+	func prScrollView(_ sender: PullRefreshableScrollView, triggeredOnEdge: PullRefreshableScrollView.ViewEdge) -> Bool
+	{
 		reload()
-		
+
 		// the [readme](https://github.com/deicoon/PullRefreshableScrollView/blob/639e37e811c50cf39264f125e6df12eeec35f0e4/README.md)
 		// seems to say we're supposed to return `true`, but returning `false` seems to be easiest
 		// to un-stick the accessory view
 		return false
 	}
-	
-	@IBOutlet var topPullToRefreshAccessoryView : ListViewPullToRefreshAccessoryView!
-	
-	var topAccessoryView: (NSView & AccessoryViewForPullRefreshable)? {
-		get {
-			return topPullToRefreshAccessoryView
-		}
+
+	@IBOutlet var topPullToRefreshAccessoryView: ListViewPullToRefreshAccessoryView!
+
+	var topAccessoryView: (NSView & AccessoryViewForPullRefreshable)?
+	{
+		return topPullToRefreshAccessoryView
 	}
-	
+
 	@IBOutlet internal private(set) unowned var scrollView: PullRefreshableScrollView!
 	@IBOutlet internal private(set) unowned var tableView: NSTableView!
 	@IBOutlet internal private(set) unowned var topConstraint: NSLayoutConstraint!
 
 	internal lazy var loadingIndicator: NSProgressIndicator =
-		{
-			let indicator = NSProgressIndicator()
-			indicator.translatesAutoresizingMaskIntoConstraints = false
-			indicator.style = .spinning
-			indicator.controlSize = .regular
-			indicator.isIndeterminate = true
-			return indicator
-		}()
+	{
+		let indicator = NSProgressIndicator()
+		indicator.translatesAutoresizingMaskIntoConstraints = false
+		indicator.style = .spinning
+		indicator.controlSize = .regular
+		indicator.isIndeterminate = true
+		return indicator
+	}()
 
 	private var notificationObservers = [NSObjectProtocol]()
 	private var remoteEventReceiver: ReceiverRef? = nil
@@ -126,7 +132,7 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 	internal private(set) var revealedFilteredEntryKeys: Set<String> = []
 
 	#if DEBUG
-	private var statusIndicator: NSImageView? = nil
+	private var statusIndicator: NSImageView?
 	#endif
 
 	var client: ClientType?
@@ -140,7 +146,7 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
-		
+
 		needsLoadingIndicator = true
 
 		tableView.target = self
@@ -161,8 +167,8 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 		let workspaceNC = NSWorkspace.shared.notificationCenter
 
 		notificationObservers.append(workspaceNC.addObserver(forName: NSWorkspace.willSleepNotification,
-															 object: nil,
-															 queue: .main)
+		                                                     object: nil,
+		                                                     queue: .main)
 			{
 				[weak self] _ in
 
@@ -179,8 +185,8 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 			})
 
 		notificationObservers.append(workspaceNC.addObserver(forName: NSWorkspace.didWakeNotification,
-															 object: nil,
-															 queue: .main)
+		                                                     object: nil,
+		                                                     queue: .main)
 			{
 				[weak self] _ in
 
@@ -194,7 +200,8 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 				self?.fetchEntries(for: .detachedAbove)
 			})
 
-		notificationObservers.append(NSAccessibility.observeReduceMotionPreference() {
+		notificationObservers.append(NSAccessibility.observeReduceMotionPreference
+		{
 			[weak self] in
 			self?.refreshVisibleCellViews()
 		})
@@ -207,7 +214,7 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 		#if DEBUG
 		statusIndicator?.removeFromSuperview()
 		#endif
-		notificationObservers.forEach({ NSWorkspace.shared.notificationCenter.removeObserver($0) })
+		notificationObservers.forEach { NSWorkspace.shared.notificationCenter.removeObserver($0) }
 	}
 
 	func registerCells()
@@ -239,10 +246,10 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 		else
 		{
 			DispatchQueue.main.asyncAfter(deadline: .now() + 0.5)
-				{
-					// Wait for initial loading to maybe install loading indicator.
-					self.installLoadingIndicatorIfNeeded()
-				}
+			{
+				// Wait for initial loading to maybe install loading indicator.
+				self.installLoadingIndicatorIfNeeded()
+			}
 		}
 	}
 
@@ -258,9 +265,10 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 		reload()
 	}
 
-	func reload() {
+	func reload()
+	{
 		needsLoadingIndicator = true
-		
+
 		lastPaginationResult = nil
 		revealedFilteredEntryKeys.removeAll()
 		reloadList()
@@ -269,11 +277,11 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 	internal func reloadList()
 	{
 		assert(Thread.isMainThread)
-		
+
 		let entryCount = entryList.count
 		var removedIndexSet = IndexSet(0..<entryCount)
 
-		pendingFetchTasks.forEach({ $0.task?.cancel() })
+		pendingFetchTasks.forEach { $0.task?.cancel() }
 		pendingFetchTasks.removeAll()
 
 		entryList.removeAll(where: { $0.isSpecial == false })
@@ -281,7 +289,7 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 
 		entryMap.removeAll()
 
-		entryList.enumerated().forEach({ removedIndexSet.remove($0.0) })
+		entryList.enumerated().forEach { removedIndexSet.remove($0.0) }
 
 		guard tableView != nil else { return }
 
@@ -299,12 +307,10 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 	}
 
 	internal func insertSpecialRows()
-	{
-	}
+	{}
 
 	func containerWindowOcclusionStateDidChange(_ occlusionState: NSWindow.OcclusionState)
-	{
-	}
+	{}
 
 	func menuItems(for entryReference: EntryReference) -> [NSMenuItem]
 	{
@@ -312,8 +318,7 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 	}
 
 	internal func cleanupSpecialRows(_ entryList: inout [EntryReference])
-	{
-	}
+	{}
 
 	internal func insert(entryReferences entryReferenceMap: [Array<EntryReference>.Index: EntryReference])
 	{
@@ -328,14 +333,14 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 	internal func refreshVisibleCellViews()
 	{
 		tableView.enumerateAvailableRowViews
-			{
-				(_, row) in
+		{
+			_, row in
 
-				if let cellView = tableView.view(atColumn: 0, row: row, makeIfNecessary: false) as? NSTableCellView
-				{
-					prepareToDisplay(cellView: cellView, at: row)
-				}
+			if let cellView = tableView.view(atColumn: 0, row: row, makeIfNecessary: false) as? NSTableCellView
+			{
+				prepareToDisplay(cellView: cellView, at: row)
 			}
+		}
 	}
 
 	internal func rangeForEntryFetch(for insertion: InsertionPoint) -> RequestRange
@@ -358,8 +363,9 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 			}
 
 		case .atIndex(let index):
-			if index >= entryList.count {
-				// Fixme: This is sort of a fallback for a bad index. It can cause duplicate entries in the list tho.
+			if index >= entryList.count
+			{
+				// FIXME: This is sort of a fallback for a bad index. It can cause duplicate entries in the list tho.
 				return (entryList.last?.entryKey).map { .max(id: $0, limit: 20) } ?? .default
 			}
 
@@ -410,36 +416,37 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 
 		guard let future = client?.run(request, resumeImmediately: false, completion:
 			{
-				[weak self] (result) in
+				[weak self] result in
 
-				DispatchQueue.main.async()
+				DispatchQueue.main.async
+				{
+					guard let self = self else { return }
+
+					if let task = futurePromise.value
 					{
-						guard let self = self else { return }
-
-						if let task = futurePromise.value
+						guard self.pendingFetchTasks.contains(task)
+						else
 						{
-							guard self.pendingFetchTasks.contains(task) else
-							{
-								return
-							}
-
-							self.pendingFetchTasks.remove(task)
+							return
 						}
 
-						if let receiver = self.remoteEventReceiver
-						{
-							RemoteEventsCoordinator.shared.addExisting(receiver: receiver)
-						}
-
-						switch result
-						{
-						case .success(let entries, let pagination):
-							self.prepareNewEntries(entries, for: insertion, pagination: pagination)
-
-						case .failure(let error):
-							self.failedLoadingEntries(for: request, error: error, insertion: insertion)
-						}
+						self.pendingFetchTasks.remove(task)
 					}
+
+					if let receiver = self.remoteEventReceiver
+					{
+						RemoteEventsCoordinator.shared.addExisting(receiver: receiver)
+					}
+
+					switch result
+					{
+					case .success(let entries, let pagination):
+						self.prepareNewEntries(entries, for: insertion, pagination: pagination)
+
+					case .failure(let error):
+						self.failedLoadingEntries(for: request, error: error, insertion: insertion)
+					}
+				}
 			})
 		else
 		{
@@ -471,7 +478,7 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 			return
 		}
 
-		// Fixme: This should be handled better. For now we simply retry after a delay:
+		// FIXME: This should be handled better. For now we simply retry after a delay:
 		DispatchQueue.main.asyncAfter(deadline: .now() + 10)
 		{
 			[weak self] in self?.run(request: request, for: insertion)
@@ -481,8 +488,8 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 	internal func prepareNewEntries(_ entries: [Entry], for insertion: InsertionPoint, pagination: Pagination?)
 	{
 		needsLoadingIndicator = false
-		
-		let newEntries = entries.filter({ entryMap[$0.key] == nil })
+
+		let newEntries = entries.filter { entryMap[$0.key] == nil }
 		handleNewEntries(newEntries, for: insertion, pagination: pagination)
 	}
 
@@ -494,7 +501,8 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 		{
 			entryMap[entryKey] = entry
 
-			guard let entryIndex = entryList.firstIndex(where: { $0.entryKey == entryKey }) else
+			guard let entryIndex = entryList.firstIndex(where: { $0.entryKey == entryKey })
+			else
 			{
 				return
 			}
@@ -514,7 +522,8 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 
 	internal func handle(deletedEntry entryReference: EntryReference)
 	{
-		guard let entryIndex = entryList.firstIndex(where: { $0 == entryReference }) else
+		guard let entryIndex = entryList.firstIndex(where: { $0 == entryReference })
+		else
 		{
 			return
 		}
@@ -532,7 +541,7 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 		lastPaginationResult = pagination
 
 		let insertionIndex: Array<EntryReference>.Index
-		var newExpanderIndex: Array<EntryReference>.Index? = nil
+		var newExpanderIndex: Array<EntryReference>.Index?
 		var shouldTruncateList = false
 
 		let nextPageEntryId: String? = pagination?.next?.id
@@ -542,7 +551,7 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 		{
 		case .detachedAbove:
 			insertionIndex = entryList.firstIndex(where: { !$0.isSpecial }) ?? entryList.endIndex
-			newExpanderIndex = nextPageEntryId.map({ entryMap.keys.contains($0) }) == false ? entries.count : nil
+			newExpanderIndex = nextPageEntryId.map { entryMap.keys.contains($0) } == false ? entries.count : nil
 			shouldTruncateList = true
 
 		case .above:
@@ -578,8 +587,8 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 			}
 			else
 			{
-				newExpanderIndex = nextPageEntryId.map({ entryMap.keys.contains($0) }) == false ? index + entries.count
-																								: nil
+				newExpanderIndex = nextPageEntryId.map { entryMap.keys.contains($0) } == false ? index + entries.count
+					: nil
 			}
 		}
 
@@ -590,13 +599,14 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 
 		expandersPendingLoadCompletion.remove(insertionIndex)
 
-		var rowToSelect: Int? = nil
+		var rowToSelect: Int?
 
 		tableView.beginUpdates()
 
 		if insertionIndex < entryList.count, entryList[insertionIndex].isExpander
 		{
-			if tableView.selectedRowIndexes.contains(insertionIndex) {
+			if tableView.selectedRowIndexes.contains(insertionIndex)
+			{
 				rowToSelect = insertionIndex
 			}
 
@@ -617,7 +627,7 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 			insertExpanderRow(at: index)
 		}
 
-		entryList.insert(contentsOf: entries.map({ EntryReference.entry(key: $0.key ) }), at: insertionIndex)
+		entryList.insert(contentsOf: entries.map { EntryReference.entry(key: $0.key) }, at: insertionIndex)
 		tableView.insertRowsAnimatingIfVisible(at: IndexSet(insertionIndex..<insertionIndex + entries.count))
 
 		if let index = newExpanderIndex, index >= insertionIndex
@@ -632,7 +642,8 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 
 		tableView.endUpdates()
 
-		if let row = rowToSelect {
+		if let row = rowToSelect
+		{
 			tableView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
 		}
 	}
@@ -642,11 +653,11 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 		guard entryList.count > maxCount, tableView.visibleRect.maxY / tableView.bounds.height < 0.5 else { return }
 
 		let entriesToRemove: [(offset: Int, element: ListViewController<Entry>.EntryReference)] =
-			entryList.enumerated().suffix(entryList.count - maxCount).filter({ $0.element.entryKey != nil })
+			entryList.enumerated().suffix(entryList.count - maxCount).filter { $0.element.entryKey != nil }
 
 		guard entriesToRemove.isEmpty == false else { return }
 
-		let rowsToRemove = entriesToRemove.map({ $0.offset })
+		let rowsToRemove = entriesToRemove.map { $0.offset }
 
 		for (row, entry) in entriesToRemove.sorted(by: { $0.offset < $1.offset }).reversed()
 		{
@@ -662,46 +673,54 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 
 	internal func setClientEventStream(_ stream: RemoteEventsListener.Stream)
 	{
-		if let receiver = self.remoteEventReceiver
+		if let receiver = remoteEventReceiver
 		{
 			RemoteEventsCoordinator.shared.remove(receiver: receiver)
-			self.remoteEventReceiver = nil
+			remoteEventReceiver = nil
 		}
 
 		guard let streamIdentifier = client?.makeStreamIdentifier(for: stream) else { return }
 
-		self.remoteEventReceiver = RemoteEventsCoordinator.shared.add(receiver: self, for: streamIdentifier)
+		remoteEventReceiver = RemoteEventsCoordinator.shared.add(receiver: self, for: streamIdentifier)
 	}
 
 	// MARK: - Filtering
 
-	func applicableFilters() -> [UserFilter] {
+	func applicableFilters() -> [UserFilter]
+	{
 		return []
 	}
 
-	func entryMatchesAnyFilter(_ entry: Entry) -> Bool {
-		guard revealedFilteredEntryKeys.contains(entry.key) == false else {
+	func entryMatchesAnyFilter(_ entry: Entry) -> Bool
+	{
+		guard revealedFilteredEntryKeys.contains(entry.key) == false
+		else
+		{
 			return false
 		}
 
-		if filteredEntryKeys.contains(entry.key) {
+		if filteredEntryKeys.contains(entry.key)
+		{
 			return true
 		}
 
 		let isMatch = applicableFilters().first(where: { self.checkEntry(entry, matchesFilter: $0) }) != nil
 
-		if isMatch {
+		if isMatch
+		{
 			filteredEntryKeys.insert(entry.key)
 		}
 
 		return isMatch
 	}
 
-	func checkEntry(_ entry: Entry, matchesFilter: UserFilter) -> Bool {
+	func checkEntry(_ entry: Entry, matchesFilter: UserFilter) -> Bool
+	{
 		return false
 	}
 
-	func validFiltersDidChange() {
+	func validFiltersDidChange()
+	{
 		guard entryMap.isEmpty == false else { return }
 
 		assert(Thread.isMainThread)
@@ -711,9 +730,12 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 
 		var rowsNeedingReload = IndexSet()
 
-		tableView.enumerateAvailableRowViews { (_, row) in
-			if case .entry(let entryKey) = entryList[row], let entry = entryMap[entryKey] {
-				if entryMatchesAnyFilter(entry) || previouslyFilteredEntryKeys.contains(entry.key) {
+		tableView.enumerateAvailableRowViews
+		{ _, row in
+			if case .entry(let entryKey) = entryList[row], let entry = entryMap[entryKey]
+			{
+				if entryMatchesAnyFilter(entry) || previouslyFilteredEntryKeys.contains(entry.key)
+				{
 					rowsNeedingReload.insert(row)
 				}
 			}
@@ -736,7 +758,7 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 	func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView?
 	{
 		let rowView = tableView.makeView(withIdentifier: ListCellViewIdentifier.row,
-										 owner: nil) as? BackgroundTableRowView
+		                                 owner: nil) as? BackgroundTableRowView
 		rowView?.rowIndex = row
 		return rowView
 	}
@@ -750,9 +772,12 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 		{
 			let cellViewIdentifier: NSUserInterfaceItemIdentifier
 
-			if entryMatchesAnyFilter(entry) {
+			if entryMatchesAnyFilter(entry)
+			{
 				cellViewIdentifier = ListCellViewIdentifier.filtered
-			} else {
+			}
+			else
+			{
 				cellViewIdentifier = self.cellViewIdentifier(for: entry)
 			}
 
@@ -797,21 +822,26 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 	func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool
 	{
 		guard row >= 0 else { return false }
-		
-		if entryList[row].isSpecial {
+
+		if entryList[row].isSpecial
+		{
 			return shouldSelectSpecialRow(at: row)
-		} else {
+		}
+		else
+		{
 			return true
 		}
 	}
-	
-	func shouldSelectSpecialRow(at index: Int) -> Bool {
+
+	func shouldSelectSpecialRow(at index: Int) -> Bool
+	{
 		return true
 	}
 
 	func tableView(_ tableView: NSTableView,
-				   shouldTypeSelectFor event: NSEvent,
-				   withCurrentSearch searchString: String?) -> Bool {
+	               shouldTypeSelectFor event: NSEvent,
+	               withCurrentSearch searchString: String?) -> Bool
+	{
 		false
 	}
 
@@ -854,7 +884,7 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 
 	internal func entry(for reference: EntryReference) -> Entry?
 	{
-		return reference.entryKey.flatMap({ entryMap[$0] })
+		return reference.entryKey.flatMap { entryMap[$0] }
 	}
 
 	internal func prepareToDisplay(cellView: NSTableCellView, at row: Int)
@@ -864,17 +894,18 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 		if entryReference.isExpander, !entryMap.isEmpty, row == entryList.count - 1
 		{
 			DispatchQueue.main.async
-				{
-					[weak self] in self?.fetchEntries(forExpanderAt: row, cellView: cellView)
-				}
+			{
+				[weak self] in self?.fetchEntries(forExpanderAt: row, cellView: cellView)
+			}
 		}
 		else if let richTextTableCellView = cellView as? RichTextCapable, let window = view.window
 		{
 			let shouldAnimate = !NSAccessibility.shouldReduceMotion && window.occlusionState.contains(.visible)
 			richTextTableCellView.set(shouldDisplayAnimatedContents: shouldAnimate)
 		}
-		
-		if var selectableCellView = cellView as? Selectable {
+
+		if var selectableCellView = cellView as? Selectable
+		{
 			selectableCellView.isSelected = tableView.selectedRowIndexes.contains(row)
 		}
 
@@ -887,8 +918,8 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 	private func fetchEntries(forExpanderAt row: Int, cellView: NSTableCellView?)
 	{
 		if !expandersPendingLoadCompletion.contains(row),
-			let cellView = cellView ?? tableView.view(atColumn: 0, row: row, makeIfNecessary: false),
-			let expanderView = cellView as? ExpanderCellView
+		   let cellView = cellView ?? tableView.view(atColumn: 0, row: row, makeIfNecessary: false),
+		   let expanderView = cellView as? ExpanderCellView
 		{
 			expandersPendingLoadCompletion.insert(row)
 			fetchEntries(for: .atIndex(row))
@@ -955,9 +986,9 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 		// We can simply dispatch a fetch since we ensure we don't insert duplicate statuses in the timelines.
 		eventsHandlerReconnectDelay = min(10, eventsHandlerReconnectDelay * 2)
 		DispatchQueue.main.asyncAfter(deadline: .now() + eventsHandlerReconnectDelay)
-			{
-				self.fetchEntries(for: .detachedAbove)
-			}
+		{
+			self.fetchEntries(for: .detachedAbove)
+		}
 	}
 
 	func remoteEventsCoordinator(streamIdentifier: StreamIdentifier, didHandleEvent event: ClientEvent)
@@ -975,40 +1006,50 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 
 	// MARK: - Keyboard Interaction
 
-	var currentFocusRegion: NSRect? {
+	var currentFocusRegion: NSRect?
+	{
 		guard let selectedRow = tableView.selectedRowIndexes.first,
-			  let rowView = tableView.rowView(atRow: selectedRow, makeIfNecessary: false)
-		else {
+		      let rowView = tableView.rowView(atRow: selectedRow, makeIfNecessary: false)
+		else
+		{
 			return nil
 		}
 
 		return tableView.enclosingScrollView?.convert(rowView.frame, from: tableView)
 	}
 
-	func controlTextDidEndEditing(_ obj: Foundation.Notification) {
+	func controlTextDidEndEditing(_ obj: Foundation.Notification)
+	{
 		didDoubleClickTableView(nil)
 	}
 
-	func activateKeyboardNavigation(preferredFocusRegion: NSRect?) {
-		guard tableView.selectedRowIndexes.isEmpty, entryList.isEmpty == false else {
+	func activateKeyboardNavigation(preferredFocusRegion: NSRect?)
+	{
+		guard tableView.selectedRowIndexes.isEmpty, entryList.isEmpty == false
+		else
+		{
 			return
 		}
 
-		if selectBestRowIfPossible(for: preferredFocusRegion) == false {
+		if selectBestRowIfPossible(for: preferredFocusRegion) == false
+		{
 			tableView.selectFirstVisibleRow()
 		}
 	}
 
-	func deactivateKeyboardNavigation() {
+	func deactivateKeyboardNavigation()
+	{
 		tableView.deselectAll(nil)
 	}
 
-	private func selectBestRowIfPossible(for preferredFocusRegion: NSRect?) -> Bool {
+	private func selectBestRowIfPossible(for preferredFocusRegion: NSRect?) -> Bool
+	{
 		guard let region = preferredFocusRegion.flatMap({ tableView.enclosingScrollView?.convert($0, to: tableView) }) else { return false }
 
 		var bestRow: (distanceY: CGFloat, rowIndex: Int) = (.greatestFiniteMagnitude, -1)
 
-		tableView.enumerateAvailableRowViews { (rowView, rowIndex) in
+		tableView.enumerateAvailableRowViews
+		{ rowView, rowIndex in
 			guard region.intersects(rowView.frame) else { return }
 
 			let distance = abs(rowView.frame.midY - region.midY)
@@ -1028,20 +1069,25 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 
 	// MARK: - MastonautTableViewDelegate
 
-	func tableViewDidResignFirstResponder(_ tableView: MastonautTableView) {
+	func tableViewDidResignFirstResponder(_ tableView: MastonautTableView)
+	{
 		deactivateKeyboardNavigation()
 	}
 
-	func tableView(_ tableView: MastonautTableView, shouldTogglePreviewForRow rowIndex: Int) {
-		if let entryKey = entryList[bounded: rowIndex], let entry = entry(for: entryKey) {
+	func tableView(_ tableView: MastonautTableView, shouldTogglePreviewForRow rowIndex: Int)
+	{
+		if let entryKey = entryList[bounded: rowIndex], let entry = entry(for: entryKey)
+		{
 			showPreview(for: entry, atRow: rowIndex)
 		}
 	}
 
 	// MARK: - ClientObserver
 
-	func client(_ client: ClientType, didUpdate accessToken: String) {
-		if entryMap.isEmpty {
+	func client(_ client: ClientType, didUpdate accessToken: String)
+	{
+		if entryMap.isEmpty
+		{
 			reloadList()
 		}
 	}
@@ -1108,22 +1154,22 @@ protocol ListViewPresentable
 #if DEBUG
 extension ListViewController
 {
-	internal func showStatusIndicator(state: IndicatorStyle)
+	func showStatusIndicator(state: IndicatorStyle)
 	{
-		let indicator: NSImageView = self.statusIndicator ??
-			{
-				let indicator = NSImageView(frame: .zero)
-				indicator.translatesAutoresizingMaskIntoConstraints = false
-				indicator.setAccessibilityElement(false)
-				view.addSubview(indicator)
+		let indicator: NSImageView = statusIndicator ??
+		{
+			let indicator = NSImageView(frame: .zero)
+			indicator.translatesAutoresizingMaskIntoConstraints = false
+			indicator.setAccessibilityElement(false)
+			view.addSubview(indicator)
 
-				NSLayoutConstraint.activate([
-					indicator.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
-					view.rightAnchor.constraint(equalTo: indicator.rightAnchor, constant: 10)
-				])
+			NSLayoutConstraint.activate([
+				indicator.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
+				view.rightAnchor.constraint(equalTo: indicator.rightAnchor, constant: 10)
+			])
 
-				return indicator
-			}()
+			return indicator
+		}()
 
 		indicator.image = NSImage(named: state.rawValue)
 	}
@@ -1139,10 +1185,10 @@ extension ListViewController
 		{
 			switch self
 			{
-			case .green:	return NSImage.statusAvailableName
-			case .amber:	return NSImage.statusPartiallyAvailableName
-			case .red:		return NSImage.statusUnavailableName
-			case .off:		return NSImage.statusNoneName
+			case .green: return NSImage.statusAvailableName
+			case .amber: return NSImage.statusPartiallyAvailableName
+			case .red: return NSImage.statusUnavailableName
+			case .off: return NSImage.statusNoneName
 			}
 		}
 	}
