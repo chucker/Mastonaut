@@ -519,6 +519,8 @@
 		5F3A17EF291DB26700EA6FEC /* CoreAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */; };
 		5F3A17F0291DB26700EA6FEC /* CoreAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */; };
 		5F3A17F1291DB26700EA6FEC /* CoreAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */; };
+		5F502EA92986F27A0087AA6E /* InteractionDetailsCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F502EA82986F27A0087AA6E /* InteractionDetailsCellView.xib */; };
+		5F502EAB2986F2CF0087AA6E /* InteractionDetailsCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F502EAA2986F2CF0087AA6E /* InteractionDetailsCellView.swift */; };
 		5F5338B32960B23200C1D9AE /* ReplaceCharactersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5338B22960B23200C1D9AE /* ReplaceCharactersTests.swift */; };
 		5F65400B297C7A9B0089BECC /* NotificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F65400A297C7A9B0089BECC /* NotificationTests.swift */; };
 		5F65400E297C7CD00089BECC /* CoalesceJustOne.json in Sources */ = {isa = PBXBuildFile; fileRef = 5F65400D297C7CD00089BECC /* CoalesceJustOne.json */; };
@@ -988,6 +990,8 @@
 		5F38B52B29302F0C00FCB9FC /* AppKitSwiftUIIntegration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKitSwiftUIIntegration.swift; sourceTree = "<group>"; };
 		5F38B52E2930301600FCB9FC /* PullToRefreshInnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefreshInnerView.swift; sourceTree = "<group>"; };
 		5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = CoreAssets.xcassets; sourceTree = "<group>"; };
+		5F502EA82986F27A0087AA6E /* InteractionDetailsCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InteractionDetailsCellView.xib; sourceTree = "<group>"; };
+		5F502EAA2986F2CF0087AA6E /* InteractionDetailsCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionDetailsCellView.swift; sourceTree = "<group>"; };
 		5F5338B22960B23200C1D9AE /* ReplaceCharactersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceCharactersTests.swift; sourceTree = "<group>"; };
 		5F65400A297C7A9B0089BECC /* NotificationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTests.swift; sourceTree = "<group>"; };
 		5F65400D297C7CD00089BECC /* CoalesceJustOne.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CoalesceJustOne.json; sourceTree = "<group>"; };
@@ -1254,6 +1258,8 @@
 				1594392B2299917800E47DBB /* InstanceTableCellView.xib */,
 				150CEA3A21FCC17600F815A9 /* InteractionCellView.swift */,
 				150CEA3D21FCC18600F815A9 /* InteractionCellView.xib */,
+				5F502EA82986F27A0087AA6E /* InteractionDetailsCellView.xib */,
+				5F502EAA2986F2CF0087AA6E /* InteractionDetailsCellView.swift */,
 				1528BA1C228B52F60072068F /* MastonautTableCellView.swift */,
 				15053AED2254036B00DEED8F /* ProfileTableCellView.swift */,
 				15053AF02254037B00DEED8F /* ProfileTableCellView.xib */,
@@ -2201,6 +2207,7 @@
 				15B25D0C2651CBAC00C90963 /* FilterEditorWindowController.xib in Resources */,
 				1538FB2F22184CB7006B5F78 /* error_preview.pdf in Resources */,
 				5F8C134B296A0B5C007BE2D5 /* EditHistorySheetWindowController.xib in Resources */,
+				5F502EA92986F27A0087AA6E /* InteractionDetailsCellView.xib in Resources */,
 				15E745202236FDF5009A1252 /* WelcomePlaceholderController.xib in Resources */,
 				1561C09621FE5AB400476467 /* BackgroundTableRowView.xib in Resources */,
 				15C4DD1521D41EC0002AF6DA /* Assets.xcassets in Resources */,
@@ -2796,6 +2803,7 @@
 				5F8C134D296A0BF2007BE2D5 /* EditHistorySheetWindowController.swift in Sources */,
 				15DB809921FFE4B700BEA2F9 /* NSMenu+Additions.swift in Sources */,
 				5F176FAF290EF65200DF043C /* FollowedListsService.swift in Sources */,
+				5F502EAB2986F2CF0087AA6E /* InteractionDetailsCellView.swift in Sources */,
 				15F9B63D21DA6462008D95FE /* RelativeDateFormatter.swift in Sources */,
 				154D4351237F459E005D99D9 /* FilterService.swift in Sources */,
 				15BF72CB2342B3460020CE70 /* SidebarTitleViewController.swift in Sources */,

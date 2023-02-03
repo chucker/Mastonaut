@@ -186,7 +186,8 @@ class UserNotificationAgent
 
 				j-=1
 
-				coalescedNotifications.append(CoalescedNotification.following(accounts: notifications[i...j].map { $0.account }))
+				coalescedNotifications.append(CoalescedNotification.following(accounts: notifications[i...j].map { $0.account },
+																			  newestNotification: notifications[j]))
 
 				skipAhead = j+1
 
@@ -211,7 +212,10 @@ class UserNotificationAgent
 				
 				j-=1
 
-				coalescedNotifications.append(CoalescedNotification.rebloggedOrFavorited(accounts: notifications[i...j].map { $0.account }, types: notifications[i...j].map { $0.type }, status: current.status!))
+				coalescedNotifications.append(CoalescedNotification.rebloggedOrFavorited(accounts: notifications[i...j].map { $0.account },
+																						 types: notifications[i...j].map { $0.type },
+																						 status: current.status!,
+																						 newestNotification: notifications[j]))
 
 				skipAhead = j+1
 

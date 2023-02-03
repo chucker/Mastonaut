@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="InteractionDetailsCellView" customModule="Mastonaut" customModuleProvider="target">
+            <connections>
+                <outlet property="agentAvatarButton" destination="FM4-Hg-GAo" id="eIo-pu-AHa"/>
+                <outlet property="interactionIcon" destination="VY6-Jy-l3X" id="sq9-oI-Rqc"/>
+                <outlet property="interactionLabel" destination="huC-s3-2dB" id="RhS-KN-Ocw"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="c22-O7-iKe">
+            <rect key="frame" x="0.0" y="0.0" width="188" height="20"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="12" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="1000" verticalHuggingPriority="1000" ambiguous="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JwB-30-I0M">
+                    <rect key="frame" x="0.0" y="0.0" width="188" height="20"/>
+                    <subviews>
+                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VY6-Jy-l3X">
+                            <rect key="frame" x="0.0" y="0.0" width="14" height="20"/>
+                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="retooted" id="sbs-He-pxv"/>
+                        </imageView>
+                        <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="4" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="248.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rtZ-Kl-iwl">
+                            <rect key="frame" x="26" y="0.0" width="162" height="20"/>
+                            <subviews>
+                                <customView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Xea-DO-fR4" customClass="BorderView" customModule="CoreTootin">
+                                    <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                    <subviews>
+                                        <button translatesAutoresizingMaskIntoConstraints="NO" id="FM4-Hg-GAo">
+                                            <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="missing" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="eBe-5o-sSH">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="clicked:" target="-2" id="ysT-Hr-bKr"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="20" id="Ekj-Dr-aFD"/>
+                                        <constraint firstItem="FM4-Hg-GAo" firstAttribute="leading" secondItem="Xea-DO-fR4" secondAttribute="leading" id="G61-Eu-dnY"/>
+                                        <constraint firstAttribute="width" constant="20" id="OlC-53-4yH"/>
+                                        <constraint firstAttribute="bottom" secondItem="FM4-Hg-GAo" secondAttribute="bottom" id="YdB-0F-8aM"/>
+                                        <constraint firstAttribute="trailing" secondItem="FM4-Hg-GAo" secondAttribute="trailing" id="qa8-En-UT8"/>
+                                        <constraint firstItem="FM4-Hg-GAo" firstAttribute="top" secondItem="Xea-DO-fR4" secondAttribute="top" id="u63-ed-e4c"/>
+                                    </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="borderRadius">
+                                            <real key="value" value="4"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </customView>
+                                <button verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="huC-s3-2dB">
+                                    <rect key="frame" x="24" y="3" width="138" height="14"/>
+                                    <buttonCell key="cell" type="smallSquare" title="John Appleseed boosted" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="SKZ-0D-MeZ">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="systemMedium" size="11"/>
+                                    </buttonCell>
+                                    <color key="contentTintColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <connections>
+                                        <action selector="interactionButtonClicked:" target="-2" id="Q9g-aC-oOF"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <visibilityPriorities>
+                                <integer value="1000"/>
+                                <integer value="1000"/>
+                            </visibilityPriorities>
+                            <customSpacing>
+                                <real value="3.4028234663852886e+38"/>
+                                <real value="3.4028234663852886e+38"/>
+                            </customSpacing>
+                        </stackView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="SGa-ER-fDv"/>
+                    </constraints>
+                    <visibilityPriorities>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                    </visibilityPriorities>
+                    <customSpacing>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                    </customSpacing>
+                </stackView>
+            </subviews>
+            <point key="canvasLocation" x="-7" y="9"/>
+        </customView>
+    </objects>
+    <resources>
+        <image name="missing" width="400" height="400"/>
+        <image name="retooted" width="14" height="9"/>
+    </resources>
+</document>

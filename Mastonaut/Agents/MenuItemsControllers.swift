@@ -222,7 +222,7 @@ class StatusMenuItemsController: MenuItemsController
 			makeActionItem(title: 🔠("Delete & Re-draft")) { interactionHandler.delete(status: status, redraft: true) }
 		]
 	}
-	
+
 	private func makeEditStatusItem(status: Status, interactionHandler: StatusInteractionHandling) -> [NSMenuItem]
 	{
 		return [
@@ -272,12 +272,27 @@ class NotificationMenuItemsController: MenuItemsController
 {
 	static let shared = NotificationMenuItemsController()
 
-	func menuItems(for notification: MastodonNotification,
+	func menuItems(for notification: CoalescedNotification,
 	               interactionHandler: NotificationInteractionHandling) -> [NSMenuItem]
 	{
-		return [
-			makeShowAccountItem(account: notification.account, interactionHandler: interactionHandler)
-		]
+		var accounts: [Account]?
+
+		switch notification
+		{
+		case .uncoalesced(let originalNotification):
+			accounts = [originalNotification.account]
+		case .rebloggedOrFavorited(let _accounts, _, _, _):
+			accounts = _accounts
+		case .following(let _accounts, _):
+			accounts = _accounts
+		}
+
+		if let accounts
+		{
+			return accounts.map { makeShowAccountItem(account: $0, interactionHandler: interactionHandler) }
+		}
+
+		return []
 	}
 
 	private func makeShowAccountItem(account: Account, interactionHandler: NotificationInteractionHandling) -> NSMenuItem

@@ -230,7 +230,7 @@ struct UserFilter {
 		return false
 	}
 
-	func checkMatch(notification: MastodonKit.Notification) -> Bool {
+	func checkMatch(notification: CoalescedNotification) -> Bool {
 		guard isValid else { return false }
 
 		if let status = notification.status {
@@ -238,9 +238,11 @@ struct UserFilter {
 				return true
 			}
 		} else {
-			if checkMatch(string: notification.account.attributedNote.string) {
-				return true
-			}
+			// TODO: how do we handle this?
+			return false
+//			if checkMatch(string: notification.account.attributedNote.string) {
+//				return true
+//			}
 		}
 
 		return false

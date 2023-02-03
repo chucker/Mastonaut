@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner"/>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <tableCellView wantsLayer="YES" misplaced="YES" id="uA5-gi-A8Y" customClass="InteractionCellView" customModule="Mastonaut" customModuleProvider="target">
+        <tableCellView wantsLayer="YES" id="uA5-gi-A8Y" customClass="InteractionCellView" customModule="Mastonaut" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="328" height="188"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fZB-Y3-kYO" customClass="BorderView" customModule="CoreTootin">
-                    <rect key="frame" x="12" y="89" width="54" height="54"/>
+                    <rect key="frame" x="12" y="87" width="54" height="54"/>
                     <subviews>
                         <button translatesAutoresizingMaskIntoConstraints="NO" id="Le2-yn-yOH">
                             <rect key="frame" x="0.0" y="0.0" width="54" height="54"/>
@@ -42,7 +42,7 @@
                     </userDefinedRuntimeAttributes>
                 </customView>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="MRT-NC-KZH">
-                    <rect key="frame" x="76" y="116" width="242" height="14"/>
+                    <rect key="frame" x="76" y="114" width="242" height="14"/>
                     <textFieldCell key="cell" lineBreakMode="truncatingTail" title="steve.baum@mastodon.example" id="ctT-Ia-Spu">
                         <font key="font" metaFont="controlContent" size="11"/>
                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -58,16 +58,16 @@
                     </textFieldCell>
                 </textField>
                 <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="1000" horizontalHuggingPriority="249" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wfD-6T-hMW">
-                    <rect key="frame" x="78" y="39" width="238" height="69"/>
+                    <rect key="frame" x="78" y="39" width="238" height="67"/>
                     <subviews>
                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="7qo-br-mgW" customClass="BorderView" customModule="CoreTootin">
-                            <rect key="frame" x="0.0" y="46" width="238" height="23"/>
+                            <rect key="frame" x="0.0" y="46" width="238" height="21"/>
                             <subviews>
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="zCf-Ct-BB1" customClass="BackgroundView" customModule="CoreTootin">
-                                    <rect key="frame" x="0.0" y="0.0" width="32" height="23"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="32" height="21"/>
                                     <subviews>
                                         <textField toolTip="Content Warning" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QEi-By-8bc">
-                                            <rect key="frame" x="4" y="5" width="24" height="14"/>
+                                            <rect key="frame" x="4" y="3" width="24" height="14"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="CW" id="hqE-CY-2aV">
                                                 <font key="font" metaFont="systemSemibold" size="11"/>
                                                 <color key="textColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -88,7 +88,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </customView>
                                 <textField horizontalHuggingPriority="255" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wji-dS-tLE" customClass="AttributedLabel">
-                                    <rect key="frame" x="38" y="3" width="194" height="18"/>
+                                    <rect key="frame" x="38" y="3" width="194" height="16"/>
                                     <textFieldCell key="cell" selectable="YES" allowsUndo="NO" alignment="left" title="The quick brown fox" allowsEditingTextAttributes="YES" id="fM0-r2-L11">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -202,80 +202,8 @@
                         <action selector="interactionButtonClicked:" target="uA5-gi-A8Y" id="7YR-la-DAI"/>
                     </connections>
                 </button>
-                <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="12" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="1000" verticalHuggingPriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SsG-u2-jcM">
-                    <rect key="frame" x="50" y="156" width="188" height="20"/>
-                    <subviews>
-                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="npy-Dl-32e">
-                            <rect key="frame" x="0.0" y="0.0" width="14" height="20"/>
-                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="retooted" id="47Z-Er-6Bg"/>
-                        </imageView>
-                        <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="4" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="248.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1aE-KA-sFf">
-                            <rect key="frame" x="26" y="0.0" width="162" height="20"/>
-                            <subviews>
-                                <customView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PDL-QG-cFf" customClass="BorderView" customModule="CoreTootin">
-                                    <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
-                                    <subviews>
-                                        <button translatesAutoresizingMaskIntoConstraints="NO" id="RyI-g7-tmn">
-                                            <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
-                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="missing" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="fcI-KD-s2V">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <action selector="interactionButtonClicked:" target="uA5-gi-A8Y" id="mAf-Ev-YVN"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="RyI-g7-tmn" firstAttribute="top" secondItem="PDL-QG-cFf" secondAttribute="top" id="DaG-Gt-RjM"/>
-                                        <constraint firstAttribute="bottom" secondItem="RyI-g7-tmn" secondAttribute="bottom" id="MGp-8V-7ab"/>
-                                        <constraint firstItem="RyI-g7-tmn" firstAttribute="leading" secondItem="PDL-QG-cFf" secondAttribute="leading" id="i6b-GJ-A7n"/>
-                                        <constraint firstAttribute="trailing" secondItem="RyI-g7-tmn" secondAttribute="trailing" id="iVl-IB-TEX"/>
-                                        <constraint firstAttribute="width" constant="20" id="lh7-Fa-m1e"/>
-                                        <constraint firstAttribute="height" constant="20" id="oi1-8x-mjX"/>
-                                    </constraints>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="borderRadius">
-                                            <real key="value" value="4"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                </customView>
-                                <button verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="b8v-EM-VcY">
-                                    <rect key="frame" x="24" y="3" width="138" height="14"/>
-                                    <buttonCell key="cell" type="smallSquare" title="John Appleseed boosted" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="5de-zs-JMj">
-                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                        <font key="font" metaFont="systemMedium" size="11"/>
-                                    </buttonCell>
-                                    <color key="contentTintColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                    <connections>
-                                        <action selector="interactionButtonClicked:" target="uA5-gi-A8Y" id="Wao-eD-Gj4"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                            <visibilityPriorities>
-                                <integer value="1000"/>
-                                <integer value="1000"/>
-                            </visibilityPriorities>
-                            <customSpacing>
-                                <real value="3.4028234663852886e+38"/>
-                                <real value="3.4028234663852886e+38"/>
-                            </customSpacing>
-                        </stackView>
-                    </subviews>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="20" id="cUw-Av-o6i"/>
-                    </constraints>
-                    <visibilityPriorities>
-                        <integer value="1000"/>
-                        <integer value="1000"/>
-                    </visibilityPriorities>
-                    <customSpacing>
-                        <real value="3.4028234663852886e+38"/>
-                        <real value="3.4028234663852886e+38"/>
-                    </customSpacing>
-                </stackView>
                 <button verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="XOW-dd-yLi">
-                    <rect key="frame" x="76" y="132" width="113" height="16"/>
+                    <rect key="frame" x="76" y="130" width="113" height="16"/>
                     <buttonCell key="cell" type="smallSquare" title="Steve Applebaum" bezelStyle="smallSquare" imagePosition="overlaps" alignment="left" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="QJe-R5-jKf">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="systemMedium" size="13"/>
@@ -285,16 +213,18 @@
                         <action selector="interactionButtonClicked:" target="uA5-gi-A8Y" id="DIU-RW-t3O"/>
                     </connections>
                 </button>
+                <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PWX-cf-xgG">
+                    <rect key="frame" x="51" y="154" width="188" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                </stackView>
             </subviews>
             <constraints>
                 <constraint firstItem="j5Z-f1-HO8" firstAttribute="firstBaseline" secondItem="S0C-0l-7dv" secondAttribute="firstBaseline" id="0nH-In-3Fo"/>
                 <constraint firstItem="cW1-Jf-RNF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="j5Z-f1-HO8" secondAttribute="trailing" constant="10" id="1wO-jd-bFr"/>
-                <constraint firstItem="wfD-6T-hMW" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="SsG-u2-jcM" secondAttribute="trailing" id="2DS-C9-dmq"/>
                 <constraint firstItem="wfD-6T-hMW" firstAttribute="leading" secondItem="fZB-Y3-kYO" secondAttribute="trailing" constant="12" id="678-p6-0Z4"/>
                 <constraint firstItem="37b-yO-ce8" firstAttribute="top" secondItem="wfD-6T-hMW" secondAttribute="bottom" constant="12" id="7HY-qd-ruc"/>
                 <constraint firstItem="wfD-6T-hMW" firstAttribute="trailing" secondItem="MRT-NC-KZH" secondAttribute="trailing" id="8aE-nv-YmN"/>
                 <constraint firstItem="XOW-dd-yLi" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="wfD-6T-hMW" secondAttribute="trailing" constant="-2" id="IUV-mc-pKw"/>
-                <constraint firstItem="SsG-u2-jcM" firstAttribute="top" secondItem="uA5-gi-A8Y" secondAttribute="top" constant="12" id="KeG-4S-BlA"/>
                 <constraint firstItem="S0C-0l-7dv" firstAttribute="firstBaseline" secondItem="37b-yO-ce8" secondAttribute="firstBaseline" id="Mar-KW-nET"/>
                 <constraint firstItem="cW1-Jf-RNF" firstAttribute="centerY" secondItem="j5Z-f1-HO8" secondAttribute="centerY" id="Ndp-sW-uom"/>
                 <constraint firstItem="XOW-dd-yLi" firstAttribute="leading" secondItem="wfD-6T-hMW" secondAttribute="leading" constant="-2" id="NxC-4g-tHg"/>
@@ -304,8 +234,6 @@
                 <constraint firstItem="wfD-6T-hMW" firstAttribute="leading" secondItem="MRT-NC-KZH" secondAttribute="leading" id="ckR-OO-zuh"/>
                 <constraint firstItem="MRT-NC-KZH" firstAttribute="top" secondItem="XOW-dd-yLi" secondAttribute="bottom" constant="2" id="edM-bM-qCj"/>
                 <constraint firstItem="37b-yO-ce8" firstAttribute="leading" secondItem="wfD-6T-hMW" secondAttribute="leading" id="gxS-ZS-uAX"/>
-                <constraint firstItem="1aE-KA-sFf" firstAttribute="leading" secondItem="XOW-dd-yLi" secondAttribute="leading" id="ies-tC-hCB"/>
-                <constraint firstItem="XOW-dd-yLi" firstAttribute="top" secondItem="SsG-u2-jcM" secondAttribute="bottom" constant="8" id="pVL-JM-TLq"/>
                 <constraint firstItem="fZB-Y3-kYO" firstAttribute="leading" secondItem="uA5-gi-A8Y" secondAttribute="leading" constant="12" id="q7I-RU-Ya0"/>
                 <constraint firstItem="wfD-6T-hMW" firstAttribute="top" secondItem="MRT-NC-KZH" secondAttribute="bottom" constant="8" id="rVK-44-K6O"/>
                 <constraint firstAttribute="trailing" secondItem="wfD-6T-hMW" secondAttribute="trailing" constant="12" id="sfK-Ak-gtz"/>
@@ -313,7 +241,6 @@
                 <constraint firstItem="cW1-Jf-RNF" firstAttribute="trailing" secondItem="wfD-6T-hMW" secondAttribute="trailing" id="wzR-W4-ajb"/>
             </constraints>
             <connections>
-                <outlet property="agentAvatarButton" destination="RyI-g7-tmn" id="h3X-F8-ZEM"/>
                 <outlet property="attachmentIcon" destination="97M-bw-2fQ" id="bg5-sk-PYf"/>
                 <outlet property="attachmentInfoLabel" destination="9HC-fH-lo1" id="PEI-sx-Fq6"/>
                 <outlet property="attachmentInfoStackView" destination="KwM-5S-bQj" id="GoC-49-S5I"/>
@@ -323,8 +250,7 @@
                 <outlet property="contentWarningContainerView" destination="7qo-br-mgW" id="TZP-bY-lMu"/>
                 <outlet property="contentWarningLabel" destination="wji-dS-tLE" id="XCf-Sm-PCb"/>
                 <outlet property="favoriteButton" destination="j5Z-f1-HO8" id="zWP-jb-vw1"/>
-                <outlet property="interactionIcon" destination="npy-Dl-32e" id="icx-5e-efI"/>
-                <outlet property="interactionLabel" destination="b8v-EM-VcY" id="Zv9-MB-y4q"/>
+                <outlet property="interactionsStackView" destination="PWX-cf-xgG" id="1gB-lI-V3l"/>
                 <outlet property="reblogButton" destination="S0C-0l-7dv" id="o4M-n3-MJx"/>
                 <outlet property="replyButton" destination="37b-yO-ce8" id="cKt-s2-OBs"/>
                 <outlet property="stackView" destination="wfD-6T-hMW" id="e2X-eV-lu7"/>
@@ -340,7 +266,6 @@
         <image name="reply" width="16" height="15"/>
         <image name="retoot" width="17" height="15"/>
         <image name="retoot_active" width="17" height="15"/>
-        <image name="retooted" width="14" height="9"/>
         <image name="star" width="15" height="15"/>
         <image name="star_active" width="15" height="15"/>
     </resources>

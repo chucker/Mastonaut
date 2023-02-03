@@ -80,6 +80,11 @@ class NotificationListViewController: ListViewController<CoalescedNotification, 
 		                   forIdentifier: CellViewIdentifier.interaction)
 		tableView.register(NSNib(nibNamed: "FollowCellView", bundle: .main),
 		                   forIdentifier: CellViewIdentifier.follow)
+
+		tableView.register(NSNib(nibNamed: "InteractionCellView", bundle: .main),
+						   forIdentifier: CellViewIdentifier.coalescedInteraction)
+		tableView.register(NSNib(nibNamed: "FollowCellView", bundle: .main),
+						   forIdentifier: CellViewIdentifier.coalescedFollow)
 	}
 
 	override func viewDidLoad()
@@ -161,7 +166,11 @@ class NotificationListViewController: ListViewController<CoalescedNotification, 
 
 	func reply(to statusID: String)
 	{
-		if let notificationId = statusIdNotificationIdMap[statusID], let status = entry(for: notificationId)?.status
+		if let notificationId = statusIdNotificationIdMap[statusID],
+		   let entry = entry(for: notificationId),
+		   case CoalescedNotification.uncoalesced(let original) = entry,
+		   original.type == .mention,
+		   let status = original.status
 		{
 			authorizedAccountProvider?.composeReply(for: status, sender: nil)
 		}
@@ -288,21 +297,32 @@ class NotificationListViewController: ListViewController<CoalescedNotification, 
 
 	override func cellViewIdentifier(for notification: CoalescedNotification) -> NSUserInterfaceItemIdentifier
 	{
-		switch notification.type
+		switch notification
 		{
-		case .mention:
-			return NotificationListViewController.CellViewIdentifier.status
+		case .uncoalesced(let originalNotification):
+			switch originalNotification.type
+			{
+			case .mention:
+				return NotificationListViewController.CellViewIdentifier.status
 
-		case .favourite, .reblog, .poll:
-			return NotificationListViewController.CellViewIdentifier.interaction
+			case .favourite, .reblog, .poll:
+				return NotificationListViewController.CellViewIdentifier.interaction
 
-		case .follow:
-			return NotificationListViewController.CellViewIdentifier.follow
+			case .follow:
+				return NotificationListViewController.CellViewIdentifier.follow
 
-		default:
-			return NSUserInterfaceItemIdentifier("")
-			fatalError("Unknown notification types should be filtered!")
+			default:
+				break
+			}
+
+		case .rebloggedOrFavorited:
+			return NotificationListViewController.CellViewIdentifier.coalescedInteraction
+
+		case .following:
+			return NotificationListViewController.CellViewIdentifier.coalescedFollow
 		}
+
+		return NSUserInterfaceItemIdentifier("")
 	}
 
 	override func populate(cell: NSTableCellView, for notification: CoalescedNotification)
@@ -316,27 +336,48 @@ class NotificationListViewController: ListViewController<CoalescedNotification, 
 			return
 		}
 
-		switch notification.type
+		switch notification
 		{
-		case .mention:
-			guard let status = notification.status, let statusCell = cell as? StatusDisplaying
-			else
+		case .uncoalesced(let originalNotification):
+			switch originalNotification.type
 			{
-				return
+			case .mention:
+				guard let status = originalNotification.status, let statusCell = cell as? StatusDisplaying
+				else
+				{
+					return
+				}
+
+				if let poll = status.poll
+				{
+					setupRefreshTimer(for: poll, statusID: status.id)
+				}
+
+				statusCell.set(displayedStatus: status,
+				               poll: status.poll.flatMap { updatedPolls[$0.id] },
+				               attachmentPresenter: attachmentPresenter,
+				               interactionHandler: self,
+				               activeInstance: instance)
+
+			case .favourite, .follow, .reblog, .poll:
+				guard let notificationCell = cell as? NotificationDisplaying
+				else
+				{
+					return
+				}
+
+				notificationCell.set(displayedNotification: notification,
+				                     attachmentPresenter: attachmentPresenter,
+				                     interactionHandler: self,
+				                     activeInstance: instance)
+
+			default:
+				break
 			}
 
-			if let poll = status.poll
-			{
-				setupRefreshTimer(for: poll, statusID: status.id)
-			}
+		case .rebloggedOrFavorited(let accounts, let types, let status, _):
+//		case .rebloggedOrFavorited(let accounts, let types, let status, let newestNotification):
 
-			statusCell.set(displayedStatus: status,
-			               poll: status.poll.flatMap { updatedPolls[$0.id] },
-			               attachmentPresenter: attachmentPresenter,
-			               interactionHandler: self,
-			               activeInstance: instance)
-
-		case .favourite, .follow, .reblog, .poll:
 			guard let notificationCell = cell as? NotificationDisplaying
 			else
 			{
@@ -348,8 +389,19 @@ class NotificationListViewController: ListViewController<CoalescedNotification, 
 			                     interactionHandler: self,
 			                     activeInstance: instance)
 
-		default:
-			break
+		case .following(let accounts, _):
+//		case .following(let accounts, let newestNotification):
+
+			guard let notificationCell = cell as? NotificationDisplaying
+			else
+			{
+				return
+			}
+
+			notificationCell.set(displayedNotification: notification,
+			                     attachmentPresenter: attachmentPresenter,
+			                     interactionHandler: self,
+			                     activeInstance: instance)
 		}
 	}
 
@@ -383,8 +435,8 @@ class NotificationListViewController: ListViewController<CoalescedNotification, 
 			{
 				[weak self] in
 
-				self?.prepareNewEntries([notification], for: .above, pagination: nil)
-				self?.postNotificationIfAppropriate(notification)
+//				self?.prepareNewEntries([notification], for: .above, pagination: nil)
+//				self?.postNotificationIfAppropriate(notification)
 			}
 
 		case .delete(let statusID):
@@ -412,10 +464,11 @@ class NotificationListViewController: ListViewController<CoalescedNotification, 
 		{
 			show(status: status)
 		}
-		else
+		else if case CoalescedNotification.uncoalesced(let original) = notification
 		{
-			show(account: notification.account)
+			show(account: original.account)
 		}
+		else {} // if it's coalesced and has no status, there's no single author to show
 	}
 
 	private func postNotificationIfAppropriate(_ notification: MastodonNotification)
@@ -481,6 +534,11 @@ class NotificationListViewController: ListViewController<CoalescedNotification, 
 		static let status = NSUserInterfaceItemIdentifier("status")
 		static let interaction = NSUserInterfaceItemIdentifier("interaction")
 		static let follow = NSUserInterfaceItemIdentifier("follow")
+
+		static let coalescedInteraction = NSUserInterfaceItemIdentifier("interaction")
+		static let coalescedFollow = NSUserInterfaceItemIdentifier("follow")
+//		static let coalescedInteraction = NSUserInterfaceItemIdentifier("coalescedInteraction")
+//		static let coalescedFollow = NSUserInterfaceItemIdentifier("coalescedFollow")
 	}
 }
 

@@ -79,37 +79,41 @@ class FollowCellView: MastonautTableCellView, NotificationDisplaying
 		}
 	}
 
-	func set(displayedNotification notification: MastodonNotification,
+	func set(displayedNotification notification: CoalescedNotification,
 			 attachmentPresenter: AttachmentPresenting,
 			 interactionHandler: NotificationInteractionHandling,
 			 activeInstance: Instance)
 	{
-		self.displayedNotificationId = notification.id
+		guard case CoalescedNotification.following(let accounts, let newestNotification) = notification else {
+			return
+		}
+
+		self.displayedNotificationId = newestNotification.id
 		self.interactionHandler = interactionHandler
-		self.agentAccount = notification.account
-		let accountEmojis = notification.account.cacheableEmojis
+		self.agentAccount = newestNotification.account
+		let accountEmojis = newestNotification.account.cacheableEmojis
 
 		displayedNotificationTags = notification.status?.tags
 
 		userBioLabel.linkHandler = self
 
-		interactionLabel.set(stringValue: 🔠("%@ followed you", notification.authorName),
+		interactionLabel.set(stringValue: 🔠("%@ followed you", newestNotification.authorName),
 							 applyingAttributes: FollowCellView.followLabelAttributes,
 							 applyingEmojis: accountEmojis)
 
-		userBioLabel.set(attributedStringValue: notification.account.attributedNote,
+		userBioLabel.set(attributedStringValue: newestNotification.account.attributedNote,
 						 applyingAttributes: FollowCellView.userBioLabelAttributes,
 						 applyingEmojis: accountEmojis)
 
 		userBioLabel.isHidden = userBioLabel.attributedStringValue.length == 0
 		userBioLabel.selectableAfterFirstClick = true
 
-		userAccountLabel.stringValue = notification.account.uri(in: activeInstance)
-		timeLabel.objectValue = notification.createdAt
-		timeLabel.toolTip = DateFormatter.longDateFormatter.string(from: notification.createdAt)
+		userAccountLabel.stringValue = newestNotification.account.uri(in: activeInstance)
+		timeLabel.objectValue = newestNotification.createdAt
+		timeLabel.toolTip = DateFormatter.longDateFormatter.string(from: newestNotification.createdAt)
 
-		let localNotificationID = notification.id
-		AppDelegate.shared.avatarImageCache.fetchImage(account: notification.account) { [weak self] result in
+		let localNotificationID = newestNotification.id
+		AppDelegate.shared.avatarImageCache.fetchImage(account: newestNotification.account) { [weak self] result in
 			switch result {
 			case .inCache(let avatarImage):
 				assert(Thread.isMainThread)

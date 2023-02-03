@@ -27,7 +27,7 @@ protocol NotificationDisplaying
 
 	var displayedStatusId: String? { get }
 
-	func set(displayedNotification: MastodonNotification,
+	func set(displayedNotification: CoalescedNotification,
 			 attachmentPresenter: AttachmentPresenting,
 			 interactionHandler: NotificationInteractionHandling,
 			 activeInstance: Instance)

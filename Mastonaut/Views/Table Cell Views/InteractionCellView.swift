@@ -24,9 +24,9 @@ import CoreTootin
 class InteractionCellView: MastonautTableCellView, NotificationDisplaying
 {
 	@IBOutlet private unowned var stackView: NSStackView!
-	@IBOutlet private unowned var interactionIcon: NSImageView!
-	@IBOutlet private unowned var interactionLabel: NSButton!
-	@IBOutlet private unowned var agentAvatarButton: NSButton!
+//	@IBOutlet private unowned var interactionIcon: NSImageView!
+//	@IBOutlet private unowned var interactionLabel: NSButton!
+//	@IBOutlet private unowned var agentAvatarButton: NSButton!
 	@IBOutlet private unowned var authorAvatarButton: NSButton!
 	@IBOutlet private unowned var authorNameLabel: NSButton!
 	@IBOutlet private unowned var authorAccountLabel: NSTextField!
@@ -40,6 +40,7 @@ class InteractionCellView: MastonautTableCellView, NotificationDisplaying
 	@IBOutlet private unowned var reblogButton: NSButton!
 	@IBOutlet private unowned var favoriteButton: NSButton!
 	@IBOutlet private unowned var timeLabel: NSTextField!
+	@IBOutlet weak var interactionsStackView: NSStackView!
 
 	var displayedNotificationId: String? = nil
 
@@ -109,13 +110,16 @@ class InteractionCellView: MastonautTableCellView, NotificationDisplaying
 			switch notificationType
 			{
 			case .reblog:
-				interactionIcon.image = emphasized ? #imageLiteral(resourceName: "retooted") : #imageLiteral(resourceName: "retooted_active")
+				break
+//				interactionIcon.image = emphasized ? #imageLiteral(resourceName: "retooted") : #imageLiteral(resourceName: "retooted_active")
 				
 			case .favourite:
-				interactionIcon.image = emphasized ? #imageLiteral(resourceName: "favorited") : #imageLiteral(resourceName: "favorited_active")
+				break
+//				interactionIcon.image = emphasized ? #imageLiteral(resourceName: "favorited") : #imageLiteral(resourceName: "favorited_active")
 
 			case .poll:
-				interactionIcon.image = #imageLiteral(resourceName: "poll")
+				break
+//				interactionIcon.image = #imageLiteral(resourceName: "poll")
 
 			case .follow:
 				// This type of notification is handled by a different notification cell view.
@@ -142,44 +146,47 @@ class InteractionCellView: MastonautTableCellView, NotificationDisplaying
 		}
 	}
 
-	func set(displayedNotification notification: MastodonNotification,
+	func set(displayedNotification notifications: CoalescedNotification,
 			 attachmentPresenter: AttachmentPresenting,
 			 interactionHandler: NotificationInteractionHandling,
 			 activeInstance: Instance)
 	{
-		displayedNotificationId = notification.id
-		displayedNotificationType = notification.type
-		displayedStatusId = notification.status?.id
+		guard case CoalescedNotification.rebloggedOrFavorited(let accounts, let types, let status, let newestNotification) = notifications else {
+			return
+		}
+		
+		displayedNotificationId = newestNotification.id
+		displayedNotificationType = newestNotification.type
+		displayedStatusId = newestNotification.status?.id
 
 		self.interactionHandler = interactionHandler
-		displayedNotificationTags = notification.status?.tags
+		displayedNotificationTags = newestNotification.status?.tags
 
 		contentWarningLabel.linkHandler = self
 		statusLabel.linkHandler = self
 
-		authorAccount = notification.status?.account
-		agentAccount = notification.account
+		authorAccount = status.account
+		agentAccount = newestNotification.account
 
 		let interactionMessage: String
-		let status = notification.status
 		let messageAttributes: [NSAttributedString.Key: AnyObject]
 
-		switch notification.type
+		switch newestNotification.type
 		{
 		case .reblog:
-			interactionIcon.image = #imageLiteral(resourceName: "retooted_active")
-			interactionMessage = 🔠("%@ boosted", notification.authorName)
+//			interactionIcon.image = #imageLiteral(resourceName: "retooted_active")
+			interactionMessage = 🔠("%@ boosted", newestNotification.authorName)
 			messageAttributes = InteractionCellView.reblogLabelAttributes
 			set(status: status, activeInstance: activeInstance)
 
 		case .favourite:
-			interactionIcon.image = #imageLiteral(resourceName: "favorited_active")
-			interactionMessage = 🔠("%@ favorited", notification.authorName)
+//			interactionIcon.image = #imageLiteral(resourceName: "favorited_active")
+			interactionMessage = 🔠("%@ favorited", newestNotification.authorName)
 			messageAttributes = InteractionCellView.favoriteLabelAttributes
 			set(status: status, activeInstance: activeInstance)
 
 		case .poll:
-			interactionIcon.image = #imageLiteral(resourceName: "poll")
+//			interactionIcon.image = #imageLiteral(resourceName: "poll")
 			interactionMessage = 🔠("A poll has ended")
 			messageAttributes = InteractionCellView.interactionLabelAttributes
 			set(status: status, activeInstance: activeInstance)
@@ -197,19 +204,19 @@ class InteractionCellView: MastonautTableCellView, NotificationDisplaying
 			return
 		}
 
-		interactionLabel.set(stringValue: interactionMessage,
-							 applyingAttributes: messageAttributes,
-							 applyingEmojis: notification.account.cacheableEmojis)
+//		interactionLabel.set(stringValue: interactionMessage,
+//							 applyingAttributes: messageAttributes,
+//							 applyingEmojis: notification.account.cacheableEmojis)
 
 		authorAvatarButton.image = #imageLiteral(resourceName: "missing")
-		agentAvatarButton.image = #imageLiteral(resourceName: "missing")
+//		agentAvatarButton.image = #imageLiteral(resourceName: "missing")
 
-		let localNotificationID = notification.id
-		AppDelegate.shared.avatarImageCache.fetchImage(account: notification.account) { [weak self] result in
+		let localNotificationID = newestNotification.id
+		AppDelegate.shared.avatarImageCache.fetchImage(account: newestNotification.account) { [weak self] result in
 			switch result {
 			case .inCache(let avatarImage):
 				assert(Thread.isMainThread)
-				self?.agentAvatarButton.image = avatarImage
+//				self?.agentAvatarButton.image = avatarImage
 			case .loaded(let avatarImage):
 				self?.applyAgentImageIfNotReused(avatarImage, originatingNotificationID: localNotificationID)
 			case .noImage:
@@ -217,7 +224,7 @@ class InteractionCellView: MastonautTableCellView, NotificationDisplaying
 			}
 		}
 
-		if let account = notification.status?.account {
+		if let account = newestNotification.status?.account {
 			AppDelegate.shared.avatarImageCache.fetchImage(account: account) { [weak self] result in
 				switch result {
 				case .inCache(let avatarImage):
@@ -246,7 +253,7 @@ class InteractionCellView: MastonautTableCellView, NotificationDisplaying
 				return
 			}
 
-			self?.agentAvatarButton.image = image ?? #imageLiteral(resourceName: "missing")
+//			self?.agentAvatarButton.image = image ?? #imageLiteral(resourceName: "missing")
 		}
 	}
 
@@ -363,9 +370,9 @@ class InteractionCellView: MastonautTableCellView, NotificationDisplaying
 
 		displayedNotificationId = nil
 		displayedNotificationType = nil
-		interactionIcon.image = nil
+//		interactionIcon.image = nil
 		authorAvatarButton.image = #imageLiteral(resourceName: "missing")
-		interactionLabel.stringValue = ""
+//		interactionLabel.stringValue = ""
 		authorNameLabel.stringValue = ""
 		authorAccountLabel.stringValue = ""
 		statusLabel.stringValue = ""
@@ -444,8 +451,8 @@ class InteractionCellView: MastonautTableCellView, NotificationDisplaying
 		case (authorNameLabel, _), (authorAvatarButton, _):
 			authorAccount.map { interactionHandler?.show(account: $0) }
 
-		case (interactionLabel, _), (agentAvatarButton, _):
-			agentAccount.map { interactionHandler?.show(account: $0) }
+//		case (interactionLabel, _), (agentAvatarButton, _):
+//			agentAccount.map { interactionHandler?.show(account: $0) }
 
 		default: break
 		}
@@ -464,7 +471,7 @@ extension InteractionCellView: RichTextCapable
 {
 	func set(shouldDisplayAnimatedContents animates: Bool)
 	{
-		interactionLabel.animatedEmojiImageViews?.forEach({ $0.animates = animates })
+//		interactionLabel.animatedEmojiImageViews?.forEach({ $0.animates = animates })
 		authorNameLabel.animatedEmojiImageViews?.forEach({ $0.animates = animates })
 		statusLabel.animatedEmojiImageViews?.forEach({ $0.animates = animates })
 		contentWarningLabel.animatedEmojiImageViews?.forEach({ $0.animates = animates })
