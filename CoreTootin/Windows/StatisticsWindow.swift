@@ -6,6 +6,7 @@
 //  Copyright © 2023 Bruno Philipe. All rights reserved.
 //
 
+import CoreTootin
 import SwiftUI
 import SwiftUICharts
 
@@ -25,31 +26,24 @@ struct StatisticsWindow: View {
 	}
 	
 	let groups: [GroupingData] = [Group.posted.data, Group.boosted.data]
-
-	let data = StackedBarDataSets(dataSets: [
-		StackedBarDataSet(dataPoints: [
-			StackedBarDataPoint(value: 30, description: "One Three", group: Group.posted.data),
-			StackedBarDataPoint(value: 40, description: "One Four", group: Group.boosted.data)
-		]),
-		  
-		StackedBarDataSet(dataPoints: [
-			StackedBarDataPoint(value: 40, description: "Two Three", group: Group.posted.data),
-			StackedBarDataPoint(value: 60, description: "Two Four", group: Group.boosted.data)
-		]),
-		  
-		StackedBarDataSet(dataPoints: [
-			StackedBarDataPoint(value: 30, description: "Three Three", group: Group.posted.data),
-			StackedBarDataPoint(value: 90, description: "Three Four", group: Group.boosted.data)
-		]),
-		  
-		StackedBarDataSet(dataPoints: [
-			StackedBarDataPoint(value: 20, description: "Four Three", group: Group.posted.data),
-			StackedBarDataPoint(value: 50, description: "Four Four", group: Group.boosted.data)
-		])
-	])
+	
+	var dataSets: [StackedBarDataSet] {
+		let stats = Stats_StatusesByHour.getCounts(context: AppDelegate.shared.managedObjectContext)
+		
+		var result = [StackedBarDataSet]()
+		
+		for s in stats {
+			result.append(StackedBarDataSet(dataPoints: [
+				StackedBarDataPoint(value: Double(s.postCount), description: "Hello", group: Group.posted.data),
+				StackedBarDataPoint(value: Double(s.boostCount), description: "Hello", group: Group.boosted.data)
+			]))
+		}
+		
+		return result
+	}
 	
 	var body: some View {
-		let chartData = StackedBarChartData(dataSets: data, groups: groups)
+		let chartData = StackedBarChartData(dataSets: StackedBarDataSets(dataSets: dataSets), groups: groups)
 		
 		VStack {
 			Text("Posts by Hour of Day").font(.title)

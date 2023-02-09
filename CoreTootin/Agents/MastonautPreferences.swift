@@ -80,6 +80,12 @@ public class MastonautPreferences: PreferencesController
 		get { return integerRepresentable(for: #keyPath(appearance), default: .auto) }
 		set { defaults.setValue(newValue.rawValue, forKey: #keyPath(appearance)) }
 	}
+	
+	@objc public dynamic var areStatisticsEnabled: Bool
+	{
+		get { return bool(forKey: #keyPath(areStatisticsEnabled)) ?? false }
+		set { defaults.setValue(newValue, forKey: #keyPath(areStatisticsEnabled)) }
+	}
 
 	// Viewing preferences
 

@@ -517,6 +517,7 @@
 		5F2F46A9299523FE00A1059B /* StatisticsWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2F46A8299523FE00A1059B /* StatisticsWindow.swift */; };
 		5F2F46AA299523FE00A1059B /* StatisticsWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2F46A8299523FE00A1059B /* StatisticsWindow.swift */; };
 		5F2F46AD29954D5B00A1059B /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 5F2F46AC29954D5B00A1059B /* SwiftUICharts */; };
+		5F2F46B02995587000A1059B /* Stats_StatusesPerHour+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2F46AF2995587000A1059B /* Stats_StatusesPerHour+Helpers.swift */; };
 		5F38B52C29302F0C00FCB9FC /* AppKitSwiftUIIntegration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F38B52B29302F0C00FCB9FC /* AppKitSwiftUIIntegration.swift */; };
 		5F38B52F2930301600FCB9FC /* PullToRefreshInnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F38B52E2930301600FCB9FC /* PullToRefreshInnerView.swift */; };
 		5F3A17EF291DB26700EA6FEC /* CoreAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */; };
@@ -985,6 +986,8 @@
 		5F176FAE290EF65200DF043C /* FollowedListsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowedListsService.swift; sourceTree = "<group>"; };
 		5F176FB0290F00FB00DF043C /* Mastonaut 9.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Mastonaut 9.xcdatamodel"; sourceTree = "<group>"; };
 		5F2F46A8299523FE00A1059B /* StatisticsWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsWindow.swift; sourceTree = "<group>"; };
+		5F2F46AE2995516700A1059B /* Mastonaut 11.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Mastonaut 11.xcdatamodel"; sourceTree = "<group>"; };
+		5F2F46AF2995587000A1059B /* Stats_StatusesPerHour+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Stats_StatusesPerHour+Helpers.swift"; sourceTree = "<group>"; };
 		5F38B52B29302F0C00FCB9FC /* AppKitSwiftUIIntegration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKitSwiftUIIntegration.swift; sourceTree = "<group>"; };
 		5F38B52E2930301600FCB9FC /* PullToRefreshInnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefreshInnerView.swift; sourceTree = "<group>"; };
 		5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = CoreAssets.xcassets; sourceTree = "<group>"; };
@@ -1482,6 +1485,7 @@
 				15BF72C7234299D10020CE70 /* NSAlert+Factory.swift */,
 				154AC42524D238AD00F89400 /* NSBundle+KeychainAccess.h */,
 				154AC42624D238AD00F89400 /* NSBundle+KeychainAccess.m */,
+				5F2F46AF2995587000A1059B /* Stats_StatusesPerHour+Helpers.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2720,6 +2724,7 @@
 				159C217A232D316C00139BD5 /* PreferencesController.swift in Sources */,
 				15EE2B15232EA68500155E16 /* Attachment+Shims.swift in Sources */,
 				159C2171232C5B1300139BD5 /* AccountsService.swift in Sources */,
+				5F2F46B02995587000A1059B /* Stats_StatusesPerHour+Helpers.swift in Sources */,
 				154B6BC5234A165E0025A9DB /* NSCoder+RawRepresentableKeys.swift in Sources */,
 				1574DE20233C035C00AB1036 /* DialogMode.swift in Sources */,
 				159C2188232D492600139BD5 /* NSMenu+Additions.swift in Sources */,
@@ -3751,6 +3756,7 @@
 		152DA63421E1B3140065CC1B /* Mastonaut.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				5F2F46AE2995516700A1059B /* Mastonaut 11.xcdatamodel */,
 				5F043C582933A8D30095C702 /* Mastonaut 10.xcdatamodel */,
 				5F176FB0290F00FB00DF043C /* Mastonaut 9.xcdatamodel */,
 				5F176FAD290EF4AD00DF043C /* Mastonaut 8.xcdatamodel */,
@@ -3762,7 +3768,7 @@
 				1531084922B0EDA7002FA1E7 /* Mastonaut 2.xcdatamodel */,
 				152DA63521E1B3140065CC1B /* Mastonaut.xcdatamodel */,
 			);
-			currentVersion = 5F043C582933A8D30095C702 /* Mastonaut 10.xcdatamodel */;
+			currentVersion = 5F2F46AE2995516700A1059B /* Mastonaut 11.xcdatamodel */;
 			path = Mastonaut.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

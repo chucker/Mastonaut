@@ -1,0 +1,80 @@
+//
+//  Stats_StatusesPerHour+Helpers.swift
+//  CoreTootin
+//
+//  Created by Sören Kuklau on 09.02.23.
+//  Copyright © 2023 Bruno Philipe. All rights reserved.
+//
+
+import CoreData
+import Foundation
+import MastodonKit
+
+public extension Stats_StatusesByHour {
+	static func insert(context: NSManagedObjectContext, status: Status) {
+		let request = NSFetchRequest<Stats_StatusesByHour>(entityName: "Stats_StatusesByHour")
+		let usernamePredicate = NSPredicate(format: "username = %@", status.account.username),
+		    statusPredicate = NSPredicate(format: "statusID = %@", status.id)
+		request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [usernamePredicate, statusPredicate])
+		request.fetchLimit = 1
+
+		let calendar = Calendar.current
+		
+		if let result = try? context.fetch(request), result.count > 0 {
+		} else {
+			let newRow = Stats_StatusesByHour(context: context)
+			newRow.username = status.account.username
+			newRow.timestamp = status.createdAt
+			newRow.hourOfDay = Int16(calendar.component(.hour, from: status.createdAt))
+			newRow.statusID = status.id
+			newRow.isReblog = status.reblog != nil
+		}
+	}
+	
+	static func getCounts(context: NSManagedObjectContext) -> [StatusesByHourResult] {
+		let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Stats_StatusesByHour")
+		
+		let expression = NSExpression(forFunction: "count:", arguments: [NSExpression(forKeyPath: "statusID")])
+		let expressionDescription = NSExpressionDescription()
+		expressionDescription.name = "countStatuses"
+		expressionDescription.expression = expression
+		expressionDescription.resultType = .integer64
+		
+		let calendar = Calendar.current
+		
+		request.predicate = NSPredicate(format: "timestamp > %@", calendar.date(byAdding: .day, value: -7, to: Date.now)! as NSDate)
+		request.returnsObjectsAsFaults = false
+		request.propertiesToGroupBy = ["hourOfDay", "isReblog"]
+		request.propertiesToFetch = ["hourOfDay", "isReblog", expressionDescription]
+		request.resultType = .dictionaryResultType
+		
+		var stats = [StatusesByHourResult]()
+		
+		for _ in 0 ... 23 {
+			stats.append(StatusesByHourResult(postCount: 0, boostCount: 0))
+		}
+		
+		if let result = try? context.fetch(request) {
+			for item in result {
+				if let dict = item as? NSDictionary,
+				   let hour = dict.value(forKey: "hourOfDay") as? Int,
+				   let isReblog = dict.value(forKey: "isReblog") as? Bool,
+				   let count = dict.value(forKey: "countStatuses") as? Int
+				{
+					if !isReblog {
+						stats[hour].postCount = count
+					} else {
+						stats[hour].boostCount = count
+					}
+				}
+			}
+		}
+		
+		return stats
+	}
+	
+	struct StatusesByHourResult {
+		public var postCount: Int
+		public var boostCount: Int
+	}
+}

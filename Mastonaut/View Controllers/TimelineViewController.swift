@@ -130,6 +130,23 @@ class TimelineViewController: StatusListViewController
 		run(request: request, for: insertion)
 	}
 
+	override func prepareNewEntries(_ entries: [Status], for insertion: ListViewController<Status>.InsertionPoint, pagination: Pagination?)
+	{
+		super.prepareNewEntries(entries, for: insertion, pagination: pagination)
+
+		if MastonautPreferences.instance.areStatisticsEnabled && source == .timeline
+		{
+			let context = AppDelegate.shared.managedObjectContext
+
+			for newEntry in entries
+			{
+				Stats_StatusesByHour.insert(context: context, status: newEntry)
+			}
+
+			try? context.save()
+		}
+	}
+
 	override func receivedClientEvent(_ event: ClientEvent)
 	{
 		switch event
@@ -213,7 +230,7 @@ class TimelineViewController: StatusListViewController
 
 		case .favorites: currentContext = .home
 		case .bookmarks: currentContext = .home
-			
+
 		case .list: currentContext = .home
 		case .tag: currentContext = .home
 		case .timeline: currentContext = .home
