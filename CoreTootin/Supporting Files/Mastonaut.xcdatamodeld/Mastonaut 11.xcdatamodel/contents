@@ -71,6 +71,7 @@
         <relationship name="authorizedAccount" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AuthorizedAccount" inverseName="followedLists" inverseEntity="AuthorizedAccount"/>
     </entity>
     <entity name="Stats_StatusesByHour" representedClassName="Stats_StatusesByHour" syncable="YES" codeGenerationType="class">
+        <attribute name="dayOfWeek" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="hourOfDay" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="isReblog" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="statusID" optional="YES" attributeType="String"/>

@@ -26,12 +26,13 @@ public extension Stats_StatusesByHour {
 			newRow.username = status.account.username
 			newRow.timestamp = status.createdAt
 			newRow.hourOfDay = Int16(calendar.component(.hour, from: status.createdAt))
+			newRow.dayOfWeek = Int16(calendar.component(.weekday, from: status.createdAt))
 			newRow.statusID = status.id
 			newRow.isReblog = status.reblog != nil
 		}
 	}
 	
-	static func getCounts(context: NSManagedObjectContext) -> [StatusesByHourResult] {
+	static func getCountsByHourOfDay(context: NSManagedObjectContext) -> [AggregateStatusResult] {
 		let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Stats_StatusesByHour")
 		
 		let expression = NSExpression(forFunction: "count:", arguments: [NSExpression(forKeyPath: "statusID")])
@@ -48,10 +49,10 @@ public extension Stats_StatusesByHour {
 		request.propertiesToFetch = ["hourOfDay", "isReblog", expressionDescription]
 		request.resultType = .dictionaryResultType
 		
-		var stats = [StatusesByHourResult]()
+		var stats = [AggregateStatusResult]()
 		
 		for _ in 0 ... 23 {
-			stats.append(StatusesByHourResult(postCount: 0, boostCount: 0))
+			stats.append(AggregateStatusResult(postCount: 0, boostCount: 0))
 		}
 		
 		if let result = try? context.fetch(request) {
@@ -73,7 +74,49 @@ public extension Stats_StatusesByHour {
 		return stats
 	}
 	
-	struct StatusesByHourResult {
+	static func getCountsByDayOfWeek(context: NSManagedObjectContext) -> [AggregateStatusResult] {
+		let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Stats_StatusesByHour")
+		
+		let expression = NSExpression(forFunction: "count:", arguments: [NSExpression(forKeyPath: "statusID")])
+		let expressionDescription = NSExpressionDescription()
+		expressionDescription.name = "countStatuses"
+		expressionDescription.expression = expression
+		expressionDescription.resultType = .integer64
+		
+		let calendar = Calendar.current
+		
+		request.predicate = NSPredicate(format: "timestamp > %@", calendar.date(byAdding: .day, value: -7, to: Date.now)! as NSDate)
+		request.returnsObjectsAsFaults = false
+		request.propertiesToGroupBy = ["dayOfWeek", "isReblog"]
+		request.propertiesToFetch = ["dayOfWeek", "isReblog", expressionDescription]
+		request.resultType = .dictionaryResultType
+		
+		var stats = [AggregateStatusResult]()
+		
+		for _ in 0 ... 6 {
+			stats.append(AggregateStatusResult(postCount: 0, boostCount: 0))
+		}
+		
+		if let result = try? context.fetch(request) {
+			for item in result {
+				if let dict = item as? NSDictionary,
+				   let day = dict.value(forKey: "dayOfWeek") as? Int,
+				   let isReblog = dict.value(forKey: "isReblog") as? Bool,
+				   let count = dict.value(forKey: "countStatuses") as? Int
+				{
+					if !isReblog {
+						stats[day].postCount = count
+					} else {
+						stats[day].boostCount = count
+					}
+				}
+			}
+		}
+		
+		return stats
+	}
+	
+	struct AggregateStatusResult {
 		public var postCount: Int
 		public var boostCount: Int
 	}

@@ -27,34 +27,90 @@ struct StatisticsWindow: View {
 	
 	let groups: [GroupingData] = [Group.posted.data, Group.boosted.data]
 	
-	var dataSets: [StackedBarDataSet] {
-		let stats = Stats_StatusesByHour.getCounts(context: AppDelegate.shared.managedObjectContext)
+	var dataSetsByDayOfWeek: [StackedBarDataSet] {
+		let stats = Stats_StatusesByHour.getCountsByDayOfWeek(context: AppDelegate.shared.managedObjectContext)
 		
 		var result = [StackedBarDataSet]()
 		
 		for s in stats {
 			result.append(StackedBarDataSet(dataPoints: [
 				StackedBarDataPoint(value: Double(s.postCount), description: "Hello", group: Group.posted.data),
-				StackedBarDataPoint(value: Double(s.boostCount), description: "Hello", group: Group.boosted.data)
+				StackedBarDataPoint(value: Double(s.boostCount), description: "Hello", group: Group.boosted.data),
 			]))
 		}
 		
 		return result
 	}
 	
-	var body: some View {
-		let chartData = StackedBarChartData(dataSets: StackedBarDataSets(dataSets: dataSets), groups: groups)
+	var dataSetsByHourOfDay: [StackedBarDataSet] {
+		let stats = Stats_StatusesByHour.getCountsByHourOfDay(context: AppDelegate.shared.managedObjectContext)
 		
-		VStack {
-			Text("Posts by Hour of Day").font(.title)
-			StackedBarChart(chartData: chartData)
+		var result = [StackedBarDataSet]()
+		
+		for s in stats {
+			result.append(StackedBarDataSet(dataPoints: [
+				StackedBarDataPoint(value: Double(s.postCount), description: "Hello", group: Group.posted.data),
+				StackedBarDataPoint(value: Double(s.boostCount), description: "Hello", group: Group.boosted.data),
+			]))
 		}
-		.padding(.all, 5)
+		
+		return result
+	}
+	
+	let accountPickerColumns = [
+		GridItem(.flexible(), alignment: .trailing),
+		GridItem(.flexible(), alignment: .leading),
+	]
+	
+	var accountsService: AccountsService?
+	
+	@State private var account: String?
+	
+	var body: some View {
+		VStack {
+			Text("Posts from past 7 days")
+				.font(.title)
+			
+			LazyVGrid(columns: accountPickerColumns) {
+				Text("Received for account:")
+				Picker("", selection: $account) {
+					if let accountsService {
+						ForEach(accountsService.authorizedAccounts,
+								id: \.self) { account in
+							Text(account.bestDisplayName)
+								.tag(account)
+						}
+
+					}
+					
+//					ForEach(["All Accounts",
+				}
+				.scaledToFit()
+				.padding(.horizontal, -8)
+			}
+			
+			Divider()
+			
+			let chartDataByDayOfWeek = StackedBarChartData(dataSets: StackedBarDataSets(dataSets: dataSetsByDayOfWeek), groups: groups)
+			
+			Text("By Day of Week").font(.title2)
+			StackedBarChart(chartData: chartDataByDayOfWeek)
+				.frame(height: 100)
+			
+			Divider()
+			
+			let chartDataByHourOfDay = StackedBarChartData(dataSets: StackedBarDataSets(dataSets: dataSetsByHourOfDay), groups: groups)
+
+			Text("By Hour of Day").font(.title2)
+			StackedBarChart(chartData: chartDataByHourOfDay)
+				.frame(height: 100)
+		}
+		.padding(.all, 10)
 	}
 }
 
 struct StatisticsWindow_Previews: PreviewProvider {
 	static var previews: some View {
-		StatisticsWindow()
+		StatisticsWindow(accountsService: nil)
 	}
 }
