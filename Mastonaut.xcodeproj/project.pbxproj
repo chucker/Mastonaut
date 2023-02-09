@@ -514,6 +514,9 @@
 		5F1F20D72938E9130057E585 /* Logger+CurrentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC3E18E2926F0E80086DCEE /* Logger+CurrentType.swift */; };
 		5F1F20D82938E9140057E585 /* Logger+CurrentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC3E18E2926F0E80086DCEE /* Logger+CurrentType.swift */; };
 		5F1F20D92938E9140057E585 /* Logger+CurrentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC3E18E2926F0E80086DCEE /* Logger+CurrentType.swift */; };
+		5F2F46A9299523FE00A1059B /* StatisticsWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2F46A8299523FE00A1059B /* StatisticsWindow.swift */; };
+		5F2F46AA299523FE00A1059B /* StatisticsWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2F46A8299523FE00A1059B /* StatisticsWindow.swift */; };
+		5F2F46AD29954D5B00A1059B /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 5F2F46AC29954D5B00A1059B /* SwiftUICharts */; };
 		5F38B52C29302F0C00FCB9FC /* AppKitSwiftUIIntegration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F38B52B29302F0C00FCB9FC /* AppKitSwiftUIIntegration.swift */; };
 		5F38B52F2930301600FCB9FC /* PullToRefreshInnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F38B52E2930301600FCB9FC /* PullToRefreshInnerView.swift */; };
 		5F3A17EF291DB26700EA6FEC /* CoreAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */; };
@@ -981,6 +984,7 @@
 		5F176FAD290EF4AD00DF043C /* Mastonaut 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Mastonaut 8.xcdatamodel"; sourceTree = "<group>"; };
 		5F176FAE290EF65200DF043C /* FollowedListsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowedListsService.swift; sourceTree = "<group>"; };
 		5F176FB0290F00FB00DF043C /* Mastonaut 9.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Mastonaut 9.xcdatamodel"; sourceTree = "<group>"; };
+		5F2F46A8299523FE00A1059B /* StatisticsWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsWindow.swift; sourceTree = "<group>"; };
 		5F38B52B29302F0C00FCB9FC /* AppKitSwiftUIIntegration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKitSwiftUIIntegration.swift; sourceTree = "<group>"; };
 		5F38B52E2930301600FCB9FC /* PullToRefreshInnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefreshInnerView.swift; sourceTree = "<group>"; };
 		5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = CoreAssets.xcassets; sourceTree = "<group>"; };
@@ -1041,6 +1045,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1596DB46235F65D300B349B7 /* DirectoryService.framework in Frameworks */,
+				5F2F46AD29954D5B00A1059B /* SwiftUICharts in Frameworks */,
 				15765563229692C200783FFE /* AVKit.framework in Frameworks */,
 				5F8C133C2969F1D9007BE2D5 /* Sdifft in Frameworks */,
 				154478A6232B0223009C71D4 /* CoreTootin.framework in Frameworks */,
@@ -1317,6 +1322,7 @@
 		154478A0232B0223009C71D4 /* CoreTootin */ = {
 			isa = PBXGroup;
 			children = (
+				5F2F46A7299523E900A1059B /* Windows */,
 				15608F52232C514500923CB7 /* Agents */,
 				15F9F308232EB93500931594 /* Controls */,
 				159C216E232C56F800139BD5 /* Extensions */,
@@ -1801,6 +1807,14 @@
 			path = "Window Controllers";
 			sourceTree = "<group>";
 		};
+		5F2F46A7299523E900A1059B /* Windows */ = {
+			isa = PBXGroup;
+			children = (
+				5F2F46A8299523FE00A1059B /* StatisticsWindow.swift */,
+			);
+			path = Windows;
+			sourceTree = "<group>";
+		};
 		5F38B52D2930300400FCB9FC /* List View */ = {
 			isa = PBXGroup;
 			children = (
@@ -1971,6 +1985,7 @@
 			name = Mastonaut;
 			packageProductDependencies = (
 				5F8C133B2969F1D9007BE2D5 /* Sdifft */,
+				5F2F46AC29954D5B00A1059B /* SwiftUICharts */,
 			);
 			productName = Sengi;
 			productReference = 15C4DD0C21D41EC0002AF6DA /* Mastonaut.app */;
@@ -2050,6 +2065,7 @@
 			packageReferences = (
 				5FC3E18B2926EF3F0086DCEE /* XCRemoteSwiftPackageReference "swift-log-oslog" */,
 				5F8C133A2969F1D9007BE2D5 /* XCRemoteSwiftPackageReference "Sdifft" */,
+				5F2F46AB29954D5B00A1059B /* XCRemoteSwiftPackageReference "SwiftUICharts" */,
 			);
 			productRefGroup = 15C4DD0D21D41EC0002AF6DA /* Products */;
 			projectDirPath = "";
@@ -2630,6 +2646,7 @@
 				157D266923B25F8600B3A8BE /* StatusCellModel.swift in Sources */,
 				1523C6F921E94C7F006DE234 /* AuthorizedAccount.swift in Sources */,
 				15D3968122AAFFFC00C515EA /* InsetTextFieldCell.swift in Sources */,
+				5F2F46AA299523FE00A1059B /* StatisticsWindow.swift in Sources */,
 				15C78370221CBD4900402C66 /* TimelinesWindowController.swift in Sources */,
 				15A22B87232C5361009D5637 /* ComposerTextView.swift in Sources */,
 				1598919F21FFC0A000FA92F7 /* RefreshingFormattedTextField.swift in Sources */,
@@ -2812,6 +2829,7 @@
 				151199D022C04160007F2AEB /* InitialKeyViewProviding.swift in Sources */,
 				15979B1922CCEC8D006B6286 /* PollVotingCapable.swift in Sources */,
 				1552D6E92286576C009B4BBD /* MenuItemsControllers.swift in Sources */,
+				5F2F46A9299523FE00A1059B /* StatisticsWindow.swift in Sources */,
 				5F176FAC290EF03900DF043C /* FollowedList.swift in Sources */,
 				15CD5BE921DEEA9300E06C2F /* StatusComposerWindowController.swift in Sources */,
 				158A5CC924994C4300E95113 /* MastonautTableView.swift in Sources */,
@@ -3680,6 +3698,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		5F2F46AB29954D5B00A1059B /* XCRemoteSwiftPackageReference "SwiftUICharts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/willdale/SwiftUICharts.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		5F8C133A2969F1D9007BE2D5 /* XCRemoteSwiftPackageReference "Sdifft" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/wzxhahaha/Sdifft";
@@ -3703,6 +3729,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5FC3E18B2926EF3F0086DCEE /* XCRemoteSwiftPackageReference "swift-log-oslog" */;
 			productName = LoggingOSLog;
+		};
+		5F2F46AC29954D5B00A1059B /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5F2F46AB29954D5B00A1059B /* XCRemoteSwiftPackageReference "SwiftUICharts" */;
+			productName = SwiftUICharts;
 		};
 		5F8C133B2969F1D9007BE2D5 /* Sdifft */ = {
 			isa = XCSwiftPackageProductDependency;

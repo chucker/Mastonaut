@@ -22,6 +22,7 @@ import CoreTootin
 import Logging
 import LoggingOSLog
 import MastodonKit
+import SwiftUI
 
 class AppDelegate: NSObject, NSApplicationDelegate
 {
@@ -56,6 +57,32 @@ class AppDelegate: NSObject, NSApplicationDelegate
 			_preferencesWindowController = controller
 			return controller
 		}
+	}
+
+	private class StatisticsWindowController: NSWindow
+	{
+		init()
+		{
+			super.init(contentRect: NSRect(x: 0, y: 0, width: 480, height: 300), styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView], backing: .buffered, defer: false)
+			makeKeyAndOrderFront(nil)
+			isReleasedWhenClosed = false
+			styleMask.insert(NSWindow.StyleMask.fullSizeContentView)
+			title = "Statistics"
+			contentView = NSHostingView(rootView: StatisticsWindow())
+		}
+	}
+
+	private var _statisticsWindowController: StatisticsWindowController?
+	private var statisticsWindowController: StatisticsWindowController
+	{
+		if let wc = _statisticsWindowController
+		{
+			return wc
+		}
+
+		_statisticsWindowController = StatisticsWindowController()
+
+		return _statisticsWindowController!
 	}
 
 	private var timelineWindowControllers: Set<TimelinesWindowController> = []
@@ -629,6 +656,11 @@ extension AppDelegate
 	@IBAction func orderFrontPreferencesWindow(_ sender: Any?)
 	{
 		preferencesWindowController.showWindow(sender)
+	}
+
+	@IBAction func orderFrontStatisticsWindow(_ sender: Any?)
+	{
+		statisticsWindowController.makeKeyAndOrderFront(sender)
 	}
 
 	#if DEBUG

@@ -38,6 +38,12 @@
                                     <action selector="orderFrontPreferencesWindow:" target="-1" id="BoU-dQ-OXV"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Statistics" id="cb7-g4-Uob">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="orderFrontStatisticsWindow:" target="Voe-Tx-rLC" id="PqW-lp-A9e"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
                             <menuItem title="Services" id="NMo-om-nkz">
                                 <modifierMask key="keyEquivalentModifierMask"/>
