@@ -37,8 +37,7 @@ class GeneralPreferencesController: NSViewController
 	{
 		super.viewDidLoad()
 		
-		let appearance = Preferences.appearance
-		let view = AppearancePreferencesView(appearance: appearance)
+		let view = AppearancePreferencesView(preferences: MastonautPreferences.instance)
 
 		AppKitSwiftUIIntegration.hostSwiftUIView(view, inView: appearancePreferencesView)
 

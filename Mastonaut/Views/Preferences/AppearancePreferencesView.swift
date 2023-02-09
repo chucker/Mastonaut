@@ -6,11 +6,13 @@
 //  Copyright © 2022 Bruno Philipe. All rights reserved.
 //
 
-import SwiftUI
 import CoreTootin
+import SwiftUI
 
 struct AppearancePreferencesView: View {
-	@State var appearance: MastonautPreferences.Appearance
+	@AppStorage("appearance") var appearance: MastonautPreferences.Appearance = .auto
+
+	var preferences: MastonautPreferences?
 
 	let columns = [
 		GridItem(.fixed(260), alignment: .trailing),
@@ -20,7 +22,6 @@ struct AppearancePreferencesView: View {
     var body: some View {
 		LazyVGrid(columns: columns) {
 			Text("Appearance:")
-			
 			Picker("", selection: $appearance) {
 				Text("System Default").tag(MastonautPreferences.Appearance.auto)
 				Text("Light").tag(MastonautPreferences.Appearance.light)
