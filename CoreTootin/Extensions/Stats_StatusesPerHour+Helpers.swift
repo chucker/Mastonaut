@@ -115,17 +115,19 @@ public extension Stats_StatusesByHour {
 		
 		var stats = [AggregateStatusResult]()
 		
-		for _ in 0 ... 6 {
+		for _ in 1 ... 7 {
 			stats.append(AggregateStatusResult(postCount: 0, boostCount: 0, postCountSelectedUser: 0, boostCountSelectedUser: 0))
 		}
 		
 		if let result = try? context.fetch(request) {
 			for item in result {
 				if let dict = item as? NSDictionary,
-				   let day = dict.value(forKey: "dayOfWeek") as? Int,
+				   let _day = dict.value(forKey: "dayOfWeek") as? Int,
 				   let isReblog = dict.value(forKey: "isReblog") as? Bool,
 				   let count = dict.value(forKey: "countStatuses") as? Int
 				{
+					let day = _day - 1 // Component.weekday is 1-based 
+					
 					if let username = dict.value(forKey: "username") as? String, username == forUsername {
 						if !isReblog {
 							stats[day].postCountSelectedUser = count
