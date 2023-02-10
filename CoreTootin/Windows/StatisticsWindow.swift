@@ -33,7 +33,8 @@ struct StatisticsWindow: View {
 		}
 	}
 	
-	let groups: [GroupingData] = [Group.posted.data, Group.boosted.data]
+	let groups: [GroupingData] = [Group.posted.data, Group.boosted.data,
+								  Group.postedSelectedUser.data, Group.boostedSelectedUser.data]
 	
 	var dataSetsByDayOfWeek: [StackedBarDataSet] {
 		let stats = Stats_StatusesByHour.getCountsByDayOfWeek(context: AppDelegate.shared.managedObjectContext)
