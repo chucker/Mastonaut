@@ -15,12 +15,20 @@ struct StatisticsWindow: View {
 		case posted
 		case boosted
 		
+		case postedSelectedUser
+		case boostedSelectedUser
+		
 		var data: GroupingData {
 			switch self {
 			case .posted:
 				return GroupingData(title: "Posted", colour: ColourStyle(colour: .blue))
 			case .boosted:
 				return GroupingData(title: "Boosted", colour: ColourStyle(colour: .blue.opacity(0.8)))
+				
+			case .postedSelectedUser:
+				return GroupingData(title: "Posted (selected user)", colour: ColourStyle(colour: .orange))
+			case .boostedSelectedUser:
+				return GroupingData(title: "Boosted (selected user)", colour: ColourStyle(colour: .orange.opacity(0.8)))
 			}
 		}
 	}
@@ -36,6 +44,9 @@ struct StatisticsWindow: View {
 			result.append(StackedBarDataSet(dataPoints: [
 				StackedBarDataPoint(value: Double(s.postCount), description: "Hello", group: Group.posted.data),
 				StackedBarDataPoint(value: Double(s.boostCount), description: "Hello", group: Group.boosted.data),
+
+				StackedBarDataPoint(value: Double(s.postCountSelectedUser), description: "Hello", group: Group.postedSelectedUser.data),
+				StackedBarDataPoint(value: Double(s.boostCountSelectedUser), description: "Hello", group: Group.boostedSelectedUser.data),
 			]))
 		}
 		
@@ -51,6 +62,9 @@ struct StatisticsWindow: View {
 			result.append(StackedBarDataSet(dataPoints: [
 				StackedBarDataPoint(value: Double(s.postCount), description: "Hello", group: Group.posted.data),
 				StackedBarDataPoint(value: Double(s.boostCount), description: "Hello", group: Group.boosted.data),
+				
+				StackedBarDataPoint(value: Double(s.postCountSelectedUser), description: "Hello", group: Group.postedSelectedUser.data),
+				StackedBarDataPoint(value: Double(s.boostCountSelectedUser), description: "Hello", group: Group.boostedSelectedUser.data),
 			]))
 		}
 		

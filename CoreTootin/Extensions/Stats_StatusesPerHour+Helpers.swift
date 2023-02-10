@@ -32,7 +32,7 @@ public extension Stats_StatusesByHour {
 		}
 	}
 	
-	static func getCountsByHourOfDay(context: NSManagedObjectContext) -> [AggregateStatusResult] {
+	static func getCountsByHourOfDay(context: NSManagedObjectContext, forUsername: String?) -> [AggregateStatusResult] {
 		let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Stats_StatusesByHour")
 		
 		let expression = NSExpression(forFunction: "count:", arguments: [NSExpression(forKeyPath: "statusID")])
@@ -45,14 +45,21 @@ public extension Stats_StatusesByHour {
 		
 		request.predicate = NSPredicate(format: "timestamp > %@", calendar.date(byAdding: .day, value: -7, to: Date.now)! as NSDate)
 		request.returnsObjectsAsFaults = false
-		request.propertiesToGroupBy = ["hourOfDay", "isReblog"]
-		request.propertiesToFetch = ["hourOfDay", "isReblog", expressionDescription]
+		
+		if forUsername != nil {
+			request.propertiesToGroupBy = ["hourOfDay", "isReblog", "username"]
+			request.propertiesToFetch = ["hourOfDay", "isReblog", "username", expressionDescription]
+		} else {
+			request.propertiesToGroupBy = ["hourOfDay", "isReblog"]
+			request.propertiesToFetch = ["hourOfDay", "isReblog", expressionDescription]
+		}
+		
 		request.resultType = .dictionaryResultType
 		
 		var stats = [AggregateStatusResult]()
 		
 		for _ in 0 ... 23 {
-			stats.append(AggregateStatusResult(postCount: 0, boostCount: 0))
+			stats.append(AggregateStatusResult(postCount: 0, boostCount: 0, postCountSelectedUser: 0, boostCountSelectedUser: 0))
 		}
 		
 		if let result = try? context.fetch(request) {
@@ -62,10 +69,18 @@ public extension Stats_StatusesByHour {
 				   let isReblog = dict.value(forKey: "isReblog") as? Bool,
 				   let count = dict.value(forKey: "countStatuses") as? Int
 				{
-					if !isReblog {
-						stats[hour].postCount = count
+					if let username = dict.value(forKey: "username") as? String, username == forUsername {
+						if !isReblog {
+							stats[hour].postCountSelectedUser = count
+						} else {
+							stats[hour].boostCountSelectedUser = count
+						}
 					} else {
-						stats[hour].boostCount = count
+						if !isReblog {
+							stats[hour].postCount = count
+						} else {
+							stats[hour].boostCount = count
+						}
 					}
 				}
 			}
@@ -94,7 +109,7 @@ public extension Stats_StatusesByHour {
 		var stats = [AggregateStatusResult]()
 		
 		for _ in 0 ... 6 {
-			stats.append(AggregateStatusResult(postCount: 0, boostCount: 0))
+			stats.append(AggregateStatusResult(postCount: 0, boostCount: 0, postCountSelectedUser: 0, boostCountSelectedUser: 0))
 		}
 		
 		if let result = try? context.fetch(request) {
@@ -119,5 +134,8 @@ public extension Stats_StatusesByHour {
 	struct AggregateStatusResult {
 		public var postCount: Int
 		public var boostCount: Int
+
+		public var postCountSelectedUser: Int
+		public var boostCountSelectedUser: Int
 	}
 }
