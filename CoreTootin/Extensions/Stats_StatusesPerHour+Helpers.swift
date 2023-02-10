@@ -89,7 +89,7 @@ public extension Stats_StatusesByHour {
 		return stats
 	}
 	
-	static func getCountsByDayOfWeek(context: NSManagedObjectContext) -> [AggregateStatusResult] {
+	static func getCountsByDayOfWeek(context: NSManagedObjectContext, forUsername: String?) -> [AggregateStatusResult] {
 		let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Stats_StatusesByHour")
 		
 		let expression = NSExpression(forFunction: "count:", arguments: [NSExpression(forKeyPath: "statusID")])
@@ -102,8 +102,15 @@ public extension Stats_StatusesByHour {
 		
 		request.predicate = NSPredicate(format: "timestamp > %@", calendar.date(byAdding: .day, value: -7, to: Date.now)! as NSDate)
 		request.returnsObjectsAsFaults = false
-		request.propertiesToGroupBy = ["dayOfWeek", "isReblog"]
-		request.propertiesToFetch = ["dayOfWeek", "isReblog", expressionDescription]
+		
+		if forUsername != nil {
+			request.propertiesToGroupBy = ["dayOfWeek", "isReblog", "username"]
+			request.propertiesToFetch = ["dayOfWeek", "isReblog", "username", expressionDescription]
+		} else {
+			request.propertiesToGroupBy = ["dayOfWeek", "isReblog"]
+			request.propertiesToFetch = ["dayOfWeek", "isReblog", expressionDescription]
+		}
+
 		request.resultType = .dictionaryResultType
 		
 		var stats = [AggregateStatusResult]()
@@ -119,10 +126,18 @@ public extension Stats_StatusesByHour {
 				   let isReblog = dict.value(forKey: "isReblog") as? Bool,
 				   let count = dict.value(forKey: "countStatuses") as? Int
 				{
-					if !isReblog {
-						stats[day].postCount = count
+					if let username = dict.value(forKey: "username") as? String, username == forUsername {
+						if !isReblog {
+							stats[day].postCountSelectedUser = count
+						} else {
+							stats[day].boostCountSelectedUser = count
+						}
 					} else {
-						stats[day].boostCount = count
+						if !isReblog {
+							stats[day].postCount = count
+						} else {
+							stats[day].boostCount = count
+						}
 					}
 				}
 			}
