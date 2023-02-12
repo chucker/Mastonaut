@@ -71,15 +71,15 @@ public extension Stats_StatusesByHour {
 				{
 					if let username = dict.value(forKey: "username") as? String, username == forUsername {
 						if !isReblog {
-							stats[hour].postCountSelectedUser = count
+							stats[hour].postCountSelectedUser += count
 						} else {
-							stats[hour].boostCountSelectedUser = count
+							stats[hour].boostCountSelectedUser += count
 						}
 					} else {
 						if !isReblog {
-							stats[hour].postCount = count
+							stats[hour].postCount += count
 						} else {
-							stats[hour].boostCount = count
+							stats[hour].boostCount += count
 						}
 					}
 				}
@@ -130,15 +130,15 @@ public extension Stats_StatusesByHour {
 					
 					if let username = dict.value(forKey: "username") as? String, username == forUsername {
 						if !isReblog {
-							stats[day].postCountSelectedUser = count
+							stats[day].postCountSelectedUser += count
 						} else {
-							stats[day].boostCountSelectedUser = count
+							stats[day].boostCountSelectedUser += count
 						}
 					} else {
 						if !isReblog {
-							stats[day].postCount = count
+							stats[day].postCount += count
 						} else {
-							stats[day].boostCount = count
+							stats[day].boostCount += count
 						}
 					}
 				}
