@@ -126,7 +126,7 @@ public extension Stats_StatusesByHour {
 				   let isReblog = dict.value(forKey: "isReblog") as? Bool,
 				   let count = dict.value(forKey: "countStatuses") as? Int
 				{
-					let day = _day - 1 // Component.weekday is 1-based 
+					let day = _day - 1 // Component.weekday is 1-based
 					
 					if let username = dict.value(forKey: "username") as? String, username == forUsername {
 						if !isReblog {
@@ -154,5 +154,68 @@ public extension Stats_StatusesByHour {
 
 		public var postCountSelectedUser: Int
 		public var boostCountSelectedUser: Int
+	}
+	
+	struct AggregateStatusByUserResult: Identifiable {
+		public var id: String {
+			return username
+		}
+		
+		public var username: String
+		public var postCount: String
+		public var boostCount: String
+	}
+	
+	static func getCountsByUser(context: NSManagedObjectContext) -> [AggregateStatusByUserResult] {
+		let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Stats_StatusesByHour")
+		
+		let expression = NSExpression(forFunction: "count:", arguments: [NSExpression(forKeyPath: "statusID")])
+		let expressionDescription = NSExpressionDescription()
+		expressionDescription.name = "countStatuses"
+		expressionDescription.expression = expression
+		expressionDescription.resultType = .integer64
+		
+		let calendar = Calendar.current
+		
+		request.predicate = NSPredicate(format: "timestamp > %@", calendar.date(byAdding: .day, value: -7, to: Date.now)! as NSDate)
+		request.returnsObjectsAsFaults = false
+		
+		request.propertiesToGroupBy = ["isReblog", "username"]
+		request.propertiesToFetch = ["isReblog", "username", expressionDescription]
+		
+		request.resultType = .dictionaryResultType
+		
+		var stats = [String: AggregateStatusResult]()
+		
+		if let result = try? context.fetch(request) {
+			for item in result {
+				if let dict = item as? NSDictionary,
+				   let username = dict.value(forKey: "username") as? String,
+				   let isReblog = dict.value(forKey: "isReblog") as? Bool,
+				   let count = dict.value(forKey: "countStatuses") as? Int
+				{
+					if stats[username] == nil {
+						stats[username] = AggregateStatusResult(postCount: 0, boostCount: 0,
+						                                        postCountSelectedUser: 0, boostCountSelectedUser: 0)
+					}
+					
+					if !isReblog {
+						stats[username]!.postCount = count
+					} else {
+						stats[username]!.boostCount = count
+					}
+				}
+			}
+		}
+		
+		var statsArray = [AggregateStatusByUserResult]()
+		
+		for item in stats {
+			statsArray.append(AggregateStatusByUserResult(username: item.key,
+			                                              postCount: item.value.postCount.description,
+			                                              boostCount: item.value.boostCount.description))
+		}
+		
+		return statsArray
 	}
 }
