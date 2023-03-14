@@ -27,55 +27,60 @@ class TimelineViewController: StatusListViewController
 	private var logger: Logger
 
 	private var markerTimer: Timer?
-	
+
 	internal var source: Source?
 	{
 		didSet { if source != oldValue { sourceDidChange(source: source) }}
 	}
-	
+
 	init(source: Source?)
 	{
 		self.source = source
 
 		logger = Logger(subsystemType: Self.self)
+
 		super.init()
-		
-		if (source != nil) && source == .timeline {
-			startMarkerTimer(forSource: source!);
+
+		if (source != nil) && source == .timeline
+		{
+			startMarkerTimer(forSource: source!)
 		}
-		
+
 		updateAccessibilityAttributes()
 	}
-	
 
 	@available(*, unavailable)
 	required init?(coder: NSCoder)
 	{
 		fatalError("init(coder:) has not been implemented")
 	}
-	
+
 	internal func sourceDidChange(source: Source?)
 	{
-		switch source {
+		switch source
+		{
 		case .timeline:
-			if let source {
-				startMarkerTimer(forSource: source);
+			if let source
+			{
+				startMarkerTimer(forSource: source)
 			}
 		default:
-			stopMarkerTimerIfRunning();
+			stopMarkerTimerIfRunning()
 		}
-		
+
 		updateAccessibilityAttributes()
 	}
-	
-	func startMarkerTimer(forSource source: Source) {
+
+	func startMarkerTimer(forSource source: Source)
+	{
 		stopMarkerTimerIfRunning()
-		
+
 		markerTimer = Timer.scheduledTimer(timeInterval: 30.0, target: self,
-										   selector: #selector(setMarker), userInfo: nil, repeats: true)
+		                                   selector: #selector(setMarker), userInfo: nil, repeats: true)
 	}
-	
-	func stopMarkerTimerIfRunning() {
+
+	func stopMarkerTimerIfRunning()
+	{
 		markerTimer?.invalidate()
 	}
 
@@ -92,9 +97,9 @@ class TimelineViewController: StatusListViewController
 				return cellModel.status
 			}
 		}
-		
+
 		logger.warning("Did not find any visible table row containing a status")
-		
+
 		return nil
 	}
 
@@ -282,7 +287,7 @@ class TimelineViewController: StatusListViewController
 
 		case .favorites: currentContext = .home
 		case .bookmarks: currentContext = .home
-			
+
 		case .list: currentContext = .home
 		case .tag: currentContext = .home
 		case .timeline: currentContext = .home
