@@ -20,6 +20,7 @@
 import Cocoa
 import CoreTootin
 import Logging
+import MastodonKit
 
 class TimelineViewController: StatusListViewController
 {
@@ -35,9 +36,8 @@ class TimelineViewController: StatusListViewController
 	init(source: Source?)
 	{
 		self.source = source
-		
-		logger = Logger(subsystemType: Self)
-		
+
+		logger = Logger(subsystemType: Self.self)
 		super.init()
 		
 		if (source != nil) && source == .timeline {
@@ -78,9 +78,31 @@ class TimelineViewController: StatusListViewController
 	func stopMarkerTimerIfRunning() {
 		markerTimer?.invalidate()
 	}
-	
-	@objc func setMarker() {
-		logger.debug2("Updating timeline marker")
+
+	func firstVisibleStatus() -> Status?
+	{
+		let rect = tableView.visibleRect
+		let rows = tableView.rows(in: rect)
+
+		for rowIndex in rows.location ..< rows.location + rows.length
+		{
+			if let view = tableView.view(atColumn: 0, row: rowIndex, makeIfNecessary: false) as? StatusTableCellView,
+			   let cellModel = view.cellModel
+			{
+				return cellModel.status
+			}
+		}
+		
+		logger.warning("Did not find any visible table row containing a status")
+		
+		return nil
+	}
+
+	@objc func setMarker(timer: Timer)
+	{
+		let firstVisibleStatus = firstVisibleStatus()
+
+		logger.debug2("Updating timeline marker to \(firstVisibleStatus?.id ?? "")")
 	}
 
 	override func clientDidChange(_ client: ClientType?, oldClient: ClientType?)
