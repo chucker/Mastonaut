@@ -100,9 +100,18 @@ class TimelineViewController: StatusListViewController
 
 	@objc func setMarker(timer: Timer)
 	{
-		let firstVisibleStatus = firstVisibleStatus()
+		if let firstVisibleStatus = firstVisibleStatus(),
+		   let client
+		{
+			logger.debug2("Updating timeline marker to \(firstVisibleStatus.id) (\(firstVisibleStatus.authorAccount)")
 
-		logger.debug2("Updating timeline marker to \(firstVisibleStatus?.id ?? "")")
+			let newMarker = Marker(lastReadStatus: firstVisibleStatus)
+			let newMarkers = MarkerCollection(home: newMarker)
+			client.run(Markers.update(markers: newMarkers))
+			{
+				_ in
+			}
+		}
 	}
 
 	override func clientDidChange(_ client: ClientType?, oldClient: ClientType?)

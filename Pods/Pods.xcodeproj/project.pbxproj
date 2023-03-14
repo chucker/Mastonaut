@@ -163,6 +163,10 @@
 		5F2F469A298EFFB300A1059B /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2F4698298EFF9700A1059B /* Response.swift */; };
 		5F2F469E298F012A00A1059B /* Result+isError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2F469D298F012A00A1059B /* Result+isError.swift */; };
 		5F8C13432969FB1C007BE2D5 /* StatusEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8C13422969FB1C007BE2D5 /* StatusEdit.swift */; };
+		5FC21CEA29C1177000A582A8 /* Markers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC21CE929C1177000A582A8 /* Markers.swift */; };
+		5FC21CEE29C117A700A582A8 /* Marker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC21CEB29C117A700A582A8 /* Marker.swift */; };
+		5FC21CEF29C117A700A582A8 /* MarkerCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC21CEC29C117A700A582A8 /* MarkerCollection.swift */; };
+		5FC21CF029C117A700A582A8 /* MarkerTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC21CED29C117A700A582A8 /* MarkerTimeline.swift */; };
 		5FD6B426293C003A008D90BE /* Bookmarks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD6B425293C003A008D90BE /* Bookmarks.swift */; };
 		603ADC95C87F56998597BE374AC5299D /* CSSStyleSheet.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D431E210C46EC5952848DFA7FFD2CB2 /* CSSStyleSheet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		613238FFB119069BB0FC9B3354498D94 /* Element.h in Headers */ = {isa = PBXBuildFile; fileRef = E870AAF01308FA35A5C93E8DE97590AF /* Element.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -611,6 +615,10 @@
 		5F2F4698298EFF9700A1059B /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Response.swift; path = Sources/MastodonKit/Response.swift; sourceTree = "<group>"; };
 		5F2F469D298F012A00A1059B /* Result+isError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Result+isError.swift"; path = "../Sources/MastodonKit/Extensions/Result+isError.swift"; sourceTree = "<group>"; };
 		5F8C13422969FB1C007BE2D5 /* StatusEdit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusEdit.swift; sourceTree = "<group>"; };
+		5FC21CE929C1177000A582A8 /* Markers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Markers.swift; sourceTree = "<group>"; };
+		5FC21CEB29C117A700A582A8 /* Marker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Marker.swift; sourceTree = "<group>"; };
+		5FC21CEC29C117A700A582A8 /* MarkerCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkerCollection.swift; sourceTree = "<group>"; };
+		5FC21CED29C117A700A582A8 /* MarkerTimeline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkerTimeline.swift; sourceTree = "<group>"; };
 		5FD6B425293C003A008D90BE /* Bookmarks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmarks.swift; sourceTree = "<group>"; };
 		60245F69232DD550728C484767531D90 /* SVGKPointsAndPathsParser.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SVGKPointsAndPathsParser.h; path = Source/Parsers/SVGKPointsAndPathsParser.h; sourceTree = "<group>"; };
 		60D480C8F159A026238680A445EAAD72 /* SVGLength.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SVGLength.m; path = "Source/DOM classes/SVG-DOM/SVGLength.m"; sourceTree = "<group>"; };
@@ -1211,9 +1219,9 @@
 		30D6936CE64C08441E6E54A51DE44007 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
-				15D7A0CC265033A7003396A6 /* ClientObserverList.swift */,
 				2AD57220FD5D08A997DBB559EE3B0DA9 /* AnyEncodable.swift */,
 				700635838F0F7321594B7690828F7A2A /* CharacterSet.swift */,
+				15D7A0CC265033A7003396A6 /* ClientObserverList.swift */,
 				2024F1302A924D63D34770AE30684524 /* Data.swift */,
 				5CC272ECA1D545E6842116E222C07CB2 /* DateFormatter.swift */,
 				C066E3CC1E3F00A4BFF8AB7FB784628E /* Decodable.swift */,
@@ -1232,6 +1240,7 @@
 			children = (
 				8757DBA1E59D400F082920F26D85E9CC /* Accounts.swift */,
 				199F52870B83987641F1CE5F4482BF91 /* Blocks.swift */,
+				5FD6B425293C003A008D90BE /* Bookmarks.swift */,
 				530457C406B73917A591BF623595C327 /* Clients.swift */,
 				A12753356A828E79CC7F9FD23171CE12 /* DomainBlocks.swift */,
 				EBFBDFF54C3F7C9507CEF962452802A1 /* Favourites.swift */,
@@ -1240,6 +1249,7 @@
 				B1E73CDEDE2D4D0FB06C60A889A095CA /* Instances.swift */,
 				7097167C0EDD7A7DE66AE8576F43735C /* Lists.swift */,
 				BE59501DC15DE37A1BAF194C50E35A46 /* Login.swift */,
+				5FC21CE929C1177000A582A8 /* Markers.swift */,
 				C32D39FD182A8B099871D9F83E5F57F4 /* Media.swift */,
 				4D46429C89FE4CA799BF59DBC0832A83 /* Mutes.swift */,
 				7538066355D07173DB89D79274FAEDF2 /* Notifications.swift */,
@@ -1248,7 +1258,6 @@
 				1D430D1AC7C31EB9F343789938C88A71 /* Search.swift */,
 				6A7D4582D7FB14F53D0AEC4B379275F3 /* Statuses.swift */,
 				781678549BE9B2E5CC5FCF55D9255649 /* Timelines.swift */,
-				5FD6B425293C003A008D90BE /* Bookmarks.swift */,
 			);
 			name = Requests;
 			path = Sources/MastodonKit/Requests;
@@ -1562,6 +1571,9 @@
 				FC77B8E13B04F416FD803E4607B8D536 /* Instance.swift */,
 				2E6C1A74F4982A985E6EDD7DCC5E1194 /* List.swift */,
 				0ED4E3FC465D88437A405E2E70461BC8 /* LoginSettings.swift */,
+				5FC21CEB29C117A700A582A8 /* Marker.swift */,
+				5FC21CEC29C117A700A582A8 /* MarkerCollection.swift */,
+				5FC21CED29C117A700A582A8 /* MarkerTimeline.swift */,
 				454249E32BD8F3A90F81F5FBEBF49287 /* Mention.swift */,
 				616B26C72A42C0F3871A32B3EE6D1B7C /* Notification.swift */,
 				B7484BB33F2E8CB494FF1E32C9F29E2A /* NotificationType.swift */,
@@ -2326,6 +2338,7 @@
 				21123FD167AC0C55EAFCD85A0CFFA20A /* AnyEncodable.swift in Sources */,
 				B0965E00A674508F4FB646E78EB25CDC /* Application.swift in Sources */,
 				A53F1572B92ADA14DF1A723B4B9E7D02 /* Attachment.swift in Sources */,
+				5FC21CEA29C1177000A582A8 /* Markers.swift in Sources */,
 				127F90FC5A0B35EB129DCEE5C829645C /* AttachmentType.swift in Sources */,
 				D3771DEC74F88181CD78515D8D5E875E /* Blocks.swift in Sources */,
 				5ECE4FACE2CB00D6ADAE8B11D11EA97D /* Card.swift in Sources */,
@@ -2354,6 +2367,7 @@
 				5886B064EDF98864037F74DFB7969652 /* HTTPURLResponse.swift in Sources */,
 				D205A288FE13E0C9B59955BE2E7E6697 /* Instance.swift in Sources */,
 				0C9DF5FB3EAA6773F236A21EA66986ED /* Instances.swift in Sources */,
+				5FC21CEE29C117A700A582A8 /* Marker.swift in Sources */,
 				3C2C96AD07CED6CBDD40E3609C5EA7E0 /* List.swift in Sources */,
 				4016041153D9DCF4048580A0C760F27F /* Lists.swift in Sources */,
 				FA430273CC8016A5562657B3B5EE9EB8 /* Localizable.strings in Sources */,
@@ -2390,10 +2404,12 @@
 				E75DFE48718038878FE62E2DCE652268 /* Status.swift in Sources */,
 				5121FB117A403212B396358EB08673A5 /* Statuses.swift in Sources */,
 				15D7A0CD265033A7003396A6 /* ClientObserverList.swift in Sources */,
+				5FC21CF029C117A700A582A8 /* MarkerTimeline.swift in Sources */,
 				44CBF072B83293B4815748E74D2D88D9 /* String.swift in Sources */,
 				93F49C22BADB921213D8631F96302BB9 /* Tag.swift in Sources */,
 				937E953E3E9F82D22E3E795141CBB88C /* Timelines.swift in Sources */,
 				3AECA134555190B145A7C122BA676B03 /* URLComponents.swift in Sources */,
+				5FC21CEF29C117A700A582A8 /* MarkerCollection.swift in Sources */,
 				494D9A1B514BBD3C4B4A79BC7A3BF2B1 /* URLRequest.swift in Sources */,
 				B1305A5B08D8D70E8E03B311888BFBEB /* Visibility.swift in Sources */,
 			);
