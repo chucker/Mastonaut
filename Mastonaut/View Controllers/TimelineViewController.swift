@@ -71,6 +71,8 @@ class TimelineViewController: StatusListViewController
 		updateAccessibilityAttributes()
 	}
 
+	// MARK: Timeline Markers
+
 	func startMarkerTimer(forSource source: Source)
 	{
 		stopMarkerTimerIfRunning()
@@ -103,12 +105,59 @@ class TimelineViewController: StatusListViewController
 		return nil
 	}
 
+	public enum MarkerBehavior
+	{
+		case active
+		case passive
+	}
+
+	public func setMarkerBehavior(_ newBehavior: MarkerBehavior)
+	{
+		switch newBehavior
+		{
+		case .active:
+			stopMarkerTimerIfRunning()
+			jumpToMarker()
+
+			logger.debug2("Timeline markers for this column are now `active`, meaning this column will _write_ to the API.")
+
+		case .passive:
+			if let source
+			{
+				startMarkerTimer(forSource: source)
+			}
+
+			logger.debug2("Timeline markers for this column are now `passive`, meaning this column will _read_ from the API.")
+		}
+	}
+
+	func jumpToMarker()
+	{
+		if let client
+		{
+			client.run(Markers.all(timelines: [.home]))
+			{
+				[weak self] result in
+
+				if case .success(let success) = result,
+				   let self,
+				   let homeMarker = success.value.home,
+				   let entryIndex = self.entryList.firstIndex(where: { $0.entryKey == homeMarker.lastReadId })
+				{
+					self.logger.debug2("Got timeline marker to \(homeMarker.lastReadId); scrolling there")
+
+					self.tableView.scrollRowToVisible(entryIndex)
+				}
+			}
+		}
+	}
+
 	@objc func setMarker(timer: Timer)
 	{
 		if let firstVisibleStatus = firstVisibleStatus(),
 		   let client
 		{
-			logger.debug2("Updating timeline marker to \(firstVisibleStatus.id) (\(firstVisibleStatus.authorAccount)")
+			logger.debug2("Updating timeline marker to \(firstVisibleStatus.id) (\(firstVisibleStatus.authorAccount), \(firstVisibleStatus.createdAt))")
 
 			let newMarker = Marker(lastReadStatus: firstVisibleStatus)
 			let newMarkers = MarkerCollection(home: newMarker)

@@ -320,6 +320,27 @@ class TimelinesWindowController: NSWindowController, UserPopUpButtonDisplaying, 
 		guard let window = window else { return }
 
 		window.backgroundColor = .timelineBackground
+
+		NotificationCenter.default.addObserver(self, selector: #selector(didBecomeKey), name: NSWindow.didBecomeKeyNotification, object: window)
+		NotificationCenter.default.addObserver(self, selector: #selector(didResignKey), name: NSWindow.didResignKeyNotification, object: window)
+	}
+
+	@objc
+	func didBecomeKey(notification: AppKit.Notification)  {
+		setTimelineMarkerBehavior(newBehavior: .active)
+	}
+
+	@objc
+	func didResignKey(notification: AppKit.Notification) {
+		setTimelineMarkerBehavior(newBehavior: .passive)
+	}
+	
+	func setTimelineMarkerBehavior(newBehavior: TimelineViewController.MarkerBehavior) {
+		for column in timelinesViewController.columnViewControllers {
+			if let timeline = column as? TimelineViewController, timeline.source == .timeline {
+				timeline.setMarkerBehavior(newBehavior)
+			}
+		}
 	}
 
 	func handleDetach() {
