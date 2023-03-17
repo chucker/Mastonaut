@@ -39,6 +39,8 @@ class TimelineViewController: StatusListViewController
 
 		logger = Logger(subsystemType: Self.self)
 
+		markerBehavior = .active
+
 		super.init()
 
 		if (source != nil) && source == .timeline
@@ -78,7 +80,7 @@ class TimelineViewController: StatusListViewController
 		stopMarkerTimerIfRunning()
 
 		markerTimer = Timer.scheduledTimer(timeInterval: 30.0, target: self,
-		                                   selector: #selector(setMarker), userInfo: nil, repeats: true)
+		                                   selector: #selector(updateMarker), userInfo: nil, repeats: true)
 	}
 
 	func stopMarkerTimerIfRunning()
@@ -111,13 +113,23 @@ class TimelineViewController: StatusListViewController
 		case passive
 	}
 
+	private var markerBehavior: MarkerBehavior
+
 	public func setMarkerBehavior(_ newBehavior: MarkerBehavior)
 	{
+		markerBehavior = newBehavior
+
 		switch newBehavior
 		{
 		case .active:
 			stopMarkerTimerIfRunning()
+
 			jumpToMarker()
+
+			if let source
+			{
+				startMarkerTimer(forSource: source)
+			}
 
 			logger.debug2("Timeline markers for this column are now `active`, meaning this column will _write_ to the API.")
 
@@ -141,18 +153,38 @@ class TimelineViewController: StatusListViewController
 
 				if case .success(let success) = result,
 				   let self,
-				   let homeMarker = success.value.home,
-				   let entryIndex = self.entryList.firstIndex(where: { $0.entryKey == homeMarker.lastReadId })
+				   let homeMarker = success.value.home
 				{
-					self.logger.debug2("Got timeline marker to \(homeMarker.lastReadId); scrolling there")
+					if let entryIndex = self.entryList.firstIndex(where: { $0.entryKey == homeMarker.lastReadId })
+					{
+						self.logger.debug2("Got timeline marker to \(homeMarker.lastReadId); scrolling there")
 
-					self.tableView.scrollRowToVisible(entryIndex)
+						DispatchQueue.main.async
+						{
+							self.tableView.scrollRowToVisible(entryIndex)
+						}
+					}
+					else
+					{
+						self.logger.debug2("Got timeline marker to \(homeMarker.lastReadId), but we don't seem to have that entry")
+					}
 				}
 			}
 		}
 	}
 
-	@objc func setMarker(timer: Timer)
+	@objc func updateMarker(timer: Timer)
+	{
+		switch markerBehavior
+		{
+		case .active:
+			setMarker()
+		case .passive:
+			jumpToMarker()
+		}
+	}
+
+	func setMarker()
 	{
 		if let firstVisibleStatus = firstVisibleStatus(),
 		   let client
