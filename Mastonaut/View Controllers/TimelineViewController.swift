@@ -150,6 +150,13 @@ class TimelineViewController: StatusListViewController
 			if let result = try? await client.run(Markers.all(timelines: [.home])),
 			   let homeMarker = result.value.home
 			{
+				if let firstVisibleStatus = firstVisibleStatus(), homeMarker.lastReadId < firstVisibleStatus.id
+				{
+					logger.debug2("Not jumping to marker because \(homeMarker.lastReadId) is older than our current position \(firstVisibleStatus.id)")
+
+					return
+				}
+
 				var entryIndex = entryList.firstIndex(where: { $0.entryKey == homeMarker.lastReadId })
 
 				if entryIndex == nil
@@ -180,7 +187,8 @@ class TimelineViewController: StatusListViewController
 		case .active:
 			setMarker()
 		case .passive:
-			Task {
+			Task
+			{
 				await jumpToMarker()
 			}
 		}
