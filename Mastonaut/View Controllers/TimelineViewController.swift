@@ -115,7 +115,7 @@ class TimelineViewController: StatusListViewController
 
 	private var markerBehavior: MarkerBehavior
 
-	public func setMarkerBehavior(_ newBehavior: MarkerBehavior)
+	public func setMarkerBehavior(_ newBehavior: MarkerBehavior) async
 	{
 		markerBehavior = newBehavior
 
@@ -124,7 +124,7 @@ class TimelineViewController: StatusListViewController
 		case .active:
 			stopMarkerTimerIfRunning()
 
-			jumpToMarker()
+			await jumpToMarker()
 
 			if let source
 			{
@@ -143,31 +143,31 @@ class TimelineViewController: StatusListViewController
 		}
 	}
 
-	func jumpToMarker()
+	func jumpToMarker() async
 	{
 		if let client
 		{
-			client.run(Markers.all(timelines: [.home]))
+			if let result = try? await client.run(Markers.all(timelines: [.home])),
+			   let homeMarker = result.value.home
 			{
-				[weak self] result in
+				var entryIndex = entryList.firstIndex(where: { $0.entryKey == homeMarker.lastReadId })
 
-				if case .success(let success) = result,
-				   let self,
-				   let homeMarker = success.value.home
+				if entryIndex == nil
 				{
-					if let entryIndex = self.entryList.firstIndex(where: { $0.entryKey == homeMarker.lastReadId })
-					{
-						self.logger.debug2("Got timeline marker to \(homeMarker.lastReadId); scrolling there")
+					_ = try? await client.run(Timelines.home(range: .min(id: homeMarker.lastReadId, limit: 20)))
 
-						DispatchQueue.main.async
-						{
-							self.tableView.scrollRowToVisible(entryIndex)
-						}
-					}
-					else
-					{
-						self.logger.debug2("Got timeline marker to \(homeMarker.lastReadId), but we don't seem to have that entry")
-					}
+					entryIndex = entryList.firstIndex(where: { $0.entryKey == homeMarker.lastReadId })
+				}
+
+				if entryIndex == nil
+				{
+					logger.warning("Got timeline marker to \(homeMarker.lastReadId), but we don't seem to have that entry, and apparently couldn't fetch it either")
+				}
+				else
+				{
+					logger.debug2("Got timeline marker to \(homeMarker.lastReadId); scrolling there")
+
+					tableView.scrollRowToVisible(entryIndex!)
 				}
 			}
 		}
@@ -180,7 +180,9 @@ class TimelineViewController: StatusListViewController
 		case .active:
 			setMarker()
 		case .passive:
-			jumpToMarker()
+			Task {
+				await jumpToMarker()
+			}
 		}
 	}
 
