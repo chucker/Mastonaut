@@ -520,6 +520,7 @@
 		5F3A17F0291DB26700EA6FEC /* CoreAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */; };
 		5F3A17F1291DB26700EA6FEC /* CoreAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */; };
 		5F5338B32960B23200C1D9AE /* ReplaceCharactersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5338B22960B23200C1D9AE /* ReplaceCharactersTests.swift */; };
+		5F58D95029E7795300F239E4 /* TimelineSyncPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F58D94F29E7795300F239E4 /* TimelineSyncPreferencesView.swift */; };
 		5F74B959294F5DD900DE1909 /* StatusPrivacyPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F74B958294F5DD900DE1909 /* StatusPrivacyPreferencesView.swift */; };
 		5F74B95A294F5DD900DE1909 /* StatusPrivacyPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F74B958294F5DD900DE1909 /* StatusPrivacyPreferencesView.swift */; };
 		5F8C133C2969F1D9007BE2D5 /* Sdifft in Frameworks */ = {isa = PBXBuildFile; productRef = 5F8C133B2969F1D9007BE2D5 /* Sdifft */; };
@@ -985,6 +986,7 @@
 		5F38B52E2930301600FCB9FC /* PullToRefreshInnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefreshInnerView.swift; sourceTree = "<group>"; };
 		5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = CoreAssets.xcassets; sourceTree = "<group>"; };
 		5F5338B22960B23200C1D9AE /* ReplaceCharactersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceCharactersTests.swift; sourceTree = "<group>"; };
+		5F58D94F29E7795300F239E4 /* TimelineSyncPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineSyncPreferencesView.swift; sourceTree = "<group>"; };
 		5F74B958294F5DD900DE1909 /* StatusPrivacyPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusPrivacyPreferencesView.swift; sourceTree = "<group>"; };
 		5F8C1346296A0661007BE2D5 /* EditedStatusTableCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditedStatusTableCellView.xib; sourceTree = "<group>"; };
 		5F8C1348296A06E3007BE2D5 /* EditedStatusTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditedStatusTableCellView.swift; sourceTree = "<group>"; };
@@ -1816,6 +1818,7 @@
 				5F043C52293286110095C702 /* NotificationTypeFilterPreferencesView.swift */,
 				5F043C552932872D0095C702 /* NotificationPerAccountPreferencesView.swift */,
 				5F74B958294F5DD900DE1909 /* StatusPrivacyPreferencesView.swift */,
+				5F58D94F29E7795300F239E4 /* TimelineSyncPreferencesView.swift */,
 			);
 			path = Preferences;
 			sourceTree = "<group>";
@@ -2819,6 +2822,7 @@
 				150CCC0321FE42D900FFA89A /* BackgroundTableRowView.swift in Sources */,
 				5FE72EB729298DB7001C7A6C /* BuildConfig.generated.swift in Sources */,
 				152B731A220E35A7004121F1 /* AcknowledgementsWindowController.swift in Sources */,
+				5F58D95029E7795300F239E4 /* TimelineSyncPreferencesView.swift in Sources */,
 				15F1D25721F8CF0000B01F35 /* NSWindowController+Additions.swift in Sources */,
 				15CD5BD621DAC89700E06C2F /* NSWindow+Additions.swift in Sources */,
 				15BCDB13221B41CF007BFFAF /* AttachmentGroup.swift in Sources */,
