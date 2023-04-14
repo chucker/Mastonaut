@@ -9,38 +9,10 @@
 import CoreTootin
 import SwiftUI
 
-enum TimelineSyncMode: Int {
-	case disabled
-	case icloud
-	case mastodon
-	
-	public var localizedTitle: String {
-		switch self {
-		case .disabled: return 🔠("Disabled")
-		case .icloud: return 🔠("iCloud")
-		case .mastodon: return 🔠("Mastodon")
-		}
-	}
-	
-	public var localizedRemarks: String {
-		switch self {
-		case .disabled: return ""
-		case .icloud: return 🔠("Syncs across Macs running Mastonaut.")
-		case .mastodon: return 🔠("Syncs across any Mastodon client that supports it.")
-		}
-	}
-	
-	public var warnings: String {
-		switch self {
-		case .disabled: return ""
-		case .icloud: return ""
-		case .mastodon: return 🔠("Not compatible with the Mastodon web interface.")
-		}
-	}
-}
-
 struct TimelineSyncPreferencesView: View {
-	@AppStorage("$timelineSyncMode") var timelineSyncMode: TimelineSyncMode = .disabled
+	@AppStorage("timelineSyncMode") var timelineSyncMode: MastonautPreferences.TimelineSyncMode = .disabled
+	
+	var preferences: MastonautPreferences?
 	
 	let columns = [
 		GridItem(.fixed(260), alignment: .topTrailing),
@@ -53,41 +25,40 @@ struct TimelineSyncPreferencesView: View {
 			
 			VStack(alignment: .leading) {
 				Picker("", selection: $timelineSyncMode) {
-					Text(TimelineSyncMode.disabled.localizedTitle)
-						.tag(TimelineSyncMode.disabled)
+					let mode1 = MastonautPreferences.TimelineSyncMode.disabled
+					Text(mode1.localizedTitle)
+						.tag(mode1)
 						.padding(.bottom, 5)
 					
+					let mode2 = MastonautPreferences.TimelineSyncMode.icloud
 					VStack(alignment: .leading) {
-						let mode = TimelineSyncMode.icloud
+						Text(mode2.localizedTitle)
 						
-						Text(mode.localizedTitle)
-							.tag(mode)
-						
-						Text(mode.localizedRemarks)
+						Text(mode2.localizedRemarks)
 							.font(.subheadline)
 							.foregroundColor(.secondary)
 					}
 					.padding(.bottom, 5)
+					.tag(mode2)
 
+					let mode3 = MastonautPreferences.TimelineSyncMode.mastodon
 					VStack(alignment: .leading) {
-						let mode = TimelineSyncMode.mastodon
+						Text(mode3.localizedTitle)
 						
-						Text(mode.localizedTitle)
-							.tag(mode)
-						
-						Text(mode.localizedRemarks)
+						Text(mode3.localizedRemarks)
 							.font(.subheadline)
 							.foregroundColor(.secondary)
 						
 						HStack {
 							Image(systemName: "exclamationmark.triangle")
 							
-							Text(mode.warnings)
+							Text(mode3.warnings)
 								.font(.subheadline)
 								.foregroundColor(.secondary)
 								.padding(.leading, -5)
 						}
 					}
+					.tag(mode3)
 				}
 				.pickerStyle(.radioGroup)
 				
@@ -97,6 +68,9 @@ struct TimelineSyncPreferencesView: View {
 					.padding(.top, 20)
 					.padding(.leading, 8)
 			}
+		}
+		.onChange(of: timelineSyncMode) { newValue in
+			preferences?.timelineSyncMode = newValue
 		}
 		.frame(minWidth: 786, minHeight: 200)
 	}

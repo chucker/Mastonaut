@@ -80,6 +80,14 @@ public class MastonautPreferences: PreferencesController
 		get { return integerRepresentable(for: #keyPath(appearance), default: .auto) }
 		set { defaults.setValue(newValue.rawValue, forKey: #keyPath(appearance)) }
 	}
+	
+	// Timeline preferences
+	
+	@objc public dynamic var timelineSyncMode: TimelineSyncMode
+	{
+		get { return integerRepresentable(for: #keyPath(timelineSyncMode), default: .disabled) }
+		set { defaults.setValue(newValue.rawValue, forKey: #keyPath(timelineSyncMode)) }
+	}
 
 	// Viewing preferences
 
@@ -185,6 +193,36 @@ public extension MastonautPreferences
 	{
 		case ask = 1
 		case pickFirstOne
+	}
+	
+	@objc enum TimelineSyncMode: Int {
+		case disabled = 1
+		case icloud
+		case mastodon
+		
+		public var localizedTitle: String {
+			switch self {
+			case .disabled: return 🔠("Disabled")
+			case .icloud: return 🔠("iCloud")
+			case .mastodon: return 🔠("Mastodon")
+			}
+		}
+		
+		public var localizedRemarks: String {
+			switch self {
+			case .disabled: return ""
+			case .icloud: return 🔠("Syncs across Macs running Mastonaut.")
+			case .mastodon: return 🔠("Syncs across any Mastodon client that supports it.")
+			}
+		}
+		
+		public var warnings: String {
+			switch self {
+			case .disabled: return ""
+			case .icloud: return ""
+			case .mastodon: return 🔠("Not compatible with the Mastodon web interface.")
+			}
+		}
 	}
 
 	@objc enum StatusAudience: Int, CaseIterable, MenuItemRepresentable
