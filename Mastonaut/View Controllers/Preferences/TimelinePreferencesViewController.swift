@@ -17,6 +17,7 @@ class TimelinePreferencesViewController: NSViewController {
 		super.awakeFromNib()
 
 		let preferences = MastonautPreferences.instance
-		let view = StatusPrivacyPreferencesView(preferences: preferences)
+		let view = TimelineSyncPreferencesView()
+		AppKitSwiftUIIntegration.hostSwiftUIView(view, inView: preferencesView)
 	}
 }

@@ -25,7 +25,7 @@
                 </windowController>
                 <customObject id="kSk-H4-Pok" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4" y="105"/>
+            <point key="canvasLocation" x="-249" y="120"/>
         </scene>
         <!--Tab View Controller-->
         <scene sceneID="xpW-c6-ej5">
@@ -64,7 +64,7 @@
                 </tabViewController>
                 <customObject id="Ozb-oQ-lls" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="633" y="105"/>
+            <point key="canvasLocation" x="344" y="105"/>
         </scene>
         <!--General-->
         <scene sceneID="Wio-wh-bIc">
@@ -257,7 +257,7 @@
                 </viewController>
                 <customObject id="woI-dQ-Qn0" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1388" y="-481"/>
+            <point key="canvasLocation" x="1303" y="-747"/>
         </scene>
         <!--Viewing-->
         <scene sceneID="y1p-IN-2Fa">
@@ -1704,7 +1704,7 @@
         <!--Timeline-->
         <scene sceneID="dML-kd-6IN">
             <objects>
-                <viewController title="Timeline" id="ed0-8z-s1w" customClass="TimelinePreferencesViewController" sceneMemberID="viewController">
+                <viewController title="Timeline" id="ed0-8z-s1w" customClass="TimelinePreferencesViewController" customModule="Mastonaut" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="h5B-D8-ga5">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1721,7 +1721,7 @@
                 </viewController>
                 <customObject id="0bB-GG-8fn" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="390" y="-365"/>
+            <point key="canvasLocation" x="405" y="-418"/>
         </scene>
     </scenes>
     <resources>
