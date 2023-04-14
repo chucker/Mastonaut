@@ -508,6 +508,7 @@
 		5F043C54293286110095C702 /* NotificationTypeFilterPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F043C52293286110095C702 /* NotificationTypeFilterPreferencesView.swift */; };
 		5F043C562932872D0095C702 /* NotificationPerAccountPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F043C552932872D0095C702 /* NotificationPerAccountPreferencesView.swift */; };
 		5F043C572932872D0095C702 /* NotificationPerAccountPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F043C552932872D0095C702 /* NotificationPerAccountPreferencesView.swift */; };
+		5F053A6229E9B22F00E2FC8F /* TimelinePreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F053A6129E9B22F00E2FC8F /* TimelinePreferencesViewController.swift */; };
 		5F176FAC290EF03900DF043C /* FollowedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F176FAB290EF03900DF043C /* FollowedList.swift */; };
 		5F176FAF290EF65200DF043C /* FollowedListsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F176FAE290EF65200DF043C /* FollowedListsService.swift */; };
 		5F1F20D62938E86D0057E585 /* LoggingOSLog in Frameworks */ = {isa = PBXBuildFile; productRef = 5F1F20D52938E86D0057E585 /* LoggingOSLog */; };
@@ -978,6 +979,7 @@
 		5F043C52293286110095C702 /* NotificationTypeFilterPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTypeFilterPreferencesView.swift; sourceTree = "<group>"; };
 		5F043C552932872D0095C702 /* NotificationPerAccountPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPerAccountPreferencesView.swift; sourceTree = "<group>"; };
 		5F043C582933A8D30095C702 /* Mastonaut 10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Mastonaut 10.xcdatamodel"; sourceTree = "<group>"; };
+		5F053A6129E9B22F00E2FC8F /* TimelinePreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelinePreferencesViewController.swift; sourceTree = "<group>"; };
 		5F176FAB290EF03900DF043C /* FollowedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowedList.swift; sourceTree = "<group>"; };
 		5F176FAD290EF4AD00DF043C /* Mastonaut 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Mastonaut 8.xcdatamodel"; sourceTree = "<group>"; };
 		5F176FAE290EF65200DF043C /* FollowedListsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowedListsService.swift; sourceTree = "<group>"; };
@@ -1306,12 +1308,13 @@
 		1538FB3422188961006B5F78 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
-				15CB8A5A2288CDB100E465D8 /* GeneralPreferencesController.swift */,
-				1538FB3522188978006B5F78 /* ViewingPreferencesController.swift */,
-				1538FB3E2218B479006B5F78 /* ComposingPreferencesController.swift */,
 				15A1CA0B221F72C400CF51F1 /* AccountsPreferencesController.swift */,
-				15B85EF7230DF59C004B5004 /* NotificationsPreferencesViewController.swift */,
 				151D8816230DEA62002583D3 /* BaseAccountsPreferencesViewController.swift */,
+				1538FB3E2218B479006B5F78 /* ComposingPreferencesController.swift */,
+				15CB8A5A2288CDB100E465D8 /* GeneralPreferencesController.swift */,
+				15B85EF7230DF59C004B5004 /* NotificationsPreferencesViewController.swift */,
+				5F053A6129E9B22F00E2FC8F /* TimelinePreferencesViewController.swift */,
+				1538FB3522188978006B5F78 /* ViewingPreferencesController.swift */,
 			);
 			path = Preferences;
 			sourceTree = "<group>";
@@ -2887,6 +2890,7 @@
 				15D648E62275CC6400E083F7 /* AnimatedImageView.swift in Sources */,
 				15BB378B22A854880094B5A3 /* AttributedLabel.m in Sources */,
 				15175EE122CEAC7600B27EBE /* HTMLParsingService.swift in Sources */,
+				5F053A6229E9B22F00E2FC8F /* TimelinePreferencesViewController.swift in Sources */,
 				15447885232AFD9F009C71D4 /* NSString+Emoji.swift in Sources */,
 				15845E342438EAE7006DF182 /* TimelinesSplitViewController.swift in Sources */,
 				1552D6EC22871122009B4BBD /* ShareMenuFactory.swift in Sources */,
