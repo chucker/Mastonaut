@@ -25,8 +25,8 @@ enum TimelineSyncMode: Int {
 	public var localizedRemarks: String {
 		switch self {
 		case .disabled: return ""
-		case .icloud: return 🔠("Syncs your position across Macs running Mastonaut.")
-		case .mastodon: return 🔠("Syncs your position across any Mastodon client that supports it.")
+		case .icloud: return 🔠("Syncs across Macs running Mastonaut.")
+		case .mastodon: return 🔠("Syncs across any Mastodon client that supports it.")
 		}
 	}
 	
@@ -34,60 +34,71 @@ enum TimelineSyncMode: Int {
 		switch self {
 		case .disabled: return ""
 		case .icloud: return ""
-		case .mastodon: return 🔠("Not fully compatible with the Mastodon web interface.")
+		case .mastodon: return 🔠("Not compatible with the Mastodon web interface.")
 		}
 	}
 }
 
 struct TimelineSyncPreferencesView: View {
 	@AppStorage("$timelineSyncMode") var timelineSyncMode: TimelineSyncMode = .disabled
+	
+	let columns = [
+		GridItem(.fixed(260), alignment: .topTrailing),
+		GridItem(.fixed(380), alignment: .leading),
+	]
 
 	var body: some View {
-		VStack(alignment: .leading) {
+		LazyVGrid(columns: columns) {
 			Text("Sync home timeline position via:")
 			
-			Picker("", selection: $timelineSyncMode) {
-				Text(TimelineSyncMode.disabled.localizedTitle)
-					.tag(TimelineSyncMode.disabled)
-
-				VStack(alignment: .leading) {
-					let mode = TimelineSyncMode.icloud
+			VStack(alignment: .leading) {
+				Picker("", selection: $timelineSyncMode) {
+					Text(TimelineSyncMode.disabled.localizedTitle)
+						.tag(TimelineSyncMode.disabled)
+						.padding(.bottom, 5)
 					
-					Text(mode.localizedTitle)
-						.tag(mode)
-					
-					Text(mode.localizedRemarks)
-						.font(.subheadline)
-						.foregroundColor(.secondary)
-				}
-				
-				VStack(alignment: .leading) {
-					let mode = TimelineSyncMode.mastodon
-					
-					Text(mode.localizedTitle)
-						.tag(mode)
-
-					Text(mode.localizedRemarks)
-						.font(.subheadline)
-						.foregroundColor(.secondary)
-					
-					HStack {
-						Image(systemName: "exclamationmark.triangle")
+					VStack(alignment: .leading) {
+						let mode = TimelineSyncMode.icloud
 						
-						Text(mode.warnings)
+						Text(mode.localizedTitle)
+							.tag(mode)
+						
+						Text(mode.localizedRemarks)
 							.font(.subheadline)
 							.foregroundColor(.secondary)
-							.padding(.leading, -5)
+					}
+					.padding(.bottom, 5)
+
+					VStack(alignment: .leading) {
+						let mode = TimelineSyncMode.mastodon
+						
+						Text(mode.localizedTitle)
+							.tag(mode)
+						
+						Text(mode.localizedRemarks)
+							.font(.subheadline)
+							.foregroundColor(.secondary)
+						
+						HStack {
+							Image(systemName: "exclamationmark.triangle")
+							
+							Text(mode.warnings)
+								.font(.subheadline)
+								.foregroundColor(.secondary)
+								.padding(.leading, -5)
+						}
 					}
 				}
+				.pickerStyle(.radioGroup)
+				
+				Text("If enabled, other compatible clients will scroll to where you left off.")
+					.font(.subheadline)
+					.foregroundColor(.secondary)
+					.padding(.top, 20)
+					.padding(.leading, 8)
 			}
-			.pickerStyle(.radioGroup)
-			
-			Text("If enabled, other compatible clients will jump to where you left off.")
-				.font(.subheadline)
-									.foregroundColor(.secondary)
-									.padding(.top, 20)
 		}
+		.frame(minWidth: 786, minHeight: 200)
 	}
 }
 
