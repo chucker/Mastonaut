@@ -73,7 +73,7 @@ public extension Client
 public extension ClientType
 {
 	@discardableResult
-	func fetchAccountAndInstance(completion: @escaping (Swift.Result<(Account, Instance), ClientError>) -> Void) -> Set<FutureTask>
+	func fetchAccountAndInstance(completion: @escaping (Swift.Result<(Account, Instance), Error>) -> Void) -> Set<FutureTask>
 	{
 		let dispatchGroup = DispatchGroup()
 		var futures = Set<FutureTask>()
@@ -119,11 +119,11 @@ public extension ClientType
 			default:
 				if case .failure(let accountError) = accountResult
 				{
-					completion(.failure(accountError as! ClientError))
+					completion(.failure(accountError))
 				}
 				else if case .failure(let instanceError) = instanceResult
 				{
-					completion(.failure(instanceError as! ClientError))
+					completion(.failure(instanceError))
 				}
 			}
 		}

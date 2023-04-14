@@ -88,7 +88,15 @@ class ShareViewController: NSViewController, UserPopUpButtonDisplaying
 	{
 		didSet
 		{
-			textView.suggestionsProvider = accountSearchService
+			textView.accountSuggestionsProvider = accountSearchService
+		}
+	}
+
+	private var hashtagSearchService: HashtagSearchService?
+	{
+		didSet
+		{
+			textView.hashtagSuggestionsProvider = hashtagSearchService
 		}
 	}
 
@@ -160,6 +168,7 @@ class ShareViewController: NSViewController, UserPopUpButtonDisplaying
 		didSet
 		{
 			accountSearchService = nil
+			hashtagSearchService = nil
 			userPopUpButtonController.updateUserPopUpButton()
 
 			if let account = currentAccount
@@ -206,6 +215,7 @@ class ShareViewController: NSViewController, UserPopUpButtonDisplaying
 			guard let instance = currentInstance, let client = self.client else { return }
 
 			accountSearchService = AccountSearchService(client: client, activeInstance: instance)
+			hashtagSearchService = HashtagSearchService(client: client)
 		}
 	}
 

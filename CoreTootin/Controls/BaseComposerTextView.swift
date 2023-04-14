@@ -26,14 +26,14 @@ open class BaseComposerTextView: SuggestionTextView
 	public var insertDoubleNewLines: Bool = false
 
 	@IBOutlet
-	public weak var submitControl: NSControl? = nil
+	public var submitControl: NSControl? = nil
 
 	@IBOutlet
 	public weak var pasteDelegate: BaseComposerTextViewPasteDelegate? = nil
 
-	public override func insertNewline(_ sender: Any?)
+	override public func insertNewline(_ sender: Any?)
 	{
-		guard suggestionWindowController.isWindowVisible == false else
+		if activeSuggestionWindowController?.isWindowVisible == true
 		{
 			insertCurrentlySelectedSuggestion()
 			return
@@ -52,17 +52,17 @@ open class BaseComposerTextView: SuggestionTextView
 
 	public func insertAttributedString(_ attributedString: NSAttributedString)
 	{
-		guard let textStorage = self.textStorage else { return }
+		guard let textStorage = textStorage else { return }
 
 		let selectedRange = self.selectedRange()
 
-		if let undoManager = self.undoManager
+		if let undoManager = undoManager
 		{
 			let undoRange = NSMakeRange(selectedRange.location, attributedString.length)
 			let undoString = textStorage.attributedSubstring(from: selectedRange)
 			undoManager.registerUndo(withTarget: textStorage)
 			{
-				(textStorage) in textStorage.replaceCharacters(in: undoRange, with: undoString)
+				textStorage in textStorage.replaceCharacters(in: undoRange, with: undoString)
 			}
 		}
 
@@ -82,7 +82,7 @@ open class BaseComposerTextView: SuggestionTextView
 {
 	/// Returns which pasteboard types the delegate is capable of reading from the pasteboard into the control.
 	func readablePasteboardTypes(for controlTextView: BaseComposerTextView,
-								 proposedTypes: [NSPasteboard.PasteboardType]) -> [NSPasteboard.PasteboardType]
+	                             proposedTypes: [NSPasteboard.PasteboardType]) -> [NSPasteboard.PasteboardType]
 
 	/// Read the contents from the pasteboard into the control.
 	///

@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "dsfsparkline",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dagronf/DSFSparkline",
+      "state" : {
+        "revision" : "cfcf80b9e214500cbc12b795b7c9943151b8bd4f",
+        "version" : "4.6.4"
+      }
+    },
+    {
       "identity" : "sdifft",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/wzxhahaha/Sdifft",

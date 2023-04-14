@@ -178,7 +178,7 @@ class ResourcesFetcher
 	}
 }
 
-extension ResourcesFetcher: SuggestionWindowImagesProvider
+extension ResourcesFetcher: AccountSuggestionWindowImagesProvider
 {
 	func suggestionWindow(_ windowController: SuggestionWindowController,
 						  imageForSuggestionUsingURL imageURL: URL,
