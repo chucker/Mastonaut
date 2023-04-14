@@ -111,6 +111,7 @@ class TimelineViewController: StatusListViewController
 	{
 		case active
 		case passive
+		case disabled
 	}
 
 	private var markerBehavior: MarkerBehavior
@@ -140,6 +141,9 @@ class TimelineViewController: StatusListViewController
 			}
 
 			logger.debug2("Timeline markers for this column are now `passive`, meaning this column will _read_ from the API.")
+			
+		case .disabled:
+			stopMarkerTimerIfRunning()
 		}
 	}
 
@@ -191,6 +195,8 @@ class TimelineViewController: StatusListViewController
 			{
 				await jumpToMarker()
 			}
+		case .disabled:
+			break
 		}
 	}
 

@@ -335,9 +335,15 @@ class TimelinesWindowController: NSWindowController, UserPopUpButtonDisplaying, 
 	}
 
 	func setTimelineMarkerBehavior(newBehavior: TimelineViewController.MarkerBehavior) async {
+		var behavior = newBehavior
+		
+		if MastonautPreferences.instance.timelineSyncMode == .disabled {
+			behavior = .disabled
+		}
+
 		for column in timelinesViewController.columnViewControllers {
 			if let timeline = column as? TimelineViewController, timeline.source == .timeline {
-				await timeline.setMarkerBehavior(newBehavior)
+				await timeline.setMarkerBehavior(behavior)
 			}
 		}
 	}
