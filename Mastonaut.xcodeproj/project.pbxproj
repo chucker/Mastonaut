@@ -508,6 +508,8 @@
 		5F043C562932872D0095C702 /* NotificationPerAccountPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F043C552932872D0095C702 /* NotificationPerAccountPreferencesView.swift */; };
 		5F043C572932872D0095C702 /* NotificationPerAccountPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F043C552932872D0095C702 /* NotificationPerAccountPreferencesView.swift */; };
 		5F053A6229E9B22F00E2FC8F /* TimelinePreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F053A6129E9B22F00E2FC8F /* TimelinePreferencesViewController.swift */; };
+		5F053A7029E9EA1700E2FC8F /* MastodonAPIMarkerSyncProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F053A6F29E9EA1700E2FC8F /* MastodonAPIMarkerSyncProvider.swift */; };
+		5F053A7229E9EA7D00E2FC8F /* MarkerSyncProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F053A7129E9EA7D00E2FC8F /* MarkerSyncProvider.swift */; };
 		5F176FAC290EF03900DF043C /* FollowedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F176FAB290EF03900DF043C /* FollowedList.swift */; };
 		5F176FAF290EF65200DF043C /* FollowedListsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F176FAE290EF65200DF043C /* FollowedListsService.swift */; };
 		5F1F20D62938E86D0057E585 /* LoggingOSLog in Frameworks */ = {isa = PBXBuildFile; productRef = 5F1F20D52938E86D0057E585 /* LoggingOSLog */; };
@@ -984,6 +986,8 @@
 		5F043C552932872D0095C702 /* NotificationPerAccountPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPerAccountPreferencesView.swift; sourceTree = "<group>"; };
 		5F043C582933A8D30095C702 /* Mastonaut 10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Mastonaut 10.xcdatamodel"; sourceTree = "<group>"; };
 		5F053A6129E9B22F00E2FC8F /* TimelinePreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelinePreferencesViewController.swift; sourceTree = "<group>"; };
+		5F053A6F29E9EA1700E2FC8F /* MastodonAPIMarkerSyncProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MastodonAPIMarkerSyncProvider.swift; sourceTree = "<group>"; };
+		5F053A7129E9EA7D00E2FC8F /* MarkerSyncProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerSyncProvider.swift; sourceTree = "<group>"; };
 		5F176FAB290EF03900DF043C /* FollowedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowedList.swift; sourceTree = "<group>"; };
 		5F176FAD290EF4AD00DF043C /* Mastonaut 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Mastonaut 8.xcdatamodel"; sourceTree = "<group>"; };
 		5F176FAE290EF65200DF043C /* FollowedListsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowedListsService.swift; sourceTree = "<group>"; };
@@ -1555,6 +1559,7 @@
 		15C4DD0E21D41EC0002AF6DA /* Mastonaut */ = {
 			isa = PBXGroup;
 			children = (
+				5F053A6D29E9E9FE00E2FC8F /* Features */,
 				15C4DD3C21D42660002AF6DA /* Application */,
 				1507923E21D6E459009EE4A3 /* Agents */,
 				15082D5323109F890075BB1D /* UserNotifications */,
@@ -1803,6 +1808,23 @@
 				15F9F305232EB8B300931594 /* BaseComposerTextView.swift */,
 			);
 			path = Controls;
+			sourceTree = "<group>";
+		};
+		5F053A6D29E9E9FE00E2FC8F /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				5F053A6E29E9EA0300E2FC8F /* TimelineMarkerSync */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		5F053A6E29E9EA0300E2FC8F /* TimelineMarkerSync */ = {
+			isa = PBXGroup;
+			children = (
+				5F053A6F29E9EA1700E2FC8F /* MastodonAPIMarkerSyncProvider.swift */,
+				5F053A7129E9EA7D00E2FC8F /* MarkerSyncProvider.swift */,
+			);
+			path = TimelineMarkerSync;
 			sourceTree = "<group>";
 		};
 		5F30992E29CBA5C000E27292 /* Features */ = {
@@ -2857,6 +2879,7 @@
 				5F176FAC290EF03900DF043C /* FollowedList.swift in Sources */,
 				15CD5BE921DEEA9300E06C2F /* StatusComposerWindowController.swift in Sources */,
 				158A5CC924994C4300E95113 /* MastonautTableView.swift in Sources */,
+				5F053A7029E9EA1700E2FC8F /* MastodonAPIMarkerSyncProvider.swift in Sources */,
 				15769616231A7206003C8B30 /* NotificationCenter+Helpers.swift in Sources */,
 				150CCC0321FE42D900FFA89A /* BackgroundTableRowView.swift in Sources */,
 				5FE72EB729298DB7001C7A6C /* BuildConfig.generated.swift in Sources */,
@@ -2888,6 +2911,7 @@
 				1584AA5C24D4CBF00073DC60 /* StatusInteractionPresenter.swift in Sources */,
 				1538FB3F2218B479006B5F78 /* ComposingPreferencesController.swift in Sources */,
 				156C115122516B1900C54592 /* ProfileFieldsController.swift in Sources */,
+				5F053A7229E9EA7D00E2FC8F /* MarkerSyncProvider.swift in Sources */,
 				15570C2722025C930030DAFB /* CardView.swift in Sources */,
 				15398EF722272EFA00D97406 /* NSDraggingInfo+Additions.swift in Sources */,
 				1538FB2522178C17006B5F78 /* NSView+Additions.swift in Sources */,

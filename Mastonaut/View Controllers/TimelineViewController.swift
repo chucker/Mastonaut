@@ -115,10 +115,21 @@ class TimelineViewController: StatusListViewController
 	}
 
 	private var markerBehavior: MarkerBehavior
+	private var markerSyncProvider: MarkerSyncProvider?
 
 	public func setMarkerBehavior(_ newBehavior: MarkerBehavior) async
 	{
 		markerBehavior = newBehavior
+
+		switch MastonautPreferences.instance.timelineSyncMode
+		{
+		case .disabled:
+			markerSyncProvider = nil
+		case .icloud:
+			break
+		case .mastodon:
+			markerSyncProvider = MastodonAPIMarkerSyncProvider()
+		}
 
 		switch newBehavior
 		{
@@ -141,7 +152,7 @@ class TimelineViewController: StatusListViewController
 			}
 
 			logger.debug2("Timeline markers for this column are now `passive`, meaning this column will _read_ from the API.")
-			
+
 		case .disabled:
 			stopMarkerTimerIfRunning()
 		}
@@ -149,37 +160,33 @@ class TimelineViewController: StatusListViewController
 
 	func jumpToMarker() async
 	{
-		if let client
+		if let client, let homeMarker = await markerSyncProvider?.read(client: client)
 		{
-			if let result = try? await client.run(Markers.all(timelines: [.home])),
-			   let homeMarker = result.value.home
+			if let firstVisibleStatus = firstVisibleStatus(), homeMarker.lastReadId < firstVisibleStatus.id
 			{
-				if let firstVisibleStatus = firstVisibleStatus(), homeMarker.lastReadId < firstVisibleStatus.id
-				{
-					logger.debug2("Not jumping to marker because \(homeMarker.lastReadId) is older than our current position \(firstVisibleStatus.id)")
+				logger.debug2("Not jumping to marker because \(homeMarker.lastReadId) is older than our current position \(firstVisibleStatus.id)")
 
-					return
-				}
+				return
+			}
 
-				var entryIndex = entryList.firstIndex(where: { $0.entryKey == homeMarker.lastReadId })
+			var entryIndex = entryList.firstIndex(where: { $0.entryKey == homeMarker.lastReadId })
 
-				if entryIndex == nil
-				{
-					_ = try? await client.run(Timelines.home(range: .min(id: homeMarker.lastReadId, limit: 20)))
+			if entryIndex == nil
+			{
+				_ = try? await client.run(Timelines.home(range: .min(id: homeMarker.lastReadId, limit: 20)))
 
-					entryIndex = entryList.firstIndex(where: { $0.entryKey == homeMarker.lastReadId })
-				}
+				entryIndex = entryList.firstIndex(where: { $0.entryKey == homeMarker.lastReadId })
+			}
 
-				if entryIndex == nil
-				{
-					logger.warning("Got timeline marker to \(homeMarker.lastReadId), but we don't seem to have that entry, and apparently couldn't fetch it either")
-				}
-				else
-				{
-					logger.debug2("Got timeline marker to \(homeMarker.lastReadId); scrolling there")
+			if entryIndex == nil
+			{
+				logger.warning("Got timeline marker to \(homeMarker.lastReadId), but we don't seem to have that entry, and apparently couldn't fetch it either")
+			}
+			else
+			{
+				logger.debug2("Got timeline marker to \(homeMarker.lastReadId); scrolling there")
 
-					tableView.scrollRowToVisible(entryIndex!)
-				}
+				tableView.scrollRowToVisible(entryIndex!)
 			}
 		}
 	}
@@ -208,11 +215,9 @@ class TimelineViewController: StatusListViewController
 			logger.debug2("Updating timeline marker to \(firstVisibleStatus.id) (\(firstVisibleStatus.authorAccount), \(firstVisibleStatus.createdAt))")
 
 			let newMarker = Marker(lastReadStatus: firstVisibleStatus)
-			let newMarkers = MarkerCollection(home: newMarker)
-			client.run(Markers.update(markers: newMarkers))
-			{
-				_ in
-			}
+			
+			markerSyncProvider?.write(client: client,
+									  newMarker: newMarker)
 		}
 	}
 
