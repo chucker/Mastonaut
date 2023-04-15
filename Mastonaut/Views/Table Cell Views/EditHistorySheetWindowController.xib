@@ -32,7 +32,7 @@
                 </button>
                 <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="319" horizontalPageScroll="10" verticalLineScroll="319" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2DZ-jb-NWq">
                     <rect key="frame" x="0.0" y="0.0" width="321" height="556"/>
-                    <autoresizingMask key="autoresizingMask"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <clipView key="contentView" id="fwC-vr-swq">
                         <rect key="frame" x="1" y="1" width="319" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

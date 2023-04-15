@@ -53,7 +53,7 @@ class ComposerTextView: BaseComposerTextView, NSTextStorageDelegate
 
 	override func insertTab(_ sender: Any?)
 	{
-		guard suggestionWindowController.isWindowVisible == false else
+		guard let activeSuggestionWindowController, activeSuggestionWindowController.isWindowVisible == false else
 		{
 			insertCurrentlySelectedSuggestion()
 			return

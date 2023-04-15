@@ -501,7 +501,6 @@
 		15F9F307232EB8BE00931594 /* BaseComposerTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F9F305232EB8B300931594 /* BaseComposerTextView.swift */; };
 		15F9F309232EB94F00931594 /* SuggestionTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1530429222AEFCC900489F31 /* SuggestionTextView.swift */; };
 		15F9F30B232EB9E400931594 /* SuggestionWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1530428022AEC64E00489F31 /* SuggestionWindowController.swift */; };
-		15F9F30C232EB9E900931594 /* SuggestionWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1530428122AEC64E00489F31 /* SuggestionWindowController.xib */; };
 		15FD4C33223870B000D699EF /* TransientWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FD4C32223870B000D699EF /* TransientWindow.swift */; };
 		15FD4C34223870B000D699EF /* TransientWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FD4C32223870B000D699EF /* TransientWindow.swift */; };
 		5F043C53293286110095C702 /* NotificationTypeFilterPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F043C52293286110095C702 /* NotificationTypeFilterPreferencesView.swift */; };
@@ -519,6 +518,7 @@
 		5F3A17EF291DB26700EA6FEC /* CoreAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */; };
 		5F3A17F0291DB26700EA6FEC /* CoreAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */; };
 		5F3A17F1291DB26700EA6FEC /* CoreAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */; };
+		5F3BC8B229D0B44000CEBD7F /* SparklineTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3BC8B129D0B44000CEBD7F /* SparklineTableCellView.swift */; };
 		5F5338B32960B23200C1D9AE /* ReplaceCharactersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5338B22960B23200C1D9AE /* ReplaceCharactersTests.swift */; };
 		5F74B959294F5DD900DE1909 /* StatusPrivacyPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F74B958294F5DD900DE1909 /* StatusPrivacyPreferencesView.swift */; };
 		5F74B95A294F5DD900DE1909 /* StatusPrivacyPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F74B958294F5DD900DE1909 /* StatusPrivacyPreferencesView.swift */; };
@@ -528,8 +528,13 @@
 		5F8C134B296A0B5C007BE2D5 /* EditHistorySheetWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F8C134A296A0B5C007BE2D5 /* EditHistorySheetWindowController.xib */; };
 		5F8C134D296A0BF2007BE2D5 /* EditHistorySheetWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8C134C296A0BF2007BE2D5 /* EditHistorySheetWindowController.swift */; };
 		5F8C134F296A8C89007BE2D5 /* StatusEditCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8C134E296A8C89007BE2D5 /* StatusEditCellModel.swift */; };
+		5FC21CF629C6820500A582A8 /* HashtagSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC21CF529C6820500A582A8 /* HashtagSearchService.swift */; };
+		5FC21D0129CA55B400A582A8 /* HashtagSuggestionWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FC21D0029CA511300A582A8 /* HashtagSuggestionWindowController.xib */; };
+		5FC21D0329CA59EF00A582A8 /* DSFSparkline in Frameworks */ = {isa = PBXBuildFile; productRef = 5FC21D0229CA59EF00A582A8 /* DSFSparkline */; };
 		5FC3E1922926FD640086DCEE /* AppearancePreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC3E1912926FD640086DCEE /* AppearancePreferencesView.swift */; };
 		5FC3E1952927018A0086DCEE /* LoggingOSLog in Frameworks */ = {isa = PBXBuildFile; productRef = 5FC3E1942927018A0086DCEE /* LoggingOSLog */; };
+		5FD008EB29CBA8C700EC4A29 /* AccountSuggestionWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FD008EA29CBA8C700EC4A29 /* AccountSuggestionWindowController.xib */; };
+		5FD008EF29CBAB7000EC4A29 /* RedrawsOnSelectTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD008EE29CBAB7000EC4A29 /* RedrawsOnSelectTableRowView.swift */; };
 		5FE72EAE292982F0001C7A6C /* BuildConfig.sh in Resources */ = {isa = PBXBuildFile; fileRef = 5FE72EAD292982F0001C7A6C /* BuildConfig.sh */; };
 		5FE72EAF292982F0001C7A6C /* BuildConfig.sh in Resources */ = {isa = PBXBuildFile; fileRef = 5FE72EAD292982F0001C7A6C /* BuildConfig.sh */; };
 		5FE72EB529298A37001C7A6C /* BuildConfig.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE72EB429298A37001C7A6C /* BuildConfig.generated.swift */; };
@@ -712,7 +717,6 @@
 		1530427722AE8F4300489F31 /* ResolverService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolverService.swift; sourceTree = "<group>"; };
 		1530427A22AE91EA00489F31 /* NSProgressIndicator+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSProgressIndicator+Additions.swift"; sourceTree = "<group>"; };
 		1530428022AEC64E00489F31 /* SuggestionWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionWindowController.swift; sourceTree = "<group>"; };
-		1530428122AEC64E00489F31 /* SuggestionWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuggestionWindowController.xib; sourceTree = "<group>"; };
 		1530428C22AEDAFA00489F31 /* AccountSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSearchService.swift; sourceTree = "<group>"; };
 		1530428F22AEF5A100489F31 /* InfoWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoWindow.swift; sourceTree = "<group>"; };
 		1530429222AEFCC900489F31 /* SuggestionTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionTextView.swift; sourceTree = "<group>"; };
@@ -984,6 +988,7 @@
 		5F38B52B29302F0C00FCB9FC /* AppKitSwiftUIIntegration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKitSwiftUIIntegration.swift; sourceTree = "<group>"; };
 		5F38B52E2930301600FCB9FC /* PullToRefreshInnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefreshInnerView.swift; sourceTree = "<group>"; };
 		5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = CoreAssets.xcassets; sourceTree = "<group>"; };
+		5F3BC8B129D0B44000CEBD7F /* SparklineTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparklineTableCellView.swift; sourceTree = "<group>"; };
 		5F5338B22960B23200C1D9AE /* ReplaceCharactersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceCharactersTests.swift; sourceTree = "<group>"; };
 		5F74B958294F5DD900DE1909 /* StatusPrivacyPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusPrivacyPreferencesView.swift; sourceTree = "<group>"; };
 		5F8C1346296A0661007BE2D5 /* EditedStatusTableCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditedStatusTableCellView.xib; sourceTree = "<group>"; };
@@ -991,8 +996,12 @@
 		5F8C134A296A0B5C007BE2D5 /* EditHistorySheetWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditHistorySheetWindowController.xib; sourceTree = "<group>"; };
 		5F8C134C296A0BF2007BE2D5 /* EditHistorySheetWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHistorySheetWindowController.swift; sourceTree = "<group>"; };
 		5F8C134E296A8C89007BE2D5 /* StatusEditCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusEditCellModel.swift; sourceTree = "<group>"; };
+		5FC21CF529C6820500A582A8 /* HashtagSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagSearchService.swift; sourceTree = "<group>"; };
+		5FC21D0029CA511300A582A8 /* HashtagSuggestionWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HashtagSuggestionWindowController.xib; sourceTree = "<group>"; };
 		5FC3E18E2926F0E80086DCEE /* Logger+CurrentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Logger+CurrentType.swift"; sourceTree = "<group>"; };
 		5FC3E1912926FD640086DCEE /* AppearancePreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearancePreferencesView.swift; sourceTree = "<group>"; };
+		5FD008EA29CBA8C700EC4A29 /* AccountSuggestionWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountSuggestionWindowController.xib; sourceTree = "<group>"; };
+		5FD008EE29CBAB7000EC4A29 /* RedrawsOnSelectTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedrawsOnSelectTableRowView.swift; sourceTree = "<group>"; };
 		5FE72EAD292982F0001C7A6C /* BuildConfig.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = BuildConfig.sh; sourceTree = "<group>"; };
 		5FE72EB429298A37001C7A6C /* BuildConfig.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildConfig.generated.swift; sourceTree = "<group>"; };
 		5FE7A52D292E704D00F7EB73 /* PullRefreshableScrollView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PullRefreshableScrollView.xcodeproj; path = Dependencies/PullRefreshableScrollView/PullRefreshableScrollView.xcodeproj; sourceTree = "<group>"; };
@@ -1025,6 +1034,7 @@
 			files = (
 				BB0D8382B9BA154D27AFBC63 /* Pods_CoreTootin.framework in Frameworks */,
 				5F1F20D62938E86D0057E585 /* LoggingOSLog in Frameworks */,
+				5FC21D0329CA59EF00A582A8 /* DSFSparkline in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1317,6 +1327,7 @@
 		154478A0232B0223009C71D4 /* CoreTootin */ = {
 			isa = PBXGroup;
 			children = (
+				5F30992E29CBA5C000E27292 /* Features */,
 				15608F52232C514500923CB7 /* Agents */,
 				15F9F308232EB93500931594 /* Controls */,
 				159C216E232C56F800139BD5 /* Extensions */,
@@ -1327,7 +1338,6 @@
 				154478B4232B0E8F009C71D4 /* Supporting Files */,
 				1545FC0523357111006CCD2C /* View Controllers */,
 				15EE2B0A232EA31D00155E16 /* Views */,
-				15F9F30A232EB9D100931594 /* Window Controllers */,
 			);
 			path = CoreTootin;
 			sourceTree = "<group>";
@@ -1399,10 +1409,9 @@
 		15608F53232C515500923CB7 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				1530428C22AEDAFA00489F31 /* AccountSearchService.swift */,
 				15186B972279F53900850EF5 /* AccountsService.swift */,
-				1530427422AE83E300489F31 /* PostingService.swift */,
 				15249AEB234012A80088B9EE /* InstanceService.swift */,
+				1530427422AE83E300489F31 /* PostingService.swift */,
 				1530427722AE8F4300489F31 /* ResolverService.swift */,
 				154E9FDB234564F300885966 /* TagBookmarkService.swift */,
 			);
@@ -1787,18 +1796,29 @@
 			isa = PBXGroup;
 			children = (
 				15F9F305232EB8B300931594 /* BaseComposerTextView.swift */,
-				1530429222AEFCC900489F31 /* SuggestionTextView.swift */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
 		};
-		15F9F30A232EB9D100931594 /* Window Controllers */ = {
+		5F30992E29CBA5C000E27292 /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				1530428022AEC64E00489F31 /* SuggestionWindowController.swift */,
-				1530428122AEC64E00489F31 /* SuggestionWindowController.xib */,
+				5F30992F29CBA5C800E27292 /* ComposerSuggestions */,
 			);
-			path = "Window Controllers";
+			path = Features;
+			sourceTree = "<group>";
+		};
+		5F30992F29CBA5C800E27292 /* ComposerSuggestions */ = {
+			isa = PBXGroup;
+			children = (
+				1530428C22AEDAFA00489F31 /* AccountSearchService.swift */,
+				5FC21CF529C6820500A582A8 /* HashtagSearchService.swift */,
+				5FD008EE29CBAB7000EC4A29 /* RedrawsOnSelectTableRowView.swift */,
+				5F3BC8B129D0B44000CEBD7F /* SparklineTableCellView.swift */,
+				1530429222AEFCC900489F31 /* SuggestionTextView.swift */,
+				5FD008EC29CBA8DC00EC4A29 /* Windows */,
+			);
+			path = ComposerSuggestions;
 			sourceTree = "<group>";
 		};
 		5F38B52D2930300400FCB9FC /* List View */ = {
@@ -1818,6 +1838,16 @@
 				5F74B958294F5DD900DE1909 /* StatusPrivacyPreferencesView.swift */,
 			);
 			path = Preferences;
+			sourceTree = "<group>";
+		};
+		5FD008EC29CBA8DC00EC4A29 /* Windows */ = {
+			isa = PBXGroup;
+			children = (
+				5FD008EA29CBA8C700EC4A29 /* AccountSuggestionWindowController.xib */,
+				5FC21D0029CA511300A582A8 /* HashtagSuggestionWindowController.xib */,
+				1530428022AEC64E00489F31 /* SuggestionWindowController.swift */,
+			);
+			path = Windows;
 			sourceTree = "<group>";
 		};
 		5FE7A52E292E704D00F7EB73 /* Products */ = {
@@ -1924,6 +1954,7 @@
 			name = CoreTootin;
 			packageProductDependencies = (
 				5F1F20D52938E86D0057E585 /* LoggingOSLog */,
+				5FC21D0229CA59EF00A582A8 /* DSFSparkline */,
 			);
 			productName = CoreTootin;
 			productReference = 1544789F232B0223009C71D4 /* CoreTootin.framework */;
@@ -2050,6 +2081,7 @@
 			packageReferences = (
 				5FC3E18B2926EF3F0086DCEE /* XCRemoteSwiftPackageReference "swift-log-oslog" */,
 				5F8C133A2969F1D9007BE2D5 /* XCRemoteSwiftPackageReference "Sdifft" */,
+				5FC21CFD29CA360A00A582A8 /* XCRemoteSwiftPackageReference "DSFSparkline" */,
 			);
 			productRefGroup = 15C4DD0D21D41EC0002AF6DA /* Products */;
 			projectDirPath = "";
@@ -2143,12 +2175,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5FC21D0129CA55B400A582A8 /* HashtagSuggestionWindowController.xib in Resources */,
 				15EE2B0C232EA35000155E16 /* AttachmentItem.xib in Resources */,
 				5F3A17F1291DB26700EA6FEC /* CoreAssets.xcassets in Resources */,
 				1545FC0923357143006CCD2C /* AttachmentDescriptionViewController.xib in Resources */,
 				159C2182232D382200139BD5 /* Localizable.strings in Resources */,
+				5FD008EB29CBA8C700EC4A29 /* AccountSuggestionWindowController.xib in Resources */,
 				15EE2B0E232EA35000155E16 /* ProposedAttachmentItem.xib in Resources */,
-				15F9F30C232EB9E900931594 /* SuggestionWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2653,6 +2686,7 @@
 				15EE2B10232EA3EF00155E16 /* BorderView.swift in Sources */,
 				15F9F307232EB8BE00931594 /* BaseComposerTextView.swift in Sources */,
 				154478AF232B03A0009C71D4 /* MastonautPersistentContainer.swift in Sources */,
+				5F3BC8B229D0B44000CEBD7F /* SparklineTableCellView.swift in Sources */,
 				1574DE1E233C030A00AB1036 /* NetworkError.swift in Sources */,
 				159C216D232C56E100139BD5 /* Promise.swift in Sources */,
 				15E0DD2624D376AF002CE87B /* CGImage+Additions.swift in Sources */,
@@ -2672,6 +2706,7 @@
 				15EE2B0D232EA35000155E16 /* ProposedAttachmentItem.swift in Sources */,
 				15431289232EEE840010854A /* AuthorizedAccount+Helpers.swift in Sources */,
 				1545FC0823357143006CCD2C /* AttachmentDescriptionViewController.swift in Sources */,
+				5FC21CF629C6820500A582A8 /* HashtagSearchService.swift in Sources */,
 				15431290232EF1D70010854A /* UserDescriptionError.swift in Sources */,
 				157CFEA7233044EF0077CE62 /* KeychainController+Internal.swift in Sources */,
 				15431298232EF5530010854A /* AccountAccessToken.swift in Sources */,
@@ -2679,6 +2714,7 @@
 				1543127D232EE34A0010854A /* AccountSearchService.swift in Sources */,
 				15F9F30B232EB9E400931594 /* SuggestionWindowController.swift in Sources */,
 				15F9F309232EB94F00931594 /* SuggestionTextView.swift in Sources */,
+				5FD008EF29CBAB7000EC4A29 /* RedrawsOnSelectTableRowView.swift in Sources */,
 				1543127F232EE39D0010854A /* Account+Shims.swift in Sources */,
 				15EE2B04232EA1CC00155E16 /* Structs+Additions.swift in Sources */,
 				1543128B232EEFD00010854A /* Client+Helpers.swift in Sources */,
@@ -3688,6 +3724,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		5FC21CFD29CA360A00A582A8 /* XCRemoteSwiftPackageReference "DSFSparkline" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dagronf/DSFSparkline";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 		5FC3E18B2926EF3F0086DCEE /* XCRemoteSwiftPackageReference "swift-log-oslog" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/chrisaljoudi/swift-log-oslog.git";
@@ -3708,6 +3752,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5F8C133A2969F1D9007BE2D5 /* XCRemoteSwiftPackageReference "Sdifft" */;
 			productName = Sdifft;
+		};
+		5FC21D0229CA59EF00A582A8 /* DSFSparkline */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5FC21CFD29CA360A00A582A8 /* XCRemoteSwiftPackageReference "DSFSparkline" */;
+			productName = DSFSparkline;
 		};
 		5FC3E1942927018A0086DCEE /* LoggingOSLog */ = {
 			isa = XCSwiftPackageProductDependency;

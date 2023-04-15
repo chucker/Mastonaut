@@ -4,6 +4,36 @@
         <title>Mastonaut</title>
 
         <item>
+            <title>1.6.0</title>
+            <pubDate>2023-04-11</pubDate>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://github.com/chucker/Mastonaut/releases/download/app-1.6.0/Mastonaut-1.6.0.zip"
+                sparkle:version="139" sparkle:shortVersionString="1.6.0" length="8537959"
+                type="application/octet-stream" />-->
+            <description>
+                <![CDATA[
+<p>(If you're on 1.4.1 or older, auto-updating won't work. Please manually download a newer version <a href="https://github.com/chucker/Mastonaut/releases">from here</a>.)</p>
+
+<p><strong>1.6.0</strong> is out!</p>
+
+<div class="comment-body markdown-body js-preview-body" style="min-height: 353px;"><h2>Features</h2>
+<ul>
+<li>You can now <g-emoji class="g-emoji" alias="memo" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4dd.png">📝</g-emoji> <strong>edit</strong> a toot of yours. Also, if you or someone else has edited a toot, this is now indicated in the timeline. You can expand a toot to show its edit history. (Viewing edit history is a little wonky and limited for now.)</li>
+<li>Statuses and replies now have a <strong>different default privacy</strong>. (<a class="issue-link js-issue-link" data-error-text="Failed to load title" data-id="1474188640" data-permission-text="Title is private" data-url="https://github.com/chucker/Mastonaut/issues/64" data-hovercard-type="issue" data-hovercard-url="/chucker/Mastonaut/issues/64/hovercard" href="https://github.com/chucker/Mastonaut/issues/64">#64</a>) A lot of people like for replies to default to <em>Unlisted</em>.</li>
+<li>If a toot links to another toot, clicking it now opens it right in Mastonaut rather than in your browser. (<a class="issue-link js-issue-link" data-error-text="Failed to load title" data-id="1570331251" data-permission-text="Title is private" data-url="https://github.com/chucker/Mastonaut/issues/93" data-hovercard-type="issue" data-hovercard-url="/chucker/Mastonaut/issues/93/hovercard" href="https://github.com/chucker/Mastonaut/issues/93">#93</a>)</li>
+<li>If your instance has a non-default (not 500) character limit for statuses, Mastonaut now detects this.</li>
+<li>Hashtags can now be autocompleted. You can start typing <code>#maston</code>, and <code>#mastonaut</code> will get suggested. Previously, only user names could be autocompleted.</li>
+<li>Accessibility of the timeline window has been improved slightly. (<a class="issue-link js-issue-link" data-error-text="Failed to load title" data-id="1581390088" data-permission-text="Title is private" data-url="https://github.com/chucker/Mastonaut/issues/96" data-hovercard-type="issue" data-hovercard-url="/chucker/Mastonaut/issues/96/hovercard" href="https://github.com/chucker/Mastonaut/issues/96">#96</a>) There's more to come.</li>
+</ul>
+<h2>Fixes</h2>
+<ul>
+<li>If you started typing a user name at the very end of your toot, and used autocompletion to fill out the rest, the actual <em>submitted</em> toot wouldn't contain the completed name.</li>
+</ul></div>
+                ]]>
+            </description>
+        </item>
+        
+        <item>
             <title>1.5.0</title>
             <pubDate>2023-01-02</pubDate>
             <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
