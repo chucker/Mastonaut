@@ -25,17 +25,18 @@
                 </windowController>
                 <customObject id="kSk-H4-Pok" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4" y="105"/>
+            <point key="canvasLocation" x="-249" y="120"/>
         </scene>
         <!--Tab View Controller-->
         <scene sceneID="xpW-c6-ej5">
             <objects>
-                <tabViewController showSeguePresentationStyle="single" tabStyle="toolbar" id="sNp-F1-yEO" sceneMemberID="viewController">
+                <tabViewController showSeguePresentationStyle="single" selectedTabViewItemIndex="5" tabStyle="toolbar" id="sNp-F1-yEO" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem identifier="" image="General" id="Njl-Me-EPK">
                             <nil key="label"/>
                         </tabViewItem>
                         <tabViewItem image="NSUserAccounts" id="KfB-Ac-bvQ"/>
+                        <tabViewItem image="calendar.day.timeline.right" catalog="system" id="c8f-QV-OEv"/>
                         <tabViewItem identifier="" image="Viewing" id="AeV-it-45b">
                             <nil key="label"/>
                         </tabViewItem>
@@ -55,6 +56,7 @@
                         <outlet property="tabView" destination="FZe-7U-zoH" id="etW-HT-HFk"/>
                         <segue destination="rl0-04-WoO" kind="relationship" relationship="tabItems" id="Xhl-mq-NSs"/>
                         <segue destination="3t8-w7-ug2" kind="relationship" relationship="tabItems" id="Ck0-yS-5Zg"/>
+                        <segue destination="ed0-8z-s1w" kind="relationship" relationship="tabItems" id="2jy-7p-HL4"/>
                         <segue destination="mSD-jq-ByT" kind="relationship" relationship="tabItems" id="BzU-hT-d1F"/>
                         <segue destination="sar-Nn-LHe" kind="relationship" relationship="tabItems" id="PjS-Jq-eNo"/>
                         <segue destination="gUN-yo-zZV" kind="relationship" relationship="tabItems" id="eSa-Rm-uum"/>
@@ -62,7 +64,7 @@
                 </tabViewController>
                 <customObject id="Ozb-oQ-lls" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="633" y="105"/>
+            <point key="canvasLocation" x="344" y="105"/>
         </scene>
         <!--General-->
         <scene sceneID="Wio-wh-bIc">
@@ -255,7 +257,7 @@
                 </viewController>
                 <customObject id="woI-dQ-Qn0" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1388" y="-481"/>
+            <point key="canvasLocation" x="1303" y="-747"/>
         </scene>
         <!--Viewing-->
         <scene sceneID="y1p-IN-2Fa">
@@ -1343,7 +1345,7 @@
                                                     <rect key="frame" x="17" y="17" width="348" height="226"/>
                                                     <clipView key="contentView" id="fSM-pz-NUz">
                                                         <rect key="frame" x="1" y="1" width="346" height="224"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" tableStyle="fullWidth" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="24" rowSizeStyle="systemDefault" headerView="GrU-US-sWU" viewBased="YES" id="ugb-tz-1iA">
                                                                 <rect key="frame" x="0.0" y="0.0" width="346" height="174"/>
@@ -1699,6 +1701,28 @@
             </objects>
             <point key="canvasLocation" x="633" y="936"/>
         </scene>
+        <!--Timeline-->
+        <scene sceneID="dML-kd-6IN">
+            <objects>
+                <viewController title="Timeline" id="ed0-8z-s1w" customClass="TimelinePreferencesViewController" customModule="Mastonaut" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="h5B-D8-ga5">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LpO-YL-nc4" customClass="NSHostingView">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </customView>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="preferencesView" destination="LpO-YL-nc4" id="ebA-9S-3UD"/>
+                    </connections>
+                </viewController>
+                <customObject id="0bB-GG-8fn" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="405" y="-418"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Composing" width="64" height="64"/>
@@ -1708,6 +1732,7 @@
         <image name="NSUserAccounts" width="32" height="32"/>
         <image name="Notifications" width="40" height="40"/>
         <image name="Viewing" width="64" height="64"/>
+        <image name="calendar.day.timeline.right" catalog="system" width="19" height="14"/>
         <image name="info_small" width="14" height="14"/>
         <image name="sensitive_show" width="20" height="15"/>
         <image name="warning" width="17" height="15"/>

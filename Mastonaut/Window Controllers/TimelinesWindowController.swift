@@ -320,6 +320,32 @@ class TimelinesWindowController: NSWindowController, UserPopUpButtonDisplaying, 
 		guard let window = window else { return }
 
 		window.backgroundColor = .timelineBackground
+
+		Task {
+			for await _ in NotificationCenter.default.notifications(named: NSWindow.didBecomeKeyNotification) {
+				await setTimelineMarkerBehavior(newBehavior: .active)
+			}
+		}
+
+		Task {
+			for await _ in NotificationCenter.default.notifications(named: NSWindow.didResignKeyNotification) {
+				await setTimelineMarkerBehavior(newBehavior: .passive)
+			}
+		}
+	}
+
+	func setTimelineMarkerBehavior(newBehavior: TimelineViewController.MarkerBehavior) async {
+		var behavior = newBehavior
+		
+		if MastonautPreferences.instance.timelineSyncMode == .disabled {
+			behavior = .disabled
+		}
+
+		for column in timelinesViewController.columnViewControllers {
+			if let timeline = column as? TimelineViewController, timeline.source == .timeline {
+				await timeline.setMarkerBehavior(behavior)
+			}
+		}
 	}
 
 	func handleDetach() {

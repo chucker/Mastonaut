@@ -19,10 +19,15 @@
 
 import Cocoa
 import CoreTootin
+import Logging
 import MastodonKit
 
 class TimelineViewController: StatusListViewController
 {
+	private var logger: Logger
+
+	private var markerTimer: Timer?
+
 	internal var source: Source?
 	{
 		didSet { if source != oldValue { sourceDidChange(source: source) }}
@@ -31,7 +36,18 @@ class TimelineViewController: StatusListViewController
 	init(source: Source?)
 	{
 		self.source = source
+
+		logger = Logger(subsystemType: Self.self)
+
+		markerBehavior = .active
+
 		super.init()
+
+		if (source != nil) && source == .timeline
+		{
+			startMarkerTimer(forSource: source!)
+		}
+
 		updateAccessibilityAttributes()
 	}
 
@@ -43,7 +59,166 @@ class TimelineViewController: StatusListViewController
 
 	internal func sourceDidChange(source: Source?)
 	{
+		switch source
+		{
+		case .timeline:
+			if let source
+			{
+				startMarkerTimer(forSource: source)
+			}
+		default:
+			stopMarkerTimerIfRunning()
+		}
+
 		updateAccessibilityAttributes()
+	}
+
+	// MARK: Timeline Markers
+
+	func startMarkerTimer(forSource source: Source)
+	{
+		stopMarkerTimerIfRunning()
+
+		markerTimer = Timer.scheduledTimer(timeInterval: 30.0, target: self,
+		                                   selector: #selector(updateMarker), userInfo: nil, repeats: true)
+	}
+
+	func stopMarkerTimerIfRunning()
+	{
+		markerTimer?.invalidate()
+	}
+
+	func firstVisibleStatus() -> Status?
+	{
+		let rect = tableView.visibleRect
+		let rows = tableView.rows(in: rect)
+
+		for rowIndex in rows.location ..< rows.location + rows.length
+		{
+			if let view = tableView.view(atColumn: 0, row: rowIndex, makeIfNecessary: false) as? StatusTableCellView,
+			   let cellModel = view.cellModel
+			{
+				return cellModel.status
+			}
+		}
+
+		logger.warning("Did not find any visible table row containing a status")
+
+		return nil
+	}
+
+	public enum MarkerBehavior
+	{
+		case active
+		case passive
+		case disabled
+	}
+
+	private var markerBehavior: MarkerBehavior
+	private var markerSyncProvider: MarkerSyncProvider?
+
+	public func setMarkerBehavior(_ newBehavior: MarkerBehavior) async
+	{
+		markerBehavior = newBehavior
+
+		switch MastonautPreferences.instance.timelineSyncMode
+		{
+		case .disabled:
+			markerSyncProvider = nil
+		case .icloud:
+			break
+		case .mastodon:
+			markerSyncProvider = MastodonAPIMarkerSyncProvider()
+		}
+
+		switch newBehavior
+		{
+		case .active:
+			stopMarkerTimerIfRunning()
+
+			await jumpToMarker()
+
+			if let source
+			{
+				startMarkerTimer(forSource: source)
+			}
+
+			logger.debug2("Timeline markers for this column are now `active`, meaning this column will _write_ to the API.")
+
+		case .passive:
+			if let source
+			{
+				startMarkerTimer(forSource: source)
+			}
+
+			logger.debug2("Timeline markers for this column are now `passive`, meaning this column will _read_ from the API.")
+
+		case .disabled:
+			stopMarkerTimerIfRunning()
+		}
+	}
+
+	func jumpToMarker() async
+	{
+		if let client, let homeMarker = await markerSyncProvider?.read(client: client)
+		{
+			if let firstVisibleStatus = firstVisibleStatus(), homeMarker.lastReadId < firstVisibleStatus.id
+			{
+				logger.debug2("Not jumping to marker because \(homeMarker.lastReadId) is older than our current position \(firstVisibleStatus.id)")
+
+				return
+			}
+
+			var entryIndex = entryList.firstIndex(where: { $0.entryKey == homeMarker.lastReadId })
+
+			if entryIndex == nil
+			{
+				_ = try? await client.run(Timelines.home(range: .min(id: homeMarker.lastReadId, limit: 20)))
+
+				entryIndex = entryList.firstIndex(where: { $0.entryKey == homeMarker.lastReadId })
+			}
+
+			if entryIndex == nil
+			{
+				logger.warning("Got timeline marker to \(homeMarker.lastReadId), but we don't seem to have that entry, and apparently couldn't fetch it either")
+			}
+			else
+			{
+				logger.debug2("Got timeline marker to \(homeMarker.lastReadId); scrolling there")
+
+				tableView.scrollRowToVisible(entryIndex!)
+			}
+		}
+	}
+
+	@objc func updateMarker(timer: Timer)
+	{
+		switch markerBehavior
+		{
+		case .active:
+			setMarker()
+		case .passive:
+			Task
+			{
+				await jumpToMarker()
+			}
+		case .disabled:
+			break
+		}
+	}
+
+	func setMarker()
+	{
+		if let firstVisibleStatus = firstVisibleStatus(),
+		   let client
+		{
+			logger.debug2("Updating timeline marker to \(firstVisibleStatus.id) (\(firstVisibleStatus.authorAccount), \(firstVisibleStatus.createdAt))")
+
+			let newMarker = Marker(lastReadStatus: firstVisibleStatus)
+			
+			markerSyncProvider?.write(client: client,
+									  newMarker: newMarker)
+		}
 	}
 
 	override func clientDidChange(_ client: ClientType?, oldClient: ClientType?)
@@ -165,6 +340,7 @@ class TimelineViewController: StatusListViewController
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
+
 		updateAccessibilityAttributes()
 	}
 
@@ -213,7 +389,7 @@ class TimelineViewController: StatusListViewController
 
 		case .favorites: currentContext = .home
 		case .bookmarks: currentContext = .home
-			
+
 		case .list: currentContext = .home
 		case .tag: currentContext = .home
 		case .timeline: currentContext = .home
