@@ -788,7 +788,7 @@ class ListViewController<DisplayedEntry: ListViewPresentable & Codable, FetchedE
 				cellViewIdentifier = self.cellViewIdentifier(for: entry)
 			}
 
-œ				view = tableView.makeView(withIdentifier: cellViewIdentifier, owner: nil)
+			view = tableView.makeView(withIdentifier: cellViewIdentifier, owner: nil)
 
 			if let cellView = view as? NSTableCellView
 			{
