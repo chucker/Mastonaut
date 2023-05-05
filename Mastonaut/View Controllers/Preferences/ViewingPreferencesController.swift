@@ -22,6 +22,8 @@ import CoreTootin
 
 class ViewingPreferencesController: NSViewController
 {
+	@IBOutlet weak var fontSizePreferencesView: NSView!
+	
 	@IBOutlet private weak var sensitiveMediaHideSensitiveButton: NSButton!
 	@IBOutlet private weak var sensitiveMediaAlwaysRevealButton: NSButton!
 	@IBOutlet private weak var sensitiveMediaAlwaysHideButton: NSButton!
@@ -37,6 +39,9 @@ class ViewingPreferencesController: NSViewController
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
+		
+		let fontSizeView = FontSizePreferencesView()
+		AppKitSwiftUIIntegration.hostSwiftUIView(fontSizeView, inView: fontSizePreferencesView)
 
 		let sensitiveMediaButtonMap: [MastonautPreferences.MediaDisplayMode: NSButton] = [
 			.alwaysHide: sensitiveMediaAlwaysHideButton,

@@ -17,30 +17,34 @@
 //  GNU General Public License for more details.
 //
 
+import CoreTootin
 import Foundation
 import MastodonKit
-import CoreTootin
 
 class StatusCellModel: NSObject
 {
 	let status: Status
 
+	let poll: Poll?
+
+	unowned let attachmentPresenter: AttachmentPresenting
 	unowned let interactionHandler: StatusInteractionHandling
+	unowned let activeInstance: Instance
 
-	@objc dynamic
-	private(set) var isFavorited: Bool
+	@objc private(set) dynamic
+	var isFavorited: Bool
 
-	@objc dynamic
-	private(set) var isReblogged: Bool
+	@objc private(set) dynamic
+	var isReblogged: Bool
 
-	@objc dynamic
-	private(set) var authorAvatar: NSImage
+	@objc private(set) dynamic
+	var authorAvatar: NSImage
 
-	@objc dynamic
-	private(set) var agentAvatar: NSImage? = nil
+	@objc private(set) dynamic
+	var agentAvatar: NSImage?
 
-	@objc dynamic
-	private(set) var contextIcon: NSImage? = nil
+	@objc private(set) dynamic
+	var contextIcon: NSImage?
 
 	var visibleStatus: Status
 	{
@@ -57,15 +61,24 @@ class StatusCellModel: NSObject
 		return status.account
 	}
 
-	init(status: Status, interactionHandler: StatusInteractionHandling)
+	init(status: Status,
+	     poll: Poll?,
+	     attachmentPresenter: AttachmentPresenting,
+	     interactionHandler: StatusInteractionHandling,
+	     activeInstance: Instance)
 	{
 		self.status = status
+
+		self.poll = poll
+
+		self.attachmentPresenter = attachmentPresenter
 		self.interactionHandler = interactionHandler
+		self.activeInstance = activeInstance
 
 		self.isFavorited = status.favourited == true
 		self.isReblogged = status.reblogged == true
 
-		authorAvatar = #imageLiteral(resourceName: "missing")
+		self.authorAvatar = #imageLiteral(resourceName: "missing")
 
 		super.init()
 
@@ -99,8 +112,8 @@ class StatusCellModel: NSObject
 		{
 			contextIcon = #imageLiteral(resourceName: "retooted")
 			button.set(stringValue: 🔠("status.context.boost", agent.bestDisplayName),
-					   applyingAttributes: attributes,
-					   applyingEmojis: agent.cacheableEmojis)
+			           applyingAttributes: attributes,
+			           applyingEmojis: agent.cacheableEmojis)
 			button.isEnabled = true
 		}
 		else if status.inReplyToAccountID == status.account.id
@@ -182,8 +195,10 @@ class StatusCellModel: NSObject
 
 	func loadAccountAvatar(for status: Status, completion: @escaping (NSImage) -> Void)
 	{
-		AppDelegate.shared.avatarImageCache.fetchImage(account: status.account) { result in
-			switch result {
+		AppDelegate.shared.avatarImageCache.fetchImage(account: status.account)
+		{ result in
+			switch result
+			{
 			case .inCache(let avatarImage):
 				assert(Thread.isMainThread)
 				completion(avatarImage)
@@ -224,15 +239,15 @@ class StatusCellModel: NSObject
 extension StatusCellModel: PollViewControllerDelegate
 {
 	func pollViewController(_ viewController: PollViewController,
-							userDidVote optionIndexSet: IndexSet,
-							completion: @escaping (Poll?) -> Void)
+	                        userDidVote optionIndexSet: IndexSet,
+	                        completion: @escaping (Poll?) -> Void)
 	{
 		guard let poll = viewController.poll else { return }
 
 		interactionHandler.voteOn(poll: poll,
-								  statusID: visibleStatus.id,
-								  options: optionIndexSet) { [weak self] result in
-
+		                          statusID: visibleStatus.id,
+		                          options: optionIndexSet)
+		{ [weak self] result in
 			switch result
 			{
 			case .success(let updatedPoll):
@@ -240,7 +255,8 @@ extension StatusCellModel: PollViewControllerDelegate
 
 			case .failure(let error):
 				completion(nil)
-				DispatchQueue.main.async {
+				DispatchQueue.main.async
+				{
 					self?.interactionHandler.handle(interactionError: UserLocalizedDescriptionError(error))
 				}
 			}

@@ -262,12 +262,15 @@
             <objects>
                 <viewController title="Viewing" showSeguePresentationStyle="single" id="mSD-jq-ByT" customClass="ViewingPreferencesController" customModule="Mastonaut" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="gkN-wI-pe6">
-                        <rect key="frame" x="0.0" y="0.0" width="670" height="326"/>
+                        <rect key="frame" x="0.0" y="0.0" width="670" height="442"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="20" horizontalStackHuggingPriority="250.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalCompressionResistancePriority="250" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dnI-9D-en5">
-                                <rect key="frame" x="20" y="20" width="630" height="286"/>
+                                <rect key="frame" x="20" y="20" width="630" height="402"/>
                                 <subviews>
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="NvV-3Y-5m8" customClass="NSHostingView">
+                                        <rect key="frame" x="0.0" y="306" width="630" height="96"/>
+                                    </customView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="0wY-1I-Ecj">
                                         <rect key="frame" x="0.0" y="188" width="630" height="98"/>
                                         <subviews>
@@ -486,8 +489,10 @@
                                     <integer value="1000"/>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
+                                    <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
@@ -503,6 +508,7 @@
                     </view>
                     <connections>
                         <outlet property="autoplayVideosButton" destination="K31-xF-mvG" id="Xjr-k2-Oj2"/>
+                        <outlet property="fontSizePreferencesView" destination="NvV-3Y-5m8" id="T9T-WK-gqA"/>
                         <outlet property="sensitiveMediaAlwaysHideButton" destination="vhm-7l-6wD" id="9kp-oO-4gS"/>
                         <outlet property="sensitiveMediaAlwaysRevealButton" destination="lGi-pK-3BJ" id="YEM-zV-Ecy"/>
                         <outlet property="sensitiveMediaHideSensitiveButton" destination="9AT-Bt-cW1" id="mBE-Xv-LIN"/>
@@ -1343,7 +1349,7 @@
                                                     <rect key="frame" x="17" y="17" width="348" height="226"/>
                                                     <clipView key="contentView" id="fSM-pz-NUz">
                                                         <rect key="frame" x="1" y="1" width="346" height="224"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" tableStyle="fullWidth" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="24" rowSizeStyle="systemDefault" headerView="GrU-US-sWU" viewBased="YES" id="ugb-tz-1iA">
                                                                 <rect key="frame" x="0.0" y="0.0" width="346" height="174"/>

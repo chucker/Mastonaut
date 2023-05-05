@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16096" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16096"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="SidebarTitleViewController" customModule="Mastonaut" customModuleProvider="target">
             <connections>
-                <outlet property="leftSideButton" destination="iaa-JT-3Vi" id="hX3-9C-tf5"/>
+                <outlet property="firstLeftSideButton" destination="iaa-JT-3Vi" id="kK2-cR-xsY"/>
+                <outlet property="secondLeftSideButton" destination="c2Y-LV-99C" id="CAx-3w-Ots"/>
                 <outlet property="subtitleLabel" destination="OsD-tE-UAQ" id="xAr-7e-pr8"/>
                 <outlet property="titleLabel" destination="otD-Od-zUn" id="nlz-GY-4PX"/>
                 <outlet property="view" destination="26m-Xx-1gY" id="TiG-G5-CxZ"/>
@@ -16,21 +17,28 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="751" verticalHuggingPriority="751" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="752" misplaced="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="26m-Xx-1gY">
+        <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="751" verticalHuggingPriority="751" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="752" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="26m-Xx-1gY">
             <rect key="frame" x="0.0" y="0.0" width="200" height="31"/>
             <subviews>
                 <button horizontalHuggingPriority="750" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="iaa-JT-3Vi">
-                    <rect key="frame" x="0.0" y="-1" width="22" height="32"/>
+                    <rect key="frame" x="-1" y="-2" width="24" height="34"/>
                     <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="bookmark" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Cgr-xS-oN4">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                 </button>
+                <button horizontalHuggingPriority="750" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="c2Y-LV-99C">
+                    <rect key="frame" x="29" y="-2" width="24" height="34"/>
+                    <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="bookmark" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="CsZ-Fx-BEq">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
                 <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="1" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="751" verticalHuggingPriority="751" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ufm-9b-cs4">
-                    <rect key="frame" x="30" y="0.0" width="170" height="31"/>
+                    <rect key="frame" x="60" y="0.0" width="140" height="31"/>
                     <subviews>
                         <textField horizontalHuggingPriority="752" verticalHuggingPriority="752" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="otD-Od-zUn">
-                            <rect key="frame" x="9" y="15" width="153" height="16"/>
+                            <rect key="frame" x="-2" y="15" width="144" height="16"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="16" id="vhL-b9-0Sf"/>
                             </constraints>
@@ -41,7 +49,7 @@
                             </textFieldCell>
                         </textField>
                         <textField verticalHuggingPriority="751" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="OsD-tE-UAQ">
-                            <rect key="frame" x="28" y="0.0" width="114" height="14"/>
+                            <rect key="frame" x="13" y="0.0" width="114" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="Bb4-QA-NJG"/>
                             </constraints>
@@ -66,8 +74,10 @@
             <visibilityPriorities>
                 <integer value="1000"/>
                 <integer value="1000"/>
+                <integer value="1000"/>
             </visibilityPriorities>
             <customSpacing>
+                <real value="3.4028234663852886e+38"/>
                 <real value="3.4028234663852886e+38"/>
                 <real value="3.4028234663852886e+38"/>
             </customSpacing>

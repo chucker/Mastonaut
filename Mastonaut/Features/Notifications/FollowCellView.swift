@@ -18,8 +18,8 @@
 //
 
 import Cocoa
-import MastodonKit
 import CoreTootin
+import MastodonKit
 
 class FollowCellView: MastonautTableCellView, NotificationDisplaying
 {
@@ -29,38 +29,50 @@ class FollowCellView: MastonautTableCellView, NotificationDisplaying
 	@IBOutlet private unowned var userAccountLabel: NSTextField!
 	@IBOutlet private unowned var userBioLabel: AttributedLabel!
 	@IBOutlet private unowned var timeLabel: NSTextField!
+	@IBOutlet var followRequestResponsesStackView: NSStackView!
 
-	private unowned var interactionHandler: NotificationInteractionHandling? = nil
+	private unowned var interactionHandler: NotificationInteractionHandling?
 
-	private var agentAccount: Account? = nil
-	private var displayedNotificationTags: [Tag]? = nil
+	private var agentAccount: Account?
+	private var displayedNotificationTags: [Tag]?
+
+	private var notification: MastodonNotification?
 
 	var displayedNotificationId: String?
 
 	// This cell never displays statuses
 	let displayedStatusId: String? = nil
 
-	private static let followLabelAttributes: [NSAttributedString.Key: AnyObject] = [
-		.foregroundColor: NSColor.labelColor, .font: NSFont.systemFont(ofSize: 14, weight: .medium)
-	]
+	private func fontService() -> FontService
+	{
+		return FontService(font: MastonautPreferences.instance.statusFont)
+	}
 
-	private static let userBioLabelAttributes: [NSAttributedString.Key: AnyObject] = [
-		.foregroundColor: NSColor.labelColor, .font: NSFont.labelFont(ofSize: 13),
-		.underlineStyle: NSNumber(value: 0) // <-- This is a hack to prevent the label's contents from shifting
-											// vertically when clicked.
-	]
-
-	private static let bioLabelLinkAttributes: [NSAttributedString.Key: AnyObject] = [
-		.foregroundColor: NSColor.safeControlTintColor,
-		.font: NSFont.systemFont(ofSize: 13, weight: .medium),
-		.underlineStyle: NSNumber(value: 1)
-	]
-
-	override func awakeFromNib() {
+	override func awakeFromNib()
+	{
 		super.awakeFromNib()
 
 		timeLabel.formatter = RelativeDateFormatter.shared
-		userBioLabel.linkTextAttributes = FollowCellView.bioLabelLinkAttributes
+
+		fontObserver = MastonautPreferences.instance.observe(\.statusFont, options: .new)
+		{
+			[weak self] _, _ in
+			self?.updateFont()
+		}
+	}
+
+	private var fontObserver: NSKeyValueObservation?
+
+	deinit
+	{
+		fontObserver?.invalidate()
+	}
+
+	func updateFont()
+	{
+		userBioLabel.linkTextAttributes = fontService().userBioLinkAttributes()
+
+		redraw()
 	}
 
 	override var backgroundStyle: NSView.BackgroundStyle
@@ -80,26 +92,31 @@ class FollowCellView: MastonautTableCellView, NotificationDisplaying
 	}
 
 	func set(displayedNotification notification: MastodonNotification,
-			 attachmentPresenter: AttachmentPresenting,
-			 interactionHandler: NotificationInteractionHandling,
-			 activeInstance: Instance)
+	         attachmentPresenter: AttachmentPresenting,
+	         interactionHandler: NotificationInteractionHandling,
+	         activeInstance: Instance)
 	{
-		self.displayedNotificationId = notification.id
+		self.notification = notification
+
+		displayedNotificationId = notification.id
 		self.interactionHandler = interactionHandler
-		self.agentAccount = notification.account
-		let accountEmojis = notification.account.cacheableEmojis
+		agentAccount = notification.account
 
 		displayedNotificationTags = notification.status?.tags
 
 		userBioLabel.linkHandler = self
 
-		interactionLabel.set(stringValue: 🔠("%@ followed you", notification.authorName),
-							 applyingAttributes: FollowCellView.followLabelAttributes,
-							 applyingEmojis: accountEmojis)
+		switch notification.type
+		{
+		case .follow:
+			followRequestResponsesStackView.isHidden = true
+		case .follow_request:
+			followRequestResponsesStackView.isHidden = false
+		default:
+			break
+		}
 
-		userBioLabel.set(attributedStringValue: notification.account.attributedNote,
-						 applyingAttributes: FollowCellView.userBioLabelAttributes,
-						 applyingEmojis: accountEmojis)
+		redraw()
 
 		userBioLabel.isHidden = userBioLabel.attributedStringValue.length == 0
 		userBioLabel.selectableAfterFirstClick = true
@@ -109,8 +126,10 @@ class FollowCellView: MastonautTableCellView, NotificationDisplaying
 		timeLabel.toolTip = DateFormatter.longDateFormatter.string(from: notification.createdAt)
 
 		let localNotificationID = notification.id
-		AppDelegate.shared.avatarImageCache.fetchImage(account: notification.account) { [weak self] result in
-			switch result {
+		AppDelegate.shared.avatarImageCache.fetchImage(account: notification.account)
+		{ [weak self] result in
+			switch result
+			{
 			case .inCache(let avatarImage):
 				assert(Thread.isMainThread)
 				self?.agentAvatarButton.image = avatarImage
@@ -122,11 +141,40 @@ class FollowCellView: MastonautTableCellView, NotificationDisplaying
 		}
 	}
 
+	func redraw()
+	{
+		guard let notification else { return }
+
+		let accountEmojis = notification.account.cacheableEmojis
+
+		var interactionLabelText: String
+
+		switch notification.type
+		{
+		case .follow:
+			interactionLabelText = 🔠("%@ followed you", notification.authorName)
+		case .follow_request:
+			interactionLabelText = 🔠("%@ requested to follow you", notification.authorName)
+		default:
+			return
+		}
+
+		interactionLabel.set(stringValue: interactionLabelText,
+		                     applyingAttributes: fontService().followAttributes(),
+		                     applyingEmojis: accountEmojis)
+
+		userBioLabel.set(attributedStringValue: notification.account.attributedNote,
+		                 applyingAttributes: fontService().userBioAttributes(),
+		                 applyingEmojis: accountEmojis)
+	}
+
 	private func applyAgentImageIfNotReused(_ image: NSImage?, originatingNotificationID: String)
 	{
-		DispatchQueue.main.async { [weak self] in
+		DispatchQueue.main.async
+		{ [weak self] in
 			// Make sure that the notification view hasn't been reused since this fetch was dispatched.
-			guard self?.displayedNotificationId == originatingNotificationID else
+			guard self?.displayedNotificationId == originatingNotificationID
+			else
 			{
 				return
 			}
@@ -152,6 +200,32 @@ class FollowCellView: MastonautTableCellView, NotificationDisplaying
 	{
 		agentAccount.map { interactionHandler?.show(account: $0) }
 	}
+
+	@IBAction func acceptRequest(_ sender: Any)
+	{
+		guard let agentAccount else { return }
+
+		respondToFollowRequest(apiRequest: FollowRequests.authorize(id: agentAccount.id))
+	}
+
+	@IBAction func declineRequest(_ sender: Any)
+	{
+		guard let agentAccount else { return }
+
+		respondToFollowRequest(apiRequest: FollowRequests.reject(id: agentAccount.id))
+	}
+
+	func respondToFollowRequest(apiRequest: Request<Empty>)
+	{
+		guard let client = interactionHandler?.client
+		else
+		{ return }
+
+		client.run(apiRequest)
+		{
+			_ in
+		}
+	}
 }
 
 extension FollowCellView: AttributedLabelLinkHandler
@@ -166,7 +240,7 @@ extension FollowCellView: RichTextCapable
 {
 	func set(shouldDisplayAnimatedContents animates: Bool)
 	{
-		interactionLabel.animatedEmojiImageViews?.forEach({ $0.animates = animates })
-		userBioLabel.animatedEmojiImageViews?.forEach({ $0.animates = animates })
+		interactionLabel.animatedEmojiImageViews?.forEach { $0.animates = animates }
+		userBioLabel.animatedEmojiImageViews?.forEach { $0.animates = animates }
 	}
 }

@@ -420,7 +420,7 @@ class ProfileViewController: TimelineViewController, SidebarPresentable, Account
 
 		let relationshipService = RelationshipsService(client: client, authorizedAccount: authorizedAccount)
 
-		relationshipService.relationship(with: account) { profileCellView.setRelationship($0) }
+		relationshipService.relationship(with: account, forceRefresh: true) { profileCellView.setRelationship($0) }
 		profileCellView.relationshipInteractionHandler =
 			{
 				[unowned self] interaction in

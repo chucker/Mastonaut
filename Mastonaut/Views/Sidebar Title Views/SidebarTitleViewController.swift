@@ -21,7 +21,8 @@ import Cocoa
 
 class SidebarTitleViewController: NSViewController
 {
-	@IBOutlet unowned var leftSideButton: NSButton!
+	@IBOutlet unowned var firstLeftSideButton: NSButton!
+	@IBOutlet unowned var secondLeftSideButton: NSButton!
 	@IBOutlet unowned var titleLabel: NSTextField!
 	@IBOutlet unowned var subtitleLabel: NSTextField!
 
@@ -74,8 +75,12 @@ class SidebarTitleViewController: NSViewController
 		guard isViewLoaded else { return }
 
 		observations.removeAll()
-		leftSideButton.action = nil
-		leftSideButton.target = nil
+
+		for button in [firstLeftSideButton, secondLeftSideButton]
+		{
+			button?.action = nil
+			button?.target = nil
+		}
 	}
 
 	private func updateViews()
@@ -84,13 +89,13 @@ class SidebarTitleViewController: NSViewController
 
 		switch titleMode
 		{
-		case .none, .button(_, .none):
+		case .none, .buttons(_, .none):
 			titleLabel.stringValue = ""
 			titleLabel.isHidden = true
 			subtitleLabel.stringValue = ""
 			subtitleLabel.isHidden = true
 
-		case .subtitle(let title, let subtitle), .button(_, .subtitle(let title, let subtitle)):
+		case .subtitle(let title, let subtitle), .buttons(_, .subtitle(let title, let subtitle)):
 			let attrTitle = title.applyingAttributes(Self.titleAttributes)
 			let attrSubtitle = subtitle.applyingAttributes(Self.subtitleAttributes)
 
@@ -101,7 +106,7 @@ class SidebarTitleViewController: NSViewController
 			subtitleLabel.isHidden = false
 			subtitleLabel.installEmojiSubviews(using: attrSubtitle)
 
-		case .title(let title), .button(_, .title(let title)):
+		case .title(let title), .buttons(_, .title(let title)):
 			let attrTitle = title.applyingAttributes(Self.standaloneTitleAttributes)
 
 			titleLabel.attributedStringValue = attrTitle
@@ -111,50 +116,87 @@ class SidebarTitleViewController: NSViewController
 			subtitleLabel.isHidden = true
 			subtitleLabel.removeAllEmojiSubviews()
 
-		case .button(_, .button(_, _)):
+		case .buttons(_, .buttons(_, _)):
 			fatalError("You fucking bastard")
 		}
 
-		if case .button(let buttonStateBindable, _) = titleMode
+		if case .buttons(let buttonStateBindable, _) = titleMode
 		{
-			leftSideButton.isHidden = false
-			leftSideButton.action = #selector(SidebarTitleButtonStateBindable.didClickButton(_:))
-			leftSideButton.target = buttonStateBindable
-
-			observations.observe(buttonStateBindable, \.icon, sendInitial: true)
+			for button in [firstLeftSideButton, secondLeftSideButton]
 			{
-				[unowned self] (_, change) in
+				button?.isHidden = false
+				button?.target = buttonStateBindable
+			}
+
+			firstLeftSideButton.action = #selector(SidebarTitleButtonsStateBindable.didClickFirstButton(_:))
+			secondLeftSideButton.action = #selector(SidebarTitleButtonsStateBindable.didClickSecondButton(_:))
+
+			observations.observe(buttonStateBindable, \.firstIcon, sendInitial: true)
+			{
+				[unowned self] _, change in
 
 				if let image = change.newValue
 				{
-					self.leftSideButton.image = image
+					self.firstLeftSideButton.image = image
 				}
 			}
 
-			observations.observe(buttonStateBindable, \.accessibilityLabel, sendInitial: true)
+			observations.observe(buttonStateBindable, \.firstAccessibilityLabel, sendInitial: true)
 			{
-				[unowned self] (_, change) in
+				[unowned self] _, change in
 
 				if let label = change.newValue
 				{
-					self.leftSideButton.setAccessibilityLabel(label)
+					self.firstLeftSideButton.setAccessibilityLabel(label)
 				}
 			}
 
-			observations.observe(buttonStateBindable, \.accessibilityTitle, sendInitial: true)
+			observations.observe(buttonStateBindable, \.firstAccessibilityTitle, sendInitial: true)
 			{
-				[unowned self] (_, change) in
+				[unowned self] _, change in
 
 				if let title = change.newValue
 				{
-					self.leftSideButton.setAccessibilityTitle(title)
+					self.firstLeftSideButton.setAccessibilityTitle(title)
+				}
+			}
+
+			observations.observe(buttonStateBindable, \.secondIcon, sendInitial: true)
+			{
+				[unowned self] _, change in
+
+				if let image = change.newValue
+				{
+					self.secondLeftSideButton.image = image
+				}
+			}
+
+			observations.observe(buttonStateBindable, \.secondAccessibilityLabel, sendInitial: true)
+			{
+				[unowned self] _, change in
+
+				if let label = change.newValue
+				{
+					self.secondLeftSideButton.setAccessibilityLabel(label)
+				}
+			}
+
+			observations.observe(buttonStateBindable, \.secondAccessibilityTitle, sendInitial: true)
+			{
+				[unowned self] _, change in
+
+				if let title = change.newValue
+				{
+					self.secondLeftSideButton.setAccessibilityTitle(title)
 				}
 			}
 		}
 		else
 		{
-			leftSideButton.isHidden = true
+			for button in [firstLeftSideButton, secondLeftSideButton]
+			{
+				button?.isHidden = true
+			}
 		}
 	}
-
 }

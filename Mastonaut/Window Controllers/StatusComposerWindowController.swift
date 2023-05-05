@@ -88,19 +88,10 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 
 	private lazy var userPopUpButtonController = UserPopUpButtonSubcontroller(display: self)
 
-	private static let authorLabelAttributes: [NSAttributedString.Key: AnyObject] = [
-		.foregroundColor: NSColor.labelColor, .font: NSFont.systemFont(ofSize: 13, weight: .semibold)
-	]
-
-	private static let statusLabelAttributes: [NSAttributedString.Key: AnyObject] = [
-		.foregroundColor: NSColor.labelColor, .font: NSFont.labelFont(ofSize: 13)
-	]
-
-	private static let statusLabelLinkAttributes: [NSAttributedString.Key: AnyObject] = [
-		.foregroundColor: NSColor.safeControlTintColor,
-		.font: NSFont.systemFont(ofSize: 13, weight: .medium),
-		.underlineStyle: NSNumber(value: 1)
-	]
+	private func fontService() -> FontService
+	{
+		return FontService(font: MastonautPreferences.instance.statusFont)
+	}
 
 	private lazy var fileDropFilteringOptions: [NSPasteboard.ReadingOptionKey: Any]? =
 	{
@@ -468,7 +459,7 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 
 		window?.registerForDraggedTypes([.fileURL, .png])
 
-		replyStatusContentsLabel.linkTextAttributes = StatusComposerWindowController.statusLabelLinkAttributes
+		replyStatusContentsLabel.linkTextAttributes = fontService().statusLinkAttributes()
 		visibilitySegmentedControl.isHidden = true
 
 		collapseAllDrawers()
@@ -661,12 +652,12 @@ class StatusComposerWindowController: NSWindowController, UserPopUpButtonDisplay
 		}
 
 		replyStatusAuthorNameLabel.set(stringValue: replyStatus.authorName,
-		                               applyingAttributes: StatusComposerWindowController.authorLabelAttributes,
+		                               applyingAttributes: fontService().authorAttributes(),
 		                               applyingEmojis: replyStatus.account.cacheableEmojis)
 
 		replyStatusContentsLabel.linkHandler = self
 		replyStatusContentsLabel.set(attributedStringValue: replyStatus.attributedContent,
-		                             applyingAttributes: StatusComposerWindowController.statusLabelAttributes,
+		                             applyingAttributes: fontService().statusAttributes(),
 		                             applyingEmojis: replyStatus.cacheableEmojis)
 
 		replyStatusAvatarView.image = #imageLiteral(resourceName: "missing")
@@ -1167,6 +1158,10 @@ extension StatusComposerWindowController: NSWindowDelegate
 
 		return true
 	}
+	
+	func windowWillClose(_ notification: Foundation.Notification) {
+		AppDelegate.shared.removeStatusComposerWindowController(self)
+	}
 }
 
 extension StatusComposerWindowController: AttributedLabelLinkHandler
@@ -1284,6 +1279,13 @@ extension StatusComposerWindowController: AccountsMenuProvider
 
 extension StatusComposerWindowController
 {
+	@IBAction func composeStatus(_ sender: Any?)
+	{
+		AppDelegate.shared.composeStatus(sender)
+		guard let newComposerWindow = AppDelegate.shared.statusComposerWindowControllers.last else { return }
+		newComposerWindow.currentAccount = self.currentAccount
+	}
+	
 	@IBAction func sendStatus(_ sender: Any?)
 	{
 		validateAndSendStatus()

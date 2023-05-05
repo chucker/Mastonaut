@@ -297,7 +297,7 @@ class NotificationListViewController: ListViewController<MastodonNotification>, 
 		case .favourite, .reblog, .poll:
 			return NotificationListViewController.CellViewIdentifier.interaction
 
-		case .follow:
+		case .follow, .follow_request:
 			return NotificationListViewController.CellViewIdentifier.follow
 
 		default:
@@ -310,8 +310,7 @@ class NotificationListViewController: ListViewController<MastodonNotification>, 
 	{
 		guard
 			let attachmentPresenter = authorizedAccountProvider?.attachmentPresenter,
-			let instance = authorizedAccountProvider?.currentInstance,
-			let accountNotificationPreferences
+			let instance = authorizedAccountProvider?.currentInstance
 		else
 		{
 			return
@@ -337,7 +336,7 @@ class NotificationListViewController: ListViewController<MastodonNotification>, 
 			               interactionHandler: self,
 			               activeInstance: instance)
 
-		case .favourite, .follow, .reblog, .poll:
+		case .favourite, .follow, .follow_request, .reblog, .poll:
 			guard let notificationCell = cell as? NotificationDisplaying
 			else
 			{
@@ -492,6 +491,17 @@ extension NotificationListViewController: NSMenuItemValidation
 		return cellMenuItemHandler.validateMenuItem(menuItem)
 	}
 
+	// not possible until validateMenuItem allows for different view types
+//	@IBAction func copyTootLink(_ sender: Any?)
+//	{
+//		cellMenuItemHandler.copyTootLink(sender)
+//	}
+//
+//	@IBAction func copyTootText(_ sender: Any?)
+//	{
+//		cellMenuItemHandler.copyTootText(sender)
+//	}
+
 	@IBAction func favoriteSelectedStatus(_ sender: Any?)
 	{
 		cellMenuItemHandler.favoriteSelectedStatus(sender)
@@ -553,7 +563,7 @@ extension MastodonNotification: ListViewPresentable
 		// these are known, but not currently supported
 		switch type
 		{
-		case .status, .follow_request, .update, .admin_sign_up, .admin_report:
+		case .status, .update, .admin_sign_up, .admin_report:
 			return false
 		default:
 			break

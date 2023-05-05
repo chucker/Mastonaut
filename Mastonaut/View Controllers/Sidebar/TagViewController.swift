@@ -17,14 +17,16 @@
 //  GNU General Public License for more details.
 //
 
-import Foundation
 import CoreTootin
+import Foundation
 
 class TagViewController: TimelineViewController, SidebarPresentable
 {
 	let tag: String
-	private let titleButtonBindable: SidebarTitleButtonStateBindable?
+	private let titleButtonBindable: SidebarTitleButtonsStateBindable?
+
 	private let tagBookmarkService: TagBookmarkService?
+	private let tagFollowService: TagFollowService?
 
 	var sidebarModelValue: SidebarModel
 	{
@@ -33,57 +35,92 @@ class TagViewController: TimelineViewController, SidebarPresentable
 
 	var titleMode: SidebarTitleMode
 	{
-		return titleButtonBindable.map { .button($0, .title("#\(tag)")) } ?? .title("#\(tag)")
+		return titleButtonBindable.map { .buttons($0, .title("#\(tag)")) } ?? .title("#\(tag)")
 	}
 
-	init(tag: String, tagBookmarkService: TagBookmarkService?)
+	init(tag: String, tagBookmarkService: TagBookmarkService?, tagFollowService: TagFollowService?)
 	{
 		self.tag = tag
 
-		if let service = tagBookmarkService
+		if let tagBookmarkService, let tagFollowService
 		{
-			self.titleButtonBindable = TagBookmarkButtonStateBindable(tag: tag, tagBookmarkService: service)
-			self.tagBookmarkService = service
+			self.titleButtonBindable = TagButtonsStateBindable(tag: tag,
+			                                                   tagBookmarkService: tagBookmarkService,
+			                                                   tagFollowService: tagFollowService)
+			self.tagBookmarkService = tagBookmarkService
+			self.tagFollowService = tagFollowService
 		}
 		else
 		{
 			self.titleButtonBindable = nil
 			self.tagBookmarkService = nil
+			self.tagFollowService = nil
 		}
 
 		super.init(source: .tag(name: tag))
 	}
 
+	@available(*, unavailable)
 	required init?(coder: NSCoder)
 	{
 		fatalError("init(coder:) has not been implemented")
 	}
 }
 
-private class TagBookmarkButtonStateBindable: SidebarTitleButtonStateBindable
+private class TagButtonsStateBindable: SidebarTitleButtonsStateBindable
 {
 	let tag: String
 
 	unowned let tagBookmarkService: TagBookmarkService
+	unowned let tagFollowService: TagFollowService
 
-	init(tag: String, tagBookmarkService: TagBookmarkService)
+	init(tag: String, tagBookmarkService: TagBookmarkService, tagFollowService: TagFollowService)
 	{
 		self.tag = tag
 		self.tagBookmarkService = tagBookmarkService
+		self.tagFollowService = tagFollowService
+
 		super.init()
-		updateButton()
+
+		updateBookmarkButton()
+		updateFollowButton()
 	}
 
-	private func updateButton()
+	private func updateBookmarkButton()
 	{
 		let isBookmarked = tagBookmarkService.isTagBookmarked(tag)
-		icon = isBookmarked ? #imageLiteral(resourceName: "bookmark_active") : #imageLiteral(resourceName: "bookmark")
-		accessibilityLabel = isBookmarked ? 🔠("Unbookmark Tag") : 🔠("Bookmark Tag")
+		firstIcon = isBookmarked ? #imageLiteral(resourceName: "bookmark_active") : #imageLiteral(resourceName: "bookmark")
+		firstAccessibilityLabel = isBookmarked ? 🔠("Unbookmark Tag") : 🔠("Bookmark Tag")
 	}
 
-	override func didClickButton(_ sender: Any?)
+	private func updateFollowButton()
+	{
+		Task
+		{
+			let isFollowed = await tagFollowService.isTagFollowed(tag)
+
+			await MainActor.run
+			{
+				secondAccessibilityLabel = isFollowed ? 🔠("Unfollow Tag on Timeline") : 🔠("Follow Tag on Timeline")
+				secondIcon = NSImage(systemSymbolName: isFollowed ? "rectangle.fill.badge.xmark": "rectangle",
+				                     accessibilityDescription: secondAccessibilityLabel)
+			}
+		}
+	}
+
+	override func didClickFirstButton(_ sender: Any?)
 	{
 		tagBookmarkService.toggleBookmarkedState(for: tag)
-		updateButton()
+		updateBookmarkButton()
+	}
+
+	override func didClickSecondButton(_ sender: Any?)
+	{
+		Task
+		{
+			await tagFollowService.toggleFollowedState(for: tag)
+
+			updateFollowButton()
+		}
 	}
 }

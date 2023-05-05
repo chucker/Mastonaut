@@ -254,6 +254,11 @@ private extension RelationshipSet
 		else if contains(.follower) {
 			sentences.append(🔠("relationship.follower"))
 		}
+		
+		if contains(.followingRequested)
+		{
+			sentences.append(🔠("relationship.followingRequested"))
+		}
 
 		if contains(.muted)
 		{

@@ -303,7 +303,7 @@ indirect enum SidebarTitleMode
 	case none
 	case title(NSAttributedString)
 	case subtitle(title: NSAttributedString, subtitle: NSAttributedString)
-	case button(SidebarTitleButtonStateBindable, SidebarTitleMode)
+	case buttons(SidebarTitleButtonsStateBindable, SidebarTitleMode)
 
 	static func title(_ string: String) -> SidebarTitleMode
 	{
@@ -316,13 +316,24 @@ indirect enum SidebarTitleMode
 	}
 }
 
-@objc class SidebarTitleButtonStateBindable: NSObject
+@objc class SidebarTitleButtonsStateBindable: NSObject
 {
-	@objc dynamic var icon: NSImage? = nil
-	@objc dynamic var accessibilityLabel: String? = nil
-	@objc dynamic var accessibilityTitle: String? = nil
+	// this is currently hardcoded to two buttons,
+	// as we only use it for hashtags
+	
+	@objc dynamic var firstIcon: NSImage? = nil
+	@objc dynamic var firstAccessibilityLabel: String? = nil
+	@objc dynamic var firstAccessibilityTitle: String? = nil
 
-	@objc func didClickButton(_ sender: Any?)
+	@objc func didClickFirstButton(_ sender: Any?)
+	{
+	}
+	
+	@objc dynamic var secondIcon: NSImage? = nil
+	@objc dynamic var secondAccessibilityLabel: String? = nil
+	@objc dynamic var secondAccessibilityTitle: String? = nil
+
+	@objc func didClickSecondButton(_ sender: Any?)
 	{
 	}
 }

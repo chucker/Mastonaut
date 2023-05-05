@@ -3,4 +3,4 @@
 	url = git@github.com:chucker/MastodonKit.git
 [submodule "Dependencies/PullRefreshableScrollView"]
 	path = Dependencies/PullRefreshableScrollView
-	url = https://github.com/deicoon/PullRefreshableScrollView
+	url = https://github.com/chucker/PullRefreshableScrollView

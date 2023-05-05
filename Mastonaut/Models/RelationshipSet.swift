@@ -21,10 +21,11 @@ import Foundation
 
 struct RelationshipSet: OptionSet
 {
-	let rawValue: Int8
+	let rawValue: Int16
 
 	static let follower = RelationshipSet(rawValue: 1 << 0)
 	static let following = RelationshipSet(rawValue: 1 << 1)
+	static let followingRequested = RelationshipSet(rawValue: 1 << 8)
 	static let muted = RelationshipSet(rawValue: 1 << 2)
 	static let blocked = RelationshipSet(rawValue: 1 << 3)
 

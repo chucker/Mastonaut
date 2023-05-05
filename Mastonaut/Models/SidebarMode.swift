@@ -107,8 +107,10 @@ enum SidebarMode: RawRepresentable, SidebarModel, Equatable
 			return ProfileViewController(account: account, instance: currentInstance)
 
 		case .tag(let tag):
-			let service = currentAccount.map { TagBookmarkService(account: $0) }
-			return TagViewController(tag: tag, tagBookmarkService: service)
+			let bookmarkService = currentAccount.map { TagBookmarkService(account: $0) }
+			let followService = currentAccount.map { TagFollowService(account: $0, client: client) }
+			
+			return TagViewController(tag: tag, tagBookmarkService: bookmarkService, tagFollowService: followService)
 
 		case .status(let uri, nil):
 			return StatusThreadViewController(uri: uri, client: client)

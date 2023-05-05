@@ -26,11 +26,11 @@ struct RelationshipsService
 	let client: ClientType
 	let authorizedAccount: AuthorizedAccount
 
-	func relationship(with account: Account, completion: @escaping (RelationshipSet) -> Void)
+	func relationship(with account: Account, forceRefresh: Bool = false, completion: @escaping (RelationshipSet) -> Void)
 	{
 		let isSameUser = authorizedAccount.isSameUser(as: account)
 
-		if let accountReference = try? AccountReference.fetch(account: account, authorizedAccount: authorizedAccount)
+		if !forceRefresh, let accountReference = try? AccountReference.fetch(account: account, authorizedAccount: authorizedAccount)
 		{
 			completion(accountReference.relationshipSet(with: account, isSelf: isSameUser))
 		}
@@ -69,7 +69,9 @@ struct RelationshipsService
 			reference.isMuted = relationship.muting
 			reference.isFollower = relationship.followedBy
 			reference.isFollowing = relationship.following
+			reference.isFollowingRequested = relationship.requested
 			reference.isBlocked = relationship.blocking
+			
 			try? reference.managedObjectContext?.save()
 
 			return reference
@@ -105,9 +107,12 @@ struct RelationshipsService
 	func follow(account: Account, completion: @escaping (Swift.Result<AccountReference, Errors>) -> Void)
 	{
 		setRelationship(with: account,
-						request: Accounts.follow(id: account.id),
-						persistenceSetter: { $0.isFollowing = $1.following },
-						completion: completion)
+		                request: Accounts.follow(id: account.id),
+		                persistenceSetter: {
+		                	$0.isFollowing = $1.following
+		                	$0.isFollowingRequested = $1.requested
+		                },
+		                completion: completion)
 	}
 
 	func unfollow(account: Account, completion: @escaping (Swift.Result<AccountReference, Errors>) -> Void)

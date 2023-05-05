@@ -315,9 +315,9 @@ extension StatusListViewController: NSMenuItemValidation
 		return cellMenuItemHandler.validateMenuItem(menuItem)
 	}
 
-	@IBAction func copyTootLink(_ sender: Any?)
+	@IBAction func copy(_ sender: Any?)
 	{
-		cellMenuItemHandler.copyTootLink(sender)
+		cellMenuItemHandler.copy(sender)
 	}
 
 	@IBAction func copyTootText(_ sender: Any?)

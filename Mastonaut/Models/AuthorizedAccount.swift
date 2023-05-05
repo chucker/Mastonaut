@@ -27,11 +27,11 @@ extension AuthorizedAccount
 	{
 		for list in lists
 		{
-			let accountReference = try FollowedList.fetchOrInsert(for: list, authorizedAccount: self)
-			accountReference.authorizedAccount = self
+			let followedList = try FollowedList.fetchOrInsert(for: list, authorizedAccount: self)
+			followedList.authorizedAccount = self
 		}
 	}
-	
+
 	func setBlockedAccounts(_ accounts: [Account]) throws
 	{
 		try updateRelationship(keyPath: \AccountReference.isBlocked, using: accounts)
@@ -66,7 +66,6 @@ extension AuthorizedAccount
 		{
 			var accountReference = try AccountReference.fetchOrInsert(for: account, authorizedAccount: self)
 			accountReference[keyPath: keyPath] = true
-			accountReference.authorizedAccount = self
 		}
 	}
 

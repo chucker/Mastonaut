@@ -133,6 +133,7 @@
 "dialog.filter.delete.error" = "There was an error deleting this filter: %@";
 
 "relationship.follower" = "✓ This user follows you.";
+"relationship.followingRequested" = "✓ You have requested to follow them.";
 "relationship.mutual" = "✓ You both follow each other.";
 "relationship.blocked" = "✗ You have blocked this user.";
 "relationship.muted" = "You have muted this user.";

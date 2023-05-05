@@ -165,10 +165,22 @@ class StatusThreadViewController: StatusListViewController, SidebarPresentable
 
 			DispatchQueue.main.async
 			{
+				[status]
+
 				self?.prepareNewEntries(context.ancestors.sorted(by: { $0.createdAt < $1.createdAt }),
 				                        for: .above, pagination: nil)
 				self?.prepareNewEntries(context.descendants.sorted(by: { $0.createdAt < $1.createdAt }),
 				                        for: .below, pagination: nil)
+
+				guard
+					let index = self?.entryList.firstIndex(where: { $0.entryKey == status.id }),
+					let statusCell = self?.tableView.view(atColumn: 0, row: index, makeIfNecessary: false) as? FocusedStatusTableCellView
+				else
+				{
+					return
+				}
+
+				statusCell.set(context: context)
 			}
 		}
 	}

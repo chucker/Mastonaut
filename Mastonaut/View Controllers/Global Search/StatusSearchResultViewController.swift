@@ -56,16 +56,12 @@ class StatusSearchResultsViewController: SearchResultsViewController<Status>
 
 class StatusResultTableCellView: NSTableCellView
 {
-	/// A lot of this code is just copied from `StatusTableCellView` and should probably be abstracted out
-	private static let _authorLabelAttributes: [NSAttributedString.Key: AnyObject] = [
-		.foregroundColor: NSColor.labelColor, .font: NSFont.systemFont(ofSize: 14, weight: .semibold)
-	]
+	/// Some of this code is just copied from `StatusTableCellView` and should probably be abstracted out
 
-	private static let _statusLabelAttributes: [NSAttributedString.Key: AnyObject] = [
-		.foregroundColor: NSColor.labelColor, .font: NSFont.labelFont(ofSize: 14),
-		.underlineStyle: NSNumber(value: 0) // <-- This is a hack to prevent the label's contents from shifting
-		// vertically when clicked.
-	]
+	private func fontService() -> FontService
+	{
+		return FontService(font: MastonautPreferences.instance.statusFont)
+	}
 
 	@IBOutlet var avatarImageView: NSButton!
 	@IBOutlet private unowned var authorNameButton: NSButton!
@@ -105,7 +101,7 @@ class StatusResultTableCellView: NSTableCellView
 		super.awakeFromNib()
 
 		timeLabel.formatter = RelativeDateFormatter.shared
-		
+
 		// https://github.com/chucker/Mastonaut/issues/79 unclear why needed (otherwise set to pink)
 		contentWarningLabel.backgroundColor = NSColor.clear
 		statusLabel.backgroundColor = NSColor.clear
@@ -139,7 +135,7 @@ class StatusResultTableCellView: NSTableCellView
 		}
 
 		authorNameButton.set(stringValue: status.authorName,
-		                     applyingAttributes: StatusResultTableCellView._authorLabelAttributes,
+		                     applyingAttributes: fontService().authorAttributes(),
 		                     applyingEmojis: status.account.cacheableEmojis)
 
 		authorAccountLabel.stringValue = status.account.uri(in: instance)
@@ -158,7 +154,7 @@ class StatusResultTableCellView: NSTableCellView
 		}
 
 		statusLabel.set(attributedStringValue: statusString,
-		                applyingAttributes: StatusResultTableCellView._statusLabelAttributes,
+		                applyingAttributes: fontService().statusAttributes(),
 		                applyingEmojis: status.cacheableEmojis)
 
 		if status.mediaAttachments.count > 0
@@ -189,7 +185,7 @@ class StatusResultTableCellView: NSTableCellView
 
 			warningButton.isHidden = false
 			contentWarningLabel.set(attributedStringValue: status.attributedSpoiler,
-			                        applyingAttributes: StatusResultTableCellView._statusLabelAttributes,
+			                        applyingAttributes: fontService().statusAttributes(),
 			                        applyingEmojis: status.cacheableEmojis)
 			installSpoilerCover()
 			contentWarningContainer.isHidden = false

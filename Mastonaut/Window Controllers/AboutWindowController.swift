@@ -25,7 +25,7 @@ class AboutWindowController: NSWindowController
 	@IBOutlet weak var versionLabel: NSTextField!
 	@IBOutlet weak var copyrightLabel: NSTextField!
 
-	private lazy var acknowledgementsWindowController = AcknowledgementsWindowController()
+	private lazy var acknowledgementsWindow = AcknowledgementsWindow()
 
 	override func windowDidLoad()
 	{
@@ -62,6 +62,7 @@ class AboutWindowController: NSWindowController
 
 	@IBAction func orderFrontAcknowledgementsWindow(_ sender: Any?)
 	{
-		acknowledgementsWindowController.showWindow(sender)
+		acknowledgementsWindow.makeKeyAndOrderFront(sender)
+		acknowledgementsWindow.center()
 	}
 }

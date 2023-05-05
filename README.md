@@ -1,20 +1,45 @@
 ## About
 
-This is a fork of **Mastonaut** by @brunophilipe, whose original marketing page you can still look at [here](https://mastonaut.app). 
+This is a fork of **Mastonaut** by @brunophilipe, whose original marketing page you can still look at [here](https://mastonaut.app). His latest version 1.3.9 can still be [installed from the App Store](https://apps.apple.com/us/app/mastonaut/id1450757574).
+
+### Some features since 1.3.9
+
+(As of 1.6.0.)
+
+#### Accessibility
+
+* Assorted accessibility improvements
+
+#### Composing
+
+* Edit your toots
+* Autocomplete for hashtags (1.3.9 already had autocomplete for user names)
+
+#### Notifications
+
+* Filter notifications by type (for example, to only see mentions)
+
+#### Search
+
+* Search for (already known) toots by text or their URL
+
+#### Timeline
+
+* Pull to refresh
+* View a list as a column
+* View your favorites or bookmarks as a column
+
+#### Viewing
+
+* See if a toot has been edited, and view previous versions
 
 ## 👩🏽‍💻 End Users: Install
 
-To use it, you probably want a pre-built release. The current one is 1.5 and can be downloaded [here](https://github.com/chucker/Mastonaut/releases/download/app-1.5.0/Mastonaut-1.5.0.zip).
+To use it, you just want to [download 1.6 here](https://github.com/chucker/Mastonaut/releases/download/app-1.6.0/Mastonaut-1.6.0.zip).
 
 ## 🗺️ Roadmap
 
-This is purely a hobbyist effort, so I can't really promise anything. We can look back at the road so far:
-
-**April 2022:** the code was made open-source
-
-**August 2022:** this fork's first minor release
-
-**November 2022 through January 2023:** on average one release per month
+This is purely a hobbyist effort, so I can't really promise anything. I try to do a new release every month or two.
 
 ## 👩🏻‍🌾 Developers: Build
 

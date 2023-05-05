@@ -28,10 +28,11 @@ extension AccountReference
 		return AccountReference(context: AppDelegate.shared.managedObjectContext)
 	}
 
-	fileprivate static func insert(id: String) -> AccountReference
+	fileprivate static func insert(id: String, authorizedAccount: AuthorizedAccount) -> AccountReference
 	{
 		let blank = AccountReference(context: AppDelegate.shared.managedObjectContext)
 		blank.identifier = id
+		blank.authorizedAccount = authorizedAccount
 		return blank
 	}
 
@@ -65,7 +66,7 @@ extension AccountReference
 		let context = AppDelegate.shared.managedObjectContext
 		let fetchRequest = self.fetchRequest(id: account.id, authorizedAccount: authorizedAccount)
 
-		let accountReference = try context.fetch(fetchRequest).first ?? insert(id: account.id)
+		let accountReference = try context.fetch(fetchRequest).first ?? insert(id: account.id, authorizedAccount: authorizedAccount)
 		accountReference.username = account.username
 		accountReference.host = account.url.host
 		accountReference.avatarURL = account.avatarURL
@@ -82,6 +83,7 @@ extension AccountReference
 
 		if isMastonautAuthor { relationship.formUnion(.isAuthor) }
 		if isFollowing { relationship.formUnion(.following) }
+		if isFollowingRequested { relationship.formUnion(.followingRequested) }
 		if isFollower { relationship.formUnion(.follower) }
 		if isBlocked { relationship.formUnion(.blocked) }
 		if isMuted { relationship.formUnion(.muted) }

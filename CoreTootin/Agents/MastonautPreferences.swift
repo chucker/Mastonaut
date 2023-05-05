@@ -23,7 +23,7 @@ public let Preferences = MastonautPreferences.instance
 
 public class MastonautPreferences: PreferencesController
 {
-	private static var sharedInstance: MastonautPreferences! = nil
+	private static var sharedInstance: MastonautPreferences!
 
 	override var suiteName: String?
 	{
@@ -31,7 +31,7 @@ public class MastonautPreferences: PreferencesController
 	}
 
 	/// Initializer declared as private to avoid accidental creation of new instances.
-	private override init()
+	override private init()
 	{
 		super.init()
 
@@ -45,7 +45,7 @@ public class MastonautPreferences: PreferencesController
 		{
 			sharedInstance = MastonautPreferences()
 		}
-		
+
 		return sharedInstance
 	}
 
@@ -74,7 +74,7 @@ public class MastonautPreferences: PreferencesController
 		get { return bool(forKey: #keyPath(didMigrateToSharedLocalKeychain)) ?? false }
 		set { defaults.setValue(newValue, forKey: #keyPath(didMigrateToSharedLocalKeychain)) }
 	}
-	
+
 	@objc public dynamic var appearance: Appearance
 	{
 		get { return integerRepresentable(for: #keyPath(appearance), default: .auto) }
@@ -82,6 +82,55 @@ public class MastonautPreferences: PreferencesController
 	}
 
 	// Viewing preferences
+
+	private func getFont(familyKey: String, sizeKey: String) -> NSFont?
+	{
+		NSFont(name: defaults.string(forKey: familyKey) ?? "",
+		       size: CGFloat(defaults.float(forKey: sizeKey)))
+	}
+
+	private func setFont(newValue: NSFont, familyKey: String, sizeKey: String)
+	{
+		defaults.setValue(newValue.familyName, forKey: familyKey)
+		defaults.setValue(newValue.pointSize, forKey: sizeKey)
+	}
+
+	// FIXME: I can probably use key paths here?
+
+	public static let defaultStatusFont = NSFont.systemFont(ofSize: 14)
+	public static let defaultFocusedStatusFont = NSFont.systemFont(ofSize: 16)
+
+	public static let statusFontFamilyKey = "statusFontFamily"
+	public static let statusFontSizeKey = "statusFontSize"
+
+	@objc public dynamic var statusFont: NSFont
+	{
+		get
+		{
+			return getFont(familyKey: MastonautPreferences.statusFontFamilyKey, sizeKey: MastonautPreferences.statusFontSizeKey) ??
+				MastonautPreferences.defaultStatusFont
+		}
+		set
+		{
+			setFont(newValue: newValue, familyKey: MastonautPreferences.statusFontFamilyKey, sizeKey: MastonautPreferences.statusFontSizeKey)
+		}
+	}
+
+	public static let focusedStatusFontFamilyKey = "focusedStatusFontFamily"
+	public static let focusedStatusFontSizeKey = "focusedStatusFontSize"
+
+	@objc public dynamic var focusedStatusFont: NSFont
+	{
+		get
+		{
+			return getFont(familyKey: MastonautPreferences.focusedStatusFontFamilyKey, sizeKey: MastonautPreferences.focusedStatusFontSizeKey) ??
+				MastonautPreferences.defaultFocusedStatusFont
+		}
+		set
+		{
+			setFont(newValue: newValue, familyKey: MastonautPreferences.focusedStatusFontFamilyKey, sizeKey: MastonautPreferences.focusedStatusFontSizeKey)
+		}
+	}
 
 	@objc public dynamic var mediaDisplayMode: MediaDisplayMode
 	{
@@ -137,7 +186,8 @@ public class MastonautPreferences: PreferencesController
 
 	public func storedFrame(forTimelineWindowIndex index: Int) -> NSRect?
 	{
-		guard let frames: [String: String] = object(forKey: "MastonautPreferences.preservedWindowFrames") else
+		guard let frames: [String: String] = object(forKey: "MastonautPreferences.preservedWindowFrames")
+		else
 		{
 			return nil
 		}
@@ -151,22 +201,24 @@ public class MastonautPreferences: PreferencesController
 		frames["\(index)"] = NSStringFromRect(frame)
 		defaults.setValue(frames, forKey: "MastonautPreferences.preservedWindowFrames")
 	}
-	
+
 	// KVO
-	
-	public func addObserver(_ observer: NSObject, forKeyPath keyPath: String) {
+
+	public func addObserver(_ observer: NSObject, forKeyPath keyPath: String)
+	{
 		defaults.addObserver(observer, forKeyPath: keyPath, context: nil)
 	}
 }
 
 public extension MastonautPreferences
 {
-	@objc enum Appearance : Int {
-	    case auto = 1
-	    case light
-	    case dark
-    }
-	
+	@objc enum Appearance: Int
+	{
+		case auto = 1
+		case light
+		case dark
+	}
+
 	@objc enum MediaDisplayMode: Int
 	{
 		case alwaysHide = 1
@@ -199,9 +251,9 @@ public extension MastonautPreferences
 		{
 			switch self
 			{
-			case .public:	return 🔠("Public")
-			case .unlisted:	return 🔠("Unlisted")
-			case .private:	return 🔠("Private")
+			case .public: return 🔠("Public")
+			case .unlisted: return 🔠("Unlisted")
+			case .private: return 🔠("Private")
 			}
 		}
 
@@ -209,9 +261,9 @@ public extension MastonautPreferences
 		{
 			switch self
 			{
-			case .public:	return NSImage(named: "globe")
-			case .unlisted:	return NSImage(named: "padlock_open")
-			case .private:	return NSImage(named: "padlock")
+			case .public: return NSImage(named: "globe")
+			case .unlisted: return NSImage(named: "padlock_open")
+			case .private: return NSImage(named: "padlock")
 			}
 		}
 	}

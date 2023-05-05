@@ -10,11 +10,11 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <tableCellView wantsLayer="YES" id="Hz6-mo-xeY" customClass="FocusedStatusTableCellView" customModule="Mastonaut" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="330" height="426"/>
+            <rect key="frame" x="0.0" y="0.0" width="330" height="632"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <customView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZOF-P9-3K0" customClass="BorderView" customModule="CoreTootin">
-                    <rect key="frame" x="12" y="356" width="54" height="54"/>
+                    <rect key="frame" x="12" y="562" width="54" height="54"/>
                     <subviews>
                         <button translatesAutoresizingMaskIntoConstraints="NO" id="SPv-5a-3fl">
                             <rect key="frame" x="0.0" y="0.0" width="54" height="54"/>
@@ -43,7 +43,7 @@
                     </userDefinedRuntimeAttributes>
                 </customView>
                 <button verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Mr1-Dk-o1f">
-                    <rect key="frame" x="78" y="395" width="123" height="19"/>
+                    <rect key="frame" x="78" y="601" width="123" height="19"/>
                     <buttonCell key="cell" type="bevel" title="John Appleseed " bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" inset="2" id="Iq6-6n-4b7">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="systemSemibold" size="15"/>
@@ -54,26 +54,26 @@
                     </connections>
                 </button>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="e90-GJ-Pog">
-                    <rect key="frame" x="78" y="376" width="223" height="16"/>
+                    <rect key="frame" x="78" y="582" width="223" height="16"/>
                     <textFieldCell key="cell" lineBreakMode="truncatingTail" title="john.appleseed@mastodon.example" id="0Lg-rL-09u">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="JEU-le-JUg" customClass="RefreshingFormattedTextField" customModule="Mastonaut" customModuleProvider="target">
-                    <rect key="frame" x="236" y="12" width="84" height="16"/>
+                <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JEU-le-JUg" customClass="RefreshingFormattedTextField" customModule="Mastonaut" customModuleProvider="target">
+                    <rect key="frame" x="236" y="220" width="84" height="16"/>
                     <textFieldCell key="cell" lineBreakMode="truncatingTail" alignment="right" title="A minute ago" id="LJk-yU-oYV">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <stackView wantsLayer="YES" distribution="fillProportionally" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="751" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NiZ-P1-sSE">
-                    <rect key="frame" x="80" y="40" width="238" height="330"/>
+                <stackView wantsLayer="YES" distribution="fillProportionally" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="751" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" ambiguous="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NiZ-P1-sSE">
+                    <rect key="frame" x="80" y="116" width="238" height="460"/>
                     <subviews>
-                        <customView placeholderIntrinsicWidth="238" placeholderIntrinsicHeight="23" translatesAutoresizingMaskIntoConstraints="NO" id="FqU-Ny-Ix8" customClass="BorderView" customModule="CoreTootin">
-                            <rect key="frame" x="0.0" y="306" width="238" height="24"/>
+                        <customView ambiguous="YES" placeholderIntrinsicWidth="238" placeholderIntrinsicHeight="23" translatesAutoresizingMaskIntoConstraints="NO" id="FqU-Ny-Ix8" customClass="BorderView" customModule="CoreTootin">
+                            <rect key="frame" x="0.0" y="436" width="238" height="24"/>
                             <subviews>
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="Rhy-uU-pzk" customClass="BackgroundView" customModule="CoreTootin">
                                     <rect key="frame" x="0.0" y="0.0" width="35" height="24"/>
@@ -136,23 +136,23 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </customView>
-                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xUb-sD-bkH" customClass="AttributedLabel">
-                            <rect key="frame" x="-2" y="279" width="88" height="19"/>
+                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" ambiguous="YES" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xUb-sD-bkH" customClass="AttributedLabel">
+                            <rect key="frame" x="-2" y="409" width="88" height="19"/>
                             <textFieldCell key="cell" selectable="YES" allowsUndo="NO" title="Hello there!" allowsEditingTextAttributes="YES" id="ayh-RZ-PqU">
                                 <font key="font" metaFont="system" size="16"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
-                        <customView verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="zd4-St-vGh">
-                            <rect key="frame" x="0.0" y="132" width="238" height="139"/>
+                        <customView verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zd4-St-vGh">
+                            <rect key="frame" x="0.0" y="262" width="238" height="139"/>
                             <constraints>
                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="230" id="7Yc-9n-RTE"/>
                                 <constraint firstAttribute="height" secondItem="zd4-St-vGh" secondAttribute="width" multiplier="7:12" priority="250" id="a4d-Kk-6hR"/>
                             </constraints>
                         </customView>
-                        <customView wantsLayer="YES" placeholderIntrinsicWidth="238" placeholderIntrinsicHeight="64" translatesAutoresizingMaskIntoConstraints="NO" id="9iE-Mr-lJ9" customClass="CardView" customModule="Mastonaut" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="52" width="238" height="72"/>
+                        <customView wantsLayer="YES" ambiguous="YES" placeholderIntrinsicWidth="238" placeholderIntrinsicHeight="64" translatesAutoresizingMaskIntoConstraints="NO" id="9iE-Mr-lJ9" customClass="CardView" customModule="Mastonaut" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="182" width="238" height="72"/>
                             <subviews>
                                 <customView wantsLayer="YES" horizontalCompressionResistancePriority="491" placeholderIntrinsicWidth="500" placeholderIntrinsicHeight="500" translatesAutoresizingMaskIntoConstraints="NO" id="mhw-7K-d4x" customClass="AttachmentImageView" customModule="CoreTootin">
                                     <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
@@ -241,8 +241,8 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </customView>
-                        <stackView distribution="fillProportionally" orientation="horizontal" alignment="top" spacing="2" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8hE-N6-yIa">
-                            <rect key="frame" x="0.0" y="28" width="135" height="16"/>
+                        <stackView distribution="fillProportionally" orientation="horizontal" alignment="top" spacing="2" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" ambiguous="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8hE-N6-yIa">
+                            <rect key="frame" x="0.0" y="158" width="135" height="16"/>
                             <subviews>
                                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DFD-km-KXh">
                                     <rect key="frame" x="-2" y="0.0" width="67" height="16"/>
@@ -277,19 +277,19 @@
                                 <real value="3.4028234663852886e+38"/>
                             </customSpacing>
                         </stackView>
-                        <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HBE-1y-vRf">
-                            <rect key="frame" x="0.0" y="0.0" width="117" height="20"/>
+                        <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" ambiguous="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HBE-1y-vRf">
+                            <rect key="frame" x="0.0" y="0.0" width="117" height="150"/>
                             <subviews>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pbM-Xn-IX3">
-                                    <rect key="frame" x="-2" y="6" width="33" height="14"/>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pbM-Xn-IX3">
+                                    <rect key="frame" x="-2" y="136" width="33" height="14"/>
                                     <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="syf-oY-iNE">
                                         <font key="font" metaFont="controlContent" size="11"/>
                                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xZX-2G-Llb">
-                                    <rect key="frame" x="37" y="2" width="80" height="18"/>
+                                <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xZX-2G-Llb">
+                                    <rect key="frame" x="37" y="132" width="80" height="18"/>
                                     <buttonCell key="cell" type="inline" title="View History" bezelStyle="inline" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="sxL-wB-iRE">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="smallSystemBold"/>
@@ -326,62 +326,11 @@
                         <real value="3.4028234663852886e+38"/>
                     </customSpacing>
                 </stackView>
-                <stackView distribution="fill" orientation="horizontal" alignment="bottom" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eK9-ym-EXK">
-                    <rect key="frame" x="80" y="12" width="117" height="16"/>
+                <stackView distribution="fill" orientation="horizontal" alignment="bottom" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" ambiguous="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eK9-ym-EXK" userLabel="Warning Stack View">
+                    <rect key="frame" x="80" y="220" width="45" height="16"/>
                     <subviews>
-                        <button toolTip="Reply to this toot" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rbD-x0-4Qd">
-                            <rect key="frame" x="0.0" y="0.0" width="16" height="15"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="15" id="Wxy-Zk-B9m"/>
-                            </constraints>
-                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="reply" imagePosition="only" alignment="center" inset="2" id="81b-Je-zos">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="message" size="11"/>
-                            </buttonCell>
-                            <connections>
-                                <action selector="interactionButtonClicked:" target="Hz6-mo-xeY" id="sQ5-Io-gsy"/>
-                            </connections>
-                        </button>
-                        <button toolTip="Boost this toot" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FGE-RI-Pae">
-                            <rect key="frame" x="24" y="0.0" width="17" height="15"/>
-                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="retoot" imagePosition="only" alignment="center" alternateImage="retoot_active" inset="2" id="XOt-xX-9JZ">
-                                <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
-                                <font key="font" metaFont="message" size="11"/>
-                            </buttonCell>
-                            <connections>
-                                <action selector="interactionButtonClicked:" target="Hz6-mo-xeY" id="bTP-qo-blz"/>
-                                <binding destination="Hz6-mo-xeY" name="value" keyPath="cellModel.isReblogged" id="aok-S3-7G3">
-                                    <dictionary key="options">
-                                        <integer key="NSMultipleValuesPlaceholder" value="0"/>
-                                        <integer key="NSNoSelectionPlaceholder" value="0"/>
-                                        <integer key="NSNotApplicablePlaceholder" value="0"/>
-                                        <integer key="NSNullPlaceholder" value="0"/>
-                                        <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
-                                    </dictionary>
-                                </binding>
-                            </connections>
-                        </button>
-                        <button toolTip="Favorite this toot" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bah-Xt-rKH">
-                            <rect key="frame" x="49" y="0.0" width="15" height="15"/>
-                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="star" imagePosition="overlaps" alignment="center" alternateImage="star_active" inset="2" id="U0O-6r-i82">
-                                <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
-                                <font key="font" metaFont="message" size="11"/>
-                            </buttonCell>
-                            <connections>
-                                <action selector="interactionButtonClicked:" target="Hz6-mo-xeY" id="dSR-bI-8NW"/>
-                                <binding destination="Hz6-mo-xeY" name="value" keyPath="cellModel.isFavorited" id="I4j-59-hxC">
-                                    <dictionary key="options">
-                                        <integer key="NSMultipleValuesPlaceholder" value="0"/>
-                                        <integer key="NSNoSelectionPlaceholder" value="0"/>
-                                        <integer key="NSNotApplicablePlaceholder" value="0"/>
-                                        <integer key="NSNullPlaceholder" value="0"/>
-                                        <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
-                                    </dictionary>
-                                </binding>
-                            </connections>
-                        </button>
                         <button toolTip="Toggle sensitive content visibility" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ifk-GB-BIa">
-                            <rect key="frame" x="72" y="0.0" width="17" height="15"/>
+                            <rect key="frame" x="0.0" y="0.0" width="17" height="15"/>
                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="warning" imagePosition="overlaps" alignment="center" alternateImage="warning_active" inset="2" id="0zC-4P-BEh">
                                 <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                 <font key="font" metaFont="message" size="11"/>
@@ -391,7 +340,7 @@
                             </connections>
                         </button>
                         <button toolTip="Toggle media visibility" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OfF-ox-q52">
-                            <rect key="frame" x="97" y="0.0" width="20" height="15"/>
+                            <rect key="frame" x="25" y="0.0" width="20" height="15"/>
                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="sensitive_show" imagePosition="overlaps" alignment="center" alternateImage="sensitive_hide" inset="2" id="zdc-h2-Mrl">
                                 <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                 <font key="font" metaFont="message" size="11"/>
@@ -407,6 +356,131 @@
                     <visibilityPriorities>
                         <integer value="1000"/>
                         <integer value="1000"/>
+                    </visibilityPriorities>
+                    <customSpacing>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                    </customSpacing>
+                </stackView>
+                <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" ambiguous="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GG8-p3-OIJ" userLabel="Interaction Stack View">
+                    <rect key="frame" x="80" y="144" width="34" height="64"/>
+                    <subviews>
+                        <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" ambiguous="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zu3-GV-dyI">
+                            <rect key="frame" x="0.0" y="48" width="34" height="16"/>
+                            <subviews>
+                                <button toolTip="Reply to this toot" ambiguous="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rbD-x0-4Qd">
+                                    <rect key="frame" x="0.0" y="1" width="17" height="15"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="15" id="Wxy-Zk-B9m"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="reply" imagePosition="only" alignment="center" inset="2" id="81b-Je-zos">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="message" size="11"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="interactionButtonClicked:" target="Hz6-mo-xeY" id="sQ5-Io-gsy"/>
+                                    </connections>
+                                </button>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eyQ-0V-BqE" userLabel="Reply Count">
+                                    <rect key="frame" x="23" y="0.0" width="13" height="16"/>
+                                    <textFieldCell key="cell" lineBreakMode="clipping" title="0" id="E5O-PK-o38">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </subviews>
+                            <visibilityPriorities>
+                                <integer value="1000"/>
+                                <integer value="1000"/>
+                            </visibilityPriorities>
+                            <customSpacing>
+                                <real value="3.4028234663852886e+38"/>
+                                <real value="3.4028234663852886e+38"/>
+                            </customSpacing>
+                        </stackView>
+                        <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" ambiguous="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hpI-dm-zx7">
+                            <rect key="frame" x="0.0" y="24" width="34" height="16"/>
+                            <subviews>
+                                <button toolTip="Boost this toot" ambiguous="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FGE-RI-Pae">
+                                    <rect key="frame" x="0.0" y="1" width="17" height="15"/>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="retoot" imagePosition="only" alignment="center" alternateImage="retoot_active" inset="2" id="XOt-xX-9JZ">
+                                        <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                        <font key="font" metaFont="message" size="11"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="interactionButtonClicked:" target="Hz6-mo-xeY" id="bTP-qo-blz"/>
+                                        <binding destination="Hz6-mo-xeY" name="value" keyPath="cellModel.isReblogged" id="aok-S3-7G3">
+                                            <dictionary key="options">
+                                                <integer key="NSMultipleValuesPlaceholder" value="0"/>
+                                                <integer key="NSNoSelectionPlaceholder" value="0"/>
+                                                <integer key="NSNotApplicablePlaceholder" value="0"/>
+                                                <integer key="NSNullPlaceholder" value="0"/>
+                                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                            </dictionary>
+                                        </binding>
+                                    </connections>
+                                </button>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ONC-cp-Fem" userLabel="Reblog Count">
+                                    <rect key="frame" x="23" y="0.0" width="13" height="16"/>
+                                    <textFieldCell key="cell" lineBreakMode="clipping" title="0" id="WrY-Jx-dIi">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </subviews>
+                            <visibilityPriorities>
+                                <integer value="1000"/>
+                                <integer value="1000"/>
+                            </visibilityPriorities>
+                            <customSpacing>
+                                <real value="3.4028234663852886e+38"/>
+                                <real value="3.4028234663852886e+38"/>
+                            </customSpacing>
+                        </stackView>
+                        <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" ambiguous="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XZs-XH-U0E">
+                            <rect key="frame" x="0.0" y="0.0" width="34" height="16"/>
+                            <subviews>
+                                <button toolTip="Favorite this toot" ambiguous="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bah-Xt-rKH">
+                                    <rect key="frame" x="0.0" y="1" width="17" height="15"/>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="star" imagePosition="overlaps" alignment="center" alternateImage="star_active" inset="2" id="U0O-6r-i82">
+                                        <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                        <font key="font" metaFont="message" size="11"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="interactionButtonClicked:" target="Hz6-mo-xeY" id="dSR-bI-8NW"/>
+                                        <binding destination="Hz6-mo-xeY" name="value" keyPath="cellModel.isFavorited" id="I4j-59-hxC">
+                                            <dictionary key="options">
+                                                <integer key="NSMultipleValuesPlaceholder" value="0"/>
+                                                <integer key="NSNoSelectionPlaceholder" value="0"/>
+                                                <integer key="NSNotApplicablePlaceholder" value="0"/>
+                                                <integer key="NSNullPlaceholder" value="0"/>
+                                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                            </dictionary>
+                                        </binding>
+                                    </connections>
+                                </button>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yyj-bi-MwR" userLabel="Favorite Count">
+                                    <rect key="frame" x="23" y="0.0" width="13" height="16"/>
+                                    <textFieldCell key="cell" lineBreakMode="clipping" title="0" id="g1H-4z-Gy2">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </subviews>
+                            <visibilityPriorities>
+                                <integer value="1000"/>
+                                <integer value="1000"/>
+                            </visibilityPriorities>
+                            <customSpacing>
+                                <real value="3.4028234663852886e+38"/>
+                                <real value="3.4028234663852886e+38"/>
+                            </customSpacing>
+                        </stackView>
+                    </subviews>
+                    <visibilityPriorities>
                         <integer value="1000"/>
                         <integer value="1000"/>
                         <integer value="1000"/>
@@ -415,18 +489,23 @@
                         <real value="3.4028234663852886e+38"/>
                         <real value="3.4028234663852886e+38"/>
                         <real value="3.4028234663852886e+38"/>
-                        <real value="3.4028234663852886e+38"/>
-                        <real value="3.4028234663852886e+38"/>
                     </customSpacing>
                 </stackView>
             </subviews>
             <constraints>
                 <constraint firstItem="e90-GJ-Pog" firstAttribute="top" secondItem="Mr1-Dk-o1f" secondAttribute="bottom" constant="3" id="0wX-3I-dQf"/>
+                <constraint firstItem="FGE-RI-Pae" firstAttribute="centerX" secondItem="ifk-GB-BIa" secondAttribute="centerX" id="2Fo-Sb-NHr"/>
+                <constraint firstItem="ONC-cp-Fem" firstAttribute="leading" secondItem="OfF-ox-q52" secondAttribute="leading" id="4ta-qq-ydn"/>
+                <constraint firstItem="yyj-bi-MwR" firstAttribute="leading" secondItem="OfF-ox-q52" secondAttribute="leading" id="5tU-nD-lYj"/>
+                <constraint firstItem="GG8-p3-OIJ" firstAttribute="leading" secondItem="NiZ-P1-sSE" secondAttribute="leading" id="7Y3-1g-fG4"/>
                 <constraint firstItem="e90-GJ-Pog" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="NiZ-P1-sSE" secondAttribute="trailing" constant="2" id="BxG-qR-lJY"/>
                 <constraint firstItem="ZOF-P9-3K0" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="12" id="GSL-VH-if0"/>
+                <constraint firstItem="eyQ-0V-BqE" firstAttribute="leading" secondItem="OfF-ox-q52" secondAttribute="leading" id="IgS-N6-ltU"/>
                 <constraint firstItem="JEU-le-JUg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eK9-ym-EXK" secondAttribute="trailing" constant="12" id="L9d-Wm-GpW"/>
+                <constraint firstItem="GG8-p3-OIJ" firstAttribute="top" secondItem="eK9-ym-EXK" secondAttribute="bottom" constant="12" id="Mol-06-4oe"/>
                 <constraint firstItem="Mr1-Dk-o1f" firstAttribute="leading" secondItem="e90-GJ-Pog" secondAttribute="leading" constant="-2" id="O2m-uJ-sSm"/>
                 <constraint firstAttribute="trailing" secondItem="NiZ-P1-sSE" secondAttribute="trailing" constant="12" id="Tgx-MQ-ZmQ"/>
+                <constraint firstItem="rbD-x0-4Qd" firstAttribute="centerX" secondItem="ifk-GB-BIa" secondAttribute="centerX" id="VA8-qC-CEy"/>
                 <constraint firstItem="Mr1-Dk-o1f" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="12" id="WFz-2i-y3h"/>
                 <constraint firstItem="JEU-le-JUg" firstAttribute="centerY" secondItem="eK9-ym-EXK" secondAttribute="centerY" id="X4I-5W-Ec4"/>
                 <constraint firstItem="NiZ-P1-sSE" firstAttribute="leading" secondItem="e90-GJ-Pog" secondAttribute="leading" id="YxL-yC-9if"/>
@@ -435,7 +514,8 @@
                 <constraint firstItem="eK9-ym-EXK" firstAttribute="leading" secondItem="NiZ-P1-sSE" secondAttribute="leading" id="kYh-ee-jeW"/>
                 <constraint firstItem="NiZ-P1-sSE" firstAttribute="top" secondItem="e90-GJ-Pog" secondAttribute="bottom" constant="6" id="mh9-LZ-Pij"/>
                 <constraint firstItem="eK9-ym-EXK" firstAttribute="top" secondItem="NiZ-P1-sSE" secondAttribute="bottom" constant="12" id="nJF-Td-02i"/>
-                <constraint firstAttribute="bottom" secondItem="eK9-ym-EXK" secondAttribute="bottom" constant="12" id="oGS-Db-gE9"/>
+                <constraint firstItem="Bah-Xt-rKH" firstAttribute="centerX" secondItem="ifk-GB-BIa" secondAttribute="centerX" id="sFO-R2-FRe"/>
+                <constraint firstAttribute="bottom" secondItem="GG8-p3-OIJ" secondAttribute="bottom" constant="12" id="sOh-Hs-nD3"/>
                 <constraint firstItem="JEU-le-JUg" firstAttribute="trailing" secondItem="NiZ-P1-sSE" secondAttribute="trailing" id="t3q-Zx-VY0"/>
                 <constraint firstItem="Mr1-Dk-o1f" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="NiZ-P1-sSE" secondAttribute="trailing" constant="2" id="xkP-X0-LFC"/>
             </constraints>
@@ -458,10 +538,13 @@
                 <outlet property="editInfoContainer" destination="HBE-1y-vRf" id="7eR-Y5-KrH"/>
                 <outlet property="editedTimeLabel" destination="pbM-Xn-IX3" id="wOO-G4-jVX"/>
                 <outlet property="favoriteButton" destination="Bah-Xt-rKH" id="2hO-P0-JLs"/>
+                <outlet property="favoriteCount" destination="yyj-bi-MwR" id="RfG-Qv-OLN"/>
                 <outlet property="mainContentStackView" destination="NiZ-P1-sSE" id="9ry-ES-FJC"/>
                 <outlet property="mediaContainerView" destination="zd4-St-vGh" id="tW1-IQ-UiP"/>
                 <outlet property="reblogButton" destination="FGE-RI-Pae" id="2Lm-Mn-PlX"/>
+                <outlet property="reblogCount" destination="ONC-cp-Fem" id="bfD-XM-YYL"/>
                 <outlet property="replyButton" destination="rbD-x0-4Qd" id="lDU-M5-IOC"/>
+                <outlet property="replyCount" destination="eyQ-0V-BqE" id="wUk-Fd-rTW"/>
                 <outlet property="sensitiveContentButton" destination="OfF-ox-q52" id="I5o-Zq-VF9"/>
                 <outlet property="statusLabel" destination="xUb-sD-bkH" id="ehe-m5-4Zd"/>
                 <outlet property="timeLabel" destination="JEU-le-JUg" id="x3L-QV-cUF"/>

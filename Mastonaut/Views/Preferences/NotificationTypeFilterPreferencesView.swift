@@ -51,7 +51,7 @@ struct NotificationTypeFilterPreferencesView: View {
 					.padding(.bottom, 10)
 
 				Toggle("New followers", isOn: $showNewFollowers)
-//				Toggle("Follow requests", isOn: $showFollowRequests)
+				Toggle("Follow requests", isOn: $showFollowRequests)
 					.padding(.bottom, 10)
 
 				Toggle("Boosts", isOn: $showBoosts)

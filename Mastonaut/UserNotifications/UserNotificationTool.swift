@@ -91,6 +91,9 @@ class UserNotificationTool
 		case .follow:
 			title = 🔠("%@ followed you", actorName)
 			message = showDetails ? notification.account.attributedNote.string.ellipsedPrefix(maxLength: 80) : nil
+		case .follow_request:
+			title = 🔠("%@ requested to followed you", actorName)
+			message = showDetails ? notification.account.attributedNote.string.ellipsedPrefix(maxLength: 80) : nil
 		case .poll:
 			title = 🔠("A poll has ended")
 			message = contentOrSpoiler?.string.ellipsedPrefix(maxLength: 80)

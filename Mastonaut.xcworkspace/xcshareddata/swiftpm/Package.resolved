@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "fontpicker",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/chucker/FontPicker.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "c3d15a549a9436b406466cfa552540db95888ffe"
+      }
+    },
+    {
       "identity" : "sdifft",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/wzxhahaha/Sdifft",

@@ -27,7 +27,7 @@ class StatusTableCellView: MastonautTableCellView, StatusDisplaying, StatusInter
 {
 	@IBOutlet private unowned var authorNameButton: NSButton!
 	@IBOutlet private unowned var authorAccountLabel: NSTextField!
-	@IBOutlet private unowned var statusLabel: AttributedLabel!
+	@IBOutlet unowned var statusLabel: AttributedLabel!
 	@IBOutlet private unowned var fullContentDisclosureView: NSView?
 	@IBOutlet private unowned var timeLabel: NSTextField!
 	@IBOutlet private unowned var editInfoContainer: NSStackView!
@@ -60,6 +60,10 @@ class StatusTableCellView: MastonautTableCellView, StatusDisplaying, StatusInter
 	private(set) var hasMedia: Bool = false
 	private(set) var hasSensitiveMedia: Bool = false
 	private(set) var hasSpoiler: Bool = false
+	
+	private func fontService() -> FontService {
+		return FontService(font: MastonautPreferences.instance.statusFont)
+	}
 
 	var isContentHidden: Bool
 	{
@@ -90,39 +94,25 @@ class StatusTableCellView: MastonautTableCellView, StatusDisplaying, StatusInter
 		return coverView
 	}()
 
-	private static let _authorLabelAttributes: [NSAttributedString.Key: AnyObject] = [
-		.foregroundColor: NSColor.labelColor, .font: NSFont.systemFont(ofSize: 14, weight: .semibold)
-	]
-
-	private static let _statusLabelAttributes: [NSAttributedString.Key: AnyObject] = [
-		.foregroundColor: NSColor.labelColor, .font: NSFont.labelFont(ofSize: 14),
-		.underlineStyle: NSNumber(value: 0) // <-- This is a hack to prevent the label's contents from shifting
-		// vertically when clicked.
-	]
-
-	private static let _statusLabelLinkAttributes: [NSAttributedString.Key: AnyObject] = [
-		.foregroundColor: NSColor.safeControlTintColor,
-		.font: NSFont.systemFont(ofSize: 14, weight: .medium),
-		.underlineStyle: NSNumber(value: 1)
-	]
-
+	// this is exempt from #83 (custom font) for now, because it's mostly UI
+	// chrome, not content
 	private static let _contextLabelAttributes: [NSAttributedString.Key: AnyObject] = [
 		.foregroundColor: NSColor.secondaryLabelColor, .font: NSFont.systemFont(ofSize: 12, weight: .medium)
 	]
 
 	internal func authorLabelAttributes() -> [NSAttributedString.Key: AnyObject]
 	{
-		return StatusTableCellView._authorLabelAttributes
+		return fontService().authorAttributes()
 	}
 
 	internal func statusLabelAttributes() -> [NSAttributedString.Key: AnyObject]
 	{
-		return StatusTableCellView._statusLabelAttributes
+		return fontService().statusAttributes()
 	}
 
 	internal func statusLabelLinkAttributes() -> [NSAttributedString.Key: AnyObject]
 	{
-		return StatusTableCellView._statusLabelLinkAttributes
+		return fontService().statusLinkAttributes()
 	}
 
 	internal func contextLabelAttributes() -> [NSAttributedString.Key: AnyObject]
@@ -138,6 +128,26 @@ class StatusTableCellView: MastonautTableCellView, StatusDisplaying, StatusInter
 		statusLabel.linkTextAttributes = statusLabelLinkAttributes()
 
 		cardContainerView.clickHandler = { [weak self] in self?.cellModel?.openCardLink() }
+
+		fontObserver = MastonautPreferences.instance.observe(\.statusFont, options: .new)
+		{
+			[weak self] _, _ in
+			self?.updateFont()
+		}
+	}
+
+	private var fontObserver: NSKeyValueObservation?
+
+	deinit
+	{
+		fontObserver?.invalidate()
+	}
+
+	func updateFont()
+	{
+		statusLabel.linkTextAttributes = statusLabelLinkAttributes()
+
+		redraw()
 	}
 
 	override var backgroundStyle: NSView.BackgroundStyle
@@ -167,19 +177,33 @@ class StatusTableCellView: MastonautTableCellView, StatusDisplaying, StatusInter
 	         interactionHandler: StatusInteractionHandling,
 	         activeInstance: Instance)
 	{
-		let cellModel = StatusCellModel(status: status, interactionHandler: interactionHandler)
+		let cellModel = StatusCellModel(status: status,
+		                                poll: poll,
+		                                attachmentPresenter: attachmentPresenter,
+		                                interactionHandler: interactionHandler,
+		                                activeInstance: activeInstance)
 		self.cellModel = cellModel
+
+		redraw()
+	}
+
+	func redraw()
+	{
+		guard let cellModel
+		else { return }
+
+		let status = cellModel.status
 
 		statusLabel.linkHandler = cellModel
 		contentWarningLabel.linkHandler = cellModel
 
 		authorNameButton.set(stringValue: cellModel.visibleStatus.authorName,
-		                     applyingAttributes: authorLabelAttributes(),
+							 applyingAttributes: fontService().authorAttributes(),
 		                     applyingEmojis: cellModel.visibleStatus.account.cacheableEmojis)
 
 		contextButton.map { cellModel.setupContextButton($0, attributes: contextLabelAttributes()) }
 
-		authorAccountLabel.stringValue = cellModel.visibleStatus.account.uri(in: activeInstance)
+		authorAccountLabel.stringValue = cellModel.visibleStatus.account.uri(in: cellModel.activeInstance)
 		timeLabel.objectValue = cellModel.visibleStatus.createdAt
 		timeLabel.toolTip = DateFormatter.longDateFormatter.string(from: cellModel.visibleStatus.createdAt)
 
@@ -254,7 +278,9 @@ class StatusTableCellView: MastonautTableCellView, StatusDisplaying, StatusInter
 
 		setUpInteractions(status: cellModel.visibleStatus)
 
-		setupAttachmentsContainerView(for: cellModel.visibleStatus, poll: poll, attachmentPresenter: attachmentPresenter)
+		setupAttachmentsContainerView(for: cellModel.visibleStatus,
+		                              poll: cellModel.poll,
+		                              attachmentPresenter: cellModel.attachmentPresenter)
 		hasMedia = attachmentViewController != nil
 		hasSensitiveMedia = attachmentViewController?.sensitiveMedia == true
 	}

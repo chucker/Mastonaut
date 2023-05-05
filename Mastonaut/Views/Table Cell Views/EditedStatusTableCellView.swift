@@ -37,7 +37,7 @@ class EditedStatusTableCellView: NSTableCellView {
 		self.cellModel = cellModel
 
 		authorNameButton.set(stringValue: status.authorName,
-		                     applyingAttributes: EditedStatusTableCellView._authorLabelAttributes,
+							 applyingAttributes: fontService().authorAttributes(),
 		                     applyingEmojis: status.account.cacheableEmojis)
 
 		authorAccountLabel.stringValue = status.account.uri(in: activeInstance)
@@ -70,13 +70,7 @@ class EditedStatusTableCellView: NSTableCellView {
 			same: [.backgroundColor: NSColor.white]
 		)
 
-	private static let _authorLabelAttributes: [NSAttributedString.Key: AnyObject] = [
-		.foregroundColor: NSColor.labelColor, .font: NSFont.systemFont(ofSize: 14, weight: .semibold)
-	]
-
-	private static let _statusLabelAttributes: [NSAttributedString.Key: AnyObject] = [
-		.foregroundColor: NSColor.labelColor, .font: NSFont.labelFont(ofSize: 14),
-		.underlineStyle: NSNumber(value: 0) // <-- This is a hack to prevent the label's contents from shifting
-		// vertically when clicked.
-	]
+	private func fontService() -> FontService {
+		return FontService(font: MastonautPreferences.instance.statusFont)
+	}
 }

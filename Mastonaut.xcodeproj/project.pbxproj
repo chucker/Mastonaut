@@ -109,10 +109,6 @@
 		1528BA1E228B52F60072068F /* MastonautTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1528BA1C228B52F60072068F /* MastonautTableCellView.swift */; };
 		152B7316220E34D3004121F1 /* Pods-Mastonaut-acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 152B7315220E34D3004121F1 /* Pods-Mastonaut-acknowledgements.plist */; };
 		152B7317220E34D3004121F1 /* Pods-Mastonaut-acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 152B7315220E34D3004121F1 /* Pods-Mastonaut-acknowledgements.plist */; };
-		152B731A220E35A7004121F1 /* AcknowledgementsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152B7318220E35A7004121F1 /* AcknowledgementsWindowController.swift */; };
-		152B731B220E35A7004121F1 /* AcknowledgementsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152B7318220E35A7004121F1 /* AcknowledgementsWindowController.swift */; };
-		152B731C220E35A7004121F1 /* AcknowledgementsWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 152B7319220E35A7004121F1 /* AcknowledgementsWindowController.xib */; };
-		152B731D220E35A7004121F1 /* AcknowledgementsWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 152B7319220E35A7004121F1 /* AcknowledgementsWindowController.xib */; };
 		152DA63D21E236520065CC1B /* NSAttributedString+SimpleHTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 152DA63C21E236520065CC1B /* NSAttributedString+SimpleHTML.m */; };
 		152DA63F21E23FD30065CC1B /* String+HTMLEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152DA63E21E23FD30065CC1B /* String+HTMLEntities.swift */; };
 		152DA64521E2C2DB0065CC1B /* StatusTableCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 152DA64321E2C2DB0065CC1B /* StatusTableCellView.xib */; };
@@ -149,8 +145,8 @@
 		1538FB402218B479006B5F78 /* ComposingPreferencesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1538FB3E2218B479006B5F78 /* ComposingPreferencesController.swift */; };
 		15398EF722272EFA00D97406 /* NSDraggingInfo+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15398EF622272EFA00D97406 /* NSDraggingInfo+Additions.swift */; };
 		15398EF822272EFA00D97406 /* NSDraggingInfo+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15398EF622272EFA00D97406 /* NSDraggingInfo+Additions.swift */; };
-		153A6FA4220E2F0A004245E0 /* Acknowledgements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153A6FA3220E2F0A004245E0 /* Acknowledgements.swift */; };
-		153A6FA5220E2F0A004245E0 /* Acknowledgements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153A6FA3220E2F0A004245E0 /* Acknowledgements.swift */; };
+		153A6FA4220E2F0A004245E0 /* AcknowledgementsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153A6FA3220E2F0A004245E0 /* AcknowledgementsViewModel.swift */; };
+		153A6FA5220E2F0A004245E0 /* AcknowledgementsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153A6FA3220E2F0A004245E0 /* AcknowledgementsViewModel.swift */; };
 		153B23912345763F00A317A2 /* MenuItemFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153B23902345763F00A317A2 /* MenuItemFactory.swift */; };
 		153B23922345763F00A317A2 /* MenuItemFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153B23902345763F00A317A2 /* MenuItemFactory.swift */; };
 		153B23B02346A2D700A317A2 /* ReauthorizationAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153B23AF2346A2D700A317A2 /* ReauthorizationAgent.swift */; };
@@ -507,6 +503,7 @@
 		5F043C54293286110095C702 /* NotificationTypeFilterPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F043C52293286110095C702 /* NotificationTypeFilterPreferencesView.swift */; };
 		5F043C562932872D0095C702 /* NotificationPerAccountPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F043C552932872D0095C702 /* NotificationPerAccountPreferencesView.swift */; };
 		5F043C572932872D0095C702 /* NotificationPerAccountPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F043C552932872D0095C702 /* NotificationPerAccountPreferencesView.swift */; };
+		5F053A8229F0795E00E2FC8F /* AppearancePreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F053A8129F078BE00E2FC8F /* AppearancePreferencesView.swift */; };
 		5F176FAC290EF03900DF043C /* FollowedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F176FAB290EF03900DF043C /* FollowedList.swift */; };
 		5F176FAF290EF65200DF043C /* FollowedListsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F176FAE290EF65200DF043C /* FollowedListsService.swift */; };
 		5F1F20D62938E86D0057E585 /* LoggingOSLog in Frameworks */ = {isa = PBXBuildFile; productRef = 5F1F20D52938E86D0057E585 /* LoggingOSLog */; };
@@ -519,7 +516,16 @@
 		5F3A17F0291DB26700EA6FEC /* CoreAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */; };
 		5F3A17F1291DB26700EA6FEC /* CoreAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */; };
 		5F3BC8B229D0B44000CEBD7F /* SparklineTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3BC8B129D0B44000CEBD7F /* SparklineTableCellView.swift */; };
+		5F4DAAAC29FDA15E009FA0AE /* FontPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 5F4DAAAB29FDA15E009FA0AE /* FontPicker */; };
+		5F4DAAAE29FEEDE4009FA0AE /* NSFont+withWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4DAAAD29FEEDE4009FA0AE /* NSFont+withWeight.swift */; };
 		5F5338B32960B23200C1D9AE /* ReplaceCharactersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5338B22960B23200C1D9AE /* ReplaceCharactersTests.swift */; };
+		5F6F8F602A0033DF00FB3414 /* FontService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6F8F5F2A0033DF00FB3414 /* FontService.swift */; };
+		5F6F8F6A2A0051BF00FB3414 /* TagFollowService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6F8F692A0051BF00FB3414 /* TagFollowService.swift */; };
+		5F6F8F852A023F9100FB3414 /* AcknowledgementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6F8F842A023F9100FB3414 /* AcknowledgementsView.swift */; };
+		5F6F8F882A0240A800FB3414 /* AcknowledgementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6F8F842A023F9100FB3414 /* AcknowledgementsView.swift */; };
+		5F6F8F8A2A02422F00FB3414 /* AcknowledgementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6F8F892A02422F00FB3414 /* AcknowledgementView.swift */; };
+		5F6F8F8C2A024A7700FB3414 /* CocoapodAcknowledgements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6F8F8B2A024A7700FB3414 /* CocoapodAcknowledgements.swift */; };
+		5F6F8F8F2A025BAA00FB3414 /* AdditionalAcknowledgements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6F8F8E2A025BAA00FB3414 /* AdditionalAcknowledgements.swift */; };
 		5F74B959294F5DD900DE1909 /* StatusPrivacyPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F74B958294F5DD900DE1909 /* StatusPrivacyPreferencesView.swift */; };
 		5F74B95A294F5DD900DE1909 /* StatusPrivacyPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F74B958294F5DD900DE1909 /* StatusPrivacyPreferencesView.swift */; };
 		5F8C133C2969F1D9007BE2D5 /* Sdifft in Frameworks */ = {isa = PBXBuildFile; productRef = 5F8C133B2969F1D9007BE2D5 /* Sdifft */; };
@@ -531,8 +537,9 @@
 		5FC21CF629C6820500A582A8 /* HashtagSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC21CF529C6820500A582A8 /* HashtagSearchService.swift */; };
 		5FC21D0129CA55B400A582A8 /* HashtagSuggestionWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FC21D0029CA511300A582A8 /* HashtagSuggestionWindowController.xib */; };
 		5FC21D0329CA59EF00A582A8 /* DSFSparkline in Frameworks */ = {isa = PBXBuildFile; productRef = 5FC21D0229CA59EF00A582A8 /* DSFSparkline */; };
-		5FC3E1922926FD640086DCEE /* AppearancePreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC3E1912926FD640086DCEE /* AppearancePreferencesView.swift */; };
+		5FC3E1922926FD640086DCEE /* FontSizePreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC3E1912926FD640086DCEE /* FontSizePreferencesView.swift */; };
 		5FC3E1952927018A0086DCEE /* LoggingOSLog in Frameworks */ = {isa = PBXBuildFile; productRef = 5FC3E1942927018A0086DCEE /* LoggingOSLog */; };
+		5FCD67622A02B9350083EDB2 /* SwiftPMAcknowledgements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCD67612A02B9350083EDB2 /* SwiftPMAcknowledgements.swift */; };
 		5FD008EB29CBA8C700EC4A29 /* AccountSuggestionWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FD008EA29CBA8C700EC4A29 /* AccountSuggestionWindowController.xib */; };
 		5FD008EF29CBAB7000EC4A29 /* RedrawsOnSelectTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD008EE29CBAB7000EC4A29 /* RedrawsOnSelectTableRowView.swift */; };
 		5FE72EAE292982F0001C7A6C /* BuildConfig.sh in Resources */ = {isa = PBXBuildFile; fileRef = 5FE72EAD292982F0001C7A6C /* BuildConfig.sh */; };
@@ -696,8 +703,6 @@
 		15249AEF23401C7D0088B9EE /* NonVibrantPopUpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonVibrantPopUpButton.swift; sourceTree = "<group>"; };
 		1528BA1C228B52F60072068F /* MastonautTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MastonautTableCellView.swift; sourceTree = "<group>"; };
 		152B7315220E34D3004121F1 /* Pods-Mastonaut-acknowledgements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Pods-Mastonaut-acknowledgements.plist"; path = "Pods/Target Support Files/Pods-Mastonaut/Pods-Mastonaut-acknowledgements.plist"; sourceTree = SOURCE_ROOT; };
-		152B7318220E35A7004121F1 /* AcknowledgementsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgementsWindowController.swift; sourceTree = "<group>"; };
-		152B7319220E35A7004121F1 /* AcknowledgementsWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AcknowledgementsWindowController.xib; sourceTree = "<group>"; };
 		152DA63521E1B3140065CC1B /* Mastonaut.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Mastonaut.xcdatamodel; sourceTree = "<group>"; };
 		152DA63921E2360E0065CC1B /* Mastonaut-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Mastonaut-Bridging-Header.h"; sourceTree = "<group>"; };
 		152DA63B21E236520065CC1B /* NSAttributedString+SimpleHTML.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+SimpleHTML.h"; sourceTree = "<group>"; };
@@ -738,7 +743,7 @@
 		15398EF622272EFA00D97406 /* NSDraggingInfo+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSDraggingInfo+Additions.swift"; sourceTree = "<group>"; };
 		153A6F99220E1E0D004245E0 /* LocalizationTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationTool.swift; sourceTree = "<group>"; };
 		153A6FA1220E23AD004245E0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		153A6FA3220E2F0A004245E0 /* Acknowledgements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Acknowledgements.swift; sourceTree = "<group>"; };
+		153A6FA3220E2F0A004245E0 /* AcknowledgementsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgementsViewModel.swift; sourceTree = "<group>"; };
 		153B23902345763F00A317A2 /* MenuItemFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemFactory.swift; sourceTree = "<group>"; };
 		153B23AF2346A2D700A317A2 /* ReauthorizationAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReauthorizationAgent.swift; sourceTree = "<group>"; };
 		1543127E232EE39D0010854A /* Account+Shims.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Account+Shims.swift"; sourceTree = "<group>"; };
@@ -981,6 +986,7 @@
 		5F043C52293286110095C702 /* NotificationTypeFilterPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTypeFilterPreferencesView.swift; sourceTree = "<group>"; };
 		5F043C552932872D0095C702 /* NotificationPerAccountPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPerAccountPreferencesView.swift; sourceTree = "<group>"; };
 		5F043C582933A8D30095C702 /* Mastonaut 10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Mastonaut 10.xcdatamodel"; sourceTree = "<group>"; };
+		5F053A8129F078BE00E2FC8F /* AppearancePreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearancePreferencesView.swift; sourceTree = "<group>"; };
 		5F176FAB290EF03900DF043C /* FollowedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowedList.swift; sourceTree = "<group>"; };
 		5F176FAD290EF4AD00DF043C /* Mastonaut 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Mastonaut 8.xcdatamodel"; sourceTree = "<group>"; };
 		5F176FAE290EF65200DF043C /* FollowedListsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowedListsService.swift; sourceTree = "<group>"; };
@@ -989,7 +995,15 @@
 		5F38B52E2930301600FCB9FC /* PullToRefreshInnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefreshInnerView.swift; sourceTree = "<group>"; };
 		5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = CoreAssets.xcassets; sourceTree = "<group>"; };
 		5F3BC8B129D0B44000CEBD7F /* SparklineTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparklineTableCellView.swift; sourceTree = "<group>"; };
+		5F4581912A030E1200D5D240 /* Mastonaut 11.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Mastonaut 11.xcdatamodel"; sourceTree = "<group>"; };
+		5F4DAAAD29FEEDE4009FA0AE /* NSFont+withWeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSFont+withWeight.swift"; sourceTree = "<group>"; };
 		5F5338B22960B23200C1D9AE /* ReplaceCharactersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceCharactersTests.swift; sourceTree = "<group>"; };
+		5F6F8F5F2A0033DF00FB3414 /* FontService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontService.swift; sourceTree = "<group>"; };
+		5F6F8F692A0051BF00FB3414 /* TagFollowService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagFollowService.swift; sourceTree = "<group>"; };
+		5F6F8F842A023F9100FB3414 /* AcknowledgementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgementsView.swift; sourceTree = "<group>"; };
+		5F6F8F892A02422F00FB3414 /* AcknowledgementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgementView.swift; sourceTree = "<group>"; };
+		5F6F8F8B2A024A7700FB3414 /* CocoapodAcknowledgements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocoapodAcknowledgements.swift; sourceTree = "<group>"; };
+		5F6F8F8E2A025BAA00FB3414 /* AdditionalAcknowledgements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalAcknowledgements.swift; sourceTree = "<group>"; };
 		5F74B958294F5DD900DE1909 /* StatusPrivacyPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusPrivacyPreferencesView.swift; sourceTree = "<group>"; };
 		5F8C1346296A0661007BE2D5 /* EditedStatusTableCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditedStatusTableCellView.xib; sourceTree = "<group>"; };
 		5F8C1348296A06E3007BE2D5 /* EditedStatusTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditedStatusTableCellView.swift; sourceTree = "<group>"; };
@@ -999,7 +1013,8 @@
 		5FC21CF529C6820500A582A8 /* HashtagSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagSearchService.swift; sourceTree = "<group>"; };
 		5FC21D0029CA511300A582A8 /* HashtagSuggestionWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HashtagSuggestionWindowController.xib; sourceTree = "<group>"; };
 		5FC3E18E2926F0E80086DCEE /* Logger+CurrentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Logger+CurrentType.swift"; sourceTree = "<group>"; };
-		5FC3E1912926FD640086DCEE /* AppearancePreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearancePreferencesView.swift; sourceTree = "<group>"; };
+		5FC3E1912926FD640086DCEE /* FontSizePreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontSizePreferencesView.swift; sourceTree = "<group>"; };
+		5FCD67612A02B9350083EDB2 /* SwiftPMAcknowledgements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftPMAcknowledgements.swift; sourceTree = "<group>"; };
 		5FD008EA29CBA8C700EC4A29 /* AccountSuggestionWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountSuggestionWindowController.xib; sourceTree = "<group>"; };
 		5FD008EE29CBAB7000EC4A29 /* RedrawsOnSelectTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedrawsOnSelectTableRowView.swift; sourceTree = "<group>"; };
 		5FE72EAD292982F0001C7A6C /* BuildConfig.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = BuildConfig.sh; sourceTree = "<group>"; };
@@ -1053,6 +1068,7 @@
 				1596DB46235F65D300B349B7 /* DirectoryService.framework in Frameworks */,
 				15765563229692C200783FFE /* AVKit.framework in Frameworks */,
 				5F8C133C2969F1D9007BE2D5 /* Sdifft in Frameworks */,
+				5F4DAAAC29FDA15E009FA0AE /* FontPicker in Frameworks */,
 				154478A6232B0223009C71D4 /* CoreTootin.framework in Frameworks */,
 				8018496C90237DCCDED54D8E /* Pods_Mastonaut.framework in Frameworks */,
 				5FE7A535292E711100F7EB73 /* PullRefreshableScrollView.framework in Frameworks */,
@@ -1151,8 +1167,6 @@
 				15F1D25121F7D5AC00B01F35 /* AttachmentWindowController.xib */,
 				150443A32208750000D9018F /* AboutWindowController.swift */,
 				150443A42208750000D9018F /* AboutWindowController.xib */,
-				152B7318220E35A7004121F1 /* AcknowledgementsWindowController.swift */,
-				152B7319220E35A7004121F1 /* AcknowledgementsWindowController.xib */,
 				15B4AF17222B682A007AA447 /* PreferencesWindowController.swift */,
 				15EE538922C956A5001BEA58 /* SearchWindowController.swift */,
 				151E9A29230C830500A76DB0 /* DebugWindowController.swift */,
@@ -1196,6 +1210,7 @@
 				15E7452822372001009A1252 /* SVGKImage+Helpers.swift */,
 				15431283232EEB960010854A /* UserPopUpButtonController+Helper.swift */,
 				5F38B52B29302F0C00FCB9FC /* AppKitSwiftUIIntegration.swift */,
+				5F4DAAAD29FEEDE4009FA0AE /* NSFont+withWeight.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1248,8 +1263,6 @@
 				15B25D01265164BF00C90963 /* FilterTableCellView.xib */,
 				15DED9C02298B1D1000F11B8 /* FocusedStatusTableCellView.swift */,
 				15DED9C32298B707000F11B8 /* FocusedStatusTableCellView.xib */,
-				150A9F0321FD1BCE00DF42A1 /* FollowCellView.swift */,
-				150A9F0021FD1B1500DF42A1 /* FollowCellView.xib */,
 				1594392E229991F200E47DBB /* InstanceTableCellView.swift */,
 				1594392B2299917800E47DBB /* InstanceTableCellView.xib */,
 				150CEA3A21FCC17600F815A9 /* InteractionCellView.swift */,
@@ -1414,6 +1427,7 @@
 				1530427422AE83E300489F31 /* PostingService.swift */,
 				1530427722AE8F4300489F31 /* ResolverService.swift */,
 				154E9FDB234564F300885966 /* TagBookmarkService.swift */,
+				5F6F8F692A0051BF00FB3414 /* TagFollowService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1550,6 +1564,7 @@
 		15C4DD0E21D41EC0002AF6DA /* Mastonaut */ = {
 			isa = PBXGroup;
 			children = (
+				5F6F8F862A02406B00FB3414 /* Features */,
 				15C4DD3C21D42660002AF6DA /* Application */,
 				1507923E21D6E459009EE4A3 /* Agents */,
 				15082D5323109F890075BB1D /* UserNotifications */,
@@ -1630,7 +1645,6 @@
 			isa = PBXGroup;
 			children = (
 				15DC02DE22597983008407A6 /* AccountReference.swift */,
-				153A6FA3220E2F0A004245E0 /* Acknowledgements.swift */,
 				15B44D58225D0D9B00EDFDC1 /* AnnotatedURL.h */,
 				15B44D59225D0D9B00EDFDC1 /* AnnotatedURL.m */,
 				15BCDB12221B41CF007BFFAF /* AttachmentGroup.swift */,
@@ -1710,6 +1724,7 @@
 				5F176FAE290EF65200DF043C /* FollowedListsService.swift */,
 				15769BB622B83C8300E93712 /* PollService.swift */,
 				15E973C4225A6B44009CE4DF /* RelationshipsService.swift */,
+				5F6F8F5F2A0033DF00FB3414 /* FontService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1829,12 +1844,52 @@
 			path = "List View";
 			sourceTree = "<group>";
 		};
+		5F4581902A02F8BD00D5D240 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				150A9F0321FD1BCE00DF42A1 /* FollowCellView.swift */,
+				150A9F0021FD1B1500DF42A1 /* FollowCellView.xib */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		5F6F8F862A02406B00FB3414 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				5F6F8F872A02407100FB3414 /* Acknowledgments */,
+				5F4581902A02F8BD00D5D240 /* Notifications */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		5F6F8F872A02407100FB3414 /* Acknowledgments */ = {
+			isa = PBXGroup;
+			children = (
+				5F6F8F842A023F9100FB3414 /* AcknowledgementsView.swift */,
+				153A6FA3220E2F0A004245E0 /* AcknowledgementsViewModel.swift */,
+				5F6F8F892A02422F00FB3414 /* AcknowledgementView.swift */,
+				5F6F8F8D2A025B9B00FB3414 /* Data Sources */,
+			);
+			path = Acknowledgments;
+			sourceTree = "<group>";
+		};
+		5F6F8F8D2A025B9B00FB3414 /* Data Sources */ = {
+			isa = PBXGroup;
+			children = (
+				5F6F8F8E2A025BAA00FB3414 /* AdditionalAcknowledgements.swift */,
+				5F6F8F8B2A024A7700FB3414 /* CocoapodAcknowledgements.swift */,
+				5FCD67612A02B9350083EDB2 /* SwiftPMAcknowledgements.swift */,
+			);
+			path = "Data Sources";
+			sourceTree = "<group>";
+		};
 		5FC3E1902926FD520086DCEE /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
-				5FC3E1912926FD640086DCEE /* AppearancePreferencesView.swift */,
-				5F043C52293286110095C702 /* NotificationTypeFilterPreferencesView.swift */,
+				5F053A8129F078BE00E2FC8F /* AppearancePreferencesView.swift */,
+				5FC3E1912926FD640086DCEE /* FontSizePreferencesView.swift */,
 				5F043C552932872D0095C702 /* NotificationPerAccountPreferencesView.swift */,
+				5F043C52293286110095C702 /* NotificationTypeFilterPreferencesView.swift */,
 				5F74B958294F5DD900DE1909 /* StatusPrivacyPreferencesView.swift */,
 			);
 			path = Preferences;
@@ -2002,6 +2057,7 @@
 			name = Mastonaut;
 			packageProductDependencies = (
 				5F8C133B2969F1D9007BE2D5 /* Sdifft */,
+				5F4DAAAB29FDA15E009FA0AE /* FontPicker */,
 			);
 			productName = Sengi;
 			productReference = 15C4DD0C21D41EC0002AF6DA /* Mastonaut.app */;
@@ -2082,6 +2138,7 @@
 				5FC3E18B2926EF3F0086DCEE /* XCRemoteSwiftPackageReference "swift-log-oslog" */,
 				5F8C133A2969F1D9007BE2D5 /* XCRemoteSwiftPackageReference "Sdifft" */,
 				5FC21CFD29CA360A00A582A8 /* XCRemoteSwiftPackageReference "DSFSparkline" */,
+				5F4DAAAA29FDA15E009FA0AE /* XCRemoteSwiftPackageReference "FontPicker" */,
 			);
 			productRefGroup = 15C4DD0D21D41EC0002AF6DA /* Products */;
 			projectDirPath = "";
@@ -2142,7 +2199,6 @@
 				15032606247F297600F02E83 /* MastonautDebug.icns in Resources */,
 				15EE539122C956C8001BEA58 /* Search.storyboard in Resources */,
 				158B997721F9DB0C0046C8D6 /* ListViewController.xib in Resources */,
-				152B731D220E35A7004121F1 /* AcknowledgementsWindowController.xib in Resources */,
 				15E7452D2237236A009A1252 /* accounts.svg in Resources */,
 				15A1CA0A221F4BAF00CF51F1 /* AccountTableCellView.xib in Resources */,
 				15DED9C52298B708000F11B8 /* FocusedStatusTableCellView.xib in Resources */,
@@ -2228,7 +2284,6 @@
 				158B997621F9DB0C0046C8D6 /* ListViewController.xib in Resources */,
 				1595BEB3249ECE850077A150 /* PollResultItemView.xib in Resources */,
 				15E7452C2237236A009A1252 /* accounts.svg in Resources */,
-				152B731C220E35A7004121F1 /* AcknowledgementsWindowController.xib in Resources */,
 				152DA65121E3FCB40065CC1B /* QuadrupleAttachmentView.xib in Resources */,
 				150CEA3E21FCC18600F815A9 /* InteractionCellView.xib in Resources */,
 				15BF72D12342B3AF0020CE70 /* SidebarTitleViewController.xib in Resources */,
@@ -2591,7 +2646,6 @@
 				1523C6E821E94C7F006DE234 /* StatusComposerWindowController.swift in Sources */,
 				150CCC0421FE42D900FFA89A /* BackgroundTableRowView.swift in Sources */,
 				5FE72EB629298DB7001C7A6C /* BuildConfig.generated.swift in Sources */,
-				152B731B220E35A7004121F1 /* AcknowledgementsWindowController.swift in Sources */,
 				15F1D25821F8CF0000B01F35 /* NSWindowController+Additions.swift in Sources */,
 				1523C6E921E94C7F006DE234 /* NSWindow+Additions.swift in Sources */,
 				15BCDB14221B41CF007BFFAF /* AttachmentGroup.swift in Sources */,
@@ -2666,10 +2720,11 @@
 				15C78370221CBD4900402C66 /* TimelinesWindowController.swift in Sources */,
 				15A22B87232C5361009D5637 /* ComposerTextView.swift in Sources */,
 				1598919F21FFC0A000FA92F7 /* RefreshingFormattedTextField.swift in Sources */,
+				5F6F8F882A0240A800FB3414 /* AcknowledgementsView.swift in Sources */,
 				15D9DA75229F175C006AE6D4 /* EmojiCollectionViewItem.swift in Sources */,
 				150B1F01227FA1F80048EA22 /* StaticEmojiCell.swift in Sources */,
 				15B7B2E32252A2AD00A3222C /* TrackingLayoutConstraint.swift in Sources */,
-				153A6FA5220E2F0A004245E0 /* Acknowledgements.swift in Sources */,
+				153A6FA5220E2F0A004245E0 /* AcknowledgementsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2685,6 +2740,7 @@
 				15EE2B02232EA0CB00155E16 /* ImageRestrainer.swift in Sources */,
 				15EE2B10232EA3EF00155E16 /* BorderView.swift in Sources */,
 				15F9F307232EB8BE00931594 /* BaseComposerTextView.swift in Sources */,
+				5F6F8F6A2A0051BF00FB3414 /* TagFollowService.swift in Sources */,
 				154478AF232B03A0009C71D4 /* MastonautPersistentContainer.swift in Sources */,
 				5F3BC8B229D0B44000CEBD7F /* SparklineTableCellView.swift in Sources */,
 				1574DE1E233C030A00AB1036 /* NetworkError.swift in Sources */,
@@ -2791,11 +2847,13 @@
 				15CB8A5B2288CDB100E465D8 /* GeneralPreferencesController.swift in Sources */,
 				1599F8EB22CABA0B00A53D93 /* StatusSearchResultViewController.swift in Sources */,
 				15C78372221CBD8600402C66 /* TimelinesViewController.swift in Sources */,
+				5F053A8229F0795E00E2FC8F /* AppearancePreferencesView.swift in Sources */,
 				1519EBD722A72122007AB87F /* IndexPath+Helpers.swift in Sources */,
 				151D8817230DEA62002583D3 /* BaseAccountsPreferencesViewController.swift in Sources */,
 				15DC02E1225979C0008407A6 /* AccountReference.swift in Sources */,
 				15EE2B08232EA28600155E16 /* NSImage+ErrorImages.swift in Sources */,
 				1563AE9D2378281800D4849B /* NSTableView+Helpers.swift in Sources */,
+				5FCD67622A02B9350083EDB2 /* SwiftPMAcknowledgements.swift in Sources */,
 				15D9DA6E229F144F006AE6D4 /* CustomEmojiPanelController.swift in Sources */,
 				15EE538B22C956A5001BEA58 /* SearchWindowController.swift in Sources */,
 				15722EA822123D2A00A672C6 /* ClickThroughTextField.swift in Sources */,
@@ -2835,10 +2893,12 @@
 				15B25D0A2651CBAC00C90963 /* FilterEditorWindowController.swift in Sources */,
 				152DA64721E3F46B0065CC1B /* ResourcesFetcher.swift in Sources */,
 				15E7452922372001009A1252 /* SVGKImage+Helpers.swift in Sources */,
+				5F6F8F602A0033DF00FB3414 /* FontService.swift in Sources */,
 				157D266823B25F8600B3A8BE /* StatusCellModel.swift in Sources */,
 				15E7453022372806009A1252 /* AccountAvatarItem.swift in Sources */,
 				153B23912345763F00A317A2 /* MenuItemFactory.swift in Sources */,
 				15077EE22231DB9700965651 /* RemoteEventsListener.swift in Sources */,
+				5F4DAAAE29FEEDE4009FA0AE /* NSFont+withWeight.swift in Sources */,
 				1594392F229991F200E47DBB /* InstanceTableCellView.swift in Sources */,
 				5F043C562932872D0095C702 /* NotificationPerAccountPreferencesView.swift in Sources */,
 				15ECEECE22E8EEAB00A37CC0 /* LazyEvaluationAdapter.swift in Sources */,
@@ -2854,16 +2914,17 @@
 				15769616231A7206003C8B30 /* NotificationCenter+Helpers.swift in Sources */,
 				150CCC0321FE42D900FFA89A /* BackgroundTableRowView.swift in Sources */,
 				5FE72EB729298DB7001C7A6C /* BuildConfig.generated.swift in Sources */,
-				152B731A220E35A7004121F1 /* AcknowledgementsWindowController.swift in Sources */,
 				15F1D25721F8CF0000B01F35 /* NSWindowController+Additions.swift in Sources */,
 				15CD5BD621DAC89700E06C2F /* NSWindow+Additions.swift in Sources */,
 				15BCDB13221B41CF007BFFAF /* AttachmentGroup.swift in Sources */,
+				5F6F8F8A2A02422F00FB3414 /* AcknowledgementView.swift in Sources */,
 				15E7452622371DCB009A1252 /* AccountsPlaceholderController.swift in Sources */,
 				152DA64A21E3F9CD0065CC1B /* AttachmentViewController.swift in Sources */,
 				5F8C1349296A06E3007BE2D5 /* EditedStatusTableCellView.swift in Sources */,
 				15B981B6234FE549008391F8 /* FavoritesViewController.swift in Sources */,
 				1538FB3622188978006B5F78 /* ViewingPreferencesController.swift in Sources */,
 				15EE539D22C95854001BEA58 /* SearchResultsPresenter.swift in Sources */,
+				5F6F8F852A023F9100FB3414 /* AcknowledgementsView.swift in Sources */,
 				1538FB22221777EE006B5F78 /* CoverView.swift in Sources */,
 				15BC41522262145A00C2A150 /* RichTextCapable.swift in Sources */,
 				15A453DD2283828D00AB8A54 /* StatusThreadViewController.swift in Sources */,
@@ -2872,6 +2933,7 @@
 				15082D552312CA3A0075BB1D /* ReconnectModerator.swift in Sources */,
 				1599F8EE22CABD1B00A53D93 /* TagSearchResultsViewController.swift in Sources */,
 				15431295232EF5380010854A /* AuthController.swift in Sources */,
+				5F6F8F8F2A025BAA00FB3414 /* AdditionalAcknowledgements.swift in Sources */,
 				15BC41552262218C00C2A150 /* TagViewController.swift in Sources */,
 				15BC415B2262A65F00C2A150 /* TimelinesWindowRestoration.swift in Sources */,
 				1507924421D6E707009EE4A3 /* InstancePickerWindowController.swift in Sources */,
@@ -2896,9 +2958,10 @@
 				155B9389237A23E5006EBF3C /* AnyObject+Helpers.swift in Sources */,
 				15BB378C22A854880094B5A3 /* EmphasizedTextField.m in Sources */,
 				5F1F20D92938E9140057E585 /* Logger+CurrentType.swift in Sources */,
-				5FC3E1922926FD640086DCEE /* AppearancePreferencesView.swift in Sources */,
+				5FC3E1922926FD640086DCEE /* FontSizePreferencesView.swift in Sources */,
 				15D3B9C824A298CB00DC3B10 /* BPAnimatedImageLayer.swift in Sources */,
 				152DA63F21E23FD30065CC1B /* String+HTMLEntities.swift in Sources */,
+				5F6F8F8C2A024A7700FB3414 /* CocoapodAcknowledgements.swift in Sources */,
 				15C4DD1021D41EC0002AF6DA /* AppDelegate.swift in Sources */,
 				158B997A21FBB9E30046C8D6 /* ToolbarWindow.swift in Sources */,
 				15CD5BD321DAC76B00E06C2F /* AuthWindowController.swift in Sources */,
@@ -2936,7 +2999,7 @@
 				15D9DA74229F175C006AE6D4 /* EmojiCollectionViewItem.swift in Sources */,
 				150B1F00227FA1F80048EA22 /* StaticEmojiCell.swift in Sources */,
 				15B7B2E22252A2AD00A3222C /* TrackingLayoutConstraint.swift in Sources */,
-				153A6FA4220E2F0A004245E0 /* Acknowledgements.swift in Sources */,
+				153A6FA4220E2F0A004245E0 /* AcknowledgementsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3716,6 +3779,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		5F4DAAAA29FDA15E009FA0AE /* XCRemoteSwiftPackageReference "FontPicker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/chucker/FontPicker.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		5F8C133A2969F1D9007BE2D5 /* XCRemoteSwiftPackageReference "Sdifft" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/wzxhahaha/Sdifft";
@@ -3748,6 +3819,11 @@
 			package = 5FC3E18B2926EF3F0086DCEE /* XCRemoteSwiftPackageReference "swift-log-oslog" */;
 			productName = LoggingOSLog;
 		};
+		5F4DAAAB29FDA15E009FA0AE /* FontPicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5F4DAAAA29FDA15E009FA0AE /* XCRemoteSwiftPackageReference "FontPicker" */;
+			productName = FontPicker;
+		};
 		5F8C133B2969F1D9007BE2D5 /* Sdifft */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5F8C133A2969F1D9007BE2D5 /* XCRemoteSwiftPackageReference "Sdifft" */;
@@ -3769,6 +3845,7 @@
 		152DA63421E1B3140065CC1B /* Mastonaut.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				5F4581912A030E1200D5D240 /* Mastonaut 11.xcdatamodel */,
 				5F043C582933A8D30095C702 /* Mastonaut 10.xcdatamodel */,
 				5F176FB0290F00FB00DF043C /* Mastonaut 9.xcdatamodel */,
 				5F176FAD290EF4AD00DF043C /* Mastonaut 8.xcdatamodel */,
@@ -3780,7 +3857,7 @@
 				1531084922B0EDA7002FA1E7 /* Mastonaut 2.xcdatamodel */,
 				152DA63521E1B3140065CC1B /* Mastonaut.xcdatamodel */,
 			);
-			currentVersion = 5F043C582933A8D30095C702 /* Mastonaut 10.xcdatamodel */;
+			currentVersion = 5F4581912A030E1200D5D240 /* Mastonaut 11.xcdatamodel */;
 			path = Mastonaut.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -168,4 +168,23 @@ public extension AuthorizedAccount
 		fetchRequest.predicate = NSPredicate(format: "account = %@ AND name = %@", self, name)
 		return try! managedObjectContext!.fetch(fetchRequest).first
 	}
+
+	func hasFollowedTag(_ tagName: String, client: ClientType) async -> Bool
+	{
+		let followedTags = try? await client.run(Tags.followed())
+
+		let filtered = followedTags?.value.filter { $0.name == tagName }
+
+		return filtered?.count ?? 0 > 0
+	}
+
+	func followTag(_ tagName: String, client: ClientType) async
+	{
+		_ = try? await client.run(Tags.follow(name: tagName))
+	}
+
+	func unfollowTag(_ tagName: String, client: ClientType) async
+	{
+		_ = try? await client.run(Tags.unfollow(name: tagName))
+	}
 }

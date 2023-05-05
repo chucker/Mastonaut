@@ -17,6 +17,7 @@
 //  GNU General Public License for more details.
 //
 
+import CoreTootin
 import Foundation
 import MastodonKit
 
@@ -25,50 +26,68 @@ class FocusedStatusTableCellView: StatusTableCellView
 	@IBOutlet private unowned var appNameConatiner: NSView!
 	@IBOutlet private unowned var appNameLabel: NSButton!
 
-	private var sourceApplication: Application? = nil
-
-	private static let _authorLabelAttributes: [NSAttributedString.Key: AnyObject] = [
-		.foregroundColor: NSColor.labelColor, .font: NSFont.systemFont(ofSize: 15, weight: .semibold)
-	]
-
-	private static let _statusLabelAttributes: [NSAttributedString.Key: AnyObject] = [
-		.foregroundColor: NSColor.labelColor, .font: NSFont.labelFont(ofSize: 16),
-		.underlineStyle: NSNumber(value: 0) // <-- This is a hack to prevent the label's contents from shifting
-		// vertically when clicked.
-	]
-
-	private static let _statusLabelLinkAttributes: [NSAttributedString.Key: AnyObject] = [
-		.foregroundColor: NSColor.safeControlTintColor,
-		.font: NSFont.systemFont(ofSize: 16, weight: .medium),
-		.underlineStyle: NSNumber(value: 1)
-	]
-
-	internal override func authorLabelAttributes() -> [NSAttributedString.Key: AnyObject]
+	private func fontService() -> FontService
 	{
-		return FocusedStatusTableCellView._authorLabelAttributes
+		return FontService(font: MastonautPreferences.instance.focusedStatusFont)
 	}
 
-	internal override func statusLabelAttributes() -> [NSAttributedString.Key: AnyObject]
+	@IBOutlet var replyCount: NSTextField!
+	@IBOutlet var reblogCount: NSTextField!
+	@IBOutlet var favoriteCount: NSTextField!
+
+	private var sourceApplication: Application?
+
+	override func awakeFromNib()
 	{
-		return FocusedStatusTableCellView._statusLabelAttributes
+		super.awakeFromNib()
+
+		fontObserver = MastonautPreferences.instance.observe(\.focusedStatusFont, options: .new)
+		{
+			[weak self] _, _ in
+			self?.updateFont()
+		}
 	}
 
-	internal override func statusLabelLinkAttributes() -> [NSAttributedString.Key: AnyObject]
+	private var fontObserver: NSKeyValueObservation?
+
+	deinit
 	{
-		return FocusedStatusTableCellView._statusLabelLinkAttributes
+		fontObserver?.invalidate()
+	}
+
+	override func updateFont()
+	{
+		statusLabel.linkTextAttributes = statusLabelLinkAttributes()
+
+		redraw()
+	}
+
+	override internal func authorLabelAttributes() -> [NSAttributedString.Key: AnyObject]
+	{
+		return fontService().authorAttributes()
+	}
+
+	override internal func statusLabelAttributes() -> [NSAttributedString.Key: AnyObject]
+	{
+		return fontService().statusAttributes()
+	}
+
+	override internal func statusLabelLinkAttributes() -> [NSAttributedString.Key: AnyObject]
+	{
+		return fontService().statusLinkAttributes()
 	}
 
 	override func set(displayedStatus status: Status,
-					  poll: Poll?,
-					  attachmentPresenter: AttachmentPresenting,
-					  interactionHandler: StatusInteractionHandling,
-					  activeInstance: Instance)
+	                  poll: Poll?,
+	                  attachmentPresenter: AttachmentPresenting,
+	                  interactionHandler: StatusInteractionHandling,
+	                  activeInstance: Instance)
 	{
 		super.set(displayedStatus: status,
-				  poll: poll,
-				  attachmentPresenter: attachmentPresenter,
-				  interactionHandler: interactionHandler,
-				  activeInstance: activeInstance)
+		          poll: poll,
+		          attachmentPresenter: attachmentPresenter,
+		          interactionHandler: interactionHandler,
+		          activeInstance: activeInstance)
 
 		setContentLabelsSelectable(true)
 
@@ -84,6 +103,14 @@ class FocusedStatusTableCellView: StatusTableCellView
 			appNameLabel.title = ""
 			appNameConatiner.isHidden = true
 		}
+
+		reblogCount.intValue = Int32(status.reblogsCount)
+		favoriteCount.intValue = Int32(status.favouritesCount)
+	}
+
+	func set(context: Context)
+	{
+		replyCount.intValue = Int32(context.descendants.count)
 	}
 
 	override func prepareForReuse()
@@ -95,7 +122,8 @@ class FocusedStatusTableCellView: StatusTableCellView
 
 	@IBAction func showStatusApp(_ sender: Any?)
 	{
-		guard let applicationWebsite = sourceApplication?.website, let url = URL(string: applicationWebsite) else
+		guard let applicationWebsite = sourceApplication?.website, let url = URL(string: applicationWebsite)
+		else
 		{
 			return
 		}

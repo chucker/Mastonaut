@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22F5059b" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="AccountNotificationPreferences" representedClassName="AccountNotificationPreferences" syncable="YES" codeGenerationType="class">
+        <attribute name="showAdminReports" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="showAdminSignUps" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="showBoosts" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="showEdits" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="showFavorites" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="showFollowRequests" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="showMentions" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="showNewFollowers" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="showPollResults" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="showStatuses" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <relationship name="account" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AuthorizedAccount" inverseName="accountNotificationPreferences" inverseEntity="AuthorizedAccount"/>
+    </entity>
+    <entity name="AccountOrder" representedClassName="AccountOrder" syncable="YES" codeGenerationType="class">
+        <relationship name="accounts" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="AuthorizedAccount" inverseName="order" inverseEntity="AuthorizedAccount"/>
+    </entity>
+    <entity name="AccountPreferences" representedClassName="AccountPreferences" syncable="YES" codeGenerationType="class">
+        <attribute name="customTootLengthLimit" optional="YES" attributeType="Integer 32" usesScalarValueType="NO"/>
+        <attribute name="showNotificationDetails" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="showNotifications" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="account" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AuthorizedAccount" inverseName="accountPreferences" inverseEntity="AuthorizedAccount"/>
+    </entity>
+    <entity name="AccountReference" representedClassName="AccountReference" syncable="YES" codeGenerationType="class">
+        <attribute name="avatarURL" optional="YES" attributeType="URI"/>
+        <attribute name="host" attributeType="String"/>
+        <attribute name="identifier" attributeType="String"/>
+        <attribute name="isBlocked" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="isFollower" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="isFollowing" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="isFollowingRequested" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="isMuted" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="username" attributeType="String"/>
+        <relationship name="authorizedAccount" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AuthorizedAccount" inverseName="relationships" inverseEntity="AuthorizedAccount"/>
+    </entity>
+    <entity name="AuthorizedAccount" representedClassName="AuthorizedAccount" syncable="YES" codeGenerationType="class">
+        <attribute name="accessTokenType" attributeType="String"/>
+        <attribute name="account" attributeType="String"/>
+        <attribute name="avatarURL" optional="YES" attributeType="URI"/>
+        <attribute name="baseDomain" attributeType="String"/>
+        <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="displayName" attributeType="String"/>
+        <attribute name="needsAuthorization" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="uri" optional="YES" attributeType="String"/>
+        <attribute name="username" attributeType="String"/>
+        <attribute name="uuidString" attributeType="String"/>
+        <relationship name="accountNotificationPreferences" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="AccountNotificationPreferences" inverseName="account" inverseEntity="AccountNotificationPreferences"/>
+        <relationship name="accountPreferences" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="AccountPreferences" inverseName="account" inverseEntity="AccountPreferences"/>
+        <relationship name="bookmarkedTags" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="BookmarkedTag" inverseName="account" inverseEntity="BookmarkedTag"/>
+        <relationship name="filters" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CachedFilter" inverseName="account" inverseEntity="CachedFilter"/>
+        <relationship name="followedLists" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="FollowedList" inverseName="authorizedAccount" inverseEntity="FollowedList"/>
+        <relationship name="order" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AccountOrder" inverseName="accounts" inverseEntity="AccountOrder"/>
+        <relationship name="relationships" toMany="YES" deletionRule="Cascade" destinationEntity="AccountReference" inverseName="authorizedAccount" inverseEntity="AccountReference"/>
+    </entity>
+    <entity name="BookmarkedTag" representedClassName="BookmarkedTag" syncable="YES" codeGenerationType="class">
+        <attribute name="name" attributeType="String" minValueString="1"/>
+        <relationship name="account" maxCount="1" deletionRule="Nullify" destinationEntity="AuthorizedAccount" inverseName="bookmarkedTags" inverseEntity="AuthorizedAccount"/>
+    </entity>
+    <entity name="CachedFilter" representedClassName="CachedFilter" syncable="YES" codeGenerationType="class">
+        <attribute name="context" optional="YES" attributeType="String"/>
+        <attribute name="expiresAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="irreversible" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="phrase" optional="YES" attributeType="String"/>
+        <attribute name="wholeWord" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <relationship name="account" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AuthorizedAccount" inverseName="filters" inverseEntity="AuthorizedAccount"/>
+    </entity>
+    <entity name="FollowedList" representedClassName="FollowedList" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="authorizedAccount" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AuthorizedAccount" inverseName="followedLists" inverseEntity="AuthorizedAccount"/>
+    </entity>
+    <fetchRequest name="UnreferencedAccounts" entity="AccountReference" predicateString="isFollower == 0 AND isFollowing == 0 AND isBlocked == 0 AND isMuted == 0" includesPendingChanges="YES"/>
+</model>
