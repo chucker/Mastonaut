@@ -12,12 +12,43 @@ class InstancePickerViewModel: ObservableObject {
 	@Published var languages = [Language]()
 	@Published var categories = [Category]()
 	@Published var servers = [Server]()
+
+	@Published var selectedLanguage: String = "" {
+		didSet { refreshFilteredServers() }
+	}
+
+	@Published var selectedCategory: String = "All" {
+		didSet { refreshFilteredServers() }
+	}
+
+	@Published var filteredServers = [Server]()
 	
+	var instanceName: String = "" {
+		didSet { refreshFilteredServers() }
+	}
+
+	func refreshFilteredServers() {
+		filteredServers = servers
+		
+		if instanceName != "" {
+			filteredServers.removeAll { !$0.domain.contains(instanceName) }
+		}
+		
+		if selectedLanguage != "" {
+			filteredServers.removeAll { !$0.languages.contains(selectedLanguage) }
+		}
+		
+		if selectedCategory != "All" {
+			filteredServers.removeAll { !$0.categories.contains(selectedCategory) }
+		}
+	}
+		
 	@MainActor
 	func refresh() async {
 		await refreshLanguages()
 		await refreshCategories()
 		await refreshServers()
+		refreshFilteredServers()
 	}
 	
 	private func refreshLanguages() async {

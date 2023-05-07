@@ -68,10 +68,7 @@ class AuthController
 //
 //		pickerWindowController.delegate = self
 
-		let window = AppKitSwiftUIIntegration.makeSheet(forSwiftUIView: InstancePickerView(instanceName: "mastodon.social",
-		                                                                                   selectedLanguage: "All",
-		                                                                                   selectedCategory: "All",
-		                                                                                   viewModel: InstancePickerViewModel()),
+		let window = AppKitSwiftUIIntegration.makeSheet(forSwiftUIView: InstancePickerView(viewModel: InstancePickerViewModel()),
 		                                                contentRect: NSRect(x: 0, y: 0, width: 400, height: 400))
 
 //		authorizationState = .pickingDomain(sourceWindow: sourceWindow, sheetWindowController: pickerWindowController)

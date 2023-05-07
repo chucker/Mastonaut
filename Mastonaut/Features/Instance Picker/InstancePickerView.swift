@@ -9,12 +9,6 @@
 import SwiftUI
 
 struct InstancePickerView: View {
-	@State var instanceName: String
-
-//	@State var languages = ["German", "English"]
-	@State var selectedLanguage: String
-	@State var selectedCategory: String
-
 	@ObservedObject var viewModel: InstancePickerViewModel
 
 	var body: some View {
@@ -22,13 +16,13 @@ struct InstancePickerView: View {
 			Text("Type an instance address:")
 				.font(.title3)
 
-			TextField("Hello", text: $instanceName)
+			TextField("", text: $viewModel.instanceName)
 				.padding(.bottom, 20)
 
 			Text("Or, pick from this list of popular instances:")
 				.font(.title3)
 
-			Picker("", selection: $selectedLanguage) {
+			Picker("", selection: $viewModel.selectedLanguage) {
 				//				ForEach(languages) {
 				//					language in
 				//
@@ -46,7 +40,7 @@ struct InstancePickerView: View {
 			// .pickerStyle(.radioGroup)
 			.scaledToFit()
 
-			Picker("", selection: $selectedCategory) {
+			Picker("", selection: $viewModel.selectedCategory) {
 				ForEach(viewModel.categories, id: \.category) {
 					category in
 
@@ -57,7 +51,7 @@ struct InstancePickerView: View {
 			.scaledToFit()
 			
 			List {
-				ForEach(viewModel.servers, id: \.domain) {
+				ForEach(viewModel.filteredServers, id: \.domain) {
 					server in
 					
 					VStack(alignment: .leading) {
@@ -88,9 +82,6 @@ struct InstancePickerView: View {
 
 struct InstancePickerView_Previews: PreviewProvider {
 	static var previews: some View {
-		InstancePickerView(instanceName: "norden.social",
-		                   selectedLanguage: "",
-		                   selectedCategory: "All",
-		                   viewModel: InstancePickerViewModel())
+		InstancePickerView(viewModel: InstancePickerViewModel())
 	}
 }
