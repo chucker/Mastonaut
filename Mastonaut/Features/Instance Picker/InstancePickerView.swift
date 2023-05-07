@@ -44,26 +44,32 @@ struct InstancePickerView: View {
 				ForEach(viewModel.categories, id: \.category) {
 					category in
 
-					Text(category.category)
-						.tag(category.category)
+					HStack {
+						if let categorySymbol = category.symbolName {
+							Image(systemName: categorySymbol)
+						}
+
+						Text(category.category)
+							.tag(category.category)
+					}
 				}
 			}
 			.scaledToFit()
-			
+
 			List {
 				ForEach(viewModel.filteredServers, id: \.domain) {
 					server in
-					
+
 					VStack(alignment: .leading) {
 						Text(server.domain)
 							.bold()
-					
+
 						Text(server.description)
 							.font(.subheadline)
 							.foregroundColor(.secondary)
-						
+
 						HStack {
-							Image.init(systemName: "person.3.fill")
+							Image(systemName: "person.3.fill")
 							Text("\(server.totalUsers)")
 						}
 					}
