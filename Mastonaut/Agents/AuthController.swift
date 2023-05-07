@@ -59,16 +59,22 @@ class AuthController
 	{
 		cleanupAuthorizationState()
 
-		let pickerWindowController = InstancePickerWindowController()
+//		let pickerWindowController = InstancePickerWindowController()
+//
+//		guard let window = pickerWindowController.window else
+//		{
+//			return
+//		}
+//
+//		pickerWindowController.delegate = self
 
-		guard let window = pickerWindowController.window else
-		{
-			return
-		}
+		let window = AppKitSwiftUIIntegration.makeSheet(forSwiftUIView: InstancePickerView(instanceName: "mastodon.social",
+		                                                                                   selectedLanguage: "All",
+		                                                                                   selectedCategory: "All",
+		                                                                                   viewModel: InstancePickerViewModel()),
+		                                                contentRect: NSRect(x: 0, y: 0, width: 400, height: 400))
 
-		pickerWindowController.delegate = self
-
-		authorizationState = .pickingDomain(sourceWindow: sourceWindow, sheetWindowController: pickerWindowController)
+//		authorizationState = .pickingDomain(sourceWindow: sourceWindow, sheetWindowController: pickerWindowController)
 
 		sourceWindow.beginSheet(window)
 		{
