@@ -9,7 +9,6 @@
 import SwiftUI
 
 struct InstancePickerView: View {
-	@State var isOn: Bool
 	@State var instanceName: String
 
 //	@State var languages = ["German", "English"]
@@ -56,6 +55,26 @@ struct InstancePickerView: View {
 				}
 			}
 			.scaledToFit()
+			
+			List {
+				ForEach(viewModel.servers, id: \.domain) {
+					server in
+					
+					VStack(alignment: .leading) {
+						Text(server.domain)
+							.bold()
+					
+						Text(server.description)
+							.font(.subheadline)
+							.foregroundColor(.secondary)
+						
+						HStack {
+							Image.init(systemName: "person.3.fill")
+							Text("\(server.totalUsers)")
+						}
+					}
+				}
+			}
 
 //			Button("I agree to connect to joinmastodon.org") {
 //
@@ -69,8 +88,7 @@ struct InstancePickerView: View {
 
 struct InstancePickerView_Previews: PreviewProvider {
 	static var previews: some View {
-		InstancePickerView(isOn: false,
-		                   instanceName: "norden.social",
+		InstancePickerView(instanceName: "norden.social",
 		                   selectedLanguage: "",
 		                   selectedCategory: "All",
 		                   viewModel: InstancePickerViewModel())

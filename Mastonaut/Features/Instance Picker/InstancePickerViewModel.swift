@@ -11,12 +11,13 @@ import Foundation
 class InstancePickerViewModel: ObservableObject {
 	@Published var languages = [Language]()
 	@Published var categories = [Category]()
+	@Published var servers = [Server]()
 	
 	@MainActor
 	func refresh() async {
 		await refreshLanguages()
 		await refreshCategories()
-		// TODO: await refreshServers()
+		await refreshServers()
 	}
 	
 	private func refreshLanguages() async {
@@ -54,6 +55,24 @@ class InstancePickerViewModel: ObservableObject {
 				.sorted { $0.category < $1.category }
 			
 			categories.insert(Category(category: "All", serversCount: 0), at: 0)
+		}
+		catch {}
+	}
+	
+	private func refreshServers() async {
+		do {
+			let (data, response) = try await URLSession.shared.data(from: JoinMastodonInstanceDirectory.serversEndpointURL)
+			
+			guard let httpResponse = response as? HTTPURLResponse,
+			      httpResponse.statusCode == 200
+			else {
+				return
+			}
+			
+			servers = try JSONDecoder()
+				.decode([Server].self, from: data)
+//				.sorted { $0.domain < $1.domain }
+				.sorted { $0.totalUsers > $1.totalUsers }
 		}
 		catch {}
 	}

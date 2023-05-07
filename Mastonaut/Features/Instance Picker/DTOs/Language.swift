@@ -8,12 +8,12 @@
 
 import Foundation
 
-struct Language : Codable {
-	public let locale:String
-	public let language:String?
+struct Language: Codable {
+	public let locale: String
+	public let language: String?
 	public let serversCount: Int
-	
-	private enum CodingKeys:String,CodingKey {
+
+	private enum CodingKeys: String, CodingKey {
 		case locale
 		case language
 		case serversCount = "servers_count"
