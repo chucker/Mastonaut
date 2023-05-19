@@ -51,6 +51,7 @@ class InstancePickerViewModel: ObservableObject {
 		refreshFilteredServers()
 	}
 	
+	@MainActor
 	private func refreshLanguages() async {
 		do {
 			let (data, response) = try await URLSession.shared.data(from: JoinMastodonInstanceDirectory.languagesEndpointURL)
@@ -71,6 +72,7 @@ class InstancePickerViewModel: ObservableObject {
 		catch {}
 	}
 	
+	@MainActor
 	private func refreshCategories() async {
 		do {
 			let (data, response) = try await URLSession.shared.data(from: JoinMastodonInstanceDirectory.categoriesEndpointURL)
@@ -90,6 +92,7 @@ class InstancePickerViewModel: ObservableObject {
 		catch {}
 	}
 	
+	@MainActor
 	private func refreshServers() async {
 		do {
 			let (data, response) = try await URLSession.shared.data(from: JoinMastodonInstanceDirectory.serversEndpointURL)
