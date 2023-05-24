@@ -32,7 +32,7 @@ struct MastodonURLResolver {
 			logger.info("Resolved \(url); will show in sidebar with mode \(mode)")
 			await windowController.presentInSidebar(mode)
 		}
-		else if let client, let status = try? await fetchStatusFromUrl(using: client, url: url) {
+		else if #available(macOS 10.15, *), let client, let status = try? await fetchStatusFromUrl(using: client, url: url) {
 			logger.info("Resolved \(url); fetched as status as \(status)")
 			await windowController?.presentInSidebar(SidebarMode.status(uri: url.absoluteString, status: status))
 		}
@@ -66,6 +66,7 @@ struct MastodonURLResolver {
 		return modeToPresent
 	}
 	
+	@available(macOS 10.15, *)
 	private static func fetchStatusFromUrl(using client: ClientType, url: URL) async throws -> Status? {
 		/*
 		 * TODO: make this a `StatusResolver` that also handles

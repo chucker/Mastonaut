@@ -98,6 +98,7 @@ class MockClient: ClientType
 		}
 	}
 	
+	@available(macOS 10.15, *)
 	func run<Model>(_ request: MastodonKit.Request<Model>) async throws -> MastodonKit.Response<Model> where Model : Decodable, Model : Encodable {
 		try await withCheckedThrowingContinuation { continuation in
 			run(request) { result in

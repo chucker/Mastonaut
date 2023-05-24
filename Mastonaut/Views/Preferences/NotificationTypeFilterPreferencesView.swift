@@ -9,6 +9,7 @@
 import SwiftUI
 import CoreTootin
 
+@available(macOS 12.0, *)
 struct NotificationTypeFilterPreferencesView: View {
 	@Environment(\.dismiss) var dismiss
 	
@@ -130,6 +131,7 @@ struct NotificationTypeFilterPreferencesView: View {
     }
 }
 
+@available(macOS 12.0, *)
 struct NotificationTypeFilterPreferencesView_Previews: PreviewProvider {
     static var previews: some View {
 		NotificationTypeFilterPreferencesView(accountNotificationPreferences: AccountNotificationPreferences(), accountName: "hello@example.com",

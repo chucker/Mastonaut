@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+@available(macOS 11.0, *)
 struct PullToRefreshInnerView: View {
 	@State var percentage : Double
 	
@@ -23,6 +24,7 @@ struct PullToRefreshInnerView: View {
 	}
 }
 
+@available(macOS 11.0, *)
 struct PullToRefreshInnerView_Previews: PreviewProvider {
     static var previews: some View {
 		VStack {

@@ -45,7 +45,7 @@ class TimelinesWindowController: NSWindowController, UserPopUpButtonDisplaying, 
 
 	internal lazy var toolbarContainerView: NSView? = makeToolbarContainerView()
 	internal var currentUserPopUpButton: NSPopUpButton = makeAccountsPopUpButton()
-	private var searchSegmentedControl: NSSegmentedControl = makeSearchSegmentedControl()
+	private var searchSegmentedControl: NSSegmentedControl?
 	private var statusComposerSegmentedControl: NSSegmentedControl = makeStatusComposerSegmentedControl()
 	private var newColumnSegmentedControl: NSSegmentedControl = makeNewColumnSegmentedControl()
 	private var userPopUpButtonController: UserPopUpButtonSubcontroller!
@@ -294,6 +294,10 @@ class TimelinesWindowController: NSWindowController, UserPopUpButtonDisplaying, 
 		logger = Logger(subsystemType: self)
 
 		shouldCascadeWindows = true
+
+		if #available(macOS 11.0, *) {
+			searchSegmentedControl = TimelinesWindowController.makeSearchSegmentedControl()
+		}
 
 		window?.restorationClass = TimelinesWindowRestoration.self
 
@@ -1038,8 +1042,13 @@ extension TimelinesWindowController: AuthorizedAccountProviding {
 	}
 
 	func handle(linkURL: URL, knownTags: [Tag]?) {
-		Task {
-			await MastodonURLResolver.resolve(using: client, url: linkURL, knownTags: knownTags, source: self)
+		if #available(macOS 10.15, *) {
+			Task {
+				await MastodonURLResolver.resolve(using: client, url: linkURL, knownTags: knownTags, source: self)
+			}
+		}
+		else {
+			// TODO: handle pre-10.15
 		}
 	}
 }
@@ -1230,6 +1239,7 @@ private extension TimelinesWindowController {
 		return segmentedControl
 	}
 
+	@available(macOS 11.0, *)
 	static func makeSearchSegmentedControl() -> NSSegmentedControl {
 		let segmentedControl = NSSegmentedControl(images: [NSImage(systemSymbolName: "magnifyingglass", accessibilityDescription: "Search")!],
 		                                          trackingMode: .momentary,

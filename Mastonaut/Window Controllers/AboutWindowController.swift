@@ -31,7 +31,7 @@ class AboutWindowController: NSWindowController
 	{
 		super.windowDidLoad()
 
-		if #available(macOS 10.15, *)
+		if #available(macOS 11.0, *)
 		{
 			acknowledgementsWindow = AcknowledgementsWindow()
 		}
