@@ -499,6 +499,7 @@
 		15F9F30B232EB9E400931594 /* SuggestionWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1530428022AEC64E00489F31 /* SuggestionWindowController.swift */; };
 		15FD4C33223870B000D699EF /* TransientWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FD4C32223870B000D699EF /* TransientWindow.swift */; };
 		15FD4C34223870B000D699EF /* TransientWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FD4C32223870B000D699EF /* TransientWindow.swift */; };
+		464DE2C54A21D836AB1C1113 /* Pods-Mastonaut-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = A37563B919B7E94C39EDE4FC /* Pods-Mastonaut-metadata.plist */; };
 		5F043C53293286110095C702 /* NotificationTypeFilterPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F043C52293286110095C702 /* NotificationTypeFilterPreferencesView.swift */; };
 		5F043C54293286110095C702 /* NotificationTypeFilterPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F043C52293286110095C702 /* NotificationTypeFilterPreferencesView.swift */; };
 		5F043C562932872D0095C702 /* NotificationPerAccountPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F043C552932872D0095C702 /* NotificationPerAccountPreferencesView.swift */; };
@@ -549,10 +550,12 @@
 		5FE72EB729298DB7001C7A6C /* BuildConfig.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE72EB429298A37001C7A6C /* BuildConfig.generated.swift */; };
 		5FE7A535292E711100F7EB73 /* PullRefreshableScrollView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FE7A532292E704D00F7EB73 /* PullRefreshableScrollView.framework */; };
 		5FE7A536292E711100F7EB73 /* PullRefreshableScrollView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5FE7A532292E704D00F7EB73 /* PullRefreshableScrollView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		65D8188C23A0757793946157 /* Pods-QuickToot-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = F57A9EA740CF8505EFF03CC8 /* Pods-QuickToot-metadata.plist */; };
 		8018496C90237DCCDED54D8E /* Pods_Mastonaut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 092B4EA6357A3987C4DB12B9 /* Pods_Mastonaut.framework */; };
 		9BF0CEF5AD6BE645406760FA /* Pods_Mastonaut__Mock_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D2DCB52811AC15559D8AE9 /* Pods_Mastonaut__Mock_.framework */; };
 		BB0D8382B9BA154D27AFBC63 /* Pods_CoreTootin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C7A9AB62B40D2AFDAA70E9 /* Pods_CoreTootin.framework */; };
 		C98AE162223D7FB700A8DD22 /* AvatarImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98AE161223D7FB700A8DD22 /* AvatarImageCache.swift */; };
+		DC48C8195A00D25D9EDA18B4 /* Pods-Mastonaut (Mock)-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 69288F4A1FC52FE35C3B2C9E /* Pods-Mastonaut (Mock)-metadata.plist */; };
 		E7D99EDB7E2A091BF870FD6E /* Pods_QuickToot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BCC49A8ECAB04865B510BFF /* Pods_QuickToot.framework */; };
 		FFCDECEB3FA1B6319EDD0664 /* Pods_MastonautTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35D6AE63926CBA301063B221 /* Pods_MastonautTests.framework */; };
 /* End PBXBuildFile section */
@@ -1021,8 +1024,10 @@
 		5FE72EB429298A37001C7A6C /* BuildConfig.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildConfig.generated.swift; sourceTree = "<group>"; };
 		5FE7A52D292E704D00F7EB73 /* PullRefreshableScrollView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PullRefreshableScrollView.xcodeproj; path = Dependencies/PullRefreshableScrollView/PullRefreshableScrollView.xcodeproj; sourceTree = "<group>"; };
 		613EECFE95639DB968A362BE /* Pods-QuickToot.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickToot.adhoc.xcconfig"; path = "Target Support Files/Pods-QuickToot/Pods-QuickToot.adhoc.xcconfig"; sourceTree = "<group>"; };
+		69288F4A1FC52FE35C3B2C9E /* Pods-Mastonaut (Mock)-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Mastonaut (Mock)-metadata.plist"; sourceTree = "<group>"; };
 		7AEAB27D6CB6D651C5299936 /* Pods-MastonautTests.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MastonautTests.adhoc.xcconfig"; path = "Target Support Files/Pods-MastonautTests/Pods-MastonautTests.adhoc.xcconfig"; sourceTree = "<group>"; };
 		8BE1B4746437CF8AAE269D73 /* Pods-Mastonaut (Mock).adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mastonaut (Mock).adhoc.xcconfig"; path = "Target Support Files/Pods-Mastonaut (Mock)/Pods-Mastonaut (Mock).adhoc.xcconfig"; sourceTree = "<group>"; };
+		A37563B919B7E94C39EDE4FC /* Pods-Mastonaut-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Mastonaut-metadata.plist"; sourceTree = "<group>"; };
 		BDA5F885C761EEC9A0A80081 /* Pods-Mastonaut (Mock).release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mastonaut (Mock).release.xcconfig"; path = "Target Support Files/Pods-Mastonaut (Mock)/Pods-Mastonaut (Mock).release.xcconfig"; sourceTree = "<group>"; };
 		C98AE161223D7FB700A8DD22 /* AvatarImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarImageCache.swift; sourceTree = "<group>"; };
 		D052D8D7DC75AE86FA6E38F0 /* Pods-Mastonaut.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mastonaut.adhoc.xcconfig"; path = "Target Support Files/Pods-Mastonaut/Pods-Mastonaut.adhoc.xcconfig"; sourceTree = "<group>"; };
@@ -1030,6 +1035,7 @@
 		D4947F11B85059EE85BA2857 /* Pods-Mastonaut (Mock).debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mastonaut (Mock).debug.xcconfig"; path = "Target Support Files/Pods-Mastonaut (Mock)/Pods-Mastonaut (Mock).debug.xcconfig"; sourceTree = "<group>"; };
 		E74672D331A888BC3C6D1512 /* Pods-CoreTootin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoreTootin.release.xcconfig"; path = "Target Support Files/Pods-CoreTootin/Pods-CoreTootin.release.xcconfig"; sourceTree = "<group>"; };
 		E884A5BDB042D4FBEE510962 /* Pods-Mastonaut.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mastonaut.release.xcconfig"; path = "Target Support Files/Pods-Mastonaut/Pods-Mastonaut.release.xcconfig"; sourceTree = "<group>"; };
+		F57A9EA740CF8505EFF03CC8 /* Pods-QuickToot-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-QuickToot-metadata.plist"; sourceTree = "<group>"; };
 		F78A836510592DFADE095479 /* Pods-Mastonaut.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mastonaut.debug.xcconfig"; path = "Target Support Files/Pods-Mastonaut/Pods-Mastonaut.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1945,6 +1951,9 @@
 				3616DEA53A719762EAC8196D /* Pods-QuickToot.debug.xcconfig */,
 				39AA9CF1114711021688EDCD /* Pods-QuickToot.release.xcconfig */,
 				613EECFE95639DB968A362BE /* Pods-QuickToot.adhoc.xcconfig */,
+				A37563B919B7E94C39EDE4FC /* Pods-Mastonaut-metadata.plist */,
+				F57A9EA740CF8505EFF03CC8 /* Pods-QuickToot-metadata.plist */,
+				69288F4A1FC52FE35C3B2C9E /* Pods-Mastonaut (Mock)-metadata.plist */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -2224,6 +2233,7 @@
 				151E9A2E230C830500A76DB0 /* DebugWindowController.xib in Resources */,
 				1538FB3D2218A817006B5F78 /* Preferences.xcassets in Resources */,
 				1523C70C21E94C7F006DE234 /* SingleAttachmentView.xib in Resources */,
+				DC48C8195A00D25D9EDA18B4 /* Pods-Mastonaut (Mock)-metadata.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2247,6 +2257,7 @@
 			files = (
 				15608F48232C4DED00923CB7 /* ShareViewController.xib in Resources */,
 				151A05A5233D50D40011A6AC /* Mastonaut.icns in Resources */,
+				65D8188C23A0757793946157 /* Pods-QuickToot-metadata.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2302,6 +2313,7 @@
 				15B25D02265164BF00C90963 /* FilterTableCellView.xib in Resources */,
 				152B7316220E34D3004121F1 /* Pods-Mastonaut-acknowledgements.plist in Resources */,
 				152DA64C21E3FA180065CC1B /* SingleAttachmentView.xib in Resources */,
+				464DE2C54A21D836AB1C1113 /* Pods-Mastonaut-metadata.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3108,7 +3120,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MARKETING_VERSION = 1.3.9;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D MOCK";
 				PRODUCT_BUNDLE_IDENTIFIER = app.mastonaut.mac;
@@ -3138,7 +3150,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MARKETING_VERSION = 1.3.9;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D MOCK";
 				PRODUCT_BUNDLE_IDENTIFIER = app.mastonaut.mac;
@@ -3170,7 +3182,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MARKETING_VERSION = 1.3.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(MASTONAUT_BUNDLE_ID_BASE).coretootin";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -3203,7 +3215,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MARKETING_VERSION = 1.3.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(MASTONAUT_BUNDLE_ID_BASE).coretootin";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -3235,7 +3247,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MARKETING_VERSION = 1.3.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(MASTONAUT_BUNDLE_ID_BASE).coretootin";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -3265,7 +3277,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MARKETING_VERSION = 1.3.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(MASTONAUT_BUNDLE_ID_BASE).mac.QuickToot";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3292,7 +3304,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MARKETING_VERSION = 1.3.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(MASTONAUT_BUNDLE_ID_BASE).mac.QuickToot";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3319,7 +3331,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MARKETING_VERSION = 1.3.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(MASTONAUT_BUNDLE_ID_BASE).mac.QuickToot";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3386,7 +3398,7 @@
 					"$(CONFIGURATION_BUILD_DIR)",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -3445,7 +3457,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -3476,7 +3488,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MARKETING_VERSION = 1.3.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(MASTONAUT_BUNDLE_ID_BASE).mac";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3509,7 +3521,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MARKETING_VERSION = 1.3.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(MASTONAUT_BUNDLE_ID_BASE).mac";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3533,7 +3545,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(MASTONAUT_BUNDLE_ID_BASE).tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -3555,7 +3567,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(MASTONAUT_BUNDLE_ID_BASE).tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -3620,7 +3632,7 @@
 					"$(CONFIGURATION_BUILD_DIR)",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				OTHER_SWIFT_FLAGS = "-D ADHOC";
@@ -3652,7 +3664,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MARKETING_VERSION = 1.3.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(MASTONAUT_BUNDLE_ID_BASE).mac";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3680,7 +3692,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MARKETING_VERSION = 1.3.9;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D MOCK";
 				PRODUCT_BUNDLE_IDENTIFIER = app.mastonaut.mac;
@@ -3705,7 +3717,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(MASTONAUT_BUNDLE_ID_BASE).tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

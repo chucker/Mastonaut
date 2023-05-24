@@ -13,6 +13,7 @@ import MastodonKit
 /// bookmarking tags is entirely a client-side feature (there's no API, as of 4.1),
 /// stored in Core Data, and surfaced in the menu bar, _following_ a tag is
 /// entirely server-side, stored in the API, and surfaced in your timeline.
+@available(macOSApplicationExtension 10.15, *)
 public class TagFollowService
 {
 	private let account: AuthorizedAccount

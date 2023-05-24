@@ -9,6 +9,7 @@
 import Foundation
 import SwiftUI
 
+@available(macOS 11.0, *)
 class AppKitSwiftUIIntegration {
 	public static func hostSwiftUIView<TSwiftUIView: View>(_ swiftView: TSwiftUIView, inView nsView: NSView) {
 		nsView.subviews.removeAll()

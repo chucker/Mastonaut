@@ -19,6 +19,7 @@
 
 import Foundation
 
+@available(macOS 10.15, *)
 final class AcknowledgementsViewModel: ObservableObject
 {
 	@Published var entries: [Acknowledgement]

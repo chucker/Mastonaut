@@ -35,8 +35,12 @@ class ComposingPreferencesController: NSViewController
 		super.awakeFromNib()
 
 		let preferences = MastonautPreferences.instance
-		let view = StatusPrivacyPreferencesView(preferences: preferences)
-		AppKitSwiftUIIntegration.hostSwiftUIView(view, inView: statusPrivacyPreferences)
+
+		if #available(macOS 11.0, *)
+		{
+			let view = StatusPrivacyPreferencesView(preferences: preferences)
+			AppKitSwiftUIIntegration.hostSwiftUIView(view, inView: statusPrivacyPreferences)
+		}
 
 		preferenceObservers.append(PreferenceCheckboxObserver(preference: \MastonautPreferences.markMediaAsSensitive,
 		                                                      checkbox: defaultMarkAsSensitiveButton))

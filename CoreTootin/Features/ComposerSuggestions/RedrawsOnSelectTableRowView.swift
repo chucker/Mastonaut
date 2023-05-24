@@ -27,8 +27,10 @@ public class RedrawsOnSelectTableRowView: NSTableRowView {
 					let rowView = tableView.rowView(atRow: row, makeIfNecessary: false)
 
 					for cell in 0 ..< tableView.numberOfColumns {
-						if let rowView, let cellView = tableView.view(atColumn: cell, row: row, makeIfNecessary: false) as? SparklineTableCellView {
-							cellView.redraw(isSelected: rowView.isSelected)
+						if #available(macOSApplicationExtension 10.14, *) {
+							if let rowView, let cellView = tableView.view(atColumn: cell, row: row, makeIfNecessary: false) as? SparklineTableCellView {
+								cellView.redraw(isSelected: rowView.isSelected)
+							}
 						}
 					}
 				}

@@ -169,6 +169,7 @@ public extension AuthorizedAccount
 		return try! managedObjectContext!.fetch(fetchRequest).first
 	}
 
+	@available(macOSApplicationExtension 10.15, *)
 	func hasFollowedTag(_ tagName: String, client: ClientType) async -> Bool
 	{
 		let followedTags = try? await client.run(Tags.followed())
@@ -178,11 +179,13 @@ public extension AuthorizedAccount
 		return filtered?.count ?? 0 > 0
 	}
 
+	@available(macOSApplicationExtension 10.15, *)
 	func followTag(_ tagName: String, client: ClientType) async
 	{
 		_ = try? await client.run(Tags.follow(name: tagName))
 	}
 
+	@available(macOSApplicationExtension 10.15, *)
 	func unfollowTag(_ tagName: String, client: ClientType) async
 	{
 		_ = try? await client.run(Tags.unfollow(name: tagName))

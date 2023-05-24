@@ -65,13 +65,17 @@ class NotificationsPreferencesViewController: BaseAccountsPreferencesViewControl
 		accountPreferences = accounts?[row].preferences(context: AppDelegate.shared.managedObjectContext)
 		accountNotificationPreferences = accounts?[row].notificationPreferences(context: AppDelegate.shared.managedObjectContext)
 
-		if (accountPreferences != nil && accountNotificationPreferences != nil) {
-			let view = NotificationPerAccountPreferencesView(accountPreferences: accountPreferences,
-															 accountNotificationPreferences: accountNotificationPreferences,
-															 notificationDisplayMode: accountPreferences?.notificationDisplayMode ?? .always,
-															 notificationDetailMode: accountPreferences?.notificationDetailMode ?? .always)
-			
-			AppKitSwiftUIIntegration.hostSwiftUIView(view, inView: perAccountNotificationPreferencesView)
+		if accountPreferences != nil && accountNotificationPreferences != nil
+		{
+			if #available(macOS 11.0, *)
+			{
+				let view = NotificationPerAccountPreferencesView(accountPreferences: accountPreferences,
+				                                                 accountNotificationPreferences: accountNotificationPreferences,
+				                                                 notificationDisplayMode: accountPreferences?.notificationDisplayMode ?? .always,
+				                                                 notificationDetailMode: accountPreferences?.notificationDetailMode ?? .always)
+
+				AppKitSwiftUIIntegration.hostSwiftUIView(view, inView: perAccountNotificationPreferencesView)
+			}
 		}
 	}
 }

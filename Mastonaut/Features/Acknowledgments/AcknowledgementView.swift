@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+@available(macOS 11.0, *)
 struct AcknowledgementView: View {
 	@State var viewModel: Acknowledgement
 
@@ -32,6 +33,7 @@ struct AcknowledgementView: View {
 	}
 }
 
+@available(macOS 11.0, *)
 struct AcknowledgmentView_Previews: PreviewProvider {
 	static var previews: some View {
 		let viewModel = Acknowledgement(title: "Hello",

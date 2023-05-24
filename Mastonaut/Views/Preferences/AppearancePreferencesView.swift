@@ -9,6 +9,7 @@
 import SwiftUI
 import CoreTootin
 
+@available(macOS 11.0, *)
 struct AppearancePreferencesView: View {
 	@State var appearance: MastonautPreferences.Appearance
 
@@ -36,6 +37,7 @@ struct AppearancePreferencesView: View {
 	}
 }
 
+@available(macOS 11.0, *)
 struct AppearancePreferencesView_Previews: PreviewProvider {
     static var previews: some View {
 		AppearancePreferencesView(appearance: .dark)

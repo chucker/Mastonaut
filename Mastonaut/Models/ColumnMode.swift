@@ -137,15 +137,21 @@ enum ColumnMode: RawRepresentable, ColumnModel, Equatable, Comparable
 
 		case .favorites:
 			menuItem.title = 🔠("Favorites")
-			menuItem.image = NSImage(systemSymbolName: "star", accessibilityDescription: "Favorites")
+			if #available(macOS 11.0, *) {
+				menuItem.image = NSImage(systemSymbolName: "star", accessibilityDescription: "Favorites")
+			}
 
 		case .bookmarks:
 			menuItem.title = 🔠("Bookmarks")
-			menuItem.image = NSImage(systemSymbolName: "bookmark", accessibilityDescription: "Bookmarks")
+			if #available(macOS 11.0, *) {
+				menuItem.image = NSImage(systemSymbolName: "bookmark", accessibilityDescription: "Bookmarks")
+			}
 
 		case .list(let list):
 			menuItem.title = 🔠(list.title!)
-			menuItem.image = NSImage(systemSymbolName: "list.bullet", accessibilityDescription: "List")
+			if #available(macOS 11.0, *) {
+				menuItem.image = NSImage(systemSymbolName: "list.bullet", accessibilityDescription: "List")
+			} 
 
 		case .tag(let name):
 			menuItem.title = 🔠("Tag: %@", name)

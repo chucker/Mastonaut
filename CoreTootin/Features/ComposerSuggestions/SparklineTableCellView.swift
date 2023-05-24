@@ -10,6 +10,7 @@ import AppKit
 import DSFSparkline
 import Foundation
 
+@available(macOSApplicationExtension 10.14, *)
 public class SparklineTableCellView: NSTableCellView {
 	public var dataSource: DSFSparkline.DataSource?
 	public var maxUses: Int?

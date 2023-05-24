@@ -83,7 +83,9 @@ private class TagButtonsStateBindable: SidebarTitleButtonsStateBindable
 		super.init()
 
 		updateBookmarkButton()
-		updateFollowButton()
+		if #available(macOS 11.0, *) {
+			updateFollowButton()
+		}
 	}
 
 	private func updateBookmarkButton()
@@ -93,6 +95,7 @@ private class TagButtonsStateBindable: SidebarTitleButtonsStateBindable
 		firstAccessibilityLabel = isBookmarked ? 🔠("Unbookmark Tag") : 🔠("Bookmark Tag")
 	}
 
+	@available(macOS 11.0, *)
 	private func updateFollowButton()
 	{
 		Task
@@ -116,11 +119,13 @@ private class TagButtonsStateBindable: SidebarTitleButtonsStateBindable
 
 	override func didClickSecondButton(_ sender: Any?)
 	{
-		Task
-		{
-			await tagFollowService.toggleFollowedState(for: tag)
-
-			updateFollowButton()
+		if #available(macOS 11.0, *) {
+			Task
+			{
+				await tagFollowService.toggleFollowedState(for: tag)
+				
+				updateFollowButton()
+			}
 		}
 	}
 }

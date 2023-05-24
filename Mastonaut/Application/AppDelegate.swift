@@ -118,8 +118,11 @@ class AppDelegate: NSObject, NSApplicationDelegate
 		let logger = Logger(subsystemType: self)
 		logger.debug2("applicationDidFinishLaunching")
 
+		if #available(macOS 10.14, *)
+		{
 		Preferences.addObserver(self, forKeyPath: "appearance")
 		updateAppearance()
+		}
 
 		if accountsService.authorizedAccounts.isEmpty
 		{
@@ -175,12 +178,15 @@ class AppDelegate: NSObject, NSApplicationDelegate
 		switch keyPath
 		{
 		case "appearance":
+			if #available(macOS 10.14, *) {
 			updateAppearance()
+			} 
 		default:
 			print("Key path \(keyPath ?? "") has changed")
 		}
 	}
 
+	@available(macOS 10.14, *)
 	func updateAppearance()
 	{
 		switch Preferences.appearance

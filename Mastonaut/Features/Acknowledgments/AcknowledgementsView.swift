@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+@available(macOS 10.15, *)
 class AcknowledgementsWindow: NSWindow {
 	init() {
 		super.init(contentRect: NSRect(x: 0, y: 0, width: 800, height: 500), styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView], backing: .buffered, defer: false)
@@ -19,6 +20,7 @@ class AcknowledgementsWindow: NSWindow {
 	}
 }
 
+@available(macOS 10.15, *)
 struct AcknowledgementsView: View {
 	@StateObject var viewModel = AcknowledgementsViewModel()
 
@@ -32,6 +34,7 @@ struct AcknowledgementsView: View {
 	}
 }
 
+@available(macOS 10.15, *)
 struct AcknowledgementsView_Previews: PreviewProvider {
 	static var previews: some View {
 		AcknowledgementsView()

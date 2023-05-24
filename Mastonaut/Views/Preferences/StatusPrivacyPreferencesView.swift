@@ -9,6 +9,7 @@
 import CoreTootin
 import SwiftUI
 
+@available(macOS 11.0, *)
 struct StatusPrivacyPreferencesView: View {
 	@AppStorage("defaultStatusAudience") var defaultStatusAudience: MastonautPreferences.StatusAudience = .public
 	@AppStorage("defaultReplyAudience") var defaultReplyAudience: MastonautPreferences.StatusAudience = .unlisted
@@ -76,6 +77,7 @@ struct StatusPrivacyPreferencesView: View {
 	}
 }
 
+@available(macOS 11.0, *)
 struct StatusPrivacyPreferencesView_Previews: PreviewProvider {
 	static var previews: some View {
 		StatusPrivacyPreferencesView()

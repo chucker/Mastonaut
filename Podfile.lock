@@ -2,7 +2,7 @@ PODS:
   - CocoaLumberjack (3.6.0):
     - CocoaLumberjack/Core (= 3.6.0)
   - CocoaLumberjack/Core (3.6.0)
-  - MastodonKit (2.0.0)
+  - MastodonKit (3.0.0)
   - Starscream (3.1.1)
   - SVGKit (2.1.1):
     - CocoaLumberjack (~> 3.0)
@@ -24,10 +24,10 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   CocoaLumberjack: 78b0c238666f4f58db069738ec176f4519557516
-  MastodonKit: 6f3c219ff58e4d7ef20966d56c1d18e1193e5119
+  MastodonKit: 4806cd6730bc451c9db8022280ab89412a3c1e54
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
   SVGKit: 652cdf7bef8bec8564d04a8511d3ab50c7595fac
 
-PODFILE CHECKSUM: 1c860b50947816a4e7bde671e406b6fd1f66d762
+PODFILE CHECKSUM: 6272a8ba88c6821e0eaedf00b86633bf6e83c70f
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.11.3

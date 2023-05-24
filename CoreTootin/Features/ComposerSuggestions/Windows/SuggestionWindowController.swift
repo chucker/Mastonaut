@@ -246,24 +246,26 @@ extension SuggestionWindowController: NSTableViewDelegate
 			}
 		}
 
-		if let suggestion = hashtagSuggestions?[row],
-		   identifier.rawValue == "history",
-		   let cellView = view as? SparklineTableCellView
-		{
-			if cellView.dataSource == nil || cellView.maxUses == nil
+		if #available(macOSApplicationExtension 10.14, *) {
+			if let suggestion = hashtagSuggestions?[row],
+			   identifier.rawValue == "history",
+			   let cellView = view as? SparklineTableCellView
 			{
-				guard !suggestion.uses.isEmpty,
-				      let maxUses = suggestion.uses.max() else { return view }
-
-				// MAYBE maxUses should be across all search results?
-
-				cellView.maxUses = maxUses
-
-				cellView.dataSource = DSFSparkline.DataSource(values: suggestion.uses.map { CGFloat($0) },
-				                                              range: 0 ... CGFloat(maxUses))
+				if cellView.dataSource == nil || cellView.maxUses == nil
+				{
+					guard !suggestion.uses.isEmpty,
+						  let maxUses = suggestion.uses.max() else { return view }
+					
+					// MAYBE maxUses should be across all search results?
+					
+					cellView.maxUses = maxUses
+					
+					cellView.dataSource = DSFSparkline.DataSource(values: suggestion.uses.map { CGFloat($0) },
+																  range: 0 ... CGFloat(maxUses))
+				}
+				
+				cellView.redraw(isSelected: tableView.selectedRow == row)
 			}
-
-			cellView.redraw(isSelected: tableView.selectedRow == row)
 		}
 
 		return view

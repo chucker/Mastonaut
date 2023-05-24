@@ -36,11 +36,14 @@ class GeneralPreferencesController: NSViewController
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
-		
-		let appearance = Preferences.appearance
-		let view = AppearancePreferencesView(appearance: appearance)
 
-		AppKitSwiftUIIntegration.hostSwiftUIView(view, inView: appearancePreferencesView)
+		if #available(macOS 11.0, *)
+		{
+			let appearance = Preferences.appearance
+			let view = AppearancePreferencesView(appearance: appearance)
+
+			AppKitSwiftUIIntegration.hostSwiftUIView(view, inView: appearancePreferencesView)
+		}
 
 		let timelinesResizeModeButtonMap: [MastonautPreferences.TimelinesResizeMode: NSButton] = [
 			.expandWindowFirst: timelinesResizeExpandFirstButton,

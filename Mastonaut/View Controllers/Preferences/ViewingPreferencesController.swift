@@ -39,9 +39,12 @@ class ViewingPreferencesController: NSViewController
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
-		
-		let fontSizeView = FontSizePreferencesView()
-		AppKitSwiftUIIntegration.hostSwiftUIView(fontSizeView, inView: fontSizePreferencesView)
+
+		if #available(macOS 11.0, *)
+		{
+			let fontSizeView = FontSizePreferencesView()
+			AppKitSwiftUIIntegration.hostSwiftUIView(fontSizeView, inView: fontSizePreferencesView)
+		}
 
 		let sensitiveMediaButtonMap: [MastonautPreferences.MediaDisplayMode: NSButton] = [
 			.alwaysHide: sensitiveMediaAlwaysHideButton,

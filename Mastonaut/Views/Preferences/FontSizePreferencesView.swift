@@ -7,9 +7,15 @@
 //
 
 import CoreTootin
+
+// FIXME: doesn't build; not sure how to make this conditional
+#if canImport(FontPicker)
 import FontPicker
+#endif
+
 import SwiftUI
 
+@available(macOS 11.0, *)
 struct FontSizePreferencesView: View {
 	@State private var statusFont: NSFont = MastonautPreferences.instance.statusFont
 	@State private var focusedStatusFont: NSFont = MastonautPreferences.instance.focusedStatusFont
@@ -33,7 +39,7 @@ struct FontSizePreferencesView: View {
 
 				Text("\(statusFont.displayName ?? "(no font)") \(statusFont.pointSize, specifier: "%.0f")")
 			}
-			
+
 			Text("Focused status font size:")
 
 			HStack {
@@ -59,6 +65,7 @@ struct FontSizePreferencesView: View {
 	}
 }
 
+@available(macOS 11.0, *)
 struct FontSizePreferencesView_Previews: PreviewProvider {
 	static var previews: some View {
 		FontSizePreferencesView()

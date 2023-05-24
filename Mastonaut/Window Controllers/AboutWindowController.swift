@@ -25,11 +25,16 @@ class AboutWindowController: NSWindowController
 	@IBOutlet weak var versionLabel: NSTextField!
 	@IBOutlet weak var copyrightLabel: NSTextField!
 
-	private lazy var acknowledgementsWindow = AcknowledgementsWindow()
+	private var acknowledgementsWindow: NSWindow?
 
 	override func windowDidLoad()
 	{
 		super.windowDidLoad()
+
+		if #available(macOS 10.15, *)
+		{
+			acknowledgementsWindow = AcknowledgementsWindow()
+		}
 
 		// Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
 		if
@@ -62,7 +67,10 @@ class AboutWindowController: NSWindowController
 
 	@IBAction func orderFrontAcknowledgementsWindow(_ sender: Any?)
 	{
-		acknowledgementsWindow.makeKeyAndOrderFront(sender)
-		acknowledgementsWindow.center()
+		if let acknowledgementsWindow
+		{
+			acknowledgementsWindow.makeKeyAndOrderFront(sender)
+			acknowledgementsWindow.center()
+		}
 	}
 }
