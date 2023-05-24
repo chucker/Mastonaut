@@ -511,13 +511,13 @@
 		5F1F20D72938E9130057E585 /* Logger+CurrentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC3E18E2926F0E80086DCEE /* Logger+CurrentType.swift */; };
 		5F1F20D82938E9140057E585 /* Logger+CurrentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC3E18E2926F0E80086DCEE /* Logger+CurrentType.swift */; };
 		5F1F20D92938E9140057E585 /* Logger+CurrentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC3E18E2926F0E80086DCEE /* Logger+CurrentType.swift */; };
+		5F2EB1612A1E707700B83B0D /* FontPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2EB1602A1E707700B83B0D /* FontPicker.swift */; };
 		5F38B52C29302F0C00FCB9FC /* AppKitSwiftUIIntegration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F38B52B29302F0C00FCB9FC /* AppKitSwiftUIIntegration.swift */; };
 		5F38B52F2930301600FCB9FC /* PullToRefreshInnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F38B52E2930301600FCB9FC /* PullToRefreshInnerView.swift */; };
 		5F3A17EF291DB26700EA6FEC /* CoreAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */; };
 		5F3A17F0291DB26700EA6FEC /* CoreAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */; };
 		5F3A17F1291DB26700EA6FEC /* CoreAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */; };
 		5F3BC8B229D0B44000CEBD7F /* SparklineTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3BC8B129D0B44000CEBD7F /* SparklineTableCellView.swift */; };
-		5F4DAAAC29FDA15E009FA0AE /* FontPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 5F4DAAAB29FDA15E009FA0AE /* FontPicker */; };
 		5F4DAAAE29FEEDE4009FA0AE /* NSFont+withWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4DAAAD29FEEDE4009FA0AE /* NSFont+withWeight.swift */; };
 		5F5338B32960B23200C1D9AE /* ReplaceCharactersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5338B22960B23200C1D9AE /* ReplaceCharactersTests.swift */; };
 		5F6F8F602A0033DF00FB3414 /* FontService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6F8F5F2A0033DF00FB3414 /* FontService.swift */; };
@@ -994,6 +994,9 @@
 		5F176FAD290EF4AD00DF043C /* Mastonaut 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Mastonaut 8.xcdatamodel"; sourceTree = "<group>"; };
 		5F176FAE290EF65200DF043C /* FollowedListsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowedListsService.swift; sourceTree = "<group>"; };
 		5F176FB0290F00FB00DF043C /* Mastonaut 9.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Mastonaut 9.xcdatamodel"; sourceTree = "<group>"; };
+		5F2EB1522A1E6B6A00B83B0D /* FontPicker-chucker */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "FontPicker-chucker"; path = "../../FontPicker-chucker"; sourceTree = "<group>"; };
+		5F2EB15A2A1E6C3700B83B0D /* FontPicker-chucker */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "FontPicker-chucker"; path = "../../FontPicker-chucker"; sourceTree = "<group>"; };
+		5F2EB1602A1E707700B83B0D /* FontPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FontPicker.swift; path = "Dependencies/FontPicker-chucker/Sources/FontPicker/FontPicker.swift"; sourceTree = "<group>"; };
 		5F38B52B29302F0C00FCB9FC /* AppKitSwiftUIIntegration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKitSwiftUIIntegration.swift; sourceTree = "<group>"; };
 		5F38B52E2930301600FCB9FC /* PullToRefreshInnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefreshInnerView.swift; sourceTree = "<group>"; };
 		5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = CoreAssets.xcassets; sourceTree = "<group>"; };
@@ -1074,7 +1077,6 @@
 				1596DB46235F65D300B349B7 /* DirectoryService.framework in Frameworks */,
 				15765563229692C200783FFE /* AVKit.framework in Frameworks */,
 				5F8C133C2969F1D9007BE2D5 /* Sdifft in Frameworks */,
-				5F4DAAAC29FDA15E009FA0AE /* FontPicker in Frameworks */,
 				154478A6232B0223009C71D4 /* CoreTootin.framework in Frameworks */,
 				8018496C90237DCCDED54D8E /* Pods_Mastonaut.framework in Frameworks */,
 				5FE7A535292E711100F7EB73 /* PullRefreshableScrollView.framework in Frameworks */,
@@ -1294,6 +1296,7 @@
 		1512DB82221B8D030090F2BD /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				5F2EB1602A1E707700B83B0D /* FontPicker.swift */,
 				5FE7A52D292E704D00F7EB73 /* PullRefreshableScrollView.xcodeproj */,
 			);
 			name = Dependencies;
@@ -1541,6 +1544,7 @@
 		15C4DD0321D41EC0002AF6DA = {
 			isa = PBXGroup;
 			children = (
+				5F2EB1512A1E6B6A00B83B0D /* Packages */,
 				5512395829181BCA0026C1D5 /* README.md */,
 				551239562917FA370026C1D5 /* userspecific.xcconfig */,
 				15C4DD0E21D41EC0002AF6DA /* Mastonaut */,
@@ -1821,6 +1825,15 @@
 			path = Controls;
 			sourceTree = "<group>";
 		};
+		5F2EB1512A1E6B6A00B83B0D /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				5F2EB1522A1E6B6A00B83B0D /* FontPicker-chucker */,
+				5F2EB15A2A1E6C3700B83B0D /* FontPicker-chucker */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 		5F30992E29CBA5C000E27292 /* Features */ = {
 			isa = PBXGroup;
 			children = (
@@ -2066,7 +2079,6 @@
 			name = Mastonaut;
 			packageProductDependencies = (
 				5F8C133B2969F1D9007BE2D5 /* Sdifft */,
-				5F4DAAAB29FDA15E009FA0AE /* FontPicker */,
 			);
 			productName = Sengi;
 			productReference = 15C4DD0C21D41EC0002AF6DA /* Mastonaut.app */;
@@ -2147,7 +2159,6 @@
 				5FC3E18B2926EF3F0086DCEE /* XCRemoteSwiftPackageReference "swift-log-oslog" */,
 				5F8C133A2969F1D9007BE2D5 /* XCRemoteSwiftPackageReference "Sdifft" */,
 				5FC21CFD29CA360A00A582A8 /* XCRemoteSwiftPackageReference "DSFSparkline" */,
-				5F4DAAAA29FDA15E009FA0AE /* XCRemoteSwiftPackageReference "FontPicker" */,
 			);
 			productRefGroup = 15C4DD0D21D41EC0002AF6DA /* Products */;
 			projectDirPath = "";
@@ -2985,6 +2996,7 @@
 				150443A52208750000D9018F /* AboutWindowController.swift in Sources */,
 				15A947982495ACB600E413B2 /* FilteredEntryCellView.swift in Sources */,
 				158B998421FBBBB30046C8D6 /* NSView+SubviewSearch.m in Sources */,
+				5F2EB1612A1E707700B83B0D /* FontPicker.swift in Sources */,
 				159439352299A78700E47DBB /* ISUMultiplierNumberFormatter.swift in Sources */,
 				15F1D24B21F2999500B01F35 /* AnimatableEmojiCell.swift in Sources */,
 				15DDC05A24B0E3D900F6F1EE /* NoInsetsTableView.swift in Sources */,
@@ -3791,14 +3803,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		5F4DAAAA29FDA15E009FA0AE /* XCRemoteSwiftPackageReference "FontPicker" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/chucker/FontPicker.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		5F8C133A2969F1D9007BE2D5 /* XCRemoteSwiftPackageReference "Sdifft" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/wzxhahaha/Sdifft";
@@ -3830,11 +3834,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5FC3E18B2926EF3F0086DCEE /* XCRemoteSwiftPackageReference "swift-log-oslog" */;
 			productName = LoggingOSLog;
-		};
-		5F4DAAAB29FDA15E009FA0AE /* FontPicker */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5F4DAAAA29FDA15E009FA0AE /* XCRemoteSwiftPackageReference "FontPicker" */;
-			productName = FontPicker;
 		};
 		5F8C133B2969F1D9007BE2D5 /* Sdifft */ = {
 			isa = XCSwiftPackageProductDependency;

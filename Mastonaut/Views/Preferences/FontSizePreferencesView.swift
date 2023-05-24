@@ -8,11 +8,6 @@
 
 import CoreTootin
 
-// FIXME: doesn't build; not sure how to make this conditional
-#if canImport(FontPicker)
-import FontPicker
-#endif
-
 import SwiftUI
 
 @available(macOS 11.0, *)
