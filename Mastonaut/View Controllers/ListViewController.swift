@@ -52,8 +52,11 @@ class ListViewPullToRefreshAccessoryView : NSView, AccessoryViewForPullRefreshab
 	
 	func viewDidReachElasticityPercentage(_ sender: Any?, percentage: Double) {
 		subviews.removeAll()
-		let pullToRefreshView = PullToRefreshInnerView(percentage: percentage)
-		AppKitSwiftUIIntegration.hostSwiftUIView(pullToRefreshView, inView: self)
+		
+		if #available(macOS 11.0, *) {
+			let pullToRefreshView = PullToRefreshInnerView(percentage: percentage)
+			AppKitSwiftUIIntegration.hostSwiftUIView(pullToRefreshView, inView: self)
+		}
 
 		print("percentage : \(percentage)")
 	}

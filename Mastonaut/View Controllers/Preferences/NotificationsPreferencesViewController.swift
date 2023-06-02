@@ -67,7 +67,7 @@ class NotificationsPreferencesViewController: BaseAccountsPreferencesViewControl
 
 		if accountPreferences != nil && accountNotificationPreferences != nil
 		{
-			if #available(macOS 11.0, *)
+			if #available(macOS 12.0, *)
 			{
 				let view = NotificationPerAccountPreferencesView(accountPreferences: accountPreferences,
 				                                                 accountNotificationPreferences: accountNotificationPreferences,

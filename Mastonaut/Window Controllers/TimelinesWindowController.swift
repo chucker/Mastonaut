@@ -160,7 +160,10 @@ class TimelinesWindowController: NSWindowController, UserPopUpButtonDisplaying, 
 				window?.title = 🔠("Mastonaut — No Account Selected")
 			}
 
-			searchSegmentedControl.isHidden = !hasUser
+			if let searchSegmentedControl {
+				searchSegmentedControl.isHidden = !hasUser
+			}
+
 			statusComposerSegmentedControl.isHidden = !hasUser
 			newColumnSegmentedControl.isHidden = !hasUser
 			timelinesViewController.columnViewControllers.forEach { columnPopUpButtonMap.object(forKey: $0)?.isHidden = !hasUser }
@@ -553,7 +556,14 @@ class TimelinesWindowController: NSWindowController, UserPopUpButtonDisplaying, 
 		var constraints: [NSLayoutConstraint] = []
 		let contentView = timelinesViewController.mainContentView
 
-		[currentUserPopUpButton, statusComposerSegmentedControl, searchSegmentedControl, newColumnSegmentedControl].forEach {
+		var toolbarItems = [currentUserPopUpButton, statusComposerSegmentedControl, newColumnSegmentedControl]
+
+		// 10.15 compat
+		if let searchSegmentedControl {
+			toolbarItems.append(searchSegmentedControl)
+		}
+
+		toolbarItems.forEach {
 			toolbarView.addSubview($0)
 			let referenceView = toolbarView.superview ?? toolbarView
 			constraints.append(referenceView.centerYAnchor.constraint(equalTo: $0.centerYAnchor))
@@ -566,14 +576,25 @@ class TimelinesWindowController: NSWindowController, UserPopUpButtonDisplaying, 
 		                                                       containerAttribute: .leading)
 				.with(priority: .defaultLow))
 
-		constraints.append(contentsOf: [
-			currentUserPopUpButton.leadingAnchor.constraint(equalTo: toolbarView.leadingAnchor, constant: 6),
-			searchSegmentedControl.leadingAnchor.constraint(equalTo: statusComposerSegmentedControl.trailingAnchor,
-			                                                constant: 8),
-			newColumnSegmentedControl.leadingAnchor.constraint(equalTo: searchSegmentedControl.trailingAnchor,
-			                                                   constant: 8),
-			toolbarView.trailingAnchor.constraint(greaterThanOrEqualTo: newColumnSegmentedControl.trailingAnchor, constant: 6)
-		])
+		// 10.15 compat
+		if let searchSegmentedControl {
+			constraints.append(contentsOf: [
+				currentUserPopUpButton.leadingAnchor.constraint(equalTo: toolbarView.leadingAnchor, constant: 6),
+				searchSegmentedControl.leadingAnchor.constraint(equalTo: statusComposerSegmentedControl.trailingAnchor,
+																constant: 8),
+				newColumnSegmentedControl.leadingAnchor.constraint(equalTo: searchSegmentedControl.trailingAnchor,
+																   constant: 8),
+				toolbarView.trailingAnchor.constraint(greaterThanOrEqualTo: newColumnSegmentedControl.trailingAnchor, constant: 6)
+			])
+		}
+		else {
+			constraints.append(contentsOf: [
+				currentUserPopUpButton.leadingAnchor.constraint(equalTo: toolbarView.leadingAnchor, constant: 6),
+				newColumnSegmentedControl.leadingAnchor.constraint(equalTo: statusComposerSegmentedControl.trailingAnchor,
+																   constant: 8),
+				toolbarView.trailingAnchor.constraint(greaterThanOrEqualTo: newColumnSegmentedControl.trailingAnchor, constant: 6)
+			])
+		}
 
 		NSLayoutConstraint.activate(constraints)
 	}
@@ -1035,20 +1056,25 @@ extension TimelinesWindowController: AuthorizedAccountProviding {
 	}
 
 	func handle(linkURL: URL) {
-		// wrapping these in `Task{}` is potentially dangerous, but we're just opening URLs, so it's fire and forget
-		Task {
-			await MastodonURLResolver.resolve(using: client, url: linkURL, knownTags: nil, source: self)
+		if #available(macOS 10.15, *) {
+			// wrapping these in `Task{}` is potentially dangerous, but we're just opening URLs, so it's fire and forget
+			Task {
+				await MastodonURLResolver.resolveAsync(using: client, url: linkURL, knownTags: nil, source: self)
+			}
+		}
+		else {
+			MastodonURLResolver.resolve(using: client, url: linkURL, knownTags: nil, source: self)
 		}
 	}
 
 	func handle(linkURL: URL, knownTags: [Tag]?) {
 		if #available(macOS 10.15, *) {
 			Task {
-				await MastodonURLResolver.resolve(using: client, url: linkURL, knownTags: knownTags, source: self)
+				await MastodonURLResolver.resolveAsync(using: client, url: linkURL, knownTags: knownTags, source: self)
 			}
 		}
 		else {
-			// TODO: handle pre-10.15
+			MastodonURLResolver.resolve(using: client, url: linkURL, knownTags: knownTags, source: self)
 		}
 	}
 }

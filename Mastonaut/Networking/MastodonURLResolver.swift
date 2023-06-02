@@ -23,7 +23,7 @@ import Logging
 import MastodonKit
 
 struct MastodonURLResolver {
-	static func resolve(using client: ClientType?, url: URL, knownTags: [Tag]?, source windowController: TimelinesWindowController?) async
+	static func resolveAsync(using client: ClientType?, url: URL, knownTags: [Tag]?, source windowController: TimelinesWindowController?) async
 	{
 		let logger = Logger(label: "MastodonURLResolver")
 
@@ -35,6 +35,22 @@ struct MastodonURLResolver {
 		else if #available(macOS 10.15, *), let client, let status = try? await fetchStatusFromUrl(using: client, url: url) {
 			logger.info("Resolved \(url); fetched as status as \(status)")
 			await windowController?.presentInSidebar(SidebarMode.status(uri: url.absoluteString, status: status))
+		}
+		else {
+			logger.info("Resolved \(url); will open in OS default app")
+			NSWorkspace.shared.open(url)
+		}
+	}
+	
+	@available(macOS, obsoleted: 11.0)
+	static func resolve(using client: ClientType?, url: URL, knownTags: [Tag]?, source windowController: TimelinesWindowController?)
+	{
+		let logger = Logger(label: "MastodonURLResolver")
+
+		if let mode = getSidebarModeFromAnnotations(url: url, knownTags: knownTags), let windowController = windowController
+		{
+			logger.info("Resolved \(url); will show in sidebar with mode \(mode)")
+			windowController.presentInSidebar(mode)
 		}
 		else {
 			logger.info("Resolved \(url); will open in OS default app")

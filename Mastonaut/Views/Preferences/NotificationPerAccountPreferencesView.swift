@@ -9,7 +9,7 @@
 import SwiftUI
 import CoreTootin
 
-@available(macOS 11.0, *)
+@available(macOS 12.0, *)
 struct NotificationPerAccountPreferencesView: View {
 	let columns = [
 		GridItem(.fixed(140), alignment: .topTrailing),
@@ -115,7 +115,7 @@ struct NotificationPerAccountPreferencesView: View {
     }
 }
 
-@available(macOS 11.0, *)
+@available(macOS 12.0, *)
 struct NotificationPerAccountPreferencesView_Previews: PreviewProvider {
     static var previews: some View {
 		NotificationPerAccountPreferencesView(accountPreferences: nil,
