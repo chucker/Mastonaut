@@ -994,8 +994,6 @@
 		5F176FAD290EF4AD00DF043C /* Mastonaut 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Mastonaut 8.xcdatamodel"; sourceTree = "<group>"; };
 		5F176FAE290EF65200DF043C /* FollowedListsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowedListsService.swift; sourceTree = "<group>"; };
 		5F176FB0290F00FB00DF043C /* Mastonaut 9.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Mastonaut 9.xcdatamodel"; sourceTree = "<group>"; };
-		5F2EB1522A1E6B6A00B83B0D /* FontPicker-chucker */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "FontPicker-chucker"; path = "../../FontPicker-chucker"; sourceTree = "<group>"; };
-		5F2EB15A2A1E6C3700B83B0D /* FontPicker-chucker */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "FontPicker-chucker"; path = "../../FontPicker-chucker"; sourceTree = "<group>"; };
 		5F2EB1602A1E707700B83B0D /* FontPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FontPicker.swift; path = "Dependencies/FontPicker-chucker/Sources/FontPicker/FontPicker.swift"; sourceTree = "<group>"; };
 		5F38B52B29302F0C00FCB9FC /* AppKitSwiftUIIntegration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKitSwiftUIIntegration.swift; sourceTree = "<group>"; };
 		5F38B52E2930301600FCB9FC /* PullToRefreshInnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefreshInnerView.swift; sourceTree = "<group>"; };
@@ -1544,7 +1542,6 @@
 		15C4DD0321D41EC0002AF6DA = {
 			isa = PBXGroup;
 			children = (
-				5F2EB1512A1E6B6A00B83B0D /* Packages */,
 				5512395829181BCA0026C1D5 /* README.md */,
 				551239562917FA370026C1D5 /* userspecific.xcconfig */,
 				15C4DD0E21D41EC0002AF6DA /* Mastonaut */,
@@ -1823,15 +1820,6 @@
 				15F9F305232EB8B300931594 /* BaseComposerTextView.swift */,
 			);
 			path = Controls;
-			sourceTree = "<group>";
-		};
-		5F2EB1512A1E6B6A00B83B0D /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				5F2EB1522A1E6B6A00B83B0D /* FontPicker-chucker */,
-				5F2EB15A2A1E6C3700B83B0D /* FontPicker-chucker */,
-			);
-			name = Packages;
 			sourceTree = "<group>";
 		};
 		5F30992E29CBA5C000E27292 /* Features */ = {
