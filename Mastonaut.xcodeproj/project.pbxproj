@@ -517,6 +517,7 @@
 		5F3A17EF291DB26700EA6FEC /* CoreAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */; };
 		5F3A17F0291DB26700EA6FEC /* CoreAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */; };
 		5F3A17F1291DB26700EA6FEC /* CoreAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */; };
+		5F3A91B32A2B9457002FF7AB /* macOSHighSierra.icns in Resources */ = {isa = PBXBuildFile; fileRef = 5F3A91B22A2B9457002FF7AB /* macOSHighSierra.icns */; };
 		5F3BC8B229D0B44000CEBD7F /* SparklineTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3BC8B129D0B44000CEBD7F /* SparklineTableCellView.swift */; };
 		5F4DAAAE29FEEDE4009FA0AE /* NSFont+withWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4DAAAD29FEEDE4009FA0AE /* NSFont+withWeight.swift */; };
 		5F5338B32960B23200C1D9AE /* ReplaceCharactersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5338B22960B23200C1D9AE /* ReplaceCharactersTests.swift */; };
@@ -998,6 +999,7 @@
 		5F38B52B29302F0C00FCB9FC /* AppKitSwiftUIIntegration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKitSwiftUIIntegration.swift; sourceTree = "<group>"; };
 		5F38B52E2930301600FCB9FC /* PullToRefreshInnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefreshInnerView.swift; sourceTree = "<group>"; };
 		5F3A17EE291DB26700EA6FEC /* CoreAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = CoreAssets.xcassets; sourceTree = "<group>"; };
+		5F3A91B22A2B9457002FF7AB /* macOSHighSierra.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = macOSHighSierra.icns; sourceTree = "<group>"; };
 		5F3BC8B129D0B44000CEBD7F /* SparklineTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparklineTableCellView.swift; sourceTree = "<group>"; };
 		5F4581912A030E1200D5D240 /* Mastonaut 11.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Mastonaut 11.xcdatamodel"; sourceTree = "<group>"; };
 		5F4DAAAD29FEEDE4009FA0AE /* NSFont+withWeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSFont+withWeight.swift"; sourceTree = "<group>"; };
@@ -1603,6 +1605,7 @@
 				15C4DD1621D41EC0002AF6DA /* MainMenu.xib */,
 				15D4748721DEF1F1008E66D1 /* Mastonaut.icns */,
 				15032604247F297600F02E83 /* MastonautDebug.icns */,
+				5F3A91B22A2B9457002FF7AB /* macOSHighSierra.icns */,
 				15C4DD1421D41EC0002AF6DA /* Assets.xcassets */,
 				1538FB3B2218A817006B5F78 /* Preferences.xcassets */,
 				1538FB2B22184C9A006B5F78 /* Localizable Images */,
@@ -2306,6 +2309,7 @@
 				15F1D25421F7D5AC00B01F35 /* AttachmentWindowController.xib in Resources */,
 				1507924521D6E707009EE4A3 /* InstancePickerWindowController.xib in Resources */,
 				15C4DD1821D41EC0002AF6DA /* MainMenu.xib in Resources */,
+				5F3A91B32A2B9457002FF7AB /* macOSHighSierra.icns in Resources */,
 				157D338622163DCA000E1112 /* Preferences.storyboard in Resources */,
 				15CD5BD421DAC76B00E06C2F /* AuthWindowController.xib in Resources */,
 				152DA65221E3FCB40065CC1B /* TripleAttachmentView.xib in Resources */,

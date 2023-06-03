@@ -18,10 +18,10 @@
         <window title="About" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" texturedBackground="YES" fullSizeContentView="YES"/>
             <windowCollectionBehavior key="collectionBehavior" moveToActiveSpace="YES" fullScreenAuxiliary="YES"/>
-            <rect key="contentRect" x="458" y="351" width="440" height="208"/>
+            <rect key="contentRect" x="458" y="351" width="440" height="243"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1512" height="944"/>
-            <view key="contentView" wantsLayer="YES" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="0.0" width="440" height="208"/>
+            <view key="contentView" wantsLayer="YES" misplaced="YES" id="se5-gp-TjO">
+                <rect key="frame" x="0.0" y="0.0" width="440" height="243"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Y3g-hc-919">
@@ -32,33 +32,9 @@
                         </constraints>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSApplicationIcon" id="CO4-US-ba1"/>
                     </imageView>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="YT6-si-7jZ">
-                        <rect key="frame" x="166" y="144" width="171" height="44"/>
-                        <textFieldCell key="cell" lineBreakMode="clipping" title="Mastonaut" id="HO6-pm-UKq">
-                            <font key="font" size="36" name="Charter-Roman"/>
-                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="753" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ndk-SZ-18G">
-                        <rect key="frame" x="166" y="76" width="260" height="14"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" lineBreakMode="clipping" title="© 2019-2021 Bruno Philipe - All Rights Reserved" id="fkg-TA-U2f">
-                            <font key="font" metaFont="smallSystem"/>
-                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="Mc0-fw-Wvb">
-                        <rect key="frame" x="166" y="123" width="92" height="16"/>
-                        <textFieldCell key="cell" lineBreakMode="clipping" title="Version 1.0 (0)" id="0bI-wQ-QTk">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Pi2-Cp-Wtn">
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pi2-Cp-Wtn">
                         <rect key="frame" x="38" y="10" width="92" height="22"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" controlSize="mini" lineBreakMode="clipping" alignment="center" title="Icon based on art by roundicons.com" id="qjk-Ib-dJ9">
                             <font key="font" metaFont="miniSystem"/>
                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -87,35 +63,100 @@
                             <action selector="orderFrontAcknowledgementsWindow:" target="-2" id="VqF-g4-lXz"/>
                         </connections>
                     </button>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cAI-lg-9VP">
-                        <rect key="frame" x="166" y="52" width="260" height="16"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" lineBreakMode="clipping" title="Post-OSS Copyright Label" id="905-DH-Ukf">
-                            <font key="font" metaFont="system" size="11"/>
-                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
+                    <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zhc-TI-4Oi">
+                        <rect key="frame" x="168" y="51" width="256" height="144"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="YT6-si-7jZ">
+                                <rect key="frame" x="-2" y="100" width="171" height="44"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Mastonaut" id="HO6-pm-UKq">
+                                    <font key="font" size="36" name="Charter-Roman"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="Mc0-fw-Wvb">
+                                <rect key="frame" x="-2" y="76" width="92" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Version 1.0 (0)" id="0bI-wQ-QTk">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zod-9m-fNz">
+                                <rect key="frame" x="0.0" y="44" width="130" height="24"/>
+                                <subviews>
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="24" placeholderIntrinsicHeight="24" translatesAutoresizingMaskIntoConstraints="NO" id="JWe-KG-FN2">
+                                        <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="macOSHighSierra" id="SBs-Rw-0GG"/>
+                                    </imageView>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YdS-cy-8ri">
+                                        <rect key="frame" x="30" y="5" width="102" height="14"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="High Sierra Edition" id="QRN-xR-ptT">
+                                            <font key="font" metaFont="smallSystem"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="YdS-cy-8ri" firstAttribute="centerY" secondItem="JWe-KG-FN2" secondAttribute="centerY" id="mNT-XW-oqh"/>
+                                </constraints>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="753" translatesAutoresizingMaskIntoConstraints="NO" id="ndk-SZ-18G">
+                                <rect key="frame" x="-2" y="22" width="260" height="14"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="© 2019-2021 Bruno Philipe - All Rights Reserved" id="fkg-TA-U2f">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cAI-lg-9VP">
+                                <rect key="frame" x="-2" y="0.0" width="142" height="14"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Post-OSS Copyright Label" id="905-DH-Ukf">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <visibilityPriorities>
+                            <integer value="1000"/>
+                            <integer value="1000"/>
+                            <integer value="1000"/>
+                            <integer value="1000"/>
+                            <integer value="1000"/>
+                        </visibilityPriorities>
+                        <customSpacing>
+                            <real value="3.4028234663852886e+38"/>
+                            <real value="3.4028234663852886e+38"/>
+                            <real value="3.4028234663852886e+38"/>
+                            <real value="3.4028234663852886e+38"/>
+                            <real value="3.4028234663852886e+38"/>
+                        </customSpacing>
+                    </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Pi2-Cp-Wtn" firstAttribute="centerX" secondItem="Y3g-hc-919" secondAttribute="centerX" id="6mh-uX-lQ0"/>
                     <constraint firstItem="Y3g-hc-919" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="Fjl-7w-kg7"/>
-                    <constraint firstItem="Pi2-Cp-Wtn" firstAttribute="top" secondItem="Y3g-hc-919" secondAttribute="bottom" constant="8" id="fxd-lr-PhB"/>
                     <constraint firstAttribute="bottom" secondItem="Y3g-hc-919" secondAttribute="bottom" constant="40" id="hNJ-RH-D93"/>
-                    <constraint firstItem="YT6-si-7jZ" firstAttribute="leading" secondItem="Y3g-hc-919" secondAttribute="trailing" constant="20" id="pEg-3E-9cm"/>
-                    <constraint firstItem="Mc0-fw-Wvb" firstAttribute="top" secondItem="YT6-si-7jZ" secondAttribute="bottom" constant="5" id="uKH-ZN-UiZ"/>
-                    <constraint firstItem="Mc0-fw-Wvb" firstAttribute="leading" secondItem="YT6-si-7jZ" secondAttribute="leading" id="uSt-Nv-zp2"/>
                     <constraint firstItem="Y3g-hc-919" firstAttribute="centerY" secondItem="se5-gp-TjO" secondAttribute="centerY" id="vfe-0b-m8J"/>
-                    <constraint firstItem="YT6-si-7jZ" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" id="zQO-Js-eEt"/>
                 </constraints>
             </view>
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
-            <point key="canvasLocation" x="178" y="47"/>
+            <point key="canvasLocation" x="178" y="64.5"/>
         </window>
     </objects>
     <resources>
         <image name="NSApplicationIcon" width="32" height="32"/>
+        <image name="macOSHighSierra" width="512" height="512"/>
     </resources>
 </document>
