@@ -1056,7 +1056,7 @@ extension TimelinesWindowController: AuthorizedAccountProviding {
 	}
 
 	func handle(linkURL: URL) {
-		if #available(macOS 10.15, *) {
+		if #available(macOS 11.0, *) {
 			// wrapping these in `Task{}` is potentially dangerous, but we're just opening URLs, so it's fire and forget
 			Task {
 				await MastodonURLResolver.resolveAsync(using: client, url: linkURL, knownTags: nil, source: self)
@@ -1068,7 +1068,7 @@ extension TimelinesWindowController: AuthorizedAccountProviding {
 	}
 
 	func handle(linkURL: URL, knownTags: [Tag]?) {
-		if #available(macOS 10.15, *) {
+		if #available(macOS 11.0, *) {
 			Task {
 				await MastodonURLResolver.resolveAsync(using: client, url: linkURL, knownTags: knownTags, source: self)
 			}

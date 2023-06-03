@@ -23,6 +23,7 @@ import Logging
 import MastodonKit
 
 struct MastodonURLResolver {
+	@available(macOS 11.0, *)
 	static func resolveAsync(using client: ClientType?, url: URL, knownTags: [Tag]?, source windowController: TimelinesWindowController?) async
 	{
 		let logger = Logger(label: "MastodonURLResolver")
@@ -32,7 +33,7 @@ struct MastodonURLResolver {
 			logger.info("Resolved \(url); will show in sidebar with mode \(mode)")
 			await windowController.presentInSidebar(mode)
 		}
-		else if #available(macOS 10.15, *), let client, let status = try? await fetchStatusFromUrl(using: client, url: url) {
+		else if let client, let status = try? await fetchStatusFromUrl(using: client, url: url) {
 			logger.info("Resolved \(url); fetched as status as \(status)")
 			await windowController?.presentInSidebar(SidebarMode.status(uri: url.absoluteString, status: status))
 		}
