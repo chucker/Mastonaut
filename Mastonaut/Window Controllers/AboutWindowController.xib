@@ -8,7 +8,9 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AboutWindowController" customModule="Mastonaut" customModuleProvider="target">
             <connections>
+                <outlet property="acknowledgmentsButton" destination="FhO-7d-F1G" id="XpQ-Uk-qjh"/>
                 <outlet property="copyrightLabel" destination="cAI-lg-9VP" id="pI0-Cu-YuA"/>
+                <outlet property="highSierraEditionStackView" destination="zod-9m-fNz" id="jqR-63-ov6"/>
                 <outlet property="versionLabel" destination="Mc0-fw-Wvb" id="zId-eq-hrX"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
@@ -18,22 +20,14 @@
         <window title="About" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" texturedBackground="YES" fullSizeContentView="YES"/>
             <windowCollectionBehavior key="collectionBehavior" moveToActiveSpace="YES" fullScreenAuxiliary="YES"/>
-            <rect key="contentRect" x="458" y="351" width="440" height="243"/>
+            <rect key="contentRect" x="458" y="351" width="440" height="274"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1512" height="944"/>
-            <view key="contentView" wantsLayer="YES" misplaced="YES" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="0.0" width="440" height="243"/>
-                <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" wantsLayer="YES" id="se5-gp-TjO">
+                <rect key="frame" x="0.0" y="0.0" width="440" height="274"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Y3g-hc-919">
-                        <rect key="frame" x="20" y="40" width="128" height="128"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="128" id="AEh-aU-7pc"/>
-                            <constraint firstAttribute="width" constant="128" id="VCw-mh-9RG"/>
-                        </constraints>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSApplicationIcon" id="CO4-US-ba1"/>
-                    </imageView>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pi2-Cp-Wtn">
-                        <rect key="frame" x="38" y="10" width="92" height="22"/>
+                        <rect key="frame" x="38" y="41" width="92" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" controlSize="mini" lineBreakMode="clipping" alignment="center" title="Icon based on art by roundicons.com" id="qjk-Ib-dJ9">
                             <font key="font" metaFont="miniSystem"/>
@@ -42,7 +36,7 @@
                         </textFieldCell>
                     </textField>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aKU-Xh-n5s">
-                        <rect key="frame" x="161" y="4" width="125" height="32"/>
+                        <rect key="frame" x="161" y="35" width="125" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Old Homepage" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6xr-0o-9nF">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -53,7 +47,7 @@
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FhO-7d-F1G">
-                        <rect key="frame" x="278" y="4" width="153" height="32"/>
+                        <rect key="frame" x="278" y="35" width="153" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Acknowledgements" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="vDH-dR-0LH">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -64,7 +58,7 @@
                         </connections>
                     </button>
                     <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zhc-TI-4Oi">
-                        <rect key="frame" x="168" y="51" width="256" height="144"/>
+                        <rect key="frame" x="168" y="78" width="256" height="144"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="YT6-si-7jZ">
                                 <rect key="frame" x="-2" y="100" width="171" height="44"/>
@@ -85,8 +79,12 @@
                             <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zod-9m-fNz">
                                 <rect key="frame" x="0.0" y="44" width="130" height="24"/>
                                 <subviews>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="24" placeholderIntrinsicHeight="24" translatesAutoresizingMaskIntoConstraints="NO" id="JWe-KG-FN2">
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JWe-KG-FN2">
                                         <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="Dkj-0U-d4U"/>
+                                            <constraint firstAttribute="width" constant="24" id="rKw-ed-Zpu"/>
+                                        </constraints>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="macOSHighSierra" id="SBs-Rw-0GG"/>
                                     </imageView>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YdS-cy-8ri">
@@ -142,17 +140,21 @@
                             <real value="3.4028234663852886e+38"/>
                         </customSpacing>
                     </stackView>
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y3g-hc-919">
+                        <rect key="frame" x="20" y="78" width="128" height="128"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="128" id="AEh-aU-7pc"/>
+                            <constraint firstAttribute="width" constant="128" id="VCw-mh-9RG"/>
+                        </constraints>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSApplicationIcon" id="CO4-US-ba1"/>
+                    </imageView>
                 </subviews>
-                <constraints>
-                    <constraint firstItem="Y3g-hc-919" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="Fjl-7w-kg7"/>
-                    <constraint firstAttribute="bottom" secondItem="Y3g-hc-919" secondAttribute="bottom" constant="40" id="hNJ-RH-D93"/>
-                    <constraint firstItem="Y3g-hc-919" firstAttribute="centerY" secondItem="se5-gp-TjO" secondAttribute="centerY" id="vfe-0b-m8J"/>
-                </constraints>
             </view>
+            <contentBorderThickness minY="32"/>
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
-            <point key="canvasLocation" x="178" y="64.5"/>
+            <point key="canvasLocation" x="178" y="1"/>
         </window>
     </objects>
     <resources>

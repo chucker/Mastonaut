@@ -22,8 +22,10 @@ import CoreTootin
 
 class AboutWindowController: NSWindowController
 {
-	@IBOutlet weak var versionLabel: NSTextField!
-	@IBOutlet weak var copyrightLabel: NSTextField!
+	@IBOutlet var acknowledgmentsButton: NSButton!
+	@IBOutlet var highSierraEditionStackView: NSStackView!
+	@IBOutlet var versionLabel: NSTextField!
+	@IBOutlet var copyrightLabel: NSTextField!
 
 	private var acknowledgementsWindow: NSWindow?
 
@@ -34,6 +36,13 @@ class AboutWindowController: NSWindowController
 		if #available(macOS 11.0, *)
 		{
 			acknowledgementsWindow = AcknowledgementsWindow()
+			acknowledgmentsButton.isHidden = false
+			highSierraEditionStackView.isHidden = true
+		}
+		else
+		{
+			acknowledgmentsButton.isHidden = true
+			highSierraEditionStackView.isHidden = false
 		}
 
 		// Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
