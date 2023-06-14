@@ -49,6 +49,8 @@ class StatusThreadViewController: StatusListViewController, SidebarPresentable
 		return tableView
 	}
 
+	var statusThreadContext = StatusThreadContext()
+
 	override var automaticallyInsertsExpander: Bool
 	{
 		return false
@@ -166,6 +168,9 @@ class StatusThreadViewController: StatusListViewController, SidebarPresentable
 			DispatchQueue.main.async
 			{
 				[status]
+
+				self?.statusThreadContext.build(status: status,
+				                                descendants: context.descendants)
 
 				self?.prepareNewEntries(context.ancestors.sorted(by: { $0.createdAt < $1.createdAt }),
 				                        for: .above, pagination: nil)

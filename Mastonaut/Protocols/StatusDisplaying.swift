@@ -35,7 +35,8 @@ protocol StatusDisplaying
 			 poll: Poll?,
 			 attachmentPresenter: AttachmentPresenting,
 			 interactionHandler: StatusInteractionHandling,
-			 activeInstance: Instance)
+	         activeInstance: Instance,
+	         statusThreadContext: StatusThreadContext?)
 
 	/// Set whether a poll reload task is active for the associated poll.
 	func setHasActivePollTask(_ hasTask: Bool)
