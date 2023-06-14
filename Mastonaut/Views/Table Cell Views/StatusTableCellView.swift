@@ -60,8 +60,9 @@ class StatusTableCellView: MastonautTableCellView, StatusDisplaying, StatusInter
 	private(set) var hasMedia: Bool = false
 	private(set) var hasSensitiveMedia: Bool = false
 	private(set) var hasSpoiler: Bool = false
-	
-	private func fontService() -> FontService {
+
+	private func fontService() -> FontService
+	{
 		return FontService(font: MastonautPreferences.instance.statusFont)
 	}
 
@@ -198,7 +199,7 @@ class StatusTableCellView: MastonautTableCellView, StatusDisplaying, StatusInter
 		contentWarningLabel.linkHandler = cellModel
 
 		authorNameButton.set(stringValue: cellModel.visibleStatus.authorName,
-							 applyingAttributes: fontService().authorAttributes(),
+		                     applyingAttributes: fontService().authorAttributes(),
 		                     applyingEmojis: cellModel.visibleStatus.account.cacheableEmojis)
 
 		contextButton.map { cellModel.setupContextButton($0, attributes: contextLabelAttributes()) }
@@ -636,5 +637,13 @@ extension StatusTableCellView: RichTextCapable
 		contextButton?.animatedEmojiImageViews?.forEach { $0.animates = animates }
 		statusLabel.animatedEmojiImageViews?.forEach { $0.animates = animates }
 		contentWarningLabel.animatedEmojiImageViews?.forEach { $0.animates = animates }
+	}
+}
+
+extension StatusTableCellView: StatusMenuInteractionValidating
+{
+	var statusModel: StatusCellMenuInteractionValidating?
+	{
+		return cellModel
 	}
 }

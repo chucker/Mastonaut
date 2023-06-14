@@ -534,6 +534,7 @@
 		5F8C134B296A0B5C007BE2D5 /* EditHistorySheetWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F8C134A296A0B5C007BE2D5 /* EditHistorySheetWindowController.xib */; };
 		5F8C134D296A0BF2007BE2D5 /* EditHistorySheetWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8C134C296A0BF2007BE2D5 /* EditHistorySheetWindowController.swift */; };
 		5F8C134F296A8C89007BE2D5 /* StatusEditCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8C134E296A8C89007BE2D5 /* StatusEditCellModel.swift */; };
+		5FB4DF7E2A311F0700252A04 /* StatusMenuInteractionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB4DF7D2A311F0700252A04 /* StatusMenuInteractionPresenter.swift */; };
 		5FC21CF629C6820500A582A8 /* HashtagSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC21CF529C6820500A582A8 /* HashtagSearchService.swift */; };
 		5FC21D0129CA55B400A582A8 /* HashtagSuggestionWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FC21D0029CA511300A582A8 /* HashtagSuggestionWindowController.xib */; };
 		5FC21D0329CA59EF00A582A8 /* DSFSparkline in Frameworks */ = {isa = PBXBuildFile; productRef = 5FC21D0229CA59EF00A582A8 /* DSFSparkline */; };
@@ -1010,6 +1011,7 @@
 		5F8C134A296A0B5C007BE2D5 /* EditHistorySheetWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditHistorySheetWindowController.xib; sourceTree = "<group>"; };
 		5F8C134C296A0BF2007BE2D5 /* EditHistorySheetWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHistorySheetWindowController.swift; sourceTree = "<group>"; };
 		5F8C134E296A8C89007BE2D5 /* StatusEditCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusEditCellModel.swift; sourceTree = "<group>"; };
+		5FB4DF7D2A311F0700252A04 /* StatusMenuInteractionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusMenuInteractionPresenter.swift; sourceTree = "<group>"; };
 		5FC21CF529C6820500A582A8 /* HashtagSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagSearchService.swift; sourceTree = "<group>"; };
 		5FC21D0029CA511300A582A8 /* HashtagSuggestionWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HashtagSuggestionWindowController.xib; sourceTree = "<group>"; };
 		5FC3E18E2926F0E80086DCEE /* Logger+CurrentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Logger+CurrentType.swift"; sourceTree = "<group>"; };
@@ -1856,6 +1858,8 @@
 		5F6F8F862A02406B00FB3414 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				5FF2BE1F2A38E7D500DD753F /* Thread View */,
+				5FB4DF7C2A311EEB00252A04 /* StatusViews */,
 				5F6F8F872A02407100FB3414 /* Acknowledgments */,
 				5F4581902A02F8BD00D5D240 /* Notifications */,
 			);
@@ -1881,6 +1885,14 @@
 				5FCD67612A02B9350083EDB2 /* SwiftPMAcknowledgements.swift */,
 			);
 			path = "Data Sources";
+			sourceTree = "<group>";
+		};
+		5FB4DF7C2A311EEB00252A04 /* StatusViews */ = {
+			isa = PBXGroup;
+			children = (
+				5FB4DF7D2A311F0700252A04 /* StatusMenuInteractionPresenter.swift */,
+			);
+			path = StatusViews;
 			sourceTree = "<group>";
 		};
 		5FC3E1902926FD520086DCEE /* Preferences */ = {
@@ -2973,6 +2985,7 @@
 				150443A52208750000D9018F /* AboutWindowController.swift in Sources */,
 				15A947982495ACB600E413B2 /* FilteredEntryCellView.swift in Sources */,
 				158B998421FBBBB30046C8D6 /* NSView+SubviewSearch.m in Sources */,
+				5FB4DF7E2A311F0700252A04 /* StatusMenuInteractionPresenter.swift in Sources */,
 				159439352299A78700E47DBB /* ISUMultiplierNumberFormatter.swift in Sources */,
 				15F1D24B21F2999500B01F35 /* AnimatableEmojiCell.swift in Sources */,
 				15DDC05A24B0E3D900F6F1EE /* NoInsetsTableView.swift in Sources */,

@@ -492,3 +492,27 @@ extension InteractionCellView: RichTextCapable
 		contentWarningLabel.animatedEmojiImageViews?.forEach { $0.animates = animates }
 	}
 }
+//
+//extension InteractionCellView: StatusMenuInteractionValidating
+//{
+//	var hasMedia: Bool {
+//		<#code#>
+//	}
+//	
+//	var isMediaHidden: Bool {
+//		<#code#>
+//	}
+//	
+//	var isContentHidden: Bool {
+//		<#code#>
+//	}
+//	
+//	var hasSpoiler: Bool {
+//		<#code#>
+//	}
+//	
+//	var statusModel: StatusCellMenuInteractionValidating?
+//	{
+//		return model
+//	}
+//}

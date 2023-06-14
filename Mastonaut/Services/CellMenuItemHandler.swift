@@ -34,8 +34,8 @@ class CellMenuItemHandler {
 
 		guard let selectedIndex = tableView.selectedRowIndexes.first,
 			  let view = tableView.view(atColumn: 0, row: selectedIndex, makeIfNecessary: false),
-			  let cellView = view as? StatusTableCellView,
-			  let cellModel = cellView.cellModel
+			  let cellView = view as? StatusMenuInteractionValidating,
+			  let cellModel = cellView.statusModel
 		else {
 			return false
 		}
