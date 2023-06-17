@@ -196,12 +196,24 @@ class StatusTableCellView: MastonautTableCellView, StatusDisplaying, StatusInter
 		guard let cellModel
 		else { return }
 
+		if let threadIndicatorContainer
+		{
+			threadIndicatorContainer.subviews.removeAll()
+
 		if let threadContext = cellModel.statusThreadContext,
 		   let contextItem = threadContext.getItem(status: cellModel.status)
 		{
-			for i in 0 ... contextItem.level
-			{
-				threadIndicatorContainer.subviews.append(ThreadLevelIndicatorView(frame: NSRect(x: i * 30, y: 0, width: 30, height: 100)))
+				let containerFrame = threadIndicatorContainer.frame
+
+				threadIndicatorContainer.subviews.append(ThreadLevelIndicatorView(threadContextItem: contextItem,
+				                                                                  height: containerFrame.height))
+
+				// FIXME: rather than passing height, make a constraint
+
+				threadIndicatorContainer.frame = NSRect(x: containerFrame.minX,
+				                                        y: containerFrame.minY,
+				                                        width: CGFloat(contextItem.level * ThreadLevelIndicatorView.indicatorWidth),
+				                                        height: containerFrame.height)
 			}
 		}
 

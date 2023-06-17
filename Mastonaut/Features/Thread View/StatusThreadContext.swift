@@ -17,10 +17,10 @@ class StatusThreadContext {
 	}
 
 	func build(status: Status, descendants: [Status]) {
-		items[status.uri] = StatusThreadItem(level: 1) // , deeperDescendants: descendants)
+		items[status.uri] = StatusThreadItem(level: 0) // , deeperDescendants: descendants)
 
 		recursiveAppend(parentID: status.id,
-		                level: 2,
+		                level: 1,
 						descendants: descendants)
 	}
 
