@@ -21,7 +21,7 @@ import CoreTootin
 import Foundation
 import MastodonKit
 
-class StatusCellModel: NSObject, StatusCellMenuInteractionValidating
+class StatusCellModel: NSObject
 {
 	let status: Status
 
