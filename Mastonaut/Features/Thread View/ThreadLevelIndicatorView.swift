@@ -26,6 +26,13 @@ class ThreadLevelIndicatorView: NSView {
 		self.init(frame: frame)
 
 		self.threadContextItem = threadContextItem
+
+		if threadContextItem.level == 1 {
+			self.toolTip = "This is a direct response to the focused post"
+		}
+		else {
+			self.toolTip = "This is a response \(threadContextItem.level) levels underneath the focused post"
+		}
 	}
 
 	@available(*, unavailable)
