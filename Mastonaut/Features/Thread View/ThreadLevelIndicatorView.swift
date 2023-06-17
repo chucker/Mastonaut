@@ -10,9 +10,10 @@ import Foundation
 
 class ThreadLevelIndicatorView : NSView {
 	override func draw(_ rect: CGRect) {
-		let path = NSBezierPath(rect: rect)
+		let path = NSBezierPath(rect: CGRect(x: rect.minX, y: rect.minY, width: rect.width / 2, height: rect.height))
 		let color = NSColor.systemBlue
 		color.set()
-		path.stroke()
+//		path.stroke()
+		path.fill()
 	}
 }

@@ -199,9 +199,9 @@ class StatusTableCellView: MastonautTableCellView, StatusDisplaying, StatusInter
 		if let threadContext = cellModel.statusThreadContext,
 		   let contextItem = threadContext.getItem(status: cellModel.status)
 		{
-			for _ in 0 ... contextItem.level
+			for i in 0 ... contextItem.level
 			{
-				threadIndicatorContainer.subviews.append(ThreadLevelIndicatorView(frame: NSRect(x: 0, y: 0, width: 30, height: 100)))
+				threadIndicatorContainer.subviews.append(ThreadLevelIndicatorView(frame: NSRect(x: i * 30, y: 0, width: 30, height: 100)))
 			}
 		}
 
