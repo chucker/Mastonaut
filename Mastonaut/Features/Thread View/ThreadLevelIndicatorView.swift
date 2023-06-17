@@ -35,11 +35,22 @@ class ThreadLevelIndicatorView: NSView {
 
 	var threadContextItem: StatusThreadItem!
 
+	// inspired by Apollo, but more focused on having sufficient 'distance' between each level
+	static let palette = [NSColor.systemOrange,
+	                      NSColor.systemBlue,
+	                      NSColor.systemPurple,
+	                      NSColor.systemYellow,
+	                      NSColor.systemMint,
+	                      NSColor.systemRed,
+	                      NSColor.systemTeal,
+	                      NSColor.systemCyan,
+	                      NSColor.systemPink,
+	                      NSColor.systemGreen]
+
 	override func draw(_ rect: CGRect) {
 		let path = NSBezierPath(rect: CGRect(x: rect.minX, y: rect.minY, width: rect.width / 2, height: rect.height))
-		let color = NSColor.systemBlue
+		let color = Self.palette[threadContextItem.level % Self.palette.count - 1]
 		color.set()
-//		path.stroke()
 		path.fill()
 	}
 }
