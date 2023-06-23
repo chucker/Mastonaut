@@ -9,29 +9,37 @@
 import Foundation
 
 class ThreadLevelIndicatorView: NSView {
-	public static let indicatorWidth  = 6
+	public static let secondaryIndicatorWidth = 2
+	public static let indicatorWidth = 6
 	
 	override init(frame frameRect: NSRect) {
 		super.init(frame: frameRect)
 	}
 
 	convenience init(threadContextItem: StatusThreadItem,
+	                 currentLevel: Int,
 	                 height: CGFloat)
 	{
-		let frame = NSRect(x: threadContextItem.level * Self.indicatorWidth,
+		let frame = NSRect(x: currentLevel * Self.indicatorWidth,
 		                   y: 0,
-						   width: Self.indicatorWidth,
+		                   width: Self.indicatorWidth,
 		                   height: Int(height))
 
 		self.init(frame: frame)
 
 		self.threadContextItem = threadContextItem
 
-		if threadContextItem.level == 1 {
-			self.toolTip = "This is a direct response to the focused post"
-		}
-		else {
-			self.toolTip = "This is a response \(threadContextItem.level) levels underneath the focused post"
+		self.currentLevel = currentLevel
+
+		self.isSecondary = currentLevel < threadContextItem.level
+
+		if !isSecondary {
+			if threadContextItem.level == 1 {
+				self.toolTip = "This is a direct response to the focused post"
+			}
+			else {
+				self.toolTip = "This is a response \(threadContextItem.level) levels underneath the focused post"
+			}
 		}
 	}
 
@@ -42,22 +50,37 @@ class ThreadLevelIndicatorView: NSView {
 
 	var threadContextItem: StatusThreadItem!
 
+	var currentLevel: Int!
+
+	var isSecondary: Bool!
+
 	// inspired by Apollo, but more focused on having sufficient 'distance' between each level
-	static let palette = [NSColor.systemOrange,
-	                      NSColor.systemBlue,
-	                      NSColor.systemPurple,
-	                      NSColor.systemYellow,
-	                      NSColor.systemMint,
-	                      NSColor.systemRed,
-	                      NSColor.systemTeal,
-	                      NSColor.systemCyan,
-	                      NSColor.systemPink,
-	                      NSColor.systemGreen]
+	static let palette: [NSColor] = [.systemOrange,
+	                                 .systemBlue,
+	                                 .systemPurple,
+	                                 .systemYellow,
+	                                 .systemMint,
+	                                 .systemRed,
+	                                 .systemTeal,
+	                                 .systemCyan,
+	                                 .systemPink,
+	                                 .systemGreen]
 
 	override func draw(_ rect: CGRect) {
-		let path = NSBezierPath(rect: CGRect(x: rect.minX, y: rect.minY, width: rect.width / 2, height: rect.height))
-		let color = Self.palette[threadContextItem.level % Self.palette.count - 1]
+		let width = CGFloat(!isSecondary ? Self.indicatorWidth : Self.secondaryIndicatorWidth) / 2
+
+		let path = NSBezierPath()
+		path.move(to: NSPoint(x: rect.minX, y: rect.minY))
+		path.line(to: NSPoint(x: rect.minX, y: rect.minY + rect.height))
+
+		if isSecondary {
+			path.setLineDash([1], count: 1, phase: 0)
+		}
+
+		path.lineWidth = width
+
+		let color = Self.palette[currentLevel % Self.palette.count - 1]
 		color.set()
-		path.fill()
+		path.stroke()
 	}
 }
