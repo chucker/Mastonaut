@@ -31,6 +31,8 @@ class StatusCellModel: NSObject
 	unowned let interactionHandler: StatusInteractionHandling
 	unowned let activeInstance: Instance
 
+	let statusThreadContext: StatusThreadContext?
+
 	@objc private(set) dynamic
 	var isFavorited: Bool
 
@@ -65,7 +67,8 @@ class StatusCellModel: NSObject
 	     poll: Poll?,
 	     attachmentPresenter: AttachmentPresenting,
 	     interactionHandler: StatusInteractionHandling,
-	     activeInstance: Instance)
+	     activeInstance: Instance,
+	     statusThreadContext: StatusThreadContext?)
 	{
 		self.status = status
 
@@ -74,6 +77,8 @@ class StatusCellModel: NSObject
 		self.attachmentPresenter = attachmentPresenter
 		self.interactionHandler = interactionHandler
 		self.activeInstance = activeInstance
+
+		self.statusThreadContext = statusThreadContext
 
 		self.isFavorited = status.favourited == true
 		self.isReblogged = status.reblogged == true

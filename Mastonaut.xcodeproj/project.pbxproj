@@ -557,6 +557,8 @@
 		5FE72EB729298DB7001C7A6C /* BuildConfig.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE72EB429298A37001C7A6C /* BuildConfig.generated.swift */; };
 		5FE7A535292E711100F7EB73 /* PullRefreshableScrollView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FE7A532292E704D00F7EB73 /* PullRefreshableScrollView.framework */; };
 		5FE7A536292E711100F7EB73 /* PullRefreshableScrollView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5FE7A532292E704D00F7EB73 /* PullRefreshableScrollView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5FF2BE212A38E7E400DD753F /* StatusThreadContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2BE202A38E7E400DD753F /* StatusThreadContext.swift */; };
+		5FF2BE232A39AFBD00DD753F /* ThreadLevelIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2BE222A39AFBD00DD753F /* ThreadLevelIndicatorView.swift */; };
 		8018496C90237DCCDED54D8E /* Pods_Mastonaut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 092B4EA6357A3987C4DB12B9 /* Pods_Mastonaut.framework */; };
 		9BF0CEF5AD6BE645406760FA /* Pods_Mastonaut__Mock_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D2DCB52811AC15559D8AE9 /* Pods_Mastonaut__Mock_.framework */; };
 		BB0D8382B9BA154D27AFBC63 /* Pods_CoreTootin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C7A9AB62B40D2AFDAA70E9 /* Pods_CoreTootin.framework */; };
@@ -1066,6 +1068,8 @@
 		5FE72EAD292982F0001C7A6C /* BuildConfig.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = BuildConfig.sh; sourceTree = "<group>"; };
 		5FE72EB429298A37001C7A6C /* BuildConfig.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildConfig.generated.swift; sourceTree = "<group>"; };
 		5FE7A52D292E704D00F7EB73 /* PullRefreshableScrollView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PullRefreshableScrollView.xcodeproj; path = Dependencies/PullRefreshableScrollView/PullRefreshableScrollView.xcodeproj; sourceTree = "<group>"; };
+		5FF2BE202A38E7E400DD753F /* StatusThreadContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusThreadContext.swift; sourceTree = "<group>"; };
+		5FF2BE222A39AFBD00DD753F /* ThreadLevelIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadLevelIndicatorView.swift; sourceTree = "<group>"; };
 		613EECFE95639DB968A362BE /* Pods-QuickToot.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickToot.adhoc.xcconfig"; path = "Target Support Files/Pods-QuickToot/Pods-QuickToot.adhoc.xcconfig"; sourceTree = "<group>"; };
 		7AEAB27D6CB6D651C5299936 /* Pods-MastonautTests.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MastonautTests.adhoc.xcconfig"; path = "Target Support Files/Pods-MastonautTests/Pods-MastonautTests.adhoc.xcconfig"; sourceTree = "<group>"; };
 		8BE1B4746437CF8AAE269D73 /* Pods-Mastonaut (Mock).adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mastonaut (Mock).adhoc.xcconfig"; path = "Target Support Files/Pods-Mastonaut (Mock)/Pods-Mastonaut (Mock).adhoc.xcconfig"; sourceTree = "<group>"; };
@@ -1911,6 +1915,7 @@
 		5F6F8F862A02406B00FB3414 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				5FF2BE1F2A38E7D500DD753F /* Thread View */,
 				5F6F8F872A02407100FB3414 /* Acknowledgments */,
 				5F4581902A02F8BD00D5D240 /* Notifications */,
 			);
@@ -2068,6 +2073,15 @@
 				5FE7A532292E704D00F7EB73 /* PullRefreshableScrollView.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		5FF2BE1F2A38E7D500DD753F /* Thread View */ = {
+			isa = PBXGroup;
+			children = (
+				5FF2BE202A38E7E400DD753F /* StatusThreadContext.swift */,
+				5FF2BE222A39AFBD00DD753F /* ThreadLevelIndicatorView.swift */,
+			);
+			path = "Thread View";
 			sourceTree = "<group>";
 		};
 		98ECDB4860F1D57879765C05 /* Frameworks */ = {
@@ -3080,6 +3094,7 @@
 				5F8C134D296A0BF2007BE2D5 /* EditHistorySheetWindowController.swift in Sources */,
 				15DB809921FFE4B700BEA2F9 /* NSMenu+Additions.swift in Sources */,
 				5F176FAF290EF65200DF043C /* FollowedListsService.swift in Sources */,
+				5FF2BE232A39AFBD00DD753F /* ThreadLevelIndicatorView.swift in Sources */,
 				15F9B63D21DA6462008D95FE /* RelativeDateFormatter.swift in Sources */,
 				154D4351237F459E005D99D9 /* FilterService.swift in Sources */,
 				15BF72CB2342B3460020CE70 /* SidebarTitleViewController.swift in Sources */,
@@ -3126,6 +3141,7 @@
 				5F176FAC290EF03900DF043C /* FollowedList.swift in Sources */,
 				15CD5BE921DEEA9300E06C2F /* StatusComposerWindowController.swift in Sources */,
 				158A5CC924994C4300E95113 /* MastonautTableView.swift in Sources */,
+				5FF2BE212A38E7E400DD753F /* StatusThreadContext.swift in Sources */,
 				15769616231A7206003C8B30 /* NotificationCenter+Helpers.swift in Sources */,
 				150CCC0321FE42D900FFA89A /* BackgroundTableRowView.swift in Sources */,
 				5FE72EB729298DB7001C7A6C /* BuildConfig.generated.swift in Sources */,

@@ -81,13 +81,15 @@ class FocusedStatusTableCellView: StatusTableCellView
 	                  poll: Poll?,
 	                  attachmentPresenter: AttachmentPresenting,
 	                  interactionHandler: StatusInteractionHandling,
-	                  activeInstance: Instance)
+	                  activeInstance: Instance,
+					  statusThreadContext: StatusThreadContext?)
 	{
 		super.set(displayedStatus: status,
 		          poll: poll,
 		          attachmentPresenter: attachmentPresenter,
 		          interactionHandler: interactionHandler,
-		          activeInstance: activeInstance)
+		          activeInstance: activeInstance,
+				  statusThreadContext: nil)
 
 		setContentLabelsSelectable(true)
 

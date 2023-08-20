@@ -25,6 +25,8 @@ import Sdifft
 @IBDesignable
 class StatusTableCellView: MastonautTableCellView, StatusDisplaying, StatusInteractionPresenter
 {
+	@IBOutlet private unowned var threadIndicatorContainer: NSStackView!
+
 	@IBOutlet private unowned var authorNameButton: NSButton!
 	@IBOutlet private unowned var authorAccountLabel: NSTextField!
 	@IBOutlet unowned var statusLabel: AttributedLabel!
@@ -176,13 +178,15 @@ class StatusTableCellView: MastonautTableCellView, StatusDisplaying, StatusInter
 	         poll: Poll?,
 	         attachmentPresenter: AttachmentPresenting,
 	         interactionHandler: StatusInteractionHandling,
-	         activeInstance: Instance)
+	         activeInstance: Instance,
+	         statusThreadContext: StatusThreadContext?)
 	{
 		let cellModel = StatusCellModel(status: status,
 		                                poll: poll,
 		                                attachmentPresenter: attachmentPresenter,
 		                                interactionHandler: interactionHandler,
-		                                activeInstance: activeInstance)
+		                                activeInstance: activeInstance,
+		                                statusThreadContext: statusThreadContext)
 		self.cellModel = cellModel
 
 		redraw()
@@ -192,6 +196,31 @@ class StatusTableCellView: MastonautTableCellView, StatusDisplaying, StatusInter
 	{
 		guard let cellModel
 		else { return }
+
+		if let threadIndicatorContainer
+		{
+			threadIndicatorContainer.subviews.removeAll()
+
+			if let threadContext = cellModel.statusThreadContext,
+			   let contextItem = threadContext.getItem(status: cellModel.status)
+			{
+				let containerFrame = threadIndicatorContainer.frame
+
+				for i in 1 ... contextItem.level
+				{
+					threadIndicatorContainer.subviews.append(ThreadLevelIndicatorView(threadContextItem: contextItem,
+					                                                                  currentLevel: i,
+					                                                                  height: containerFrame.height))
+				}
+
+				// FIXME: rather than passing height, make a constraint
+
+				threadIndicatorContainer.frame = NSRect(x: containerFrame.minX,
+				                                        y: containerFrame.minY,
+				                                        width: CGFloat(contextItem.level * ThreadLevelIndicatorView.indicatorWidth),
+				                                        height: containerFrame.height)
+			}
+		}
 
 		let status = cellModel.status
 
@@ -205,8 +234,14 @@ class StatusTableCellView: MastonautTableCellView, StatusDisplaying, StatusInter
 		contextButton.map { cellModel.setupContextButton($0, attributes: contextLabelAttributes()) }
 
 		authorAccountLabel.stringValue = cellModel.visibleStatus.account.uri(in: cellModel.activeInstance)
-		timeLabel.objectValue = cellModel.visibleStatus.createdAt
-		timeLabel.toolTip = DateFormatter.longDateFormatter.string(from: cellModel.visibleStatus.createdAt)
+//		timeLabel.objectValue = cellModel.visibleStatus.createdAt
+//		timeLabel.toolTip = DateFormatter.longDateFormatter.string(from: cellModel.visibleStatus.createdAt)
+
+		if let statusThreadContext = cellModel.statusThreadContext,
+		   let contextItem = statusThreadContext.getItem(status: cellModel.status)
+		{
+			timeLabel.stringValue = contextItem.level.description
+		}
 
 		if let editedAt = cellModel.visibleStatus.editedAt
 		{

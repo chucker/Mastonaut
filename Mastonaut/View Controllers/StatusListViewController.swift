@@ -208,11 +208,18 @@ class StatusListViewController: ListViewController<Status>, StatusInteractionHan
 			setupRefreshTimer(for: poll, statusID: status.id)
 		}
 
+		var statusThreadContext: StatusThreadContext?
+		if let threadViewC = self as? StatusThreadViewController
+		{
+			statusThreadContext = threadViewC.statusThreadContext
+		}
+
 		statusCell.set(displayedStatus: status,
 		               poll: status.poll.flatMap { updatedPolls[$0.id] },
 		               attachmentPresenter: attachmentPresenter,
 		               interactionHandler: self,
-		               activeInstance: instance)
+		               activeInstance: instance,
+		               statusThreadContext: statusThreadContext)
 	}
 
 	func set(hasActivePollTask: Bool, for statusID: String)
