@@ -49,8 +49,9 @@
 	dispatch_once(&onceToken, ^{
 
 		regex = [NSRegularExpression regularExpressionWithPattern:@"(?<protocol>\\w+)(?<slashes>://)((?<user>\\w+)"
-																   "(:(?<password>\\w+))?@)?(?<host>[^:/]+)((?<colon>:)"
-																   "(?<port>\\d+))?(?<path>/[^#?]*)?(?<query>\\?"
+																   "((?<userColon>:)(?<password>\\w+))?(?<at>@))?"
+                                                                   "(?<host>[^:/]+)((?<portColon>:)(?<port>\\d+))?"
+                                                                   "(?<path>/[^#?]*)?(?<query>\\?"
 																   "[^#]+)?((?<octothorpe>#)(?<fragment>.+))?"
 														  options:0
 															error:nil];
@@ -90,9 +91,11 @@
 
 	if (match == nil) { return nil; }
 
-	NSArray *groups = @[@"protocol", @"slashes", @"user",
-						@"password", @"host", @"colon",
-						@"port", @"path", @"query",
+	NSArray *groups = @[@"protocol", @"slashes", 
+                        @"user", @"userColon", @"password", @"at",
+                        @"host", @"portColon", @"port",
+                        @"path",
+                        @"query",
                         @"octothorpe", @"fragment"];
 
 	NSMutableString *sanitizedAddress = [[NSMutableString alloc] initWithCapacity:[cleanString length]];
