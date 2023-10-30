@@ -48,7 +48,7 @@
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
 
-		regex = [NSRegularExpression regularExpressionWithPattern:@"(?<protocol>\\w+)(?<slashes>://)((?<user>\\w+)"
+		regex = [NSRegularExpression regularExpressionWithPattern:@"(?<protocol>\\w+)(?<slashes>://)((?<user>\\w+)?"
 																   "((?<userColon>:)(?<password>\\w+))?(?<at>@))?"
                                                                    "(?<host>[^:/]+)((?<portColon>:)(?<port>\\d+))?"
                                                                    "(?<path>/[^#?]*)?(?<query>\\?"
@@ -99,6 +99,8 @@
                         @"octothorpe", @"fragment"];
 
 	NSMutableString *sanitizedAddress = [[NSMutableString alloc] initWithCapacity:[cleanString length]];
+    
+    bool hasUser = false;
 
 	for (NSString *captureGroup in groups)
 	{
@@ -108,16 +110,22 @@
 		NSString *substring = [cleanString substringWithRange:captureGroupRange];
 
 		NSCharacterSet *allowedCharset = [[self captureGroupCharsetMap] objectForKey:captureGroup];
-
+        
 		if (allowedCharset == nil)
 		{
-			[sanitizedAddress appendString:substring];
+            if ([captureGroup isEqualToString: @"at"] && !hasUser)
+                continue;
+
+            [sanitizedAddress appendString:substring];
 		}
 		else
 		{
 			NSString *escapedString = [substring stringByAddingPercentEncodingWithAllowedCharacters:allowedCharset];
 			[sanitizedAddress appendString:escapedString];
-		}
+
+            if ([captureGroup isEqualToString: @"user"] && escapedString.length > 0)
+                hasUser = true;
+        }
 	}
 
 	return [NSURL URLWithString:sanitizedAddress];

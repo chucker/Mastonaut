@@ -19,6 +19,7 @@ class URLSanitizerTests: XCTestCase {
         ("https://example.com/wiki/2.0.8+73", nil),
         ("http://myUser@example.com/hello", nil),
         ("http://myUser:securePassword@example.com/hello", nil),
+        ("http://@example.com/hello", "http://example.com/hello"),
     ]
 
     func testInputDoesNotGetMangled() {
