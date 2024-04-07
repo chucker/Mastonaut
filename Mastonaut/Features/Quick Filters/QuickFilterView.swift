@@ -21,6 +21,8 @@ struct QuickFilterView: View {
 
     @State
     var query: String
+    
+    var timelineController:TimelineViewController?
 
     var body: some View {
         VStack {
@@ -41,6 +43,11 @@ struct QuickFilterView: View {
         }
         .frame(width: 300, height: 40)
         .padding(.all, 20)
+        .onChange(of: selectedCategory) {
+            newCategory in
+            
+            timelineController?.applyQuickFilterCategory(category: newCategory)
+        }
     }
 }
 

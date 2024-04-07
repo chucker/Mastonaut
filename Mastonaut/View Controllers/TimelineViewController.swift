@@ -196,6 +196,38 @@ class TimelineViewController: StatusListViewController
 		}
 	}
 
+    override func quickFiltersMatchEntry(entry: Status) -> Bool
+    {
+        switch quickFilterCategory
+        {
+        case .everything:
+            return true
+        case .media:
+            return !entry.mediaAttachments.isEmpty
+        case .noBoosts:
+            return !(entry.reblogged ?? false)
+        case .links:
+            return !entry.links.isEmpty
+        }
+    }
+
+    var quickFilterCategory = QuickFilterCategory.everything
+
+    func applyQuickFilterCategory(category: QuickFilterCategory)
+    {
+        quickFilterCategory = category
+
+        validFiltersDidChange()
+
+//        for entry in self.entryMap {
+//            switch (category) {
+//            case .everything:
+//
+//                entry.value.
+//            }
+//        }
+    }
+
 	override func applicableFilters() -> [UserFilter]
 	{
 		guard let source = source
