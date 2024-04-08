@@ -200,8 +200,9 @@ class TimelineViewController: StatusListViewController
     {
         if quickFilterQuery != ""
         {
+            // if none of these contain the query, case-insensitively
             if [entry.account.username, entry.account.displayName, entry.content, entry.spoilerText].allSatisfy(
-                { !$0.contains(quickFilterQuery) }
+                { $0.range(of: quickFilterQuery, options: .caseInsensitive) == nil }
             )
             {
                 return false
