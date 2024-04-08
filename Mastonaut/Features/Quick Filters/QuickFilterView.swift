@@ -6,23 +6,23 @@
 //
 
 import SwiftUI
+import Throttler
 
-enum QuickFilterCategory : Hashable {
+enum QuickFilterCategory: Hashable {
     case everything
     case noBoosts
     case media
     case links
 }
 
-@available(macOS 13.0, *)
 struct QuickFilterView: View {
     @State
     var selectedCategory: QuickFilterCategory
 
     @State
     var query: String
-    
-    var timelineController:TimelineViewController?
+
+    var timelineController: TimelineViewController?
 
     var body: some View {
         VStack {
@@ -45,8 +45,15 @@ struct QuickFilterView: View {
         .padding(.all, 20)
         .onChange(of: selectedCategory) {
             newCategory in
-            
+
             timelineController?.applyQuickFilterCategory(category: newCategory)
+        }
+        .onChange(of: query) {
+            _ in
+
+            throttle(seconds: 0.1) {
+                timelineController?.applyQuickFilterQuery(query: query)
+            }
         }
     }
 }

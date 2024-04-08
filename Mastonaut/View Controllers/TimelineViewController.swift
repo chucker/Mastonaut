@@ -198,6 +198,16 @@ class TimelineViewController: StatusListViewController
 
     override func quickFiltersMatchEntry(entry: Status) -> Bool
     {
+        if quickFilterQuery != ""
+        {
+            if [entry.account.username, entry.account.displayName, entry.content, entry.spoilerText].allSatisfy(
+                { !$0.contains(quickFilterQuery) }
+            )
+            {
+                return false
+            }
+        }
+
         switch quickFilterCategory
         {
         case .everything:
@@ -211,7 +221,15 @@ class TimelineViewController: StatusListViewController
         }
     }
 
+    var quickFilterQuery = ""
     var quickFilterCategory = QuickFilterCategory.everything
+
+    func applyQuickFilterQuery(query: String)
+    {
+        quickFilterQuery = query
+
+        validFiltersDidChange()
+    }
 
     func applyQuickFilterCategory(category: QuickFilterCategory)
     {
@@ -219,13 +237,6 @@ class TimelineViewController: StatusListViewController
 
         validFiltersDidChange()
 
-//        for entry in self.entryMap {
-//            switch (category) {
-//            case .everything:
-//
-//                entry.value.
-//            }
-//        }
     }
 
 	override func applicableFilters() -> [UserFilter]

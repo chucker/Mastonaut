@@ -40,6 +40,9 @@ packages:
   SVGKit:
     url: https://github.com/SVGKit/SVGKit
     majorVersion: 3.0.0
+  Throttler:
+    url: https://github.com/boraseoksoon/Throttler
+    majorVersion: 1.0.0 # macOS 12 compat
   DSFSparkline:
     url: https://github.com/dagronf/DSFSparkline
     majorVersion: 4.0.0
@@ -96,6 +99,7 @@ targets:
       - package: Sdifft
       - package: Starscream
       - package: SVGKit
+      - package: Throttler
       - target: CoreTootin
       - target: MastodonKit
       - target: MastonautHelp
