@@ -205,8 +205,60 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 			[weak self] in
 			self?.refreshVisibleCellViews()
 		})
+		
+		NotificationCenter.default.addObserver(self, selector: #selector(updateScrollPositionForContentsViewBoundsDidChange(_:)), name: NSView.boundsDidChangeNotification, object: scrollView.contentView)
 
 		view.widthAnchor.constraint(greaterThanOrEqualToConstant: ListViewControllerMinimumWidth).isActive = true
+	}
+
+	private var lastScrollTopRow : Int = 0
+	private var lastScrollTopRowOffsetFromBottom : CGFloat = 0
+	private var lastScrollTopRowWasAtTop = true;
+	
+	@objc private func updateScrollPositionForContentsViewBoundsDidChange(_ notification: NSNotification)
+	{
+		// Keep the timeline visually 'stable' when the window is resized.
+		//
+		// If we do nothing, when the window resizes, the timeline appears to
+		// scroll because all the toots reflow their text: they get shorter as
+		// they get wider, or taller as they get narrower. This moves the
+		// entire timeline up and down - and does it more as you get further
+		// from the top.
+		//
+		// To combat this, when the view is scrolled manually, we store how far
+		// the bottom of the topmost visible toot is from the top of the scroll
+		// view. When live-resize is taking place, we use this stored position
+		// to re-set the scroll position at every resize bounds change to keep
+		// this toot locked in place at the top of the scroll view. To the user,
+		// it looks like the list is not moving.
+		
+		let contentViewBounds = scrollView.contentView.bounds;
+		if !scrollView.inLiveResize
+		{
+			let currentTopRow = self.tableView!.row(at: contentViewBounds.origin)
+			if currentTopRow >= 0
+			{
+				let rowFrame = tableView.rect(ofRow: currentTopRow)
+				let visiblePartOfRowFrame = contentViewBounds.intersection(rowFrame)
+				
+				lastScrollTopRow = currentTopRow
+				lastScrollTopRowOffsetFromBottom = visiblePartOfRowFrame.height;
+				
+				// If the top of the row coincides with the top of the visible
+				// bounds, make a note of that. It feels more natural to, in
+				// this case, keep the top of the row visually stable rather
+				// than the bottom.
+				lastScrollTopRowWasAtTop = (visiblePartOfRowFrame.origin.y == -scrollView.contentView.contentInsets.top)
+			}
+		} else {
+			let rowFrame = tableView.rect(ofRow: lastScrollTopRow)
+			let scrollY = lastScrollTopRowWasAtTop ?
+				rowFrame.origin.y - scrollView.contentView.contentInsets.top :
+				max(rowFrame.origin.y, rowFrame.maxY - lastScrollTopRowOffsetFromBottom)
+			let desiredOrigin = CGPoint(x: contentViewBounds.origin.x, y: scrollY)
+			
+			scrollView.contentView.scroll(desiredOrigin)
+		}
 	}
 
 	deinit
