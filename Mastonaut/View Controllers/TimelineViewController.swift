@@ -196,6 +196,50 @@ class TimelineViewController: StatusListViewController
 		}
 	}
 
+    override func quickFiltersMatchEntry(entry: Status) -> Bool
+    {
+        if quickFilterQuery != ""
+        {
+            // if none of these contain the query, case-insensitively
+            if [entry.account.username, entry.account.displayName, entry.content, entry.spoilerText].allSatisfy(
+                { $0.range(of: quickFilterQuery, options: .caseInsensitive) == nil }
+            )
+            {
+                return false
+            }
+        }
+
+        switch quickFilterCategory
+        {
+        case .everything:
+            return true
+        case .media:
+            return !entry.mediaAttachments.isEmpty
+        case .noBoosts:
+            return !(entry.reblogged ?? false)
+        case .links:
+            return !entry.links.isEmpty
+        }
+    }
+
+    var quickFilterQuery = ""
+    var quickFilterCategory = QuickFilterCategory.everything
+
+    func applyQuickFilterQuery(query: String)
+    {
+        quickFilterQuery = query
+
+        validFiltersDidChange()
+    }
+
+    func applyQuickFilterCategory(category: QuickFilterCategory)
+    {
+        quickFilterCategory = category
+
+        validFiltersDidChange()
+
+    }
+
 	override func applicableFilters() -> [UserFilter]
 	{
 		guard let source = source

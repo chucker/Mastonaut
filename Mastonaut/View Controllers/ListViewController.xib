@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="22146" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22146"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22689"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ListViewController" customModule="Mastonaut" customModuleProvider="target">
             <connections>
+                <outlet property="quickFilterSettingsView" destination="b9b-sE-V4L" id="kFZ-Ad-HL8"/>
                 <outlet property="scrollView" destination="lEl-8Y-AXZ" id="wVe-3T-X0o"/>
                 <outlet property="tableView" destination="HHi-zb-f2j" id="lVJ-TF-4XD"/>
                 <outlet property="topConstraint" destination="A00-pG-ajV" id="t7d-dk-0bf"/>
@@ -20,14 +21,14 @@
         <customView horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="RcC-AV-4Ia" customClass="BackgroundView" customModule="CoreTootin">
             <rect key="frame" x="0.0" y="0.0" width="320" height="600"/>
             <subviews>
-                <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" horizontalScrollElasticity="none" verticalScrollElasticity="allowed" translatesAutoresizingMaskIntoConstraints="NO" id="lEl-8Y-AXZ" customClass="PullRefreshableScrollView" customModule="PullRefreshableScrollView">
-                    <rect key="frame" x="0.0" y="-59" width="320" height="660"/>
-                    <clipView key="contentView" copiesOnScroll="NO" id="G9O-bm-pNb">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="660"/>
+                <scrollView wantsLayer="YES" ambiguous="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" horizontalScrollElasticity="none" verticalScrollElasticity="allowed" translatesAutoresizingMaskIntoConstraints="NO" id="lEl-8Y-AXZ" customClass="PullRefreshableScrollView" customModule="PullRefreshableScrollView">
+                    <rect key="frame" x="0.0" y="-59" width="320" height="503"/>
+                    <clipView key="contentView" ambiguous="YES" copiesOnScroll="NO" id="G9O-bm-pNb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="503"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" tableStyle="fullWidth" selectionHighlightStyle="none" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" usesAutomaticRowHeights="YES" viewBased="YES" floatsGroupRows="NO" id="HHi-zb-f2j" customClass="MastonautTableView" customModule="Mastonaut" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="600"/>
+                            <tableView verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" tableStyle="fullWidth" selectionHighlightStyle="none" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" usesAutomaticRowHeights="YES" viewBased="YES" floatsGroupRows="NO" id="HHi-zb-f2j" customClass="MastonautTableView" customModule="Mastonaut" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="443"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <size key="intercellSpacing" width="0.0" height="2"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -68,10 +69,16 @@
                         <outlet property="delegate" destination="-2" id="Pxg-Pm-xSv"/>
                     </connections>
                 </scrollView>
+                <customView ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b9b-sE-V4L">
+                    <rect key="frame" x="20" y="452" width="280" height="148"/>
+                </customView>
             </subviews>
             <constraints>
-                <constraint firstItem="lEl-8Y-AXZ" firstAttribute="top" secondItem="RcC-AV-4Ia" secondAttribute="top" constant="-1" id="A00-pG-ajV"/>
+                <constraint firstItem="b9b-sE-V4L" firstAttribute="leading" secondItem="RcC-AV-4Ia" secondAttribute="leading" constant="20" symbolic="YES" id="5Od-Kf-ecz"/>
+                <constraint firstItem="lEl-8Y-AXZ" firstAttribute="top" secondItem="b9b-sE-V4L" secondAttribute="bottom" constant="8" symbolic="YES" id="A00-pG-ajV"/>
                 <constraint firstItem="lEl-8Y-AXZ" firstAttribute="leading" secondItem="RcC-AV-4Ia" secondAttribute="leading" id="Emn-B8-7Ni"/>
+                <constraint firstAttribute="trailing" secondItem="b9b-sE-V4L" secondAttribute="trailing" constant="20" symbolic="YES" id="NYG-HK-6Ad"/>
+                <constraint firstItem="b9b-sE-V4L" firstAttribute="top" secondItem="RcC-AV-4Ia" secondAttribute="top" constant="20" symbolic="YES" id="b29-vf-Vkw"/>
                 <constraint firstAttribute="trailing" secondItem="lEl-8Y-AXZ" secondAttribute="trailing" id="bWW-s1-iNX"/>
                 <constraint firstAttribute="bottom" secondItem="lEl-8Y-AXZ" secondAttribute="bottom" constant="-59" id="bfv-yM-QXL"/>
             </constraints>

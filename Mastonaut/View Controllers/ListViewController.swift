@@ -95,6 +95,8 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 	@IBOutlet internal private(set) unowned var topConstraint: NSLayoutConstraint!
 
 	internal lazy var loadingIndicator: NSProgressIndicator =
+    @IBOutlet var quickFilterSettingsView: NSView!
+
 	{
 		let indicator = NSProgressIndicator()
 		indicator.translatesAutoresizingMaskIntoConstraints = false
@@ -146,6 +148,12 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
+
+//        if self is TimelineViewController {
+        let swiftUIView = QuickFilterView(selectedCategory: .everything, query: "", timelineController: self as? TimelineViewController)
+        AppKitSwiftUIIntegration.hostSwiftUIView(swiftUIView, inView: quickFilterSettingsView)
+//        }
+//        else {}  TODO
 
 		needsLoadingIndicator = true
 
@@ -689,6 +697,8 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 
 	// MARK: - Filtering
 
+    func quickFiltersMatchEntry(entry: Entry) -> Bool { return true }
+
 	func applicableFilters() -> [UserFilter]
 	{
 		return []
@@ -701,6 +711,11 @@ class ListViewController<Entry: ListViewPresentable & Codable>: NSViewController
 		{
 			return false
 		}
+
+        if !quickFiltersMatchEntry(entry: entry)
+        {
+            return true
+        }
 
 		if filteredEntryKeys.contains(entry.key)
 		{
