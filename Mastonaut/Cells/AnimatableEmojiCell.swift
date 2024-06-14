@@ -102,12 +102,10 @@ class AnimatableEmojiCell: NSTextAttachmentCell
 	}
 
 	override func draw(withFrame cellFrame: NSRect, in controlView: NSView?) {
-		if #available(OSX 12.0, *) {
-			let spacing = referenceSpacing ?? round(cellFrame.height * 0.05)
-			let offsetRect = cellFrame.insetBy(left: spacing / 2, right: 0, top: 0, bottom: 0)
-			imageView?.frame = offsetRect
-			lastImageViewRect = offsetRect
-		}
+		let spacing = referenceSpacing ?? round(cellFrame.height * 0.05)
+		let offsetRect = cellFrame.insetBy(left: spacing / 2, right: 0, top: 0, bottom: 0)
+		imageView?.frame = offsetRect
+		lastImageViewRect = offsetRect
 		super.draw(withFrame: cellFrame, in: controlView)
 	}
 
@@ -127,34 +125,6 @@ class AnimatableEmojiCell: NSTextAttachmentCell
 		let rect = fittedDrawRect(forBounds: bounds)
 
 		attachment?.bounds = rect
-
-		if #available(OSX 12.0, *) {} else if let imageView = self.imageView
-		{
-			let spacing = referenceSpacing ?? round(bounds.height * 0.05)
-			var offsetRect = rect
-			offsetRect.size.width -= spacing
-
-			offsetRect.origin.y = inset.height + position.y
-
-			if textView != nil
-			{
-				offsetRect.origin.x += textContainer.lineFragmentPadding
-				offsetRect.origin.x -= spacing
-			}
-			else
-			{
-				offsetRect.origin.x += spacing
-
-				// FIXME: Find out why this offset varies from 10.14 to 10.15
-				if #available(OSX 10.15, *) {} else
-				{
-					offsetRect.origin.y -= round(font?.descender ?? 0)
-				}
-			}
-
-			imageView.frame = offsetRect
-			lastImageViewRect = offsetRect
-		}
 
 		return rect
 	}
